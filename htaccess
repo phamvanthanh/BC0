@@ -1,0 +1,23 @@
+# 1 YEAR
+<FilesMatch "\.(flv|ico|pdf|avi|mov|ppt|doc|mp3|wmv|wav)$">
+Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# 1 MONTH
+<FilesMatch "\.(jpg|jpeg|png|gif|svg|swf)$">
+Header set Cache-Control "max-age=2592000, public"
+</FilesMatch>
+
+# 3 HOUR
+<FilesMatch "\.(txt|xml|php|js|css)$">
+Header set Cache-Control "max-age=604800"
+</FilesMatch>
+
+
+RewriteEngine on
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
+
+RewriteCond %{HTTPS} !on
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]

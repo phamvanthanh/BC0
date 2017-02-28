@@ -1,0 +1,39 @@
+<h5> User Assignment</h5>
+
+<div ng-controller="UserAssignmentController">
+<div id="formDiv">
+	<form>		
+		User Id: <select type="text" name="uid" ng-model="userAssignment.uid" ng-options="user.uid as user.name for user in users"></select><br/>
+		Node: <select type="text" name="node" ng-model="userAssignment.node" ng-options="node.code as node.name for node in nodes"></select><br/>
+		<input type="button" name="Save" value="Save" ng-click="save()"> <input type="button" name="Delete" value="Delete" ng-click="del()">		
+	</form>	
+</div>
+<div id="display">
+Number of records: {{num}}
+
+<div id="filter">
+	Filter: <input ng-model = "filter" placeholder="Search" ></input>
+</div>
+<div >
+	<table>
+		<thead>
+			<tr>
+				<th> No</th>
+				<th> User Id</th>
+				<th> Node </th>
+				<th> Control</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in userAssignments | filter : filter">
+				<td> {{userAssignments.indexOf(x)+1}}</td>
+				<td> {{x.uid}}</td>
+				<td> {{x.node}}</td>
+				<td> <a href="" ng-click="edit(userAssignments.indexOf(x))" ><span class="glyphicon glyphicon-edit"></span></a> </td>
+			</tr>
+		</tbody>
+	</table>	
+</div>
+</div>
+
+</div>
