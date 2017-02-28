@@ -1,0 +1,38 @@
+<h5> Node Action Dashboard</h5>
+
+<div ng-controller="NodeActionController">
+<div id="formDiv">
+	<form>
+		Code: <input type="text" name="code" ng-model="nodeAction.code"></input>
+		Description: <input type="text" name="description" ng-model="nodeAction.description"></input><br/>
+		<input type="button" name="Save" value="Save" ng-click="save()"> <input type="button" name="Delete" value="Delete" ng-click="del()">
+	</form>	
+</div>
+<div id="display">
+Number of records: {{num}}
+<div id="filter">
+	Filter: <input ng-model = "filter" placeholder="Search for code or name" ></input>
+</div>
+<div >
+	<table>
+		<thead>
+			<tr>
+				<th> No</th>
+				<th> Code</th>
+				<th> Description </th>
+				<th> Ctrl</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in nodeActions | filter: filter">
+				<td> {{nodeActions.indexOf(x)+1}}</td>
+				<td> {{x.code}}</td>
+				<td> {{x.description}}</td>
+				<td> <a href="" ng-click="edit(nodeActions.indexOf(x))" ><span class="glyphicon glyphicon-edit"></span></a> </td>
+			</tr>
+		</tbody>
+	</table>	
+</div>
+</div>
+
+</div>

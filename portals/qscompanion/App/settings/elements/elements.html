@@ -1,0 +1,40 @@
+<h5> Element Dashboard</h5>
+
+<div ng-controller="ElementController">
+<div id="formDiv">
+	<form>
+		Code: <input type="text" name="code" ng-model="element.code"></input>
+		Name: <input type="text" name="name" ng-model="element.name"></input><br/>
+		<input type="button" name="Save" value="Save" ng-click="addE()"> <input type="button" name="Delete" value="Delete" ng-click="deleteE()">
+		
+	</form>	
+</div>
+<div id="display">
+Number of records: {{Enum}}
+<div id="filter">
+	Filter: <input ng-model = "filter" placeholder="Search for code or name" ></input>
+</div>
+<div >
+	<table>
+		<thead>
+			<tr>
+				<th> No</th>
+				<th> Code</th>
+				<th> Name </th>
+				<th> Ctrl</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in elements | filter: filter">
+				<td> {{elements.indexOf(x)+1}}</td>
+				<td> {{x.code}}</td>
+				<td> {{x.name}}</td>
+				<td> <a href="" ng-click="editE(elements.indexOf(x))" ><span class="glyphicon glyphicon-edit"></span></a> </td>
+			</tr>
+		</tbody>
+	</table>	
+</div>
+</div>
+{{ response}}
+
+</div>

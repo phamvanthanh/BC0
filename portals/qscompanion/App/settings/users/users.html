@@ -1,0 +1,64 @@
+<h5> User Dashboard</h5>
+
+<div ng-controller="UserController">
+<div id="formDiv">
+	<form>		
+		User Id: <input type="text" name="uid" ng-model="user.uid"></input><br/>
+		Email: <input type="text" name="email" ng-model="user.email"></input><br/>
+		Password: <input type="password" name="password" ng-model="user.password"></input><br/>
+		Password Confirm: <input type="password" name="pwconfirm" ></input><br/>
+		Full Name: <input type="text" name="name" ng-model="user.name"></input><br/>
+		Title: <select type="text" name="title" ng-model="user.title">
+			<option value="Mr."> Mr.</option>
+			<option value="Mrs."> Ms.</option>
+		</select><br/>
+		Date of Birth: <input type="date" name="dateOfBirth" ng-model="user.dateOfBirth"></input><br/>
+		Address: <input type="text" name="address" ng-model="user.address"></input><br/>
+		City: <input type="text" name="city" ng-model="user.city"></input><br/>
+		Phone: <input type="text" name="phone" ng-model="user.phone"></input><br/>
+		Home Phone: <input type="text" name="homePhone" ng-model="user.homePhone"></input><br/>
+		<input type="button" name="Save" value="Save" ng-click="save()"> <input type="button" name="Delete" value="Delete" ng-click="del()">		
+	</form>	
+</div>
+<div id="display">
+Number of records: {{num}}
+<div id="filter">
+	Filter: <input ng-model = "filter" placeholder="Search" ></input>
+</div>
+<div >
+	<table>
+		<thead>
+			<tr>
+				<th> No</th>
+				<th> User Id</th>
+				<th> Email </th>
+				<th> Name</th>
+				<th> Title</th>
+				<th> Date of Birth</th>
+				<th> Address</th>
+				<th> City</th>
+				<th> Phone</th>
+				<th> Home Phone</th>
+				<th> Control</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="x in users | filter : filter">
+				<td> {{users.indexOf(x)+1}}</td>
+				<td> {{x.uid}}</td>
+				<td> {{x.email}}</td>
+				<td> {{x.name}}</td>
+				<td> {{x.title}}</td>
+				<td> {{x.dateOfBirth}}</td>
+				<td> {{x.address}}</td>
+				<td> {{x.city}}</td>
+				<td> {{x.phone}}</td>
+				<td> {{x.homePhone}}</td>
+				<td> <a href="" ng-click="edit(users.indexOf(x))" ><span class="glyphicon glyphicon-edit"></span></a> </td>
+			</tr>
+		</tbody>
+	</table>	
+</div>
+</div>
+
+</div>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" >
+<head>
+
+<title> Enterprise Resource Management</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Latest compiled and minified CSS -->
+<script src="../javascripts/jquery-1.12.2.js" ></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="../javascripts/angular.js" ></script>
+<script src="./js/app.js" ></script>
+<script src="../javascripts/angular-route.js" ></script>
+<script src="../javascripts/angular-ui-router.js" ></script>
+<script src="./js/services/services.js" ></script>
+<script src="./js/route/ui-route.js" ></script>
+<script src="./js/controllers/controllers.js" ></script>
+<script src="./js/directives/directives.js" ></script>
+<!-- CSS Section -->
+<script src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.4.0.js"></script>
+<link rel="stylesheet" href="../bootstrap/css/bootstrap.css" >
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="../bootstrap/css/bootstrap-theme.css" >
+<script src="../bootstrap/js/bootstrap.min.js" ></script>
+
+
+
+</head>
+<body>
+{{welcome.msg}}
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    
+    <ul class="nav navbar-nav">     
+      <li><a ui-sref="pm" >Projects</a></li> 
+	  	
+    </ul>
+  </div>
+</nav>
+
+<div class="container-fluid">	
+	<div class="col-sm-3" id="leftpane" ui-view="leftPane">		
+		
+	</div>
+	<div class="col-md-9" id="content" ui-view="content">
+		
+			
+	</div>
+	
+</div>
+
+</body>
+</html>

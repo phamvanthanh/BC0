@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="login" >
+<head>
+<title> Enterprise Resource Management</title>
+<script src="angular.js" ></script>
+<script src="angular-route.js" ></script>
+<script src="controllers/login.js" ></script>
+
+</head>
+<body>
+<div ng-controller="loginController">
+	<h3> LOGIN</h3>
+	<form>
+		Id:<br/> <input name="email" type="text"  ng-model="user.email"></input><br/>
+		Password:<br/> <input name="password" type="password"   ng-model="user.password"></input><br/><br/>
+		<input name="signIn" type="button" value="Sign in"  ng-click="signIn()"></input>
+	</form>	
+	{{welcome.msg}}
+</div>
+
+
+</body>
+</html>
