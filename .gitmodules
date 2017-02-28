@@ -1,0 +1,3 @@
+[submodule "qscompanion"]
+	path = qscompanion
+	url = https://github.com/phamvanthanh/qscompanion.git
