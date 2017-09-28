@@ -11,16 +11,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- Pinterest -->
 <meta name="p:domain_verify" content="9fb2171b867950105a1fd62511ca8829"/>
 <!-- End of Pinterest-->
-<link rel="alternate" hreflang="en" href="qscompanion.com" />
+<link rel="alternate" hreflang="en" href="breakcost.com" />
 <meta charset="utf-8">
 <meta https-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="msvalidate.01" content="F1D4C86FEB50EABA6266DC2DAA44DAE6" />
 <title>Quantity Takeoff, Material Takeoff Earth Work, Structural Work, Finishing Work, MEP</title> 
-<meta name="description" content="Qscompanion provides quantity takeoff service to any construction trades, earth work quantity take off, structure work quantity take off, finishing work quantity take off or MEP quantity take off.">
+<meta name="description" content="BreakCost provides quantity takeoff service to any construction trades, earth work quantity take off, structure work quantity take off, finishing work quantity take off or MEP quantity take off.">
 <meta name="keywords" content="quantity take-off service, quantity survey service, estimating, construction estimating, construction estimating service, construction, construction quantity takeoff, construction quantity survey, construction quantity take off, quantity take-off company, quantity survey company">
 <meta name='baynote_title' content='Quantity-Take-off-Solutions'>
-<meta name="author" content="Qscompanion">
+<meta name="author" content="BreakCost">
 <link href="/ico/logo.png" rel="icon" >
 
 <link href="/css/styles.css" rel="stylesheet" />
@@ -80,7 +80,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <h2 class="pageTitle blue weight500" >Do Your Management With Full Data Of Trades.</h2><br />
 					
 				
-					<p>At QsCompanion, We comprehend that the quality of the our services take the key of accuracy. Along with time requirement, this leads us in the development of methodologies and managament to expertise.</p>
+					<p>At BreakCost, We comprehend that the quality of the our services take the key of accuracy. Along with time requirement, this leads us in the development of methodologies and managament to expertise.</p>
 
 					<p>We believe that estimation data is not only data, but live data. That encourage us to develop <strong>trackable attribute</strong> and <strong>online office</strong> that help our customers and us to manage, update, change data and support easily with least time, at any time and every stage of construction projects.</p>	
 						

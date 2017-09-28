@@ -4,7 +4,7 @@
         <div class="slide" id="e_1" style="z-index: 1; width: 100%; height: 100%; top: 0px; left: 0px; transform: none; opacity: 1;">
             <div class="element" id="e_2" style="transform: none; left: 417px; top: 122px; width: 249px; height: 43px; opacity: 1;">
                 <div class="transform-container" id="e_3" style="height: 100%; width: 100%; transform: translateZ(0px) rotate(0deg) scale(1, 1);">
-                    <div class="bs-image image-crop" id="e_4" style="background-image: url('/ico/logo-full-black.png'); background-position: 50% 50%; opacity: 1;"></div>
+                    <div class="bs-image image-crop" id="e_4" ><span style="font-size: 34px; font-weight: 600"><span style="color: #3097D1 !important" >BREAK</span><span style="color:#ff3860 !important" >COST</span></span></div>
                 </div>
             </div>
             <div class="element" id="e_5" style="transform: none; left: 239px; top: 197px; width: 199px; height: 34px; opacity: 1;">

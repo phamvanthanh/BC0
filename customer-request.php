@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="robots" content="noindex">
 
-<title>QsCompanion | The #1 Take Off Service</title>
+<title>BreakCost | The #1 Take Off Service</title>
 <link href="/ico/logo.png" rel="icon" >
 
 <script type="text/javascript" src="/js/leadForm.js"></script>
@@ -20,7 +20,7 @@
 	<nav class="navbar navbar-inverse">
 		<div class="container">
 			<div  class="collapse navbar-collapse">
-				<a href="/"><img class="logo" src="/ico/logo-full-black.png" alt="Qscompanion" /></a>
+				<a   href="/" style="font-size: 26px; font-weight: 600; color: #3097D1 !important">BREAK<span style="color:#ff3860 !important" >COST</span></a>
 				<ul class="nav navbar-nav navbar-right  hidden-xs">
 					<li><a class="muted" href="tel:+84-975-622-359" >(+84)-975-622-359</a></li>
 					
@@ -149,10 +149,12 @@
 
 							<div class="form-group" id="fg-receiveMktgEmail">
 								<div class="form-field-box">
-									<span style="white-space: nowrap" onClick="" id="custentity180_fs" class="checkbox_ck"><input onClick="" aria-labelledby="custentity180_fs_lbl" onChange="NLCheckboxOnChange(this); " onKeyPress="NLCheckboxOnKeyPress(event);  return true;" name="custentity180" checked id="custentity180_fs_inp" type="checkbox" value="T" class="checkbox"><input type="hidden" name="custentity180_send" value="T"></span>
+									<span style="white-space: nowrap" onClick="" id="custentity180_fs" class="checkbox_ck">
+									<input onClick="" aria-labelledby="custentity180_fs_lbl" onChange="NLCheckboxOnChange(this); " onKeyPress="NLCheckboxOnKeyPress(event);  return true;" name="custentity180" checked id="custentity180_fs_inp" type="checkbox" value="T" class="checkbox">
+									<input type="hidden" name="custentity180_send" value="T"></span>
 								</div>
 								<div class="form-label label-long">
-									I would like to receive information from QsCompanion.
+									I would like to receive information from BreakCost.
 								</div>
 							</div>
 
@@ -160,9 +162,6 @@
 								<input type="submit" class="btn btn-primary" value="Send request" name="submit2" />
 							</div>
 						</div> <!-- End of .shownFields #shownFields -->
-
-					
-						
 
 						<!-- END OF REQUIRED HIDDEN FIELDS FOR HTML ONLINE FORM -->
 					</form>
@@ -177,7 +176,7 @@
 		<div class="copyright" >
 			<div class="container">
 				 <div class="row text-center">					
-						<p class="text-center">&copy; 2017 QsCompanion.</p>								
+						<p class="text-center">&copy; 2017 BreakCost.</p>								
 				 </div>
 			</div>
     	</div><!-- end .footer-wrapper -->		

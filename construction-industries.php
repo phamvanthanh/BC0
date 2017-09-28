@@ -8,16 +8,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KL3HNM5');</script>
 <!-- End Google Tag Manager -->
-<link rel="alternate" hreflang="en" href="qscompanion.com" />
+<link rel="alternate" hreflang="en" href="breakcost.com" />
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="msvalidate.01" content="F1D4C86FEB50EABA6266DC2DAA44DAE6" />
 <title>Material Takeoff, Quantity Takeoff Commercial Buildings, Industrial And Power, Civil Projects</title> 
-<meta name="description" content="Qscompanion provides quantity take off service for every construction industry, Residentital and Commercial buildings, Industrial and Power Plants, Civil Projects or Small and Private Home Projects.">
+<meta name="description" content="BreakCost provides quantity take off service for every construction industry, Residentital and Commercial buildings, Industrial and Power Plants, Civil Projects or Small and Private Home Projects.">
 <meta name="keywords" content="quantity take-off service for commercial buildings, quantity survey service for civil projects, estimating, construction estimating, construction estimating service, construction, construction quantity takeoff, construction quantity survey, construction quantity take off, quantity take-off company, quantity survey company">
 <meta name='baynote_title' content='Quantity Take-off Solutions'/>
-<meta name="author" content="Qscompanion">
+<meta name="author" content="BreakCost">
 <link href="/ico/logo.png" rel="icon" >
 <link href="/css/styles.css" rel="stylesheet" />
 <link href="/css/custom.css" rel="stylesheet" />
@@ -162,7 +162,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="col-sm-7">
                     <h3 class="blue weight500">Private Homes</h3>
                     
-                    <p>Prepare budget for your beautiful house and monitor it with full support from QsCompanion</p>
+                    <p>Prepare budget for your beautiful house and monitor it with full support from BreakCost</p>
                
                 </div>
                 <div class="col-sm-5">

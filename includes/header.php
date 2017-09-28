@@ -10,9 +10,10 @@
                     <span class="icon-bar middle-bar"></span>
                     <span class="icon-bar bottom-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="/"><img itemProp="logo" class="logo" src="/ico/LOGO-ICON800.svg" alt="QsCompanion" /></a>
-                    <div class="navbar-header-right">
-                        <a class="btn btn-sm btn-warning hover-outline" target="_blank" href="/customer-request.php" title="Request" >Request</a>
+                    
+                    <a class="navbar-brand"  href="/" style="font-size: 20px; font-weight: 600"><span >BREAK<span style="color:#ff3860 !important" >COST</span></span></a>
+					<div class="navbar-header-right">
+                        <a class="btn btn-sm btn-warning hover-outline" target="_blank" href="https://system.breakcost.com/login" title="Request" >Request</a>
                     </div>
 			</div>
 			<div id="navbar" class="collapse navbar-collapse">
@@ -20,9 +21,9 @@
                         <li><a href="construction-trades.php" ><i ></i>Trades</a></li>
                         <li><a href="construction-industries.php" ><i ></i>Industries </a></li>
                         <li><a href="plans.php" ><i ></i>Plans</a></li>
-                        <li><a href="company.php" ><i ></i>About Us</a></li>
-                        <li><a href="customer-request.php" target="_blank" ><i ></i>Request Us</a></li>
-                        <li><a href="login.php" target="_blank" ><i ></i>Company Network</a></li>
+                        <li><a href="whyus.php" ><i ></i>Why Us</a></li>
+                        <li><a href="https://system.breakcost.com/registrations" target="_blank" ><i ></i>Request</a></li>
+                        <li><a href="https://system.breakcost.com/login" target="_blank" ><i ></i>System</a></li>
                     </ul>
 			</div>
 
@@ -31,11 +32,11 @@
 	<nav class="navbar navbar-inverse hidden-xs">
 		<div class="container">
 			<div  class="collapse navbar-collapse">
-				<a   href="/"><img class="logo" src="/ico/logo-full-white.png" alt="Qscompanion" /></a>
+				<a   href="/" style="font-size: 26px; font-weight: 600">BREAK<span style="color:#ff3860 !important" >COST</span></a>
 				<ul class="nav navbar-nav navbar-right">
 					<li><a class="muted" href="tel:+84-463-288-901" >+84-463-288-901</a></li>
-					<li><a class="btn btn-nav btn-warning hover-outline" href="/customer-request.php" >Request</a></li>
-					<li><a href="/login.php" target="_blank" >Sign in</a></li>
+					<li><a class="btn btn-nav btn-warning hover-outline" href="https://system.breakcost.com/registrations" >Request</a></li>
+					<li><a href="https://system.breakcost.com/login" target="_blank" >Sign in</a></li>
 				</ul>		   
 			</div>
 		</div>
@@ -56,22 +57,8 @@
 						<a class="dropdown-toggle" id="plan-menu" href="/plans.php" >Plans</a>						
 					</li>                 
 					<li class="dropdown" >
-						<a class="dropdown-toggle" id="career-menu" href="/company.php" >Company</a>
-					 <ul class="dropdown-menu" >
-						<li>                              			
-							<div class="dropdown-content">
-								<div class="row">
-									<div class="col-sm-12">					    	
-										<a href="company.php#whyQsCompanion" >Why QsCompanion</a><br/>
-										<a href="/portals/projects/" >Projects</a><br />
-										<a href="login.php" target="_blank" >QsCompanion Network</a><br/>	
-										<a href="registration.php" >Careers</a><br />
-																		     		            
-									</div>
-								</div>
-							</div><!-- End of drop down content -->		  
-						</li>
-					</ul>
+						<a class="dropdown-toggle" id="career-menu" href="/whyus.php" >Why Us</a>
+					</li>
 				</ul>
 			</div>
 		</div>

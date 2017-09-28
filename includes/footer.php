@@ -5,11 +5,11 @@
                     <h5>CONTACT US</h5>
                     <div>
                             <ul class="list-unstyled">	                 
-                                    <li>No 9, Lane 48/36,</li>
+                                    <li>No 9, Lane 36/48</li>
                             <li>Le Trong Tan Street,</li>
                                     <li>Ha Dong, Hanoi, Vietnam</li>                       
-                                    <li><a class="muted" href="tel:+84463288901" >+84-463-288-901</a></li>
-                            <li>contact@qscompanion.com</li>                            
+                                    <li><a class="muted" href="tel:+84463288901" >+84-24463-288-901</a></li>
+                            <li>support@breakcost.com</li>                            
                             </ul>
                     </div>	
                 </div>
@@ -39,38 +39,37 @@
                     <h5><a href="/plans.php">PLANS</a></h5>
                     <div >
                         <ul class="list-unstyled">
-                            <li><a href="" >Facility</a></li>
-                            <li><a href="" >Construction</a></li>                            
-                            <li><a href="" >Bidder</a></li>
-                           <li><a href="" >One</a></li>                      
+                            <li><a href="/plans.php" >Facility</a></li>
+                            <li><a href="/plans.php" >Construction</a></li>                            
+                            <li><a href="/plans.php" >Bidder</a></li>
+                           <li><a href="/plans.php" >One</a></li>                      
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-2 hidden-xs">
 		            <h5><a href="/company.php">COMPANY</a></h5> 
                     <ul class="list-unstyled">	                 
-                            <li><a href="company.php#whyQsCompanion" target="_blank" >Why QsCompanion</a></li>
-                            <li><a href="/portals/projects/" target="_blank"  >Projects</a></li>
-                            <li><a href="login.php" target="_blank" >QsCompanion Network</a></li>	
-                            <li><a href="registration.php" target="_blank" >Careers</a></li>                                                   
+                            <li><a href="whyus.php#whyBreakCost" target="_blank" >Why BreakCost</a></li>
+                                                  
+                            <li><a href="https://system.breakcost.com/registrations" target="_blank" >Careers</a></li>                                                   
                     </ul>	
                     
                 </div>		
-                <div class="col-sm-2 col-xs-6" id="follow-us" >
+                <!--<div class="col-sm-2 col-xs-6" id="follow-us" >
                     <h5>FOLLOW US</h5>
                     <ul class="list-unstyled">
-                        <li><a href="https://www.facebook.com/qscompanion/" >Facebook</a></li>                        
+                        <li><a href="https://www.facebook.com/BreakCost/" >Facebook</a></li>                        
                         <li><a href="https://www.pinterest.com/quantitytakeoff/" >Pinterest</a></li>
-                        <li><a href="https://www.linkedin.com/company/qscompanion" >LinkedIn</a></li>
+                        <li><a href="https://www.linkedin.com/company/BreakCost" >LinkedIn</a></li>
                                              
                     </ul>
-                </div>                
+                </div>                -->
             </div>          
         </div>        
     </div>  
     <div class="copyright" >
         <div class="container text-center">                    
-                    <p>&copy; 2017 QsCompanion.</p>                             
+                    <p>&copy; 2017 BreakCost.</p>                             
            
         </div>
     </div>

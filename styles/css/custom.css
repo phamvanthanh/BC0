@@ -1,0 +1,14 @@
+.container {
+    overflow-x: hidden;
+}
+.home-panner {
+    height: 450px;
+    width: 100%;
+    background-color: green;
+}
+.overflow-hidden {
+    overflow: hidden;
+}
+.mr-0 {
+    margin-right: 0px !important;
+}
