@@ -1,0 +1,6 @@
+curl -s --user 'key-ae133592b394d2247531588d831f2c9f' \
+    https://api.mailgun.net/v3/system.breakcost.com \
+    -F from='Excited User <noreply@system.breakcost.com>' \
+    -F to='pthanh.ce@gmai.com' \
+    -F subject='Hello' \
+    -F text='Testing some Fuck mailgun!'

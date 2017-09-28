@@ -1,0 +1,305 @@
+<template>
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <window-heading2></window-heading2>
+            </div>
+
+            <div class="heading-elements">
+                <div class="heading-btn-group" >
+                   
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+
+    <div class="content">   
+        <div :class="{loader:loading}"></div>   
+        <div :class="{hidden:loading}" class="panel panel-flat">
+            <div class="panel-heading">             
+                <div class="heading-elements">
+                    <div class="heading-btn">
+                        <div class="form-group">
+                            <div class="switch-box">												  
+                                <label class="switch ">	
+                                    <span class="switch-label">Edit</span>																										
+                                    <input v-model="editMode" @click="editToggle"type="checkbox" name="edit" >
+                                    
+                                    <div class="slider"></div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="panel-body">
+                <div class="col-md-12" v-if="editMode">
+                    <form @submit.prevent="onSubmit" method="post" >
+                    
+                        <div class="col-sm-2 pl-5">
+                            <div class="form-group">
+                                <label>Code: <span class="text-danger">*</span></label>
+                                <input v-model="form.code" class="form-control">
+                            </div>
+                        </div>
+                         <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Name: <span class="text-danger">*</span></label>
+                                <input v-model="form.name" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>File: <span class="text-danger">*</span></label>
+                                <input name="form.fileUpload" @change="onFileChange" id="file-input" class="" type="file" >
+                            </div>
+                        </div>
+               
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                                <label class="transparent" >*</label>
+                                <button type="submit" class="btn btn-primary form-control">Save</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                                <label class="transparent" >*</label>
+                                <button @click="reset" type="button" class="btn btn-default form-control">Clear</button>
+                            </div>
+                        </div>
+                        
+                    </form>
+                    <div class="col-md-12 horizontal-divider mb-10"></div>
+                </div>
+                
+                <div class="col-md-12">
+                      <v-client-table 
+                            :data="files" 
+                            :columns="columns" 
+                            :options="options">
+                            <template slot="code" scope="props">
+                                <a :href="props.row.path" download>{{props.row.code}}</a>
+                            </template>
+
+                            <template v-if="$can('admin|superuser')" slot="actions" scope="props">
+                                 <ul class="icons-list" >
+                                    <li class="dropdown" >
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon-menu7"></i>
+                                        </a>
+                                        <ul class="dropdown-menu  dropdown-menu-right">
+                                            <li><a @click="editFile(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
+                                            <li><a @click="deleteFile(props.row)" class="text-danger"  ><i class="icon-trash-alt"></i> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </template>
+                      </v-client-table>
+ 
+                </div>
+            </div>           
+         
+        </div>
+    
+    </div>
+ 
+    <notify :warns="$store.state.notifications"></notify>
+</div>
+
+</template>
+<script>
+import  ClientTable from 'vue-tables-2';
+import FileUpload from 'vue-simple-upload/dist/FileUpload';
+import notify from './../../../core/Notify';
+export default {
+  
+    data() {
+        return {
+            loading: true,
+             editMode: (localStorage.getItem('formedit') =="false"? false: true),
+             files: [],
+             form: new Form( {   
+                 id: null,          
+                 code: null,
+                 name: '',
+                 path: null,
+                 fileUpload: null,
+                             
+                 
+             }),
+             formData: new FormData({
+
+             }),
+             nations: [],
+             columns: ['id', 'code', 'name',  'actions'],
+             options: {
+
+                headings: {
+                    actions:  ''
+                },
+         
+                skin: 'table-hover',
+                texts: {
+                    filter: ''
+                },
+                columnsClasses: {                  
+                    id: 'w-70',
+                    code: 'w-80',
+                    name: 'column-expanded',
+                    actions: 'text-right w-40 action',
+                },
+                sortIcon: { 
+                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
+                },
+                perPage: 25,
+                perPageValues: [10,25,50,100, 200]
+
+             }
+        
+        }
+
+    },
+    components: {
+         'fileupload': FileUpload,
+         notify
+    },
+    created() {        
+        this.getForms(this.pid);
+        var _this = this;      
+        
+        
+    },
+
+ 
+    methods: {
+        editToggle() {
+            localStorage.setItem('formedit', this.editMode);
+        },
+        onSubmit() { 
+		    this.formData.append('code', this.form.code);
+            this.formData.append('name', this.form.name);
+            if(this.form.id)
+                this.formData.append('id', this.form.id);
+            
+            axios.post('/api/forms', this.formData)
+                 .then(response=>{
+                    
+                     this.form.reset();
+                      $("#file-input").val('');
+                     notice( {
+                         status: response.status,
+                         statusText: response.statusText,
+                         data: response.data
+                     }, 5000);
+
+                     this.formData = new FormData();
+                     this.getForms();
+                 })
+                 .catch(error=>{
+                  
+                     notice({
+                         status: error.response.status,
+                         statusText: error.response.statusText,
+                         data: error.response.data
+                     }, 5000);
+                 })
+        },
+        getForms() {
+            axios.get('/api/forms')
+                 .then(({data})=>{
+                     this.files = data;
+                     this.loading = false;
+                  })
+        }, 
+        onFileChange(e) {
+            this.formData.delete("file");
+            if(this.validateFile(e.target)) {
+                let files = e.target.files || e.dataTransfer.files
+                if (!files.length) {
+                    return;
+                };
+
+                this.file = files[0];			
+        
+                this.formData.append('file', this.file);  
+            }
+
+            return;
+             
+
+        },
+        editFile(e) {
+            let _this = this;
+
+            for(let property in e){
+                _this.form[property] = e[property];
+            }
+        },
+        deleteFile(e) {
+            let form = new Form({
+                id: null
+
+            });
+
+            for(let property in e){
+                form[property] = e[property];
+            }
+            form.post('/api/forms/delete')
+                     .then((data)=>{
+                         this.getForms();
+                         notice(form.notifications);
+                     })
+                     .catch((error)=>{
+                         notice(form.notifications);
+                     })
+
+        },        
+       
+        reset() {
+            this.form.reset();
+        },            
+  
+        validateFile(oInput) {
+            
+            var _validFileExtensions = [".xls", ".xlsx", ".pdf"];  
+            if (oInput.type == "file") {
+                var sFileName = oInput.value;
+                if (sFileName.length > 0) {
+                    var blnValid = false;
+                    for (var j = 0; j < _validFileExtensions.length; j++) {
+                        var sCurExtension = _validFileExtensions[j];
+                        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+                            blnValid = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!blnValid) {
+                        this.formData.delete("file");
+                        notice({
+                            status: 422,
+                            statusText: 'File format is not invalid',
+                            data: ['File format is not valid. Please upload file with extensions: .xls, .xlsx or .pdf']
+                        }, 8000);
+                        $(oInput).val('');
+                        return false;
+
+                    }
+                }
+            }
+            return true;
+        }
+                                
+ 
+
+    }
+
+
+}
+</script>

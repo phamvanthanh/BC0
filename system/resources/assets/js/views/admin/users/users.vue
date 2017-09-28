@@ -1,0 +1,194 @@
+<template>
+<div class="content-wrapper">
+    <!-- Page header -->
+    <div class="page-header">
+        <div class="page-header-content">
+            <div class="page-title">
+                <window-heading2></window-heading2>        
+            </div>
+
+            <div class="heading-elements">
+                <div class="heading-btn-group" >
+                    <router-link to="/admin/users/new" class="btn btn-link btn-float has-text"><i class="icon-pencil3"></i><span>New</span></router-link> 
+
+                </div>
+            </div>
+        </div>
+
+    
+    </div>
+
+    <div class="content">
+        <div :class="{loader:loading}"></div>   
+        <div :class="{hidden:loading}" class="panel panel-flat">
+            <div class="panel-heading">                
+                <div class="heading-elements">
+                    <div class="heading-btn">
+                        <div class="form-group">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="panel-body">
+            
+                <div class="col-md-12">
+
+                     <v-client-table 
+                            :data="users" 
+                            :columns="columns" 
+                            :options="options">
+                            <template slot="actions" scope="props">
+                                <router-link class="text-primary" :to="{name: 'users.user.info', params: {uid: props.row.id}}"><i class="icon-unfold"></i></router-link>
+                                 
+                            </template>
+                            
+                   
+                      </v-client-table>
+
+                </div>
+            </div>        
+        </div>
+       
+    </div>
+    <notify :warns="$store.state.notifications"></notify>
+</div>
+
+</template>
+<script>
+
+import  ClientTable from 'vue-tables-2';
+import notify from './../../../core/Notify';
+
+
+export default {
+  
+    data() {
+        return {
+            loading: true,
+             editMode: (localStorage.getItem('usersedit') =="false"? false: true),
+         
+             form: new Form({
+                 id: null,
+                 first_name: null,
+                 last_name: null,
+                 nation_id: null,                
+                 email: null,
+                 phone: null,
+                 organization: null,
+                 status: null                
+                 
+             }),
+
+             users: [],
+             columns: ['id', 'full_name', 'nation_abbr', 'email', 'phone', 'organization', 'status', 'actions'],
+             options: {
+             
+                headings: {
+                    full_name: 'Name',
+                    nation_abbr: 'Nation',
+                    origanization: 'Ogr',
+                    actions: ''
+                },
+
+                templates: {      
+                    status: 'status'
+                },
+                
+                skin: 'table-hover',
+                
+                texts: {
+                    filter: ''
+                },
+                
+                columnsClasses: {
+                  
+                    id: 'w-70',
+                    full_name: 'column-expanded',
+                    client: 'w-150',
+                    nation_abbr: 'w-70',
+                    email: 'w-200',
+                    phone: 'w-125',                 
+                    organization: 'w-200',
+                    status: 'w-70',   
+                    actions: 'text-right w-40 action',
+                },
+                
+                sortIcon: { 
+                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
+                },
+                perPage: 25,
+                perPageValues: [10,25,50,100],
+             }
+        
+        }
+
+    },
+
+    components: {
+        notify,
+    },
+
+    created() {        
+        this.getUsers(this.pid);
+        var _this = this;
+
+        bus.$on('refreshusers', function(){
+            _this.getUsers(_this.pid);
+        });
+
+        bus.$on('edituser', function(e){ 
+                    
+            for(let property in e){
+                _this.form[property] = e[property];
+            }
+        })
+    },
+
+
+    methods: {
+
+        editToggle() {
+            localStorage.setItem('usersedit', this.editMode);
+        },
+
+        onSubmit() { 
+            this.form.post('/api/admin/users')
+                     .then(({data})=>{
+                         notice(this.form.notifications, 6000);
+                         this.form.reset();
+                         this.getUsers(this.pid)
+                     })
+                     .catch(({error})=>{
+                        notice(this.form.notifications, 6000);  
+                     })
+
+        },
+
+        getUsers(pid) {
+            axios.get('/api/admin/users')
+                 .then((data)=>{this.users = data.data.map(function(e){
+                     e.full_name = e.first_name + ' ' + e.last_name;
+                     e.nation_name = e.nation.name;
+                     e.nation_abbr = e.nation.abbreviation;
+                     
+                     return e;
+                 });
+                 this.loading = false; })
+        }, 
+        editUser(e) {
+            if(!this.editMode)
+                this.editMode =true;
+            bus.$emit('edituser', e);
+        },
+        clearForm() {
+            this.form.reset();
+        },   
+        
+
+    }
+
+
+}
+</script>

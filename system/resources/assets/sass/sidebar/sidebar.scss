@@ -1,0 +1,51 @@
+
+.vertical-menu a {
+    background-color: #fff; /* Grey background color */
+    color: $primary-color; /* Black text color */
+    display: block; /* Make the links appear below each other */
+    padding: 0px 0px 4px 45px; /* Add some padding */
+    box-sizing: border-box;
+    border-left: 3px solid transparent;
+}
+.menu-list {
+    padding-top:16px;
+}
+div#sidebar-header {
+  height: 44px;
+  width: 100%;
+  background-color: $subnav-bg;
+  opacity: 0.9;
+  
+}
+.vertical-menu a:hover {
+    // background-color: $sidebar-hover-bg; 
+    border-left-color: $warning-bg;
+    // font-weight: $font-weight-focus;
+    
+    /* Dark grey background on mouse-over */
+}
+
+
+.vertical-menu a.router-link-exact-active,
+.vertical-menu a.relative-active
+{
+    // background-color:  $sidebar-focus-bg; 
+    color: $sidebar-focus-color;
+    border-left-color:  $warning-bg;
+    font-weight: $font-weight-focus;
+    
+}
+.vertical-menu a.relative-active.home {
+    background-color: transparent;
+    color: inherit;
+    border-left-color: transparent
+}
+.vertical-menu a.router-link-exact-active.home {
+    background-color:  $sidebar-focus-bg; 
+    color: $sidebar-focus-color;
+    border-left-color: $warning-bg;    
+}
+
+.vertical-menu span {
+    padding-left: 25px;
+}

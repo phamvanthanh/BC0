@@ -1,0 +1,99 @@
+@import '_variables';
+
+html {
+  height: 100%;
+}
+body {
+  // position: relative;
+  // min-height: 100.1%;
+  overflow-y: auto;
+  color: $text-color;
+  background: #Fff;
+}
+
+div.wrapper {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 100%;   
+    // overflow-y: auto; 
+    
+}
+
+.main-content {
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.navbar {
+    
+    position: fixed;
+    top: 0px;
+    height: $navbar_height;
+    background-color: $navbar-bg;
+    width: 100%;
+    z-index: 9;
+  
+  
+}
+
+div.vertical-menu {
+    position: fixed;
+    top: $navbar_height;
+    height: calc(100vh - 46px);
+    left: 0px;
+    width: 200px;
+    margin: 0;   
+    padding:  0px 0em 1em 0em;
+    // overflow-x: hidden;
+    
+}
+div.vertical-menu .menu-list {
+   height: 100%;
+   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+   overflow-y: auto;
+   margin-right: 10px;
+}
+
+div.main-content {
+    position: fixed;
+    top: $navbar_height;
+    left: $sidebar_width;
+    width: calc(100% - 200px);
+    // border-left: 1px solid #ccc; 
+    padding: 0px 0em 1em 0em;   
+    height: calc(100vh - 46px);
+    overflow: hidden;
+   
+    z-index: 8;
+    box-sizing: border-box;
+    
+}
+div.content {
+   width: 100%;
+   height: calc(100vh - 98px); 
+   overflow-y: auto;
+}
+
+div.main-content div.content-wrapper {
+    height: 100.1%;
+    
+}
+
+
+@media (max-width: 768px) {
+  div.main-content {
+    margin-left: 0px;
+  }
+  
+  div.vertical-menu {
+    display: none;
+    position: fixed;
+    top:$navbar_height;
+    max-width: 200px;
+    overflow-x: hidden;
+  }
+  .navbar {
+    overflow: hidden;
+  }
+
+}
