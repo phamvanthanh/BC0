@@ -34,7 +34,7 @@
 			<div  class="collapse navbar-collapse">
 				<a   href="/" style="font-size: 26px; font-weight: 600">BREAK<span style="color:#ff3860 !important" >COST</span></a>
 				<ul class="nav navbar-nav navbar-right">
-					<li><a class="muted" href="tel:+84-463-288-901" >+84-463-288-901</a></li>
+					<li><a class="muted" href="tel:+84-2463-288-901" >+84-2463-288-901</a></li>
 					<li><a class="btn btn-nav btn-warning hover-outline" href="https://system.breakcost.com/registrations" >Request</a></li>
 					<li><a href="https://system.breakcost.com/login" target="_blank" >Sign in</a></li>
 				</ul>		   

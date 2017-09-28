@@ -410,7 +410,7 @@ class QuantityController extends Controller
             
                 $sheet_name = preg_replace('/\\.[^.\\s]{3,4}$/', '', basename($file)); 
 
-                $coppied_sheet = Excel::selectSheets('A')->load($file)->get(); 
+                $coppied_sheet = Excel::selectSheets('Express')->load($file)->get(); 
                 $data[] = ['name'=>$sheet_name, 'data'=>$coppied_sheet];
                 
             }    // Our first sheet 
