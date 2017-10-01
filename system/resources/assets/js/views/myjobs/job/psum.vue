@@ -12,18 +12,25 @@
     </div>
     
     <div  :class="{hidden:loading}" class="panel-body">
-        <div class="search-input form-group " >
-            <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
+        <div v-if="leaves.length > 0" > 
+            <div class="search-input form-group " >
+                <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
+            </div>
+            <div  id="hot-preview">
+                <HotTable ref="hot"
+                        :root="root" 
+                        :settings="hotSettings"
+                        :data="leaves"
+                            
+                            >
+                </HotTable>
+            
+            </div>
         </div>
-        <div  id="hot-preview">
-            <HotTable ref="hot"
-                      :root="root" 
-                      :settings="hotSettings"
-                      :data="leaves"
-                        
-                        >
-            </HotTable>
-           
+        <div v-else>                
+            <div class="table-norecord">
+                <span>No records.</span>
+            </div>                
         </div>
     </div>
 

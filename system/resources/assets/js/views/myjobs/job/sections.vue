@@ -7,21 +7,28 @@
         </div>
     </div>
     
-    <div :class="{hidden:loading}" class="panel-body">        
-          <v-client-table
-                :data="sections"
-                :columns="columns"
-                :options="options">
-                <template slot="rate" scope="props" >
-                    <span @click="openRate(props.row)" ><Rate :length="5" :value="props.row.rate"></Rate></span>
-                </template>
-                <template slot="actions" scope="props">
-                    <router-link :to="{name: 'myjob.section', params: {jid1: props.row.job_id}}" ><i class="icon-unfold"></i></router-link>
-                </template>
-        </v-client-table> 
-        <modal v-if="showModal"
-                :data="modalData">
-        </modal>
+    <div :class="{hidden:loading}" class="panel-body">
+        <div v-if="sections.length > 0" >        
+            <v-client-table
+                    :data="sections"
+                    :columns="columns"
+                    :options="options">
+                    <template slot="rate" scope="props" >
+                        <span @click="openRate(props.row)" ><Rate :length="5" :value="props.row.rate"></Rate></span>
+                    </template>
+                    <template slot="actions" scope="props">
+                        <router-link :to="{name: 'myjob.section', params: {jid1: props.row.job_id}}" ><i class="icon-unfold"></i></router-link>
+                    </template>
+            </v-client-table> 
+            <modal v-if="showModal"
+                    :data="modalData">
+            </modal>
+        </div>
+        <div v-else>                
+            <div class="table-norecord">
+                <span>No records.</span>
+            </div>                
+        </div>
     </div>
     
 </div>

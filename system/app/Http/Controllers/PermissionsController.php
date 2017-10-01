@@ -6,8 +6,23 @@ use Illuminate\Http\Request;
 use system\Models\Permission;
 class PermissionsController extends Controller
 {
-    public function index() {
-        return Permission::all();
+    public function index(Request $request) {
+
+     
+        extract($request->only(['query', 'limit', 'page', 'ascending', 'orderBy']));
+
+        $ascending = $ascending == 1? 'ASC' : 'DESC';
+        
+        
+        if(empty($query))
+            return Permission::orderBy($orderBy, $ascending)
+                             ->paginate($limit);
+        else 
+              return Permission::where('id', 'LIKE', "%{$query}%")
+                               ->orWhere('name', 'LIKE', "%{$query}%")
+                               ->orWhere('display_name', 'LIKE',"%{$query}%")
+                               ->orWhere('description', 'LIKE', "%{$query}%")
+                               ->paginate($limit);
     }
 
     protected function update($id, $data) {

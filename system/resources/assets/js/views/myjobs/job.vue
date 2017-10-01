@@ -13,7 +13,7 @@
                   
                         <router-link :to="{name: 'myjob.info', params: { id: id }}" class="btn btn-link btn-float has-text"><i class=" icon-info22"></i><span>Info</span></router-link>     
                         <router-link :to="{name: 'myjob.jwbs', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-tree5"></i><span>Jwbs</span></router-link>        
-                        <router-link v-if="info.jobable_type == 'project'" :to="{name: 'myjob.units', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-pencil-ruler"></i><span>Unitify</span></router-link>
+                        <router-link v-if="info.jobable_type == 'project'" :to="{name: 'myjob.units', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-pencil-ruler"></i><span>Units</span></router-link>
                         <router-link :to="{name: 'myjob.files', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-files-empty"></i><span>Files</span></router-link>
                         <router-link :to="{name: 'myjob.links', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-link"></i><span>Links</span></router-link>
                         <router-link v-if="info.jobable_type == 'package'" :to="{name: 'myjob.quantity', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-table2"></i><span>Quantity</span></router-link>

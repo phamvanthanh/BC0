@@ -11,18 +11,25 @@
         </div>
         
         <div class="panel-body">
-            <div class="search-input form-group " >
-                <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
+            <div v-if="leaves.length > 0" >
+                <div class="search-input form-group " >
+                    <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
+                </div>
+                <div  id="hot-preview" v-if="info" >
+                    <HotTable ref="hot"
+                            :root="root" 
+                            :settings="hotSettings"
+                            :data="leaves"                
+                                >
+                    </HotTable>
+                    <input name="fileUpload" @change="onFileChange" id="file-input" class="chat-actions hidden" type="file" >
+                
+                </div>
             </div>
-            <div  id="hot-preview" v-if="info" >
-                <HotTable ref="hot"
-                        :root="root" 
-                        :settings="hotSettings"
-                        :data="leaves"                
-                            >
-                </HotTable>
-                <input name="fileUpload" @change="onFileChange" id="file-input" class="chat-actions hidden" type="file" >
-              
+            <div v-else>                
+                <div class="table-norecord">
+                    <span>No records.</span>
+                </div>                
             </div>
         </div>
     </div>
@@ -31,14 +38,9 @@
 
 </template>
 <script>
-// import numbro from 'numbro';
-// import pikaday from 'pikaday';
-// import Zeroclipboard from 'zeroclipboard';
+
 import HotTable from 'vue-handsontable-official';
 import Handsontable from 'handsontable';
-// import modal from './modals/uploadModal';
-
-
 
 function QLink(instance, td, row, col, prop, value, cellProperties) {
 

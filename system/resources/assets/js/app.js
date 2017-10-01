@@ -142,5 +142,12 @@ Vue.component('window-heading2', {
   }
 });
 
+import {ServerTable} from 'vue-tables-2';
+Vue.use(ServerTable);
+
+
+import {ClientTable} from 'vue-tables-2';
+Vue.use(ClientTable);
+
 
  

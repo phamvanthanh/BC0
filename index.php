@@ -11,7 +11,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-KL3HNM5');</script>
 <!-- End Google Tag Manager -->
-<meta name="google-site-verification" content="b_QsDWUeVPyClMcaQNHFgxU5fv2mJwKA5XAWyecPwJg" />
+
 <meta name="google-site-verification" content="q1KkgtZ9-fpe31SInnoDP-2fGPTrse6P-UGxDChq3zE" />
 <!-- Pinterest -->
 <meta name="p:domain_verify" content="9fb2171b867950105a1fd62511ca8829"/>
@@ -24,8 +24,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<meta name="google-site-verification" content="q1KkgtZ9-fpe31SInnoDP-2fGPTrse6P-UGxDChq3zE" />
 	<title>Quantity Take-off, Material Take-off, MTO, QTO, Construction Quantity Survey, Construction Estimation</title> 
 	<meta name="description" content="BreakCost provides professional Construction Quantity Take-off Service for construction projects. At BreakCost, measures for specific work take-offs are developed to expertise to guarantee high accuracy as well as efficiency. Online office allows our clients to visualize progresses at any time.">
-	<meta name="keywords" content="Construction quantity take-off service, construction quantity survey, online construction quantity take off, quantity survey service, material-take-off-service, construction estimating, material-take-off, building quantity take off, construction quantity takeoff, construction quantity survey, construction quantity take off, quantity take-off company, quantity survey company">
-	<meta name='baynote_title' content='Quantity-Take-off-Solutions'>
+	<meta name="keywords" content="Construction quantity takeoff service, construction quantity survey, online construction quantity take off, quantity survey service, material-take-off-service, construction estimating, material-take-off, building quantity take off, construction quantity takeoff, construction quantity survey, construction quantity take off, quantity take-off company, quantity survey company">
+	<meta name='baynote_title' content='Quantity-Takeoff-Solutions'>
 	<meta name="author" content="BreakCost">
 	<link href="/ico/logo.png" rel="icon" >
 	

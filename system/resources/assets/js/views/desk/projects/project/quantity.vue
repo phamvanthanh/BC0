@@ -12,19 +12,21 @@
     </div>
     
     <div :class="{hidden:loading}" class="panel-body">
-        <div class="search-input form-group " >
-            <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
+        <div v-if="leaves.length > 0">
+            <div class="search-input form-group " >
+                <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
+            </div>
+            <div  id="hot-preview">
+                <HotTable   ref="hot"
+                            :root="root" 
+                            :settings="hotSettings"
+                            :data="leaves"                        
+                            >
+                </HotTable>
+            
+            </div>
         </div>
-        <div v-if="leaves.length > 0" id="hot-preview">
-            <HotTable   ref="hot"
-                        :root="root" 
-                        :settings="hotSettings"
-                        :data="leaves"                        
-                        >
-            </HotTable>
-           
-        </div>
-         <div v-else>                
+        <div v-else>                
             <div class="table-norecord">
                 <span>No records.</span>
             </div>                
@@ -35,11 +37,9 @@
 
 </template>
 <script>
-// import moment from 'moment';
-// import numbro from 'numbro';
-// import pikaday from 'pikaday';
-// import Zeroclipboard from 'zeroclipboard';
+
 import HotTable from 'vue-handsontable-official';
+// import SettingsMapper from './settingsMapper';
 import Handsontable from 'handsontable';
 
 

@@ -74,25 +74,30 @@
                      <div class="col-md-12 horizontal-divider mb-10"></div>
                 </div>
                 <div class="col-md-12">
-               
-                    <v-client-table 
-                        :data="permissions" 
+
+                      <v-server-table
+                        url="/api/admin/permissions" 
                         :columns="columns" 
-                        :options="options">
-                        <template slot="actions" scope="props">
-                            <ul class="icons-list" >
-                                <li class="dropdown" >
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="icon-menu7"></i>
-                                    </a>
-                                    <ul class="dropdown-menu  dropdown-menu-right">                                
-                                        <li><a @click="editPermission(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
-                                        <li><a @click="deletePermission(props.row)" class="text-danger" ><i class="icon-trash-alt"></i> Delete</a></li>
-                                    </ul>
-                                </li>
-                            </ul>    
-                        </template>
-                    </v-client-table>
+                        :options="options"
+                        ref="permission_table"
+                        
+                      >
+                            <template slot="actions" scope="props">
+                                <ul class="icons-list" >
+                                    <li class="dropdown" >
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                            <i class="icon-menu7"></i>
+                                        </a>
+                                        <ul class="dropdown-menu  dropdown-menu-right">                                
+                                            <li><a @click="editPermission(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
+                                            <li><a @click="deletePermission(props.row)" class="text-danger" ><i class="icon-trash-alt"></i> Delete</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>    
+                            </template>
+                     
+                    </v-server-table>              
+                   
                  </div>
             </div>         
          
@@ -105,14 +110,13 @@
 </template>
 <script>
 
-import  ClientTable from 'vue-tables-2';
 import notify from './../../../core/Notify';
 
 export default {
   
     data() {
         return {
-             loading: true,
+             loading: false,
              editMode: (localStorage.getItem('permissionedit') =="false"? false: true),
          
              form: new Form({
@@ -123,6 +127,7 @@ export default {
                  
              }),
              permissions: [],
+             count: NaN, 
              columns: ['id', 'name', 'display_name', 'description', 'actions'],
              options: {
 
@@ -145,26 +150,28 @@ export default {
                     base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
 
                 },
-                perPage: 25,
-                perPageValues: [10,25,50,100]
+
+                perPage: 10,
+                perPageValues: [10,25,50,100],
+               
+                // responseAdapter: function responseAdapter(resp) {
+                //     return {
+                //         data: resp.data,
+                //         count: resp.total
+                //     };
+                // },
 
              }
         
         }
 
     },
-    ready() {
-        // this.loading = true;
-    },
-    created() {        
-        this.getPermissions();
-        var _this = this;
-        bus.$on('refreshpermissions', function(){
-            _this.getPermissions(_this.pid);
-        });
-        bus.$on('editpermission', function(e){
+
+    mounted() {        
+      
+        this.$on('editpermission', (e)=>{
             for(let property in e){
-                _this.form[property] = e[property];
+                this.form[property] = e[property];
             }
         })
     },
@@ -172,6 +179,7 @@ export default {
     components: {
 
            notify,
+        //    ServerTable
    
     },
     methods: {
@@ -182,8 +190,10 @@ export default {
             this.form.post('/api/admin/permissions')
                      .then(({data})=>{
                          notice(this.form.notifications, 6000)
-                         this.form.reset();                      
-                         this.getPermissions(this.pid)})
+                         this.form.reset(); 
+                         this.$refs.permission_table.refresh();                     
+                        //  this.getPermissions(this.pid)
+                         })
                      .catch(({error})=>{
                          notice(this.form.notifications, 6000)})
 
@@ -201,16 +211,18 @@ export default {
             if(yes){               
                 this.form.post("/api/admin/permissions/delete")
                          .then(({data})=>{
-                             bus.$emit('refreshpermissions')})
+                             this.$refs.permission_table.refresh(); 
+                             })
                          .catch((error)=>{ 
                              this.$store.commit('loadNotifications', this.form.notifications)})               
             }
 
         },
         editPermission (e) {
+           
             if(!this.editMode)
                 this.editMode = true;
-            bus.$emit('editpermission', e);
+            this.$emit('editpermission', e);
 
         },
         reset() {
