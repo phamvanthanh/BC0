@@ -15,15 +15,13 @@ class PermissionsController extends Controller
         $ascending = $ascending == 1? 'ASC' : 'DESC';
         
         if($limit) {
-                 if(empty($query))
-                        return Permission::orderBy($orderBy, $ascending)
-                                        ->paginate($limit);
-                    else 
-                        return Permission::where('id', 'LIKE', "%{$query}%")
-                                        ->orWhere('name', 'LIKE', "%{$query}%")
-                                        ->orWhere('display_name', 'LIKE',"%{$query}%")
-                                        ->orWhere('description', 'LIKE', "%{$query}%")
-                                        ->paginate($limit);
+             
+            return Permission::where('id', 'LIKE', "%{$query}%")
+                            ->orWhere('name', 'LIKE', "%{$query}%")
+                            ->orWhere('display_name', 'LIKE',"%{$query}%")
+                            ->orWhere('description', 'LIKE', "%{$query}%")
+                            ->orderBy($orderBy, $ascending)
+                            ->paginate($limit);
         }
 
         return Permission::all(); 

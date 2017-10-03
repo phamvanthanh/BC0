@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
  
 Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () { 
 
-    Route::get('/desk/works', ['uses'=>'JobsController@index']);
+    Route::get('/desk/works', 'JobsController@index');
     Route::get('/desk/works/{id}/bids', ['uses'=>'BidsController@index']);
     Route::post('/desk/works/{id}/bids', ['uses'=>'BidsController@store']);
 

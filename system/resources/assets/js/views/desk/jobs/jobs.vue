@@ -14,8 +14,8 @@
     </div>
 
     <div class="content">
-        <div :class="{loader:loading}"></div>   
-        <div :class="{hidden:loading}" class="panel panel-flat">
+    
+        <div  class="panel panel-flat">
             <div class="panel-heading">
            
                 <div class="heading-elements">
@@ -25,30 +25,28 @@
                 </div>
             </div>        
             <div class="panel-body"> 
-                <div v-if="jobs.length">
-                    <v-client-table 
-                        :data="jobs" 
+                <div >
+                    <v-server-table 
+                        ref="job_table"
+                        url="/api/desk/works"                                             
                         :columns="columns" 
-                        :options="options">
+                        :options="options"
+                    >
                         <template slot="actions" scope="props">
                             <div>
                                 <router-link :to="{name: 'desk.job', params: {id: props.row.id}}" ><i class="icon-unfold"></i></router-link>
                             </div>
                         </template>
-                        <template slot="isAwarded" scope="props">  
-                            <span :class="[props.row.isAwarded == 'Yes'? 'label-success': 'label-default', 'label' ]">{{props.row.isAwarded}}</span>
+                        <template slot="bid_status" scope="props">  
+                            <span :class="[props.row.bid_status == 'awarded'? 'label-success': 'label-default', 'label' ]">{{props.row.bid_status}}</span>
                         
                         </template>
                         <template slot="num_bids" scope="props">  
                             <span :class="[props.row.num_bids > 0? 'label-primary': 'label-default', 'label' ]">{{props.row.num_bids}}</span>
                         </template>
-                    </v-client-table>
+                    </v-server-table>
                 </div>
-                <div v-else>
-                    <div class="table-norecord">
-                        <span>No records.</span>
-                    </div>       
-                </div>
+               
                 
             </div>
         </div>  
@@ -57,16 +55,16 @@
 </template>
 <script>
 
-import  ClientTable from 'vue-tables-2';
+
 import {capitalize} from './../../../core/filters';
 
 
 export default {
     data() {
         return {
-            loading: false,
-            jobs:[],
-            columns: ['id', 'name', 'jobable_type', 'project',  'from_date', 'to_date', 'num_bids', 'isAwarded', 'status', 'actions'],
+
+          
+            columns: ['id', 'name', 'jobable_type', 'project', 'from_date', 'to_date', 'bid_count', 'bid_status', 'status', 'actions'],
             options: {
                 headings: {
                     id: 'Id',
@@ -74,19 +72,19 @@ export default {
                     jobable_type: 'Type',
                     project: 'Project',
                     from_date: 'From',
-                    to_date: 'To',
-                    num_bids: 'Bids',
-                    isAwarded: 'Awrd',
+                    to_date: 'To',  
+                 
+                    bid_count: 'Bids',
+                    bid_status: 'Awrd',
+                    
                     actions: ''
                     
                 },
                 templates: {        
                     status: 'status'                    
                 },
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                },
+                dateFormat: "DD/MM/YY",
+                dateColumns: ['from_date', 'to_date'],
                 columnsClasses: {
                     id: 'w-70',
                     name: 'column-expanded',
@@ -94,19 +92,16 @@ export default {
                     project: 'w-150',
                     from_date: 'w-80',
                     to_date: 'w-80',
-                    num_bids: 'w-50',
-                    isAwarded: 'w-50',
+                    bid_count: 'w-50',
+                    bid_status: 'w-100',
                     progress: 'w-150',
                     status: 'w-70', 
                     actions: 'text-right w-40 action',
                       
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                },
+                sortable:['id', 'name', 'jobable_type', 'project', 'from_date', 'to_date', 'bid_status', 'status'],
                 perPage: 25,
-                perPageValues: [10,25,50,100],
+          
 
 
             }          
@@ -115,36 +110,6 @@ export default {
         }
     },
     
-    created() {
-        let _this = this;
-        this.getJobs();
-        
-    }, 
 
-    methods: {   
-
-        getJobs() {
-            axios.get('/api/desk/works')
-                    .then(({data})=>{
-                        this.jobs = data.map(function(e){
-                            return {
-                                id: e.id,
-                                name: e.info.jobable.name,
-                                jobable_type: capitalize(e.jobable_type),
-                                project: e.info.project.name,
-                                from_date: moment(e.from_date).format('YY/MM/DD'),
-                                to_date: moment(e.to_date).format('YY/MM/DD'),
-                                num_bids: e.info.bids? e.info.bids.length: 0,
-                                isAwarded: e.info.awarded? 'Yes': 'No',
-                                status: e.status
-                            }
-                        });
-                        this.loading = false;
-                    })
-                    .catch((error)=>{
-                        console.log(error);})
-        },        
-    }
-    
 }
 </script>
