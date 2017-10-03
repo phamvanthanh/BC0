@@ -18,7 +18,9 @@ class JobsController extends Controller
     * @return system\Models\Job
     * Return all jobs
     */
-    public function index() {
+    public function index(Request $request) {
+
+     
         //  $jobs = Job::all();  
                   
         //  foreach($jobs as $index=>$job) {
@@ -26,6 +28,33 @@ class JobsController extends Controller
         //      $jobs[$index]['info'] = $this->info($job['id']);
         //  }
         //  return $jobs;  
+
+        extract($request->only(['query', 'limit', 'page', 'ascending', 'orderBy']));
+
+        $ascending = $ascending == 1? 'ASC' : 'DESC';
+
+        $dropTempTables = DB::unprepared(
+            DB::raw("
+                DROP TABLE IF EXISTS vpackages;    
+                DROP TABLE IF EXISTS vbids;     
+                           
+            ")
+        );
+        $vpackages = DB::unprepared( DB::raw(
+                        'CREATE TEMPORARY TABLE vpackages
+                            AS (select packages.id, packages.name, sections.project_id from packages
+                            JOIN sections
+                            ON packages.section_id = sections.id);
+
+                        CREATE TEMPORARY TABLE vbids
+                            AS (select jobs.id, COUNT(bids.job_id) as count from bids
+                            JOIN jobs
+                            ON jobs.id = bids.job_id
+                            GROUP BY id);                 
+                        
+                        ') 
+                     ); 
+         if($vpackages)
 
          return DB::table('jobs')
            ->LeftJoin('projects', function($join){
@@ -35,17 +64,51 @@ class JobsController extends Controller
            ->LeftJoin('sections', function($join){
                $join->on('jobs.jobable_id', '=', 'sections.id');
                $join->where('jobs.jobable_type', '=', 'section');
+           })      
+           ->leftJoin('vpackages' , function($join){
+               return $join->on('jobs.jobable_id', '=', 'vpackages.id')
+                           ->where('jobs.jobable_type', '=', 'package');
            })
-           ->LeftJoin('packages', function($join){
-               $join->on('jobs.jobable_id', '=', 'packages.id');
-               $join->where('jobs.jobable_type', '=', 'package');
-           })
-
-           ->get();
-
-
-
-
+           ->Join('projects as p', function($join) {
+               $join->on('projects.id', '=', 'p.id')
+                    ->orOn('sections.project_id', '=', 'p.id')
+                    ->orOn('vpackages.project_id', '=', 'p.id');                  
+                            
+               
+            })
+            ->leftJoin('bids', function($join){
+                return $join->on('jobs.id', '=', 'bids.job_id')
+                            ->where('bids.status', '=', 'awarded');
+            })
+            ->leftJoin('vbids', 'jobs.id', '=', 'vbids.id')
+            ->select(DB::raw('
+                jobs.id,
+                jobs.jobable_type,
+                jobs.jobable_id,
+                jobs.from_date,
+                jobs.to_date,
+                jobs.status,
+                    IF(jobs.jobable_type = "project", projects.name,
+                    IF(jobs.jobable_type = "section", sections.name, vpackages.name) 
+                ) as name,
+                p.name as project,
+                vbids.count as bid_count,
+                bids.status as bid_status
+     
+           '
+               
+           ))
+           ->where('jobs.id', 'LIKE', "%{$query}%")
+           ->orWhere('jobs.jobable_type', 'LIKE', "%{$query}%")
+           ->orWhere('jobs.from_date', 'LIKE', "%{$query}%")
+           ->orWhere('jobs.to_date', 'LIKE', "%{$query}%")
+           ->orWhere('p.name', 'LIKE', "%{$query}%")
+           ->orWhere('projects.name', 'LIKE', "%{$query}%")
+           ->orWhere('sections.name', 'LIKE', "%{$query}%")
+           ->orWhere('vpackages.name', 'LIKE', "%{$query}%")
+           ->orderBy($orderBy, $ascending)
+           ->paginate($limit);
+        
     }
 
     
