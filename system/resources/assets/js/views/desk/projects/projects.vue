@@ -30,9 +30,10 @@
             </div>
           
             <div class="panel-body">
-                <div v-if="tableData.length > 0">
-                    <v-client-table 
-                        :data="tableData" 
+                <div >
+                    <v-server-table 
+                        ref="project_table"
+                        url="/api/projects" 
                         :columns="columns" 
                         :options="options">
                         <template slot="rate" scope="props" >
@@ -43,16 +44,12 @@
                                 <router-link :to="{name: 'desk.project.info', params: {pid: props.row.id}}" ><i class="icon-unfold"></i></router-link>
                             </div>
                         </template>
-                    </v-client-table>
+                    </v-server-table>
                     <modal v-if="showModal"
                         :data="modalData">
                     </modal>
                 </div>
-                <div v-else>
-                    <div class="no-record">
-                        <span>No records.</span>
-                    </div>
-                </div>
+              
             </div>        
         </div>
         <notify :warns="$store.state.notifications"></notify>
@@ -63,7 +60,7 @@
 
 <script>
 
-import ClientTable from 'vue-tables-2';
+// import ClientTable from 'vue-tables-2';
 import Rate from './../../elements/ratedisplay';
 import modal from './../../elements/rateJobModal';
 import notify from './../../../core/Notify';
@@ -77,18 +74,18 @@ export default {
     },
     data() {
       return {
-            loading: true,
+            loading: false,
             showModal: false,
             tableData: [],
-            columns: ['job_id', 'name', 'client', 'nation', 'industry', 'from', 'to', 'status', 'rate', 'actions'],              
+            columns: ['id', 'name', 'client', 'nation_abbr', 'industry', 'from_date', 'to_date', 'status', 'rate', 'actions'],              
             options: {
                  headings: {
-                    job_id: 'Id',                                      
+                    id: 'Id',                                      
                     client: 'Client',
-                    nation: 'Ntn.',
+                    nation_abbr: 'Ntn.',
                     industry: 'Ind.',
-                    from: 'From',
-                    to: 'To',
+                    from_date: 'From',
+                    to_date: 'To',
                     created: 'Created',
                     status: 'Status',  
                     actions: ''             
@@ -100,24 +97,17 @@ export default {
                     status: 'status'
                 },
 
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
+                sortable: ['id', 'name', 'client', 'nation_abbr', 'industry', 'from_date', 'to_date', 'status', 'rate'],
 
-                },
-
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                },
                 columnsClasses: {
                    
-                    job_id: 'w-70',
+                    id: 'w-70',
                     name: 'column-expanded',
                     client: 'w-150',
-                    nation: 'w-70',
+                    nation_abbr: 'w-70',
                     industry: 'w-70',
-                    from: 'w-80',
-                    to: 'w-80',
+                    from_date: 'w-80',
+                    to_date: 'w-80',
                     rate: 'w-100',
                     status: 'w-70', 
                     actions: 'text-right w-40 action'           
@@ -131,40 +121,40 @@ export default {
 
     created() {
         let _this = this;
-        this.getProjects();
+        // this.getProjects();
         this.$on('closemodal', function(){
             _this.showModal = false;
         });
-        this.$on('refreshparent', function(){
-            _this.getProjects();
-        })
+        // this.$on('refreshparent', function(){
+        //     _this.getProjects();
+        // })
     },
 
     methods: {
     
-        getProjects() {
-            axios.get('/api/projects')
-                .then(({data})=> {
-            this.tableData = data.map(function(e){
-                return {
-                    id: e.id,
-                    job_id: e.job.id,
-                    name: e.name,
-                    client: e.user.first_name + ' ' + e.user.last_name,
-                    nation: e.nation.abbreviation,
-                    industry: e.industry.name,
-                    from: e.job.from_date,
-                    to: e.job.to_date,               
-                    created: moment(e.created_at).fromNow(),
-                    status: e.job.status,
-                    rate:e.job.rate,
-                    comment: e.job.comment
-                    };
-                });
-            this.loading = false;
+        // getProjects() {
+        //     axios.get('/api/projects')
+        //         .then(({data})=> {
+        //     this.tableData = data.map(function(e){
+        //         return {
+        //             id: e.id,
+        //             job_id: e.job.id,
+        //             name: e.name,
+        //             client: e.user.first_name + ' ' + e.user.last_name,
+        //             nation: e.nation.abbreviation,
+        //             industry: e.industry.name,
+        //             from: e.job.from_date,
+        //             to: e.job.to_date,               
+        //             created: moment(e.created_at).fromNow(),
+        //             status: e.job.status,
+        //             rate:e.job.rate,
+        //             comment: e.job.comment
+        //             };
+        //         });
+        //     this.loading = false;
                    
-            });
-        },
+        //     });
+        // },
         openRate(e) {
             this.modalData = e;
             this.showModal= true;

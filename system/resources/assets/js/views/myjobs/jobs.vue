@@ -63,13 +63,14 @@ export default {
         return {
             loading: true,
             awards: [],
-            columns: ['id', 'name', 'jobable_type', 'project', 'nation', 'from_date', 'to_date', 'status', 'actions'],
+            columns: ['id', 'name', 'jobable_type', 'project', 'nation_abbr', 'from_date', 'to_date', 'status', 'actions'],
                 options: {
                     headings: {
                         id: 'Id',
                         name: 'Name',
                         jobable_type: 'Type',
                         project: 'Project',
+                        nation_abbr: 'Nation', 
                         from_date: 'From',
                         to_date: 'To',
                         num_bids: 'Bids',
@@ -87,7 +88,7 @@ export default {
                         name: 'column-expanded',
                         jobable_type: 'w-70',
                         project: 'w-200',
-                        nation: 'w-70',
+                        nation_abbr: 'w-70',
                         from_date: 'w-80',
                         to_date: 'w-80',                       
                         status: 'w-70', 

@@ -92,6 +92,7 @@ class JobsController extends Controller
                     IF(jobs.jobable_type = "section", sections.name, vpackages.name) 
                 ) as name,
                 p.name as project,
+                p.nation_abbr as nation_abbr,
                 vbids.count as bid_count,
                 bids.status as bid_status
      

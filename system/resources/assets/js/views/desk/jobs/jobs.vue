@@ -64,7 +64,7 @@ export default {
         return {
 
           
-            columns: ['id', 'name', 'jobable_type', 'project', 'from_date', 'to_date', 'bid_count', 'bid_status', 'status', 'actions'],
+            columns: ['id', 'name', 'jobable_type', 'project', 'nation_abbr', 'from_date', 'to_date', 'bid_count', 'bid_status', 'status', 'actions'],
             options: {
                 headings: {
                     id: 'Id',
@@ -73,7 +73,7 @@ export default {
                     project: 'Project',
                     from_date: 'From',
                     to_date: 'To',  
-                 
+                    nation_abbr: 'Nation',
                     bid_count: 'Bids',
                     bid_status: 'Awrd',
                     
@@ -90,6 +90,7 @@ export default {
                     name: 'column-expanded',
                     jobable_type: 'w-70',
                     project: 'w-150',
+                    nation_abbr: 'w-70',
                     from_date: 'w-80',
                     to_date: 'w-80',
                     bid_count: 'w-50',
