@@ -16,8 +16,7 @@ class ProjectsController extends Controller
 
         $ascending = $ascending == 1? 'ASC' : 'DESC';
         if($orderBy == 'client') 
-            $orderBy = 'first_name';
-           
+            $orderBy = 'first_name';           
         
         
         // return Project::with('user')->with('nation')->with('industry')->with('job')->get();
