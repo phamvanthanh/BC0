@@ -90,6 +90,7 @@
                                         </a>
                                         <ul class="dropdown-menu  dropdown-menu-right">                                
                                             <li><a @click="editPermission(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
+                                            <li><a @click="copyPermission(props.row)" class="text-primary" ><i class="icon-copy3"></i> Copy</a></li>
                                             <li><a @click="deletePermission(props.row)" class="text-danger" ><i class="icon-trash-alt"></i> Delete</a></li>
                                         </ul>
                                     </li>
@@ -126,9 +127,9 @@ export default {
                  description: null,                
                  
              }),
-             permissions: [],
-             count: NaN, 
-             columns: ['id', 'name', 'display_name', 'description', 'actions'],
+             permissions: [],           
+             columns: [ 'id', 'name', 'display_name', 'description', 'actions'],
+             
              options: {
 
                 headings: {
@@ -146,12 +147,9 @@ export default {
                     description: 'column-expanded',                     
                     actions: 'text-right w-40 action',
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                },
-
-                perPage: 10,
+           
+                sortable: ['id', 'name', 'display_name', 'description'],
+                perPage: 25,
                 perPageValues: [10,25,50,100],
                
                 // responseAdapter: function responseAdapter(resp) {
@@ -169,17 +167,15 @@ export default {
 
     mounted() {        
       
-        this.$on('editpermission', (e)=>{
-            for(let property in e){
-                this.form[property] = e[property];
-            }
-        })
+        // this.$on('editpermission', (e)=>{
+          
+        // })
     },
 
     components: {
 
            notify,
-        //    ServerTable
+     
    
     },
     methods: {
@@ -192,7 +188,7 @@ export default {
                          notice(this.form.notifications, 6000)
                          this.form.reset(); 
                          this.$refs.permission_table.refresh();                     
-                        //  this.getPermissions(this.pid)
+                        
                          })
                      .catch(({error})=>{
                          notice(this.form.notifications, 6000)})
@@ -218,11 +214,18 @@ export default {
             }
 
         },
-        editPermission (e) {
-           
+    
+        editPermission (e) {           
             if(!this.editMode)
                 this.editMode = true;
-            this.$emit('editpermission', e);
+            for(let property in e){
+                this.form[property] = e[property];
+            }
+
+        },
+        copyPermission (e) {           
+           this.editPermission(e);
+           this.form.id = undefined;
 
         },
         reset() {

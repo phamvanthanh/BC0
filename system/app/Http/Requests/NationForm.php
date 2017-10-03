@@ -24,17 +24,24 @@ class NationForm extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'name'       => 'required | string',
-            'abbreviation' => 'required | string'
+            'abbr' => 'required | string'
         ];
+        if($this->input('id'))
+            return $rules;
+        $rules = [
+            'name'       => 'required|string|unique:nations',
+            'abbr' => 'required | string|unique:nations'
+        ];
+        return $rules;
     }
     
     public function persist() {
 
         Nation::updateOrCreate(
             ['id'=>$this->input('id')],
-            $this->only(['name', 'abbreviation'])
+            $this->only(['name', 'abbr'])
         );
        return response(['Nation post succeed'], 200);
     } 

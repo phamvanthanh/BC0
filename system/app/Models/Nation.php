@@ -9,7 +9,7 @@ class Nation extends Model
     protected $table = 'nations';
     protected $fillable = [
         'name',
-        'abbreviation',
+        'abbr',
         'created_by'
     ];
     

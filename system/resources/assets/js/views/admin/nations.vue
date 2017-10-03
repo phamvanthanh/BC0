@@ -50,7 +50,7 @@
                          <div class="col-sm-2">
                             <div class="form-group">
                                 <label>Abbreviation: <span class="text-danger">*</span></label>
-                                <input v-model="form.abbreviation" class="form-control">
+                                <input v-model="form.abbr" class="form-control">
                             </div>
                         </div>
                
@@ -70,8 +70,9 @@
                      <div class="col-md-12 horizontal-divider mb-10"></div>
                 </div>
                 <div class="col-md-12">
-                      <v-client-table 
-                            :data="nations" 
+                      <v-server-table 
+                            ref="nation_table"
+                            url="/api/admin/nations"                           
                             :columns="columns" 
                             :options="options">
                             <template slot="actions" scope="props">
@@ -83,13 +84,14 @@
 
                                         <ul class="dropdown-menu  dropdown-menu-right">
                                             <li><a @click="editNation(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
+                                            <li><a @click="copyNation(props.row)" class="text-primary"  ><i class="icon-copy3"></i> Copy</a></li>
                                             <li><a @click="deleteNation(props.row)" class="text-danger"  ><i class="icon-trash-alt"></i> Delete</a></li>
                                         </ul>
                                     </li>
                                 </ul>
 
                             </template>
-                      </v-client-table>
+                      </v-server-table>
  
                 </div>
             </div>           
@@ -103,45 +105,37 @@
 
 </template>
 <script>
-import  ClientTable from 'vue-tables-2';
+
 import notify from './../../core/Notify';
 
 export default {
   
     data() {
         return {
-             loading: true,
+             loading: false,
              editMode: (localStorage.getItem('nationedit') =="false"? false: true),         
              form: new Form({
                  id: null,
                  name: null,
-                 abbreviation: null,
-                             
+                 abbr: null              
                  
              }),
-             nations: [],
-             columns: ['id', 'name', 'abbreviation', 'actions'],
+  
+             columns: ['id', 'name', 'abbr', 'actions'],
              options: {
 
                 headings: {
-                    abbreviation: 'Abbr.',
+                    abbr: 'Abbr.',
                     actions:  ''
-                },
-         
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                },
+                },         
+ 
                 columnsClasses: {                  
                     id: 'w-70',
                     name: 'column-expanded',
-                    abbreviation: 'w-80',                  
+                    abbr: 'w-80',                  
                     actions: 'text-right w-40 action',
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-                },
-
+                sortable: ['id', 'name', 'abbr']
              }
         
         }
@@ -152,8 +146,8 @@ export default {
     },
 
     created() {        
-        this.getNations(this.pid);
-        var _this = this;       
+        // this.getNations(this.pid);
+        // var _this = this;       
         
     },
 
@@ -165,32 +159,37 @@ export default {
         onSubmit() { 
             this.form.post('/api/admin/nations')
                      .then(({data})=>{
+                         this.$refs.nation_table.refresh();
                          notice(this.form.notifications, 5000);
                          this.form.reset();
-                         this.getNations(this.pid)})
+                         
+                         })
                      .catch(({error})=>{
                          notice(this.form.notifications, 5000);
                          })
 
         },
-        getNations() {
-            axios.get('/api/admin/nations')
-                 .then((data)=>{
-                     this.nations = data.data;
-                     this.loading = false; })
-                 .catch((error)=>{
-                     console.log(error);
-                 })
-        },        
+        // getNations() {
+        //     axios.get('/api/admin/nations')
+        //          .then((data)=>{
+        //              this.nations = data.data;
+        //              this.loading = false; })
+        //          .catch((error)=>{
+        //              console.log(error);
+        //          })
+        // },        
 
         editNation(e) {
             if(!this.editMode)
                 this.editMode = true;
-
             for(let property in e){
                 this.form[property] = e[property];
             }
            
+        },
+        copyNation(e) {
+            this.editNation(e);
+            this.form.id = null;
         },
         
         deleteNation(e) {
@@ -200,8 +199,9 @@ export default {
             if(yes){               
                 this.form.post("/api/admin/nations/delete")
                         .then(({data})=>{
+                            this.$refs.nation_table.refresh();
                             notice(this.form.notifications, 5000);
-                             this.getNations(this.pid);})
+                            })
                         .catch((error)=>{ 
                             notice(this.form.notifications, 5000);
                         })               

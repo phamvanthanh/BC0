@@ -8,11 +8,31 @@ use system\Models\RoleUser;
 use Illuminate\Support\Facades\Auth;
 use system\Http\Requests\UserForm; 
 use system\Http\Requests\RoleUserForm; 
+use DB;
 
 class UsersController extends Controller
 {
-    public function index() {
-        return User::with('nation')->get(); 
+    public function index(Request $request) {
+
+        extract($request->only(['query', 'limit', 'page', 'ascending', 'orderBy']));
+
+        $ascending = $ascending == 1? 'ASC' : 'DESC';
+        $orderBy = $orderBy == 'full_name'? 'first_name': $orderBy;
+        if($limit) {
+                 if(empty($query))
+                        return User::orderBy($orderBy, $ascending)
+                                        ->paginate($limit);
+                    else 
+                        return User::where('id', 'LIKE', "%{$query}%")                                    
+                                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%{$query}%")
+                                        ->orWhere('email', 'LIKE',"%{$query}%")
+                                        ->orWhere('phone', 'LIKE',"%{$query}%")
+                                        ->orWhere('organization', 'LIKE',"%{$query}%")                                       
+                                        ->orWhere('nation_abbr', 'LIKE',"%{$query}%")
+                                        ->paginate($limit);
+        }
+
+   
         
     }
    

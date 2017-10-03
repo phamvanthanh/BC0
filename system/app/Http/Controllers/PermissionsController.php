@@ -4,6 +4,7 @@ namespace system\Http\Controllers;
 
 use Illuminate\Http\Request;
 use system\Models\Permission;
+use system\Http\Requests\PermissionForm;
 class PermissionsController extends Controller
 {
     public function index(Request $request) {
@@ -13,16 +14,20 @@ class PermissionsController extends Controller
 
         $ascending = $ascending == 1? 'ASC' : 'DESC';
         
-        
-        if(empty($query))
-            return Permission::orderBy($orderBy, $ascending)
-                             ->paginate($limit);
-        else 
-              return Permission::where('id', 'LIKE', "%{$query}%")
-                               ->orWhere('name', 'LIKE', "%{$query}%")
-                               ->orWhere('display_name', 'LIKE',"%{$query}%")
-                               ->orWhere('description', 'LIKE', "%{$query}%")
-                               ->paginate($limit);
+        if($limit) {
+                 if(empty($query))
+                        return Permission::orderBy($orderBy, $ascending)
+                                        ->paginate($limit);
+                    else 
+                        return Permission::where('id', 'LIKE', "%{$query}%")
+                                        ->orWhere('name', 'LIKE', "%{$query}%")
+                                        ->orWhere('display_name', 'LIKE',"%{$query}%")
+                                        ->orWhere('description', 'LIKE', "%{$query}%")
+                                        ->paginate($limit);
+        }
+
+        return Permission::all(); 
+   
     }
 
     protected function update($id, $data) {
@@ -30,23 +35,8 @@ class PermissionsController extends Controller
         return;
     }
 
-    public function store(Request $request) {
-        $this->validate($request, [
-            'name' => 'required | string'
-        ]);
-
-        $id = $request['id'];
-                
-        if(empty($id)) 
-           $role  = new Permission;
-        else
-          $role = Permission::findOrFail($id);     
-        
-        $role->name = $request['name'];
-        $role->display_name = $request['display_name'];
-        $role->description = $request['description'];
-        $role->save();   
-        return ;   
+    public function store(PermissionForm $form) {
+       return $form->persist();
     }
     
     public function delete(Request $request) {
@@ -54,6 +44,6 @@ class PermissionsController extends Controller
         $role = Permission::findOrFail($request['id']); 
         $role->delete();
       
-        return;
+        return response(['Delete permission succeed.'], 200);
     }
 }

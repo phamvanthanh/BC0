@@ -26,7 +26,7 @@ class User extends Authenticatable
         'phone',  
         'password', 
         'organization', 
-        'nation_id', 
+        'nation_abbr', 
         'message', 
         'status', 
         'created_at', 

@@ -36,9 +36,9 @@
                             <div class="col-md-3"> 
                                 <div class="form-group">
                                     <label >Nation:</label>
-                                    <select v-model="form.nation_id"   type="text" placeholder="Nation" class="form-control">
+                                    <select v-model="form.nation_abbr"   type="text" placeholder="Nation" class="form-control">
                                         <option></option>                                    
-                                        <option :value="nation.id" v-for="nation in nations" >{{nation.name}}</option>
+                                        <option :value="nation.abbr" v-for="nation in nations" >{{nation.name}}</option>
                                        
                                     </select>
                                 </div>
@@ -110,7 +110,7 @@ export default {
                     id: this.user.id,
                     first_name: this.user.first_name,
                     last_name: this.user.last_name,
-                    nation_id: this.user.nation_id,                
+                    nation_abbr: this.user.nation_abbr,                
                     email: this.user.email,
                     phone: this.user.phone,
                     organization: this.user.organization,
@@ -119,19 +119,19 @@ export default {
                 });
              
             },
-            set(neVal) {
-
+            set(newVal) {
+                console.log(newVal)
             }
         }
     },
    
     created() {                
 
-        var _this = this;   
+        // var _this = this;   
 
-        bus.$on('edituser', function(e){                    
+        // bus.$on('edituser', function(e){                    
            
-        })
+        // })
     },
     created() {
          this.getNations();
@@ -148,7 +148,7 @@ export default {
                      .then(({data})=>{
                          notice(this.form.notifications, 6000);
                          this.form.reset();
-                         this.$parent.$emit('refreshuser');
+                        //  this.$parent.$emit('refreshuser');
                         //  this.getUsers(this.pid)
                      })
                      .catch(({error})=>{
@@ -164,7 +164,7 @@ export default {
        
         getNations() {
             axios.get('/api/admin/nations')
-                 .then((data)=>{this.nations = data.data })
+                 .then(({data})=>{this.nations = data })
         },    
         
 

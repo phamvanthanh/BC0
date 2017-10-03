@@ -8,9 +8,27 @@ use system\Http\Requests\NationForm;
 
 class NationsController extends Controller
 {
-    public function index() {
+    public function index(Request $request) {
+
+
+        extract($request->only(['query', 'limit', 'page', 'ascending', 'orderBy']));
+
+        $ascending = $ascending == 1? 'ASC' : 'DESC';
         
-        return Nation::all();
+        if($limit) {
+                 if(empty($query))
+                        return Nation::orderBy($orderBy, $ascending)
+                                        ->paginate($limit);
+                    else 
+                        return Nation::where('id', 'LIKE', "%{$query}%")
+                                        ->orWhere('name', 'LIKE', "%{$query}%")
+                                        ->orWhere('abbr', 'LIKE',"%{$query}%")                                       
+                                        ->paginate($limit);
+        }
+
+        return Nation::all(); 
+        
+        
     }
     
     public function show($id) {

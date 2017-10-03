@@ -10,8 +10,8 @@
             <div class="heading-elements">
                 <div class="heading-btn-group" >
                     <router-link :to="{name:'users.user.info', params: {uid: uid}}" class="btn btn-link btn-float has-text"><i class="icon-info22"></i><span>Info</span></router-link> 
-                     <router-link :to="{name:'users.user.roles', params: {uid: uid}}" class="btn btn-link btn-float has-text"><i class="icon-users2"></i><span>Roles</span></router-link>
-                     <router-link :to="{name:'users.user.jobs', params: {uid: uid}}" class="btn btn-link btn-float has-text"><i class="icon-list2"></i><span>Jobs</span></router-link>                    
+                    <router-link :to="{name:'users.user.roles', params: {uid: uid}}" class="btn btn-link btn-float has-text"><i class="icon-users2"></i><span>Roles</span></router-link>
+                    <router-link :to="{name:'users.user.jobs', params: {uid: uid}}" class="btn btn-link btn-float has-text"><i class="icon-list2"></i><span>Jobs</span></router-link>                    
                 </div>
             </div>
         </div>

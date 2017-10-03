@@ -98,7 +98,7 @@
 </template>
 <script>
 
-import  ClientTable from 'vue-tables-2';
+
 import notify from './../../../core/Notify';
 
 
@@ -127,11 +127,8 @@ export default {
              options: {
                  headings: {
                     actions: ''
-                 },
-                 skin: 'table-hover',
-                 texts: {
-                    filter: 'Filter: '
-                 },
+                 },     
+                
                  columnsClasses: {
                     id: 'w-70',
                     name: 'w-200',
@@ -139,10 +136,7 @@ export default {
                     description: 'column-expanded',                     
                     actions: 'text-right w-70 action',
                  },
-                 sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                 },
+                 sortable: ['id', 'name', 'display_name', 'description']
              }            
         
         }

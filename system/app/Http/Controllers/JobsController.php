@@ -10,6 +10,7 @@ use system\Models\Project;
 use system\Models\Section;
 use system\Models\Package;
 use system\Http\Requests\JobForm;
+use DB;
 
 class JobsController extends Controller
 {
@@ -18,13 +19,33 @@ class JobsController extends Controller
     * Return all jobs
     */
     public function index() {
-         $jobs = Job::all();  
+        //  $jobs = Job::all();  
                   
-         foreach($jobs as $index=>$job) {
+        //  foreach($jobs as $index=>$job) {
 
-             $jobs[$index]['info'] = $this->info($job['id']);
-         }
-         return $jobs;       
+        //      $jobs[$index]['info'] = $this->info($job['id']);
+        //  }
+        //  return $jobs;  
+
+         return DB::table('jobs')
+           ->LeftJoin('projects', function($join){
+               $join->on('jobs.jobable_id', '=', 'projects.id');
+               $join->where('jobs.jobable_type', '=', 'project');
+           })
+           ->LeftJoin('sections', function($join){
+               $join->on('jobs.jobable_id', '=', 'sections.id');
+               $join->where('jobs.jobable_type', '=', 'section');
+           })
+           ->LeftJoin('packages', function($join){
+               $join->on('jobs.jobable_id', '=', 'packages.id');
+               $join->where('jobs.jobable_type', '=', 'package');
+           })
+
+           ->get();
+
+
+
+
     }
 
     

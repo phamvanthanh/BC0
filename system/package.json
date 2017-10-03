@@ -5,11 +5,11 @@
   "scripts": {
     "webpack": "webpack  --hide-modules",
     "dev": "webpack --hide-modules --watch",
-    "build": "NODE_ENV=production webpack -p --watch"
+    "build": "webpack -p"
   },
   "keywords": [],
   "author": "thanhpv",
-  "license": "QsCompanion",
+  "license": "BreakCost",
   "devDependencies": {
     "axios": "^0.15.3",
     "babel": "^6.23.0",

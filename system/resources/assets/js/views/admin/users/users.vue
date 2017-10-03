@@ -35,17 +35,24 @@
             
                 <div class="col-md-12">
 
-                     <v-client-table 
-                            :data="users" 
+                     <v-server-table 
+                            url="/api/admin/users"                  
+                       
+                            ref="user_table"
+                        
                             :columns="columns" 
                             :options="options">
+                         
+                            <template slot="full_name" scope="props">
+                                {{props.row.first_name}} {{props.row.last_name}}
+                            </template>
                             <template slot="actions" scope="props">
                                 <router-link class="text-primary" :to="{name: 'users.user.info', params: {uid: props.row.id}}"><i class="icon-unfold"></i></router-link>
                                  
                             </template>
                             
                    
-                      </v-client-table>
+                      </v-server-table>
 
                 </div>
             </div>        
@@ -58,7 +65,6 @@
 </template>
 <script>
 
-import  ClientTable from 'vue-tables-2';
 import notify from './../../../core/Notify';
 
 
@@ -66,7 +72,7 @@ export default {
   
     data() {
         return {
-            loading: true,
+            loading: false,
              editMode: (localStorage.getItem('usersedit') =="false"? false: true),
          
              form: new Form({
@@ -82,7 +88,7 @@ export default {
              }),
 
              users: [],
-             columns: ['id', 'full_name', 'nation_abbr', 'email', 'phone', 'organization', 'status', 'actions'],
+             columns: ['id', 'full_name',  'email', 'phone', 'organization', 'nation_abbr', 'status', 'actions'],
              options: {
              
                 headings: {
@@ -96,30 +102,29 @@ export default {
                     status: 'status'
                 },
                 
-                skin: 'table-hover',
-                
-                texts: {
-                    filter: ''
-                },
-                
+                sortable: ['id', 'full_name', 'email', 'phone', 'organization', 'nation_abbr', 'status'],
                 columnsClasses: {
                   
                     id: 'w-70',
                     full_name: 'column-expanded',
                     client: 'w-150',
                     nation_abbr: 'w-70',
-                    email: 'w-200',
+                    email: 'w-250',
                     phone: 'w-125',                 
                     organization: 'w-200',
                     status: 'w-70',   
                     actions: 'text-right w-40 action',
                 },
-                
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-                },
+          
                 perPage: 25,
-                perPageValues: [10,25,50,100],
+                // responseAdapter: function responseAdapter(resp) {
+                 
+                //     return {
+                //         data: resp,
+                //         count: resp.total
+                //     };
+                // },
+                
              }
         
         }
@@ -131,12 +136,12 @@ export default {
     },
 
     created() {        
-        this.getUsers(this.pid);
-        var _this = this;
+        // this.getUsers(this.pid);
+        // var _this = this;
 
-        bus.$on('refreshusers', function(){
-            _this.getUsers(_this.pid);
-        });
+        // bus.$on('refreshusers', function(){
+        //     _this.getUsers(_this.pid);
+        // });
 
         bus.$on('edituser', function(e){ 
                     
@@ -166,17 +171,13 @@ export default {
 
         },
 
-        getUsers(pid) {
-            axios.get('/api/admin/users')
-                 .then((data)=>{this.users = data.data.map(function(e){
-                     e.full_name = e.first_name + ' ' + e.last_name;
-                     e.nation_name = e.nation.name;
-                     e.nation_abbr = e.nation.abbreviation;
-                     
-                     return e;
-                 });
-                 this.loading = false; })
-        }, 
+        // getUsers(pid) {
+        //     axios.get('/api/admin/users')
+        //          .then(({data})=>{
+        //             this.users = data;
+        //             this.loading = false; 
+        //          })
+        // }, 
         editUser(e) {
             if(!this.editMode)
                 this.editMode =true;

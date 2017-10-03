@@ -10,9 +10,7 @@
             <div class="heading-elements">
                
             </div>
-        </div>
-
-    
+        </div>    
     </div>
 
     <div class="content">

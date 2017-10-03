@@ -26,14 +26,18 @@ class UserForm extends FormRequest
     public function rules()
     {
         
-        return [
+        $rules = [
              'first_name'=>'required | string',
              'last_name' =>'required | string',
              'email'     =>'required | email',
-             'nation_id' =>'required | integer',
+             'nation_abbr' =>'required |string',
              'status'    =>'required | integer'
-            
+                       
         ];
+        if($this->input('id'))
+            return $rules;
+        $rules['email'] = 'required|email|unique:users';
+        return $rules;
     }
     public function persist() {
         if($this->user()->can('create-update-user'))
@@ -43,7 +47,7 @@ class UserForm extends FormRequest
                 'email', 
                 'phone',
                 'organization',
-                'nation_id', 
+                'nation_abbr', 
                 'status',         
                 'created_by']);
                 
@@ -53,7 +57,7 @@ class UserForm extends FormRequest
                 'last_name',           
                 'phone',
                 'organization',
-                'nation_id',              
+                'nation_abbr',              
                 'created_by']);
 
         if($this->has('id')) {           

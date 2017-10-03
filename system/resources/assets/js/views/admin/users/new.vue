@@ -29,7 +29,7 @@
                 </div>
             </div>                
             <div class="panel-body">
-                <div class="col-md-12" v-if="editMode">
+                <div class="col-md-12" >
                     <form method="post" @submit.prevent="onSubmit" >                                   
                         
                             <div class="col-md-3 pl-5">
@@ -48,9 +48,9 @@
                             <div class="col-md-3"> 
                                 <div class="form-group">
                                     <label >Nation:</label>
-                                    <select v-model="form.nation_id"   type="text" placeholder="Nation" class="form-control">
+                                    <select v-model="form.nation_abbreviation"   type="text" placeholder="Nation" class="form-control">
                                         <option></option>                                    
-                                        <option :value="nation.id" v-for="nation in nations" >{{nation.name}}</option>
+                                        <option :value="nation.abbreviation" v-for="nation in nations" >{{nation.name}}</option>
                                     
                                     </select>
                                 </div>
@@ -120,7 +120,7 @@ export default {
                     id: null,
                     first_name: null,
                     last_name: null,
-                    nation_id: null,                
+                    nation_abbreviation: null,                
                     email: null,
                     phone: null,
                     organization: null,
