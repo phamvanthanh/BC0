@@ -19,8 +19,8 @@
     </div>
  
     <div class="content">
-        <div :class="{loader:loading}"></div>   
-        <div :class="{hidden:loading}" class="panel panel-flat">
+      
+        <div class="panel panel-flat">
             <div class="panel-heading">              
                 <div class="heading-elements">
                     <ul class="icons-list">
@@ -60,7 +60,7 @@
 
 <script>
 
-// import ClientTable from 'vue-tables-2';
+
 import Rate from './../../elements/ratedisplay';
 import modal from './../../elements/rateJobModal';
 import notify from './../../../core/Notify';
@@ -74,7 +74,7 @@ export default {
     },
     data() {
       return {
-            loading: false,
+            
             showModal: false,
             tableData: [],
             columns: ['id', 'name', 'client', 'nation_abbr', 'industry', 'from_date', 'to_date', 'status', 'rate', 'actions'],              
@@ -92,8 +92,7 @@ export default {
                   
                 },
                 
-                templates: {
-      
+                templates: {      
                     status: 'status'
                 },
 
@@ -121,40 +120,16 @@ export default {
 
     created() {
         let _this = this;
-        // this.getProjects();
+      
         this.$on('closemodal', function(){
             _this.showModal = false;
         });
-        // this.$on('refreshparent', function(){
-        //     _this.getProjects();
-        // })
+      
     },
 
     methods: {
     
-        // getProjects() {
-        //     axios.get('/api/projects')
-        //         .then(({data})=> {
-        //     this.tableData = data.map(function(e){
-        //         return {
-        //             id: e.id,
-        //             job_id: e.job.id,
-        //             name: e.name,
-        //             client: e.user.first_name + ' ' + e.user.last_name,
-        //             nation: e.nation.abbreviation,
-        //             industry: e.industry.name,
-        //             from: e.job.from_date,
-        //             to: e.job.to_date,               
-        //             created: moment(e.created_at).fromNow(),
-        //             status: e.job.status,
-        //             rate:e.job.rate,
-        //             comment: e.job.comment
-        //             };
-        //         });
-        //     this.loading = false;
-                   
-        //     });
-        // },
+     
         openRate(e) {
             this.modalData = e;
             this.showModal= true;
