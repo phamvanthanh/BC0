@@ -16,8 +16,8 @@
     </div>
 
     <div class="content">
-        <div :class="{loader:loading}"></div>   
-        <div :class="{hidden:loading}" class="panel panel-flat">
+           
+        <div  class="panel panel-flat">
             <div class="panel-heading">
            
                 <div class="heading-elements">
@@ -27,23 +27,20 @@
                 </div>
             </div>        
             <div class="panel-body"> 
-                <v-client-table 
-                    :data="leads" 
+                <v-server-table 
+                    url="/api/desk/leads" 
                     :columns="columns" 
                     :options="options">
+                    <template slot="name" scope="props">
+                        {{props.row.first_name}} {{props.row.last_name}}
+                    </template>
                     <template slot="actions" scope="props">
-                        <div>
+                        <!--<div>
                             <router-link :to="{name: 'desk.job', params: {id: props.row.id}}" ><i class="icon-unfold"></i></router-link>
-                        </div>
+                        </div>-->
                     </template>
-                    <template slot="isAwarded" scope="props">  
-                          <span :class="[props.row.isAwarded == 'Yes'? 'label-success': 'label-default', 'label' ]">{{props.row.isAwarded}}</span>
-                       
-                    </template>
-                    <template slot="num_bids" scope="props">  
-                           <span :class="[props.row.num_bids > 0? 'label-primary': 'label-default', 'label' ]">{{props.row.num_bids}}</span>
-                    </template>
-                </v-client-table>
+                   
+                </v-server-table>
                 
             </div>
         </div>  
@@ -52,50 +49,37 @@
 </template>
 <script>
 
-import  ClientTable from 'vue-tables-2';
 import {capitalize} from './../../../core/filters';
 
 
 export default {
     data() {
         return {
-            loading: false,
-            leads:[],
-            columns: ['id', 'first_name', 'last_name', 'email',  'phone', 'company', 'subscription','actions'],
+          
+            columns: ['id', 'name', 'email',  'phone',  'sub', 'message', 'created_at', 'actions'],
             options: {
                 headings: {
                     id: 'Id',
-                    first_name: 'First Name',
-                    last_name: 'Last Name',                   
-                    subscription: 'Sub',                   
+                    created_at: 'Sub. Time',                   
+                    sub: 'Sub',                   
                     actions: ''
                     
                 },
-           
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                },
+         
                 columnsClasses: {
                     id: 'w-70',
-                    email: 'column-expanded',
-                    first_name: 'w-150',
-                    last_name: 'w-150',
-                    from_date: 'w-80',
-                    phone: 'w-150',
-                    company: 'w-200',
-                    subscription: 'w-50',
-                    progress: 'w-150',
-                    
+                    email: 'w-200',
+                    message: 'column-expanded',
+                    name: 'w-150',                  
+                    phone: 'w-150',                 
+                    sub: 'w-70',
+                    created_at: 'w-150',                   
                     actions: 'text-right w-40 action',
                       
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                },
+                sortable: ['id', 'name', 'email', 'phone', 'message', 'sub', 'created_at'],
                 perPage: 25,
-                perPageValues: [10,25,50,100],
+               
 
 
             }          
@@ -104,23 +88,9 @@ export default {
         }
     },
     
-    created() {
-        this.getLeads();
-        
-    }, 
+ 
 
-    methods: {   
-
-        getLeads() {
-            axios.get('/api/desk/leads')
-                    .then(({data})=>{
-                        this.leads = data;
-                        this.loading = false;
-                    })
-                    .catch((error)=>{
-                        console.log(error);})
-        },        
-    }
+   
     
 }
 </script>

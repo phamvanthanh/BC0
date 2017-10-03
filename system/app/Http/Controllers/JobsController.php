@@ -20,15 +20,6 @@ class JobsController extends Controller
     */
     public function index(Request $request) {
 
-     
-        //  $jobs = Job::all();  
-                  
-        //  foreach($jobs as $index=>$job) {
-
-        //      $jobs[$index]['info'] = $this->info($job['id']);
-        //  }
-        //  return $jobs;  
-
         extract($request->only(['query', 'limit', 'page', 'ascending', 'orderBy']));
 
         $ascending = $ascending == 1? 'ASC' : 'DESC';

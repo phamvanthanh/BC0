@@ -11,11 +11,7 @@
 <script>
 import jobinfo from './../../../jobs/job/info';
 
-
-
 export default {
- 
-    // router,
   
     props: {
         info: null

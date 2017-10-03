@@ -18,19 +18,17 @@ class UsersController extends Controller
 
         $ascending = $ascending == 1? 'ASC' : 'DESC';
         $orderBy = $orderBy == 'full_name'? 'first_name': $orderBy;
-        if($limit) {
-                 if(empty($query))
-                        return User::orderBy($orderBy, $ascending)
-                                        ->paginate($limit);
-                    else 
-                        return User::where('id', 'LIKE', "%{$query}%")                                    
-                                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%{$query}%")
-                                        ->orWhere('email', 'LIKE',"%{$query}%")
-                                        ->orWhere('phone', 'LIKE',"%{$query}%")
-                                        ->orWhere('organization', 'LIKE',"%{$query}%")                                       
-                                        ->orWhere('nation_abbr', 'LIKE',"%{$query}%")
-                                        ->paginate($limit);
-        }
+       
+    
+        return User::where('id', 'LIKE', "%{$query}%")                                    
+                        ->orWhere(DB::raw("CONCAT(`first_name`, ' ', `last_name`)"), 'LIKE', "%{$query}%")
+                        ->orWhere('email', 'LIKE',"%{$query}%")
+                        ->orWhere('phone', 'LIKE',"%{$query}%")
+                        ->orWhere('organization', 'LIKE',"%{$query}%")                                       
+                        ->orWhere('nation_abbr', 'LIKE',"%{$query}%")
+                        ->orderBy($orderBy, $ascending)
+                        ->paginate($limit);
+        
 
    
         
