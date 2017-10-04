@@ -34,7 +34,7 @@ class FormForm extends FormRequest
 
     public function persist() {
 
-       symlink('/home/nhdyjjgwhosting/public_html/system/storage/forms', '/home/nhdyjjgwhosting/public_html/system/public/forms');
+    //    symlink('/home/nhdyjjgwhosting/public_html/system/storage/forms', '/home/nhdyjjgwhosting/public_html/system/public/forms');
         
 
         if($this->input('id')){
@@ -51,6 +51,7 @@ class FormForm extends FormRequest
         [
             'code' => $this->input('code'),
             'name' => $this->input('name'),
+            'note' => $this->input('note'),
             'path' => $path
         ]);
         

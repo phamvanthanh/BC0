@@ -88,6 +88,7 @@
                 
                 <div class="row">
                       <v-server-table 
+                            ref="form_table"
                             url="/api/forms" 
                             :columns="columns" 
                             :options="options">
@@ -103,6 +104,7 @@
                                         </a>
                                         <ul class="dropdown-menu  dropdown-menu-right">
                                             <li><a @click="editFile(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
+                                             <li><a @click="copyFile(props.row)" class="text-primary" ><i class="icon-copy3"></i> Copy</a></li>
                                             <li><a @click="deleteFile(props.row)" class="text-danger"  ><i class="icon-trash-alt"></i> Delete</a></li>
                                         </ul>
                                     </li>
@@ -129,7 +131,7 @@ export default {
   
     data() {
         return {
-            loading: true,
+          
              editMode: (localStorage.getItem('formedit') =="false"? false: true),
              files: [],
              form: new Form( {   
@@ -138,8 +140,7 @@ export default {
                  name: '',
                  note: '',
                  path: null,
-                 fileUpload: null,
-                             
+                 fileUpload: null,                             
                  
              }),
              formData: new FormData({
@@ -179,11 +180,13 @@ export default {
         onSubmit() { 
 		    this.formData.append('code', this.form.code);
             this.formData.append('name', this.form.name);
+            this.formData.append('note', this.form.note);
             if(this.form.id)
                 this.formData.append('id', this.form.id);
             
             axios.post('/api/forms', this.formData)
-                 .then(response=>{                    
+                 .then(response=>{      
+                     this.$refs.form_table.refresh();              
                      this.form.reset();
                      $("#file-input").val('');
                      notice( {
@@ -193,7 +196,7 @@ export default {
                      }, 6000);
 
                      this.formData = new FormData();
-                     this.getForms();
+                     
                  })
                  .catch(error=>{
                   
@@ -204,13 +207,7 @@ export default {
                      }, 6000);
                  })
         },
-        getForms() {
-            axios.get('/api/forms')
-                 .then(({data})=>{
-                     this.files = data;
-                     this.loading = false;
-                  })
-        }, 
+  
         onFileChange(e) {
             this.formData.delete("file");
             if(this.validateFile(e.target)) {
@@ -228,17 +225,18 @@ export default {
              
 
         },
-        editFile(e) {
-            let _this = this;
-
+        editFile(e) {         
             for(let property in e){
-                _this.form[property] = e[property];
+                this.form[property] = e[property];
             }
+        },
+        copyFile(e) {
+            this.editFile(e);
+            this.form.id = null;
         },
         deleteFile(e) {
             let form = new Form({
                 id: null
-
             });
 
             for(let property in e){
@@ -246,7 +244,7 @@ export default {
             }
             form.post('/api/forms/delete')
                      .then((data)=>{
-                         this.getForms();
+                         this.$refs.table_form.refresh();
                          notice(form.notifications);
                      })
                      .catch((error)=>{
@@ -254,11 +252,7 @@ export default {
                      })
 
         },        
-       
-        reset() {
-            this.form.reset();
-        },            
-  
+      
         validateFile(oInput) {
             
             var _validFileExtensions = [".xls", ".xlsx", ".pdf"];  

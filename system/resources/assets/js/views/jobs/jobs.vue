@@ -30,7 +30,7 @@
                 </div>
             </div>        
             <div class="panel-body"> 
-                <div >
+                <div class="row" >
                     <v-server-table
                         url="/api/works"
                         :columns="columns"

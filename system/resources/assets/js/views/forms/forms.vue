@@ -31,32 +31,24 @@
           
             <div class="panel-body">
         
-                <div class="table-wrapper">
-                      <v-client-table 
-                            :data="files" 
+                <div class="row">
+                      <v-server-table 
+                            
+                            url="/api/forms" 
                             :columns="columns" 
                             :options="options">
                             <template slot="code" scope="props">
                                 <a :href="props.row.path" download>{{props.row.code}}</a>
-                            </template>
-
-                           
-                      </v-client-table>
- 
+                            </template>                          
+                      </v-server-table> 
                 </div>
-            </div>           
-         
-        </div>
-    
+            </div>        
+        </div>   
     </div>
- 
-
 </div>
 
 </template>
 <script>
-import  ClientTable from 'vue-tables-2';
-
 
 export default {
   
@@ -68,61 +60,35 @@ export default {
                  id: null,          
                  code: null,
                  name: null,
+                 note: null,
                  path: null,
-                 fileUpload: null,
-                             
+                 fileUpload: null                           
                  
              }),
-             formData: new FormData({
-
-             }),
+        
              nations: [],
-             columns: ['id', 'code', 'name',  'actions'],
+             columns: ['id', 'code', 'name', 'note', 'actions'],
              options: {
 
                 headings: {
                     actions:  ''
-                },
+                },        
          
-                skin: 'table-hover',
-                texts: {
-                    filter: 'Filter: '
-                },
                 columnsClasses: {                  
                     id: 'w-70',
-                    code: 'w-80',
+                    code: 'w-100',
                     name: 'column-expanded',
+                    note: 'w-200',
                     actions: 'text-right w-40 action',
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-                },
-                perPage: 25,
-                perPageValues: [10,25,50,100]
+                sortable: ['id', 'code', 'name', 'note']
+          
              }
         
         }
 
     },
- 
-    created() {        
-        this.getForms(this.pid);
-        var _this = this;      
-        
-        
-    },
 
- 
-    methods: {
-
-        getForms() {
-            axios.get('/api/forms')
-                 .then(({data})=>{this.files = data;
-                  })
-        }, 
-
-
-    }
 
 
 }

@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Form extends Model
 {
-    protected $table = 'forms';
+    // protected $table = 'forms';
 
     protected $fillable = [
         'id',
         'code',
         'name',
+        'note',
         'path'
     ];
 }
