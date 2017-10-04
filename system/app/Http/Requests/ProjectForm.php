@@ -30,7 +30,7 @@ class ProjectForm extends FormRequest
         return [
             'name'          =>'required | string',
             'user_id'       =>'required | integer',
-            'nation_id'     =>'required | integer',
+            'nation_abbr'   =>'required | string',
             'industry_id'   =>'required | integer',
             'job.from_date' =>'required | date',
             'job.to_date'   =>'required | date'          
@@ -47,7 +47,7 @@ class ProjectForm extends FormRequest
  
     public function persist() {         
 
-        $inputs = $this->only(['name', 'user_id', 'nation_id', 'industry_id', 'description', 'requirement']);
+        $inputs = $this->only(['name', 'user_id', 'nation_abbr', 'industry_id', 'description', 'requirement']);
         
         
                 
@@ -67,10 +67,6 @@ class ProjectForm extends FormRequest
             ]
         );    
         
-        // $role = Role::where('name', 'client')->first();
-        
-        // JobHolder::updateOrCreate(['job_id'=>$job['id'], 'user_id'=>$this->input('user_id'), 'role_id' =>$role['id'], 'status'=>'owner']); 
-
         return response(['Project information post succeed'], 200); 
     }
 }

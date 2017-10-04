@@ -53,9 +53,9 @@
                             <div class="col-md-4">
                                     <div class="form-group">
                                     <label>Nation: <span class="text-danger">*</span></label>
-                                    <select name="nation_id" v-model="form.nation_id" data-placeholder="Select nation"  class="form-control required">
+                                    <select name="nation_id" v-model="form.nation_abbr" data-placeholder="Select nation"  class="form-control required">
                                         <option></option>                                    
-                                        <option v-for="nation in nations" :value="nation.id">{{nation.name}}</option>
+                                        <option v-for="nation in nations" :value="nation.abbr">{{nation.name}}</option>
                                         
                                     </select>
                                 </div>
@@ -161,7 +161,7 @@ import datepicker from '././../../elements/Datepicker';
                     id: null,
                     name: null,
                     user_id: null,
-                    nation_id: null,
+                    nation_abbr: null,
                     industry_id: null,                
                     description: null,
                     requirement: null,

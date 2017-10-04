@@ -16,7 +16,7 @@ class ClientsController extends Controller
 
         $ascending = $ascending == 1? 'ASC' : 'DESC';
         $orderBy = $orderBy == 'name'? 'first_name': $orderBy;
-
+        if($limit)
         return User::whereHas('roles', function($query){
                         $query->where('name', 'client');
                     })
@@ -29,6 +29,10 @@ class ClientsController extends Controller
                     })                    
                     ->orderBy($orderBy, $ascending)     
                     ->paginate($limit);
+        return User::whereHas('roles', function($query){
+                        $query->where('name', 'client');
+                    })
+                    ->get();
                 
     }
     public function show($uid) {

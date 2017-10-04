@@ -38,11 +38,13 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Client: <span class="text-danger">*</span></label>
-                            <select name="user_id" type="text" v-model="form.user_id" disabled class="form-control required" >
+                            <input v-if="form.id" name="user_id" type="text" :value="form.user.first_name+ ' '+form.user.last_name" disabled class="form-control required"> 
+                            <select v-else name="user_id" type="text" v-model="form.user_id" disabled class="form-control required" >
                                 <option></option>
                                 <option v-for="client in clients" :value="client.id">{{client.first_name}} {{ client.last_name}} </option>
                                 
                             </select>
+                           
                         </div>		
                                                             
                     </div>
@@ -50,9 +52,9 @@
                     <div class="col-md-4">
                             <div class="form-group">
                             <label>Nation: <span class="text-danger">*</span></label>
-                            <select name="nation_id" v-model="form.nation_id" data-placeholder="Select nation"  class="form-control required">
+                            <select name="nation_abbr" v-model="form.nation_abbr" data-placeholder="Select nation"  class="form-control required">
                                 <option></option>                                    
-                                <option v-for="nation in nations" :value="nation.id">{{nation.name}}</option> 
+                                <option v-for="nation in nations" :value="nation.abbr">{{nation.name}}</option> 
                                 
                             </select>
                         </div>
@@ -65,7 +67,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Industry: <span class="text-danger">*</span></label>
-                            <select name="industry_id" type="text" v-model="form.industry_id"  class="form-control required">
+                            <select  name="industry_id" type="text" v-model="form.industry_id"  class="form-control required">
                                     <option> </option> 
                                     <option value="1">Residential and commercial buildings</option> 
                                     <option value="2">Industrial and power plant</option> 
@@ -147,11 +149,11 @@ import datepicker from '././../../../elements/Datepicker';
                     id: null,
                     name: null,
                     user_id: null,
-                    nation_id: null,
+                    nation_abbr: null,
                     industry_id: null,                
                     description: null,
                     requirement: null,
-                    status: 0,                             
+                    status: 0,                           
           
                     job: {
                         from_date: null,
@@ -201,16 +203,11 @@ import datepicker from '././../../../elements/Datepicker';
                 axios.get('/api/projects/'+this.id)
                  .then(({data})=>{                  
                         this.project = data;
-                        axios.get('/api/desk/clients')
-                             .then(response => {
-                                
-                                  this.clients = response.data;
-                                
-                                  for(let property  in data){
-                              
-                                        this.form[property] = data[property];
-                                  }
-                               })                        
+                       
+                        for(let property  in data){
+                    
+                            this.form[property] = data[property];
+                        }                     
                     });
             },
             onSubmit() {

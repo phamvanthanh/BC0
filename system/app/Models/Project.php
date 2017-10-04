@@ -12,17 +12,16 @@ class Project extends Model
         'jid', 
         'name', 
         'industry_id', 
-        'nation_id',  
+        'nation_abbr',  
         'user_id',
         'from_date', 
-        'to_date', 
-        'nation_id', 
+        'to_date',       
         'description', 
         'requirement', 
       
     ];  
     public function nation() {
-        return $this->belongsTo('system\Models\Nation');
+        return $this->belongsTo('system\Models\Nation', 'nation_abbr', 'abbr');
     }
 
     public function user() {
