@@ -13,6 +13,7 @@ class LeadsController extends Controller
 
         if($orderBy == 'name')
             $orderBy = 'first_name';
+            
         $ascending = $ascending == 1? 'ASC' : 'DESC';
         
         return Lead::where('id', 'LIKE', "%{$query}%")                                    

@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-               <window-heading2></window-heading2>                
+                          
             </div>
 
             <div class="heading-elements">
@@ -17,8 +17,8 @@
     
     </div>
     <div class="content">      
-        <div :class="{loader:loading}"></div>   
-        <div :class="{hidden:loading}" class="panel panel-flat">
+          
+        <div class="panel panel-flat">
             <div class="panel-heading">             
                 <div class="heading-elements">
                     <div class="heading-btn">
@@ -111,14 +111,14 @@
 </template>
 <script>
 
-import  ClientTable from 'vue-tables-2';
+
 import notify from './../../../core/Notify';
 
 export default {
   
     data() {
         return {
-            loading: true,
+           
              editMode: (localStorage.getItem('rolesedit') =="false"? false: true),         
              form: new Form({
                  id: null,
@@ -134,10 +134,7 @@ export default {
                 headings: {
                     actions: ''
                 },
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                },
+             
                 columnsClasses: {
                     id: 'w-70',
                     name: 'w-200',
@@ -145,10 +142,7 @@ export default {
                     description: 'column-expanded',                     
                     actions: 'text-right w-40 action',
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                },
+                sortable: ['id', 'name', 'display_name', 'description'],
              }        
         }
 

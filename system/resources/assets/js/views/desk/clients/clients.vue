@@ -3,7 +3,7 @@
         <div class="page-header">
             <div class="page-header-content">
                 <div class="page-title">
-                    <window-heading2></window-heading2>  
+                    
                 </div>
                 <div class="heading-elements">
                 
@@ -11,9 +11,8 @@
             </div>   
         </div>
 
-        <div class="content">
-            <div :class="{loader:loading}"></div>
-            <div :class="{hidden:loading}" class="panel panel-flat">
+        <div class="content">         
+            <div  class="panel panel-flat">
                 <div class="panel-heading">
             
                     <div class="heading-elements">
@@ -23,18 +22,18 @@
                     </div>
                 </div>        
                 <div class="panel-body">                   
-                    <v-client-table 
-                        :data="clients" 
+                    <v-server-table 
+                        url="/api/desk/clients" 
                         :columns="columns" 
                         :options="options">
-                        
-                        <template slot="actions" scope="props">
-                        
+                         <template slot="name" scope="props">
+                             {{props.row.first_name}} {{props.row.last_name}}                          
+                        </template>
+                        <template slot="actions" scope="props">                        
                                 <router-link :to="{name: 'desk.client', params: {uid: props.row.id}}" ><i class="icon-unfold"></i></router-link>
-                          
                         </template>
                
-                    </v-client-table>
+                    </v-server-table>
                     
                 </div>
             </div>  
@@ -42,19 +41,16 @@
     </div>
 </template>
 <script>
-import  ClientTable from 'vue-tables-2';
-
 
     export default {
         data() {
             return {
                 loading: true,               
                 clients:[],                  
-                columns: ['id', 'full_name', 'email', 'phone',  'organization', 'status', 'actions'],
+                columns: ['id', 'name', 'email', 'phone',  'organization', 'nation_abbr', 'status', 'actions'],
                 options: {
                     headings: {
-                        id: 'Id',
-                        full_name: 'Name',
+                        nation_abbr: 'Nation',                 
                         actions: ''
                         
                     },
@@ -62,25 +58,19 @@ import  ClientTable from 'vue-tables-2';
                         status: 'status'
                         
                     },
-                    skin: 'table-hover',
-                    texts: {
-                        filter: ''
-                    },
+               
                     columnsClasses: {                           
                        
                         id: 'w-70',
-                        full_name: 'column-expanded',
-                        nation: 'w-70',                        
-                        email: 'w-200',
+                        name: 'column-expanded',
+                        nation_abbr: 'w-70',                        
+                        email: 'w-300',
                         phone: 'w-125',
                         organization: 'w-200',
                         status: 'w-70', 
                         actions: 'text-right w-40 action'                
                     },
-                    sortIcon: { 
-                        base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                    },
+                    sortable: ['id', 'name', 'email', 'phone', 'organization', 'nation_abbr', 'status'],
 
 
                 }                     
@@ -89,8 +79,8 @@ import  ClientTable from 'vue-tables-2';
         },
       
         created() {
-            let _this = this;
-            this.getClients();
+            // let _this = this;
+            // this.getClients();
            
         }, 
 

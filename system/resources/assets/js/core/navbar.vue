@@ -1,11 +1,13 @@
 <template>
   <nav class="navbar">
     <div class="container-fluid">
-      <div class="navbar-header">
+      <div class="navbar-header display-flex">
         <a href="https://breakcost.com" class="navbar-brand" style="font-size: 26px; font-weight: 600">
-          <span class="pr-0" style="color:#3097D1 !important">BREAK</span><span class="pl-0" style="color:#ff3860 !important">COST</span>
+          <span class="pr-0" style="color:#3097D1 !important">B</span>
 
         </a>
+        
+         <window-heading2></window-heading2> 
       </div>
 
       <ul class="nav navbar-nav navbar-right">

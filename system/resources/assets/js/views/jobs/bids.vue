@@ -1,7 +1,7 @@
  <template>
     <div class="panel panel-flat">
     <div class="panel-heading">
-        <h6 class="panel-title">Work Bids</h6>
+     
         <div class="heading-elements">
        
         </div>

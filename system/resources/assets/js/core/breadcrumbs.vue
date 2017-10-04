@@ -8,10 +8,9 @@ Vue.component('vs-crumbs',
 	template:
 		`<ul class="vs-crumbs" v-if="crumbs.length" style="list-style:none; margin:0; padding:0; display:inline-block;">
 			  <li v-for="(crumb, i) in crumbs" style="display:inline-block">
-					 <router-link v-if="i < crumbs.length" :to="crumb.path"  >{{ crumb.name | capital }} <span v-if="i > 0" class="divider"><i class="icon-arrow-right32"></i></span></router-link>
-					 
-        </li>
-			</ul>`,
+			  		<router-link v-if="i < crumbs.length" :to="crumb.path"  >{{ crumb.name | capital }} <span v-if="i > 0 && i < crumbs.length - 1" class="divider"><i class="icon-arrow-right32"></i></span></router-link>
+        	  </li>
+		</ul>`,
 
 	props: { root: String },
 
@@ -37,11 +36,11 @@ Vue.component('vs-crumbs',
 			}
 
 			// window.document.title = title;
-			 cs.splice(-1,1)
+		
 			 return cs;
 		}
   },
-    filters: {
+  filters: {
 			capital: function (value) {
 				return capitalize(value)
 			}

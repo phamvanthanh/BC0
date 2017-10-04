@@ -2,6 +2,9 @@
 body {
   background-color: #fff !important;
 }
+div {
+   box-sizing: border-box;
+}
 a {
     text-decoration: none;
     color: inherit;
@@ -36,12 +39,16 @@ table {
   white-space: nowrap;
   table-layout: fixed; 
 }
-
+// td {
+//   display:flex;
+//   flex-wrap: wrap;
+// }
 
 td{
-  // overflow: hidden;
-  // text-overflow: ellipsis;
-  // white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+ 
 }
 .display-flex {
     display: -webkit-flex; /* Safari */
@@ -327,6 +334,10 @@ td{
 }
 .w-250 {
   width: 250px;
+}
+
+.w-300 {
+  width: 300px;
 }
 
 .mxw-30 {
@@ -621,25 +632,17 @@ ul.pd-0 {
   color: #fff !important;
 }
 
-.subnav {
-  color: $subnav-color !important;
-  background-color: $subnav-bg; 
-  opacity: 0.9;
-}
-.subnav a {
-  color: $subnav-color !important;
-}
+
 
 .content-wrapper .page-header {
-  color: $subnav-color !important;
-  background-color: $subnav-bg; 
+ 
   opacity: 0.9;
   height: 44px;
+  border-bottom: solid 1px $border-basic-color;
+ 
 }
 
-.content-wrapper .page-header a {
-  color: $subnav-color !important;
-}
+
 .btn-primary {
   background-color: $brand-primary-bg !important;
   

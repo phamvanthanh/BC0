@@ -1,8 +1,6 @@
 <template>
 <div  class="vertical-menu">
- <div id="sidebar-header">
 
-  </div>
   <div class="menu-list">
     <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager")' to="/myjobs">My Jobs</router-link>
     <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager|project_directors|sales_manager")' to="/jobs">Jobs</router-link>

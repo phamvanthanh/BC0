@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-                <window-heading2></window-heading2>
+               
             </div>
 
             <div class="heading-elements">
@@ -18,8 +18,8 @@
     </div>
 
     <div class="content">   
-        <div :class="{loader:loading}"></div>   
-        <div :class="{hidden:loading}" class="panel panel-flat">
+         
+        <div  class="panel panel-flat">
             <div class="panel-heading">             
                 <div class="heading-elements">
                     <div class="heading-btn">
@@ -38,48 +38,57 @@
             </div>
           
             <div class="panel-body">
-                <div class="col-md-12" v-if="editMode">
-                    <form @submit.prevent="onSubmit" method="post" >
-                    
-                        <div class="col-sm-2 pl-5">
-                            <div class="form-group">
-                                <label>Code: <span class="text-danger">*</span></label>
-                                <input v-model="form.code" class="form-control">
+           
+                    <form @submit.prevent="onSubmit" method="post"  v-if="editMode" >
+                        <div class="row">
+                            <div class="col-sm-2 pl-0">
+                                <div class="form-group">
+                                    <label>Code: <span class="text-danger">*</span></label>
+                                    <input v-model="form.code" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>Name: <span class="text-danger">*</span></label>
+                                    <input v-model="form.name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label>File: <span class="text-danger">*</span></label>
+                                    <input name="form.fileUpload" @change="onFileChange" id="file-input" class="" type="file" >
+                                </div>
                             </div>
                         </div>
-                         <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Name: <span class="text-danger">*</span></label>
-                                <input v-model="form.name" class="form-control">
+                        <div class="row">
+                            <div class="col-sm-4 pl-0">
+                                <div class="form-group">
+                                    <label>Note: <span class="text-danger"></span></label>
+                                    <input v-model="form.note" class="form-control">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>File: <span class="text-danger">*</span></label>
-                                <input name="form.fileUpload" @change="onFileChange" id="file-input" class="" type="file" >
+                
+                            <div class="col-sm-1">
+                                <div class="form-group">
+                                    <label class="transparent" >*</label>
+                                    <button type="submit" class="btn btn-primary form-control">Save</button>
+                                </div>
                             </div>
-                        </div>
-               
-                        <div class="col-sm-1">
-                            <div class="form-group">
-                                <label class="transparent" >*</label>
-                                <button type="submit" class="btn btn-primary form-control">Save</button>
-                            </div>
-                        </div>
-                        <div class="col-sm-1">
-                            <div class="form-group">
-                                <label class="transparent" >*</label>
-                                <button @click="reset" type="button" class="btn btn-default form-control">Clear</button>
+                            <div class="col-sm-1">
+                                <div class="form-group">
+                                    <label class="transparent" >*</label>
+                                    <button @click="reset" type="button" class="btn btn-default form-control">Clear</button>
+                                </div>
                             </div>
                         </div>
                         
                     </form>
-                    <div class="col-md-12 horizontal-divider mb-10"></div>
-                </div>
+                    <div class="row horizontal-divider mb-10 "></div>
+               
                 
-                <div class="col-md-12">
-                      <v-client-table 
-                            :data="files" 
+                <div class="row">
+                      <v-server-table 
+                            url="/api/forms" 
                             :columns="columns" 
                             :options="options">
                             <template slot="code" scope="props">
@@ -98,9 +107,8 @@
                                         </ul>
                                     </li>
                                 </ul>
-
                             </template>
-                      </v-client-table>
+                      </v-server-table>
  
                 </div>
             </div>           
@@ -114,7 +122,7 @@
 
 </template>
 <script>
-import  ClientTable from 'vue-tables-2';
+
 import FileUpload from 'vue-simple-upload/dist/FileUpload';
 import notify from './../../../core/Notify';
 export default {
@@ -128,6 +136,7 @@ export default {
                  id: null,          
                  code: null,
                  name: '',
+                 note: '',
                  path: null,
                  fileUpload: null,
                              
@@ -137,28 +146,21 @@ export default {
 
              }),
              nations: [],
-             columns: ['id', 'code', 'name',  'actions'],
+             columns: ['id', 'code', 'name', 'note', 'actions'],
              options: {
 
                 headings: {
                     actions:  ''
                 },
-         
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                },
+
                 columnsClasses: {                  
                     id: 'w-70',
                     code: 'w-80',
                     name: 'column-expanded',
+                    note: 'w-200',
                     actions: 'text-right w-40 action',
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-                },
-                perPage: 25,
-                perPageValues: [10,25,50,100, 200]
+                sortable: ['id', 'code', 'name', 'note']
 
              }
         
@@ -169,13 +171,6 @@ export default {
          'fileupload': FileUpload,
          notify
     },
-    created() {        
-        this.getForms(this.pid);
-        var _this = this;      
-        
-        
-    },
-
  
     methods: {
         editToggle() {
@@ -188,15 +183,14 @@ export default {
                 this.formData.append('id', this.form.id);
             
             axios.post('/api/forms', this.formData)
-                 .then(response=>{
-                    
+                 .then(response=>{                    
                      this.form.reset();
-                      $("#file-input").val('');
+                     $("#file-input").val('');
                      notice( {
                          status: response.status,
                          statusText: response.statusText,
                          data: response.data
-                     }, 5000);
+                     }, 6000);
 
                      this.formData = new FormData();
                      this.getForms();
@@ -207,7 +201,7 @@ export default {
                          status: error.response.status,
                          statusText: error.response.statusText,
                          data: error.response.data
-                     }, 5000);
+                     }, 6000);
                  })
         },
         getForms() {

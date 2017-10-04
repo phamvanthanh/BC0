@@ -8,8 +8,17 @@ use system\Models\Form;
 
 class FormsController extends Controller
 {
-    public function index() {
-        return Form::all();
+    public function index(Request $request) {
+        
+        extract($request->only(['query', 'limit', 'page', 'ascending', 'orderBy']));
+        $ascending = $ascending == 1? 'ASC' : 'DESC';
+
+        return Form::where('id', 'LIKE',"%{$query}%")
+                   ->orWhere('code', 'LIKE',"%{$query}%")
+                   ->orWhere('name', 'LIKE',"%{$query}%")
+                   ->orWhere('note', 'LIKE',"%{$query}%")                                       
+                   ->orderBy($orderBy, $ascending)
+                   ->paginate($limit);
 
     }
 

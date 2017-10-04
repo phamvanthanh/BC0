@@ -1,10 +1,12 @@
 
 // COLORS
-$body-bg: #f5f8fa;
-$navbar-bg: #fff;// #3097D1;
+$body-bg: #cccccc;// #e6e6e6;// #f5f8fa;
+$navbar-bg: #636b6f;// #3097D1;
 $sidebar-bg:  transparent;
 $panel-bg: #f5f8fa;
 $text-white: #fff;
+$subnav-bg: #f5f8fa;
+$border-basic-color: rgba(0,0,0,0.12);
 //#88c100
 $navbar-focus-bg: transparent;
 $sidebar-focus-bg:  #3097D1;
@@ -14,15 +16,15 @@ $link-color: #3097D1;
 $navbar-hover-bg: transparent;
 $sidebar-hover-bg:  #DCDCDC;
 
-$navbar-color: #636b6f;
-$subnav-color: #fff;
-$subnav-bg: #3097D1;
+$navbar-color: #fff;
+// $subnav-color:$text-color;
+
 $sidebar-color: #636b6f;
 $panel-color: #636b6f;
 
 $disabled-bg: #bbc1c3; 
 
-$navbar-hover-color: #484e51;
+$navbar-hover-color: #f2f2f2;
 $sidebar-hover-color: #3097D1;
 $panel-hover-color: #3097D1;
 
@@ -124,7 +126,7 @@ $input-color-placeholder: lighten($text-color, 30%);
 // Panels
 $panel-default-heading-bg: #fff;
 
-$sidebar_width: 200px;
+$sidebar_width: 150px;
 $navbar_height: 46px;
 
 $font-weight-focus: 600;

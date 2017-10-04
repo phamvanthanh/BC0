@@ -111,24 +111,16 @@ Vue.component('status', {
 
 require('./core/breadcrumbs');
  
-Vue.component('window-heading', {
-  template: `<span>
-                    <span class="text-muted">{{$store.state.item.label}} </span>
-                    <span class="fs-16 text-primary">{{$store.state.item.name}}</span>
-                    <i class="icon-arrow-right32 fs-16"></i>
-                    <span class="fs-16">{{$route.meta.display}}</span>
-               </span>`
-});
 
 Vue.component('window-heading2', {
-  template: `<div>
-                <div class="display-inline-block" style="height: 44px; vertical-align: top; padding-right: 20px" >  
-                        <a @click="back" class="pr-10" ><i  class="icon-arrow-left8"></i></a>
-                        <a @click="forward"><i class="icon-arrow-right8"></i></a>
+  template: `<div class="breadcrumbs" >
+                <div class="display-inline-block" style="height: 100%;  padding-right: 20px" >  
+                        <a @click="back" class="pr-10"  ><i style="line-height: 46px"  class="icon-arrow-left8"></i></a>
+                        <a @click="forward"><i style="line-height: 46px"  class="icon-arrow-right8"></i></a>
                 </div>
                 <div class="display-inline-block">  
                         <span class="display-block" ><vs-crumbs ></vs-crumbs></span>                    
-                        <span class="fs-16 fw-600 display-block">{{$route.meta.display}}</span>
+                       
                 </div>
              </div>           
             `,

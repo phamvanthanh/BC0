@@ -95,7 +95,8 @@
                                 <i class="icon-menu9"></i>
                             </a>
                             <ul class="dropdown-menu  dropdown-menu-right">
-                                <li><a @click="editPackage(props.row)" class="text-primary"><i class="icon-pencil3"></i> Edit</a></li>
+                                <li><a @click="editPackage(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
+                                <li><a @click="copyPackage(props.row)" class="text-primary" ><i class="icon-copy3"></i> Copy</a></li>
                                 <li><a @click="deletePackage(props.row)" class="text-danger" ><i class="icon-trash-alt"></i> Delete</a></li>
                             
                             </ul>
@@ -111,9 +112,6 @@
 <script>
 
 import datepicker     from './../../../../elements/Datepicker';
-import ClientTable from 'vue-tables-2';
-
-
 
 export default {
     props: ['gid', 'editMode'],
@@ -186,11 +184,7 @@ export default {
         bus.$on('refreshpackages', function(){
             _this.getPackages(_this.gid);
         });
-        bus.$on('editpackage', function(e){
-            for(let property in e){
-                _this.form[property] = e[property];
-            }
-        })
+
     },
 
     computed: {
@@ -261,8 +255,14 @@ export default {
      
         
         editPackage(e) {
-            bus.$emit('editpackage', e);            
+            for(let property in e){
+                this.form[property] = e[property];
+            }            
 
+        },
+        copyPackage(e) {
+            this.editPackage(e);
+            this.form.id = null;
         },
 
         deletePackage(e) {

@@ -57,7 +57,7 @@ class PackageForm extends FormRequest
                             ->first();
         
             if($exist)
-                return response(['Package name already exists'], 200);            
+                return response(['Package name already exists'], 422);            
 
             $package =  Package::create(
                 $this->only(['section_id', 'name', 'area', 'complexity', 'description']));          

@@ -58,14 +58,7 @@ class UsersController extends Controller
                
         }
     }
-    // public function activateRole($role_id) {
-    //     $id = Auth::id();
-    
-      
-    //     RoleUser::where('user_id', $id)->update(['active'=>null]);
-    //     RoleUser::where('user_id', $id)->where('role_id', $role_id)->update(['active'=>1]);
-    // }
-
+   
 
     
 

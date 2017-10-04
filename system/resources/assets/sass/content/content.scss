@@ -11,7 +11,7 @@ div.content .panel {
 .page-header {
     margin: 0;
     padding: 0;
-    border-bottom-width: 0;
+
 }
 .page-header-content {
     position: relative;
@@ -180,95 +180,6 @@ div.reply-heading:hover a.edit-reply {
 .action-list li ul.dropdown-menu li{
     display: block !important
 }
-
-// // div.main-content .chat-page {
-// //     height: 100% !important;
-// //     overflow: hidden;
-// // }
-
-// .chat-page .content .panel {
-//     // height: calc(100vh - 100px);
-//     // overflow: hidden;
-// }
-
-
-// .chat-page .panel-body {
-//     // height: 100%;
-// }
-
-// .chatnav {
-  
-//     min-width: 260px;
-//     height: 100%; 
-//     border-right: 1px solid $divider-color;
-//     overflow-y: hidden;
-//     overflow-x: hidden;
-// }
-// .chatnav .chatnav-heading {
-//     position:absolute;
-//     top: 0px;    
-//     width: 100%;
-//     padding: 10px 20px 10px 20px;
-//     // margin-left: -10px;
-//     height: 50px;
-//     border-bottom: 1px solid $divider-color;
-// }
-// .chatnav .chatnav-room {
-//     position: absolute;
-//     top: 50px;
-//     padding-top: 20px;
-//     width: 100%;
-//     height: calc(100% - 50px);
-//     overflow-x: hidden;
-//     overflow-y: auto;
-// }
-// .chatnav-room {
-//     padding-left: 20px;
-//     padding-right: 20px;
-// }
-// .chatroom {
-//     position: relative;
-//     height: calc(100% - 50px);  
-//     overflow: hidden;
-  
-    
-// }
-// .chatroom .chatroom-heading {
-//     position:absolute;
-//     top: 0px;    
-//     width: 100%;
-//     padding: 10px 20px 10px 20px;
-//     margin-left: -10px;
-//     height: 50px;
-//     border-bottom: 1px solid $divider-color;
-// }
-
-
-
-// .chatroom #chatroom-log {
-//     position:absolute;
-//     top: 50px;    
-//     padding-top: 20px;
-//     padding-bottom: 80px;
-//     width: calc(100% - 20px);
-//     height: calc(100% - 76px);
-//     overflow-x: hidden;
-//     overflow-y: auto;
-    
-// }
-// .chatroom-log #chatwelcom .welcome-message{
-//     padding-top: 20%;
-//     text-align: center;
-
-// }
-// .chatroom .chatroom-composer {
-//     position:absolute;
-//     bottom: 0px;
-//     width: calc(100% - 10px);
-//     // height: 80px;
-    
-// }
-
 
 
 td.action{

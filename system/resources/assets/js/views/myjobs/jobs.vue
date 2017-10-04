@@ -5,7 +5,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-              <window-heading2></window-heading2>
+             
             </div>
 
             <div class="heading-elements">
@@ -17,8 +17,8 @@
     </div>
 
     <div class="content">
-        <div :class="{loader:loading}"></div>
-        <div :class="{hidden:loading}" class="panel panel-flat">
+       
+        <div class="panel panel-flat">
             <div class="panel-heading">             
                 <div class="heading-elements">
                     <div class="heading-btn">
@@ -40,11 +40,7 @@
                             </template>
                     </v-client-table>     
                 </div>
-                <div v-else>
-                     <div class="table-norecord">
-                        <span>No records.</span>
-                     </div>       
-                </div>
+               
             </div>        
         </div>
     </div>
@@ -52,8 +48,6 @@
 
 </template>
 <script>
-import  {ClientTable} from 'vue-tables-2';
-Vue.use(ClientTable);
 
 export default {
     
@@ -99,7 +93,7 @@ export default {
 
                     },
                     perPage: 25,
-                    perPageValues: [10,25,50,100],
+                    
                 }      
         }
     },

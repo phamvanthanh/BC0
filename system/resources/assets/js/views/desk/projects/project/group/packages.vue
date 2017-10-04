@@ -87,6 +87,7 @@
 
                             <ul class="dropdown-menu  dropdown-menu-right">
                                 <li><a @click="editPackage(props.row)" ><i class="icon-pencil3"></i> Edit</a></li>
+                                <li><a @click="copyPackage(props.row)" ><i class="icon-copy3"></i> Copy</a></li>
                                 <li><a @click="deletePackage(props.row)" ><i class="icon-trash-alt"></i> Delete</a></li>
                             
                             </ul>
@@ -176,11 +177,7 @@ export default {
         bus.$on('refreshpackages', function(){
             _this.getPackages(_this.gid);
         });
-        bus.$on('editpackage', function(e){
-            for(let property in e){
-                _this.form[property] = e[property];
-            }
-        })
+   
     },
 
     computed: {
@@ -235,8 +232,14 @@ export default {
         },
         
         editPackage(e) {
-            bus.$emit('editpackage', e);            
+            for(let property in e){
+                this.form[property] = e[property];
+            }        
 
+        },
+        copyPackage(e) {
+            this.editPackage(e)
+            this.form.id = null;
         },
 
         deletePackage(e) {

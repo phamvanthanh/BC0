@@ -97,7 +97,6 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::get('/jobs/{id}/stacks', ['uses'=>'QuantityController@stack']);
     Route::post('/jobs/rate', 'JobsController@rateJob');    
 
-
   
     Route::get('/jobs/{id}/audit', ['uses'=>'AuditsController@index']);
     Route::post('/jobs/{id}/audit', ['uses'=>'AuditsController@store']);

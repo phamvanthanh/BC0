@@ -103,6 +103,7 @@
                                 <li><router-link class="text-primary" :to="{name:'desk.project.section.packages', params: {gid: props.row.id}}"><i class="icon-cube3"></i> Packages</router-link></li>
                                 <li><router-link class="text-primary" :to="{name:'desk.project.section.gwbs', params: {gid: props.row.id}}"><i class="icon-tree5"></i> Swbs</router-link></li>
                                 <li><a @click="editSection(props.row)" class="text-primary"  ><i class="icon-pencil3"></i> Edit</a></li>
+                                <li><a @click="copySection(props.row)" class="text-primary"  ><i class="icon-copy3"></i> Copy</a></li>
                                 <li><a @click="deleteSection(props.row)" class="text-danger" ><i class="icon-trash-alt" ></i> Delete</a></li>
                             </ul>
                         </li>
@@ -130,11 +131,6 @@
 import pwbsg    from './../../../elements/pwbsg';
 import gwbs     from './../../../elements/gwbs';
 import datepicker     from './../../../elements/Datepicker';
-import ClientTable from 'vue-tables-2';
-
-
-
-
 
 export default {  
     props: ['project_id'],
@@ -206,13 +202,8 @@ export default {
 
     created() {        
           
-        this.getSections(this.pid);  
+        this.getSections(this.pid);   
        
-        bus.$on('editgroup', (e)=>{
-            for(let property in e){              
-                this.form[property] = e[property];
-            }
-        });    
 
     },
     computed: {
@@ -286,8 +277,14 @@ export default {
             if(!this.editMode)             
                 this.editMode = true;
 
-            bus.$emit('editgroup', e);
+            for(let property in e){              
+                this.form[property] = e[property];
+            };
         },
+        copySection(e) {
+            this.editSection(e);
+            this.form.id = null;
+        },  
         
         deleteSection(e) {            
             this.form.id = e.id;         
