@@ -11,8 +11,17 @@ class FilesController extends Controller
     // public function index(){
     //     return File::all();
     // }
-    public function showByFolder($fid) {
-        return File::where('folder_id', $fid)->get();
+    public function index(Request $request) {
+        extract($request->only(['folder_id', 'query', 'limit', 'page', 'ascending', 'orderBy']));
+       
+        return File::where('folder_id', $folder_id)
+                   ->where(function($q) use($query){
+                       return $q->orWhere('id', 'LIKE', "%{$query}%")                                
+                                ->orWhere('name', 'LIKE', "%{$query}%")
+                                ->orWhere('created_at', 'LIKE', "%{$query}%");
+                   })
+                   ->orderBy($orderBy)
+                   ->paginate($limit);
     }
     public function upload($fid, Request $request) {
        

@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-                <window-heading2></window-heading2>
+                
             </div>
 
             <div class="heading-elements">

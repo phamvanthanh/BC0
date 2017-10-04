@@ -1,7 +1,7 @@
 <template  >
 <div class="panel panel-flat">
-    <div :class="{loader:loading}"></div>    
-    <div :class="{hidden:loading}" class="panel-heading">       
+     
+    <div  class="panel-heading">       
         <div class="heading-elements">
             <div class="heading-btn">
                 <div class="form-group">
@@ -18,7 +18,7 @@
         </div>
     </div>
     
-    <div :class="{hidden:loading}" class="panel-body">
+    <div  class="panel-body">
         <div class="row" v-if="editMode">
                 <form @submit.prevent="onSubmit" method="post" >
                 
@@ -48,7 +48,7 @@
                     </div>
                 </form>
         </div>
-        <div v-if="links.length > 0" >
+        <div  >
             <v-client-table 
                 :data="links" 
                 :columns="columns" 
@@ -73,11 +73,7 @@
                 
             </v-client-table>
         </div>
-         <div v-else>                
-            <div class="table-norecord">
-                <span>No records.</span>
-            </div>                
-        </div>
+         
     </div>
     
     

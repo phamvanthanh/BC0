@@ -19,10 +19,10 @@
     </div>
  
     <div class="content">
-        <div :class="{loader:loading}" ></div>
-        <div :class="{hidden:loading}" class="panel panel-flat">
+        
+        <div  class="panel panel-flat">
             <div class="panel-heading">
-                <span class="panel-title">Projects</span>
+          
                 <div class="heading-elements">
                     <ul class="icons-list">
                  
@@ -72,13 +72,13 @@
 
 <script>
 import notify from './../../../core/Notify';
-import  ClientTable from 'vue-tables-2';
+
 
  
 export default {
     data() {
       return {
-            loading: true,
+           
             projects: [],
             columns: ['job_id', 'name',  'nation', 'industry', 'from', 'to', 'created', 'status', 'actions'],              
             options: {

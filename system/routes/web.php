@@ -161,7 +161,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
 
     Route::post('/projects/{pid}/folders', ['uses'=>'FoldersController@store']);
     Route::post('/projects/{pid}/folders/delete', ['uses'=>'FoldersController@delete']);
-    Route::get('/projects/folders/{fid}/files', ['uses'=>'FilesController@showByFolder']);
+    Route::get('/projects/folders/files', ['uses'=>'FilesController@index']);
     Route::post('/projects/folders/{fid}/files/post', ['uses'=>'FilesController@upload']);
     Route::post('/projects/folders/{fid}/files/delete', ['uses'=>'FilesController@delete']);
 

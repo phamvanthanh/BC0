@@ -28,7 +28,7 @@
             </div>
           
             <div class="panel-body">
-                <div v-if="awards.length>0">
+                <div class="row" >
             
                     <v-client-table
                             :data="awards"

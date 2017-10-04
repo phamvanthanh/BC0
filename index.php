@@ -34,7 +34,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	 <link type="text/css" rel="stylesheet" href="/css/banner.css">
 	<link href="/css/custom.css" rel="stylesheet" /> 
 	<link rel="stylesheet" href="css/animate.css">
-	<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+
 
 	
 	

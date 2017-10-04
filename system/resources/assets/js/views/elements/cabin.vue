@@ -1,119 +1,96 @@
 <template>
-<div v-if="folder.id" id="docs-wrapper">
-    <div :class="{loader:loading}"></div>
-    <div :class="{hidden:loading}" v-if="files.length > 0" > 
+<div class="row" v-if="folder.id" >
+ 
+    <v-server-table 
+        ref="file_table"
+        url='/api/projects/folders/files'
         
-            <v-client-table 
-                :data="files" 
-                :columns="columns" 
-                :options="options">
-                <template slot="name" scope="props"  >
-                    <a :href="'/'+props.row.path" target="_blank" v-if="props.row.id != edit_id" download>{{props.row.name}}</a>
-                    <span v-if="$can('client|superuser|project_director|project_manager')">
-                        <form @submit="onSubmit" v-if="props.row.id == edit_id"  >
-                            <input id="name-input" :value="props.row.name" v-model="form.name" @blur="onSubmit" @keydown.enter="onSubmit" class="expand" >
-                            <input :value="props.row.id"  v-model="form.id" class="hidden">
-                        </form>
-                    </span>
-                </template>
-                <template  slot="actions" scope="props">        
+        :columns="columns" 
+        :options="options">
+        <template slot="name" scope="props"  >
+            <a :href="'/'+props.row.path" target="_blank" v-if="props.row.id != edit_id" download>{{props.row.name}}</a>
+            <span v-if="$can('client|superuser|project_director|project_manager')">
+                <form @submit="onSubmit" v-if="props.row.id == edit_id"  >
+                    <input id="name-input" :value="props.row.name" v-model="form.name" @blur="onSubmit" @keydown.enter="onSubmit" class="expand" >
+                    <input :value="props.row.id"  v-model="form.id" class="hidden">
+                </form>
+            </span>
+        </template>
+        <template  slot="actions" scope="props">        
 
-                    <ul class="icons-list" v-if="$can('client|superuser|project_director|project_manager')" >
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="icon-menu7"></i>
-                            </a>
+            <ul class="icons-list" v-if="$can('client|superuser|project_director|project_manager')" >
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-menu7"></i>
+                    </a>
 
-                            <ul class="dropdown-menu  dropdown-menu-right">
-                                <li><a :href="'/'+props.row.path" download target="_blank"  class="text-primary" ><i class="icon-download"></i> Download</a></li>
-                                <li><a @click="renameFile(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Rename</a></li>
-                                <li><a @click="deleteFile(props.row)" class="text-danger" ><i class="icon-trash-alt" ></i> Delete</a></li>
-                            </ul>
-                        </li>
+                    <ul class="dropdown-menu  dropdown-menu-right">
+                        <li><a :href="'/'+props.row.path" download target="_blank"  class="text-primary" ><i class="icon-download"></i> Download</a></li>
+                        <li><a @click="renameFile(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Rename</a></li>
+                        <li><a @click="deleteFile(props.row)" class="text-danger" ><i class="icon-trash-alt" ></i> Delete</a></li>
                     </ul>
-                </template>     
+                </li>
+            </ul>
+        </template>     
 
-            </v-client-table>
-        
-    </div>
-
-    <div v-else>                
-        <div class="table-norecord">
-            <span>No records.</span>
-        </div>                
-    </div>
-    
+    </v-server-table>
+  
 </div>
 
 </template>
 <script>
 
 
-import {ClientTable} from 'vue-tables-2';
-
-Vue.use(ClientTable, {
-    compileTemplates: true,
-
-});
-
 
 export default {
     props:['folder'],
     data() {
         return {
-            loading: true,
+
             edit_id: null,           
             form: new Form({
                 id: null,
                 name: null
             }),
 
-            files: [],
             columns: [
                 'id',  
                 'name',                         
                 'created_at',
                 'actions'                
-            ],
-            
-            options: {
-                headings: {
-                    id: 'Id',                      
-                    created_at: 'Created',
-                    actions: ''         
-                  
-                },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-                },              
-                 
-                columnsClasses: {
-                    id: 'w-80',
-                    name: 'column-expanded',                  
-                    created_at: 'w-150',                   
-                    actions: 'text-right w-40 action',
-                      
-                },
-                perPage: 25,
-                perPageValues: [10,25,50,100],
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                }
-            },        
+            ],           
+           
             
         }
     },
-    created() {
-        let _this = this;
-        bus.$on('uploadsuccess', function(){        
-            _this.getFiles(_this.folder.id);
-        });      
-
-      
-    },
+  
 
     computed: {
+
+        options() {
+                return {
+                    headings: {
+                        id: 'Id',                      
+                        created_at: 'Created',
+                        actions: ''         
+                  
+                    },
+                    sortable: ['id', 'name', 'created_at'],       
+                    
+                    columnsClasses: {
+                        id: 'w-80',
+                        name: 'column-expanded',                  
+                        created_at: 'w-150',                   
+                        actions: 'text-right w-40 action',
+                        
+                    },
+                    params: {
+                        folder_id: this.folder.id
+                    }
+
+                }
+        },
+    
         isActive: {
             get() {
                 return (this.folder.id != null);   
@@ -122,16 +99,16 @@ export default {
 
             }            
         },
-        hasFiles() {
-            return (this.files.length > 0);
-        },
+   
        
     },
     watch: {
         'folder.id': function(val, oldVal){
-            if(val != oldVal)
-                this.loading = true;
-            this.getFiles(val);         
+            if(val != oldVal && oldVal != undefined)     
+            setTimeout(()=>{
+                this.$refs.file_table.refresh();
+            }, 1);      
+              
             if(this.$refs.projectdropzone){
                 this.$refs.projectdropzone.setOption('url', this.uploadUrl);
                 this.$refs.projectdropzone.removeAllFiles();
@@ -145,17 +122,7 @@ export default {
         this.getFiles(this.folder.id);
        
       },
-      getFiles(fid){
-        //    this.loading = true;
-           axios.get('/api/projects/folders/'+this.folder.id+'/files')
-                .then(({data})=>{               
-                    this.files = data.map(function(e){                 
-                        return e;
-                    });
-                    this.loading = false;})
-                .catch((error)=>{
-                    console.log(error)})
-     },
+
      toggleUploader(){
         this.isOpen = !this.isOpen;
      },
@@ -171,8 +138,8 @@ export default {
             
                 form.post('/api/projects/folders/'+e.folder_id+'/files/delete')
                     .then(({data})=>{
-                            notice(form.notifications, 5000);
-                            this.getFiles(e.folder_id);
+                        notice(form.notifications, 6000);
+                        this.$refs.file_table.refresh();
                     })
                     .catch(({error})=>{
                         notice(form.notifications, 5000);
@@ -194,16 +161,16 @@ export default {
            this.form.post('/api/desk/projects/files')
                     .then(({data})=>{
                         this.edit_id = null;
-                        // bus.$emit('refreshfiles');
+                        this.$refs.file_table.refresh();
                         this.form.reset();
-                        this.getFiles(this.folder.id);
-                        notice(this.form.notifications, 5000);
+                       
+                        notice(this.form.notifications, 6000);
                         
                     })
                     .catch((error)=>{
                         this.edit_id = null;
                         this.form.reset();
-                        notice(this.form.notifications, 5000);
+                        notice(this.form.notifications, 6000);
                     })
        }
    },
@@ -218,11 +185,7 @@ i.material-icons {
 #docs-wrapper {
     min-height: 150px;
 }
-.uploader {    
-    /*overflow-x: hidden;
-    overflow-y: hidden;   */
-    /*height: 150px;*/
-}
+
 .is-close {
     width: 20px;
     right: -10px;
