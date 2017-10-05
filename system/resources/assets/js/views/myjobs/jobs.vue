@@ -1,11 +1,10 @@
 <template>
 
-<div class="content-wrapper">
-  
+<div class="content-wrapper">  
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-             
+                <page-label></page-label>
             </div>
 
             <div class="heading-elements">
@@ -34,7 +33,9 @@
                             :data="awards"
                             :columns="columns"
                             :options="options">
-
+                            <template slot="jobable_type" scope="props">
+                                {{props.row.jobable_type | capital}}
+                            </template>
                             <template slot="actions" scope="props">
                                 <router-link :to="{name: 'myjob.info', params: {id: props.row.id}}" ><i class="icon-unfold"></i></router-link>
                             </template>

@@ -93,7 +93,7 @@ export default {
 </script>
 <style lang="scss">
 
-@import './../../../../../sass/_variables';
+@import './../../../../../sass/components/_variables';
 
 
 #rate-job-modal .modal-wrapper {

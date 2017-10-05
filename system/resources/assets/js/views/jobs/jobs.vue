@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-                                
+                 <page-label></page-label>               
             </div>
 
             <div class="heading-elements">
@@ -35,6 +35,9 @@
                         url="/api/works"
                         :columns="columns"
                         :options="options">
+                        <template slot="jobable_type" scope="props">
+                            {{props.row.jobable_type | capital}}
+                        </template>
                         <template slot="actions" scope="props" >
                             <ul class="icons-list">
                                 <li>
@@ -45,9 +48,7 @@
                         </template>
                         <template slot="num_bids" scope="props">  
                             <span :class="[props.row.num_bids > 0? 'label-primary': 'label-default', 'label' ]">{{props.row.num_bids}}</span>
-                        </template>
-
-                    
+                        </template>                    
                     </v-server-table>    
                 </div>
      
@@ -79,12 +80,8 @@ import {capitalize} from './../../core/filters';
                         bid_count: 'Bids',
                         status: 'status',
                         actions: ''
-                    },
-              
-                    skin: 'table-hover',
-                    texts: {
-                        filter: ''
-                    },
+                    },              
+        
                     columnsClasses: {
                         id: 'w-70',
                         name: 'column-expanded',
@@ -96,15 +93,16 @@ import {capitalize} from './../../core/filters';
                         bid_count: 'w-70', 
                         actions: 'text-right w-40 action' 
                     },
-                    sortIcon: { 
-                        base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                    },
-                    perPage: 25,
-                    perPageValues: [10,25,50,100],
+                    sortable: ['id', 'name', 'jobable_type', 'project', 'nation_abbr', 'from_date', 'to_date', 'bid_count']
+                  
                 }                
             }
         },
+        filters: {
+            capital(value) {
+                return capitalize(value);
+            }
+        }
       
      
       

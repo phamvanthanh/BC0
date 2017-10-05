@@ -2,9 +2,7 @@
 <div>
    <jobinfo :info="info">       
        <span v-if="info.awarded" slot="awarded">Awarded to: {{ info.awarded.user.first_name }} {{ info.awarded.user.last_name }}<br></span>
-       <span slot="editbtn">         
-           <a @click="editJob" ><i class="icon-pencil7"></i> Jobable </a>
-        </span>
+      
     </jobinfo>
 </div>
 </template>

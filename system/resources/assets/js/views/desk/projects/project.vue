@@ -4,7 +4,7 @@
     <div class="page-header subnav">
         <div class="page-header-content">
             <div class="page-title">
-                            
+                <page-label></page-label>
             </div>
 
             <div class="heading-elements">

@@ -71,10 +71,3 @@ export default {
 
 }
 </script>
-<style lang="scss">
-
-@import './../../../sass/_variables';
-
-/* Style the tab */
-
-</style>

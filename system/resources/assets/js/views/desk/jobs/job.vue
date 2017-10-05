@@ -4,14 +4,16 @@
         <div class="page-header">
             <div class="page-header-content">
                 <div class="page-title">                    
-                    <window-heading2></window-heading2>     
+                    <page-label></page-label>    
                 </div>
 
                 <div class="heading-elements">
                     <div class="heading-btn-group" >
-                        <router-link :to="{name:'desk.job.info'}" class="btn btn-link btn-float has-text"><i class="icon-info22"></i><span>Info</span></router-link> 
-                        <router-link :to="{name:'desk.job.jwbs'}" class="btn btn-link btn-float has-text"><i class="icon-tree5"></i><span>Jwbs</span></router-link> 
-                        <router-link :to="{name:'desk.job.bids'}" class="btn btn-link btn-float has-text"><i class="icon-users4"></i><span>Bids</span></router-link>
+                      
+                        <router-link :to="{name:'desk.job.info'}" class="btn btn-link btn-float has-text"><i class="icon-info22" ></i><span>Info</span></router-link> 
+                        <router-link :to="{name:'desk.job.jwbs'}" class="btn btn-link btn-float has-text"><i class="icon-tree5" ></i><span>Jwbs</span></router-link> 
+                        <router-link :to="{name:'desk.job.bids'}" class="btn btn-link btn-float has-text"><i class="icon-users4" ></i><span>Bids</span></router-link>
+                        <a @click="editJob" class="btn btn-link btn-float has-text"><i class="icon-pencil7" ></i><span>Jobable</span></a>
                    </div>
                 
                 </div>
@@ -85,7 +87,47 @@ export default {
                      this.loading = false;
                 })
                  .catch((error)=>console.log(error));
-        },      
+        }, 
+        editJob() {
+              let _this = this;
+              if(this.info.jobable_type == 'project') {   
+                    this.$router.push({ name: 'desk.project.info', params: { pid: this.info.project.id }});
+               }
+
+              if(this.info.jobable_type == 'section') {
+                    var payload = {
+                        id: this.info.jobable_id,
+                        name: this.info.jobable.name,
+                        from_date: this.info.from_date,
+                        to_date: this.info.to_date,
+                        status: this.info.status,
+                        description: this.info.jobable.description
+                    }
+
+            
+                    this.$router.push({ name: 'desk.project.sections', params: { pid: this.info.project.id }});
+                    setTimeout(function(){
+                        bus.$emit('editgroup', payload)
+                    
+                    }, 5);
+                }
+                if(this.info.jobable_type == 'package'){
+                    var payload = {
+                        id: this.info.jobable_id
+                    }
+                    this.info.jobable.job = {};
+                    this.info.jobable.from_date = this.info.from_date;
+                    this.info.jobable.to_date = this.info.to_date;
+                    this.info.jobable.status = this.info.status;
+                
+                    router.push({ name: 'desk.project.section.packages', params: { pid: this.info.project.id, gid: this.info.jobable.group_id }});
+                
+                    setTimeout(function(){bus.$emit('editpackage', _this.info.jobable)}, 1);
+                }    
+            
+
+
+        }     
     }
 }
 </script>

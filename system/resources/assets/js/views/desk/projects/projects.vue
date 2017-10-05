@@ -4,14 +4,13 @@
     <!-- Page header -->
     <div class="page-header">
         <div class="page-header-content">          
-            <div class="page-title">
-               
-           
+            <div class="page-title">               
+                <page-label></page-label>
             </div>
 
             <div class="heading-elements">
                 <div class="heading-btn-group" >
-                       <router-link to="/desk/projects/new" class="btn btn-link btn-float has-text"><i class="icon-pencil3"></i><span>New</span></router-link> 
+                    <router-link to="/desk/projects/new" class="btn btn-link btn-float has-text"><i class="icon-pencil3"></i><span>New</span></router-link> 
                    
                 </div>
             </div>

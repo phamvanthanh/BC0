@@ -66,10 +66,8 @@ window.app =  new Vue({
                     return e.name;
                 });
          
-                this.$access(access);
-     
-                this.loggedIn = true;
-               
+                this.$access(access);     
+                this.loggedIn = true;               
             })
             .catch((error)=>console.log(error));  
 
@@ -132,6 +130,9 @@ Vue.component('window-heading2', {
           router.go(1);
       }
   }
+});
+Vue.component('page-label', {
+    template: '<span class="fs-16" style="line-height: 44px" >{{$route.meta.display}}</span>'
 });
 
 import {ServerTable} from 'vue-tables-2';

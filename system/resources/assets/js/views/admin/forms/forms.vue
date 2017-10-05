@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-               
+                <page-label></page-label>
             </div>
 
             <div class="heading-elements">
@@ -77,7 +77,7 @@
                             <div class="col-sm-1">
                                 <div class="form-group">
                                     <label class="transparent" >*</label>
-                                    <button @click="reset" type="button" class="btn btn-default form-control">Clear</button>
+                                    <button @click="form.reset()" type="button" class="btn btn-default form-control">Clear</button>
                                 </div>
                             </div>
                         </div>

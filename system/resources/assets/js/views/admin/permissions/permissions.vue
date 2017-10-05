@@ -1,11 +1,9 @@
 <template>
-<div class="content-wrapper">
-    
-   
+<div class="content-wrapper">  
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-           
+                <page-label></page-label>
             </div>
 
             <div class="heading-elements">

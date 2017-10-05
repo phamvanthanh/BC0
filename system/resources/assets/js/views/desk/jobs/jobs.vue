@@ -4,7 +4,7 @@
     <div class="page-header">
         <div class="page-header-content">
             <div class="page-title">
-        
+                <page-label></page-label>
             </div>
 
             <div class="heading-elements">
@@ -32,13 +32,17 @@
                         :columns="columns" 
                         :options="options"
                     >
+                         <template slot="jobable_type" scope="props">
+                             {{props.row.jobable_type | capital}}
+                           
+                        </template>
                         <template slot="actions" scope="props">
-                            <div>
+                           
                                 <router-link :to="{name: 'desk.job', params: {id: props.row.id}}" ><i class="icon-unfold"></i></router-link>
-                            </div>
+                           
                         </template>
                         <template slot="bid_status" scope="props">  
-                            <span :class="[props.row.bid_status == 'awarded'? 'label-success': 'label-default', 'label' ]">{{props.row.bid_status}}</span>
+                            <span :class="[props.row.bid_status == 'awarded'? 'label-success': 'label-default', 'label' ]">{{props.row.bid_status | capital}}</span>
                         
                         </template>
                         <template slot="num_bids" scope="props">  
@@ -54,10 +58,6 @@
 </div>
 </template>
 <script>
-
-
-import {capitalize} from './../../../core/filters';
-
 
 export default {
     data() {
@@ -101,15 +101,17 @@ export default {
                       
                 },
                 sortable:['id', 'name', 'jobable_type', 'project', 'from_date', 'to_date', 'bid_status', 'status'],
-                perPage: 25,
-          
+                perPage: 25,        
 
-
-            }          
-            
+            }        
             
         }
     },
+    filters: {
+        capital(value) {
+            return capitalize(value);
+        }
+    }
     
 
 }
