@@ -633,7 +633,7 @@ let routes = [
                                 }
                               
                             }, {
-                                path: 'sections/:gid',               
+                                path: 'sections/:sid',               
                                 component: require('./views/desk/projects/project/section'),
                                 meta: {
                                     

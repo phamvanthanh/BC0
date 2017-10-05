@@ -107,7 +107,7 @@ export default {
             
                     this.$router.push({ name: 'desk.project.sections', params: { pid: this.info.project.id }});
                     setTimeout(function(){
-                        bus.$emit('editgroup', payload)
+                        bus.$emit('editsection', payload)
                     
                     }, 5);
                 }
@@ -120,7 +120,7 @@ export default {
                     this.info.jobable.to_date = this.info.to_date;
                     this.info.jobable.status = this.info.status;
                 
-                    router.push({ name: 'desk.project.section.packages', params: { pid: this.info.project.id, gid: this.info.jobable.group_id }});
+                    router.push({ name: 'desk.project.section.packages', params: { pid: this.info.project.id, sid: this.info.jobable.section_id }});
                 
                     setTimeout(function(){bus.$emit('editpackage', _this.info.jobable)}, 1);
                 }    

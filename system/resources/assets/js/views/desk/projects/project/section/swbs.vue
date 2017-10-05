@@ -64,7 +64,7 @@ export default {
     data() {
         return {            
              pid : this.$route.params.pid,           
-             group_id : this.$route.params.gid,
+             section_id : this.$route.params.sid,
              pwbs: [],
              gwbs: [],
              disabledcodes: [],     
@@ -73,7 +73,7 @@ export default {
              addcodes: [],       
              form: new Form({ // Grouping form
                  id: null,               
-                 group_id: this.$route.params.gid,
+                 section_id: this.$route.params.sid,
                  codes: []
              }),
              group: {
@@ -87,11 +87,11 @@ export default {
     },
 
     created() {        
-        this.getGroup(this.group_id);
+        this.getGroup(this.section_id);
         this.getPwbs(this.pid);
-        this.getGwbs(this.group_id);
+        this.getGwbs(this.section_id);
         this.getDisabledCodes(this.pid);     
-        this.getPrivateChosenCodes(this.pid, this.group_id);
+        this.getPrivateChosenCodes(this.pid, this.section_id);
 
         var _this = this;
  
@@ -131,8 +131,8 @@ export default {
             localStorage.setItem('groupingedit', this.editMode);
         },
 
-        getGroup(gid) {
-             axios.get('/api/projects/sections/'+gid)
+        getGroup(sid) {
+             axios.get('/api/projects/sections/'+sid)
                  .then(({data})=>{this.group = data})
                  .catch((error)=>{console.log(error)});
         },
@@ -141,8 +141,8 @@ export default {
                  .then(({data})=>{this.pwbs = data})
                  .catch((error)=>{console.log(error)});
         },
-        getGwbs(gid) {          
-            axios.get('/api/projects/sections/'+gid+'/gwbs')
+        getGwbs(sid) {          
+            axios.get('/api/projects/sections/'+sid+'/gwbs')
                  .then(({data})=>{this.gwbs = data})
                  .catch((error)=>{console.log(error)});
         },
@@ -151,8 +151,8 @@ export default {
                 .then(({data})=>{this.disabledcodes = data})
                 .catch((error)=>{console.log(error)});
         },
-        getPrivateChosenCodes(pid, gid) {
-             axios.get('/api/projects/'+pid+'/sections/'+gid)
+        getPrivateChosenCodes(pid, sid) {
+             axios.get('/api/projects/'+pid+'/sections/'+sid)
                 .then(({data})=>{this.privatechosencodes = data})
                 .catch((error)=>{console.log(error)});
 
@@ -160,12 +160,12 @@ export default {
         reset(e){        
             if(e == "gwbs") {  
                 this.removecodes = [];             
-                this.getGwbs(this.group_id);
+                this.getGwbs(this.section_id);
             }
             if(e == "pwbs") {                    
                 this.addcodes = []; 
                 this.getDisabledCodes(this.pid);              
-                this.getPrivateChosenCodes(this.pid, this.group_id);              
+                this.getPrivateChosenCodes(this.pid, this.section_id);              
             }
         },
         selectAddCodes(e) {
@@ -189,7 +189,7 @@ export default {
         },
         passGwbs() {        
             this.form.codes = this.addcodes;
-            this.form.post('/api/projects/sections/'+this.group_id+'/gwbs/pass')
+            this.form.post('/api/projects/sections/'+this.section_id+'/gwbs/pass')
                     .then((data)=>{
                         this.reset('pwbs');
                         this.reset('gwbs')})
@@ -199,7 +199,7 @@ export default {
         removeGwbs() {
           
             this.form.codes = this.removecodes;   
-            this.form.post('/api/projects/sections/'+this.group_id+'/gwbs/delete')
+            this.form.post('/api/projects/sections/'+this.section_id+'/gwbs/delete')
                     .then(({data}) => {         
 
                          this.reset('pwbs'); 

@@ -114,7 +114,7 @@
 import datepicker     from './../../../../elements/Datepicker';
 
 export default {
-    props: ['gid', 'editMode'],
+    props: ['sid', 'editMode'],
 
     data() {
         return {
@@ -178,12 +178,18 @@ export default {
         }
     },
     created() {        
-        this.getPackages(this.gid);
-        this.getSection(this.gid);
+        this.getPackages(this.sid);
+        this.getSection(this.sid);
         var _this = this;
         bus.$on('refreshpackages', function(){
-            _this.getPackages(_this.gid);
+            _this.getPackages(_this.sid);
         });
+
+        bus.$on('editpackage', (p)=>{
+             for(let property in p){              
+                this.form[property] = p[property];
+            };
+        })  
 
     },
 
@@ -218,13 +224,13 @@ export default {
             localStorage.setItem('packagesedit', this.editMode);
         },
         onSubmit() { 
-            this.form.section_id = this.gid;
+            this.form.section_id = this.sid;
        
             this.form.post('/api/projects/'+this.pid+'/packages')
                      .then(({data})=>{
                          notice(this.form.notifications, 5000);
                          this.form.reset();
-                         this.getPackages(this.gid)})
+                         this.getPackages(this.sid)})
                      .catch(({error})=>{
                          notice(this.form.notifications, 5000);})
 
@@ -232,9 +238,9 @@ export default {
         resetForm() {
             this.form.reset();
         },
-        getPackages(gid) {
-            if(gid)
-            axios.get('/api/projects/sections/'+gid+'/packages')
+        getPackages(sid) {
+            if(sid)
+            axios.get('/api/projects/sections/'+sid+'/packages')
                  .then((data)=>{this.packages = data.data.map(function(e){
                      e.from_date = e.job.from_date;
                      e.to_date =  e.job.to_date;
@@ -244,8 +250,8 @@ export default {
                  this.loadedPackages = true;
             })
         }, 
-        getSection(gid) {
-             axios.get('/api/projects/sections/'+gid)
+        getSection(sid) {
+             axios.get('/api/projects/sections/'+sid)
                  .then(({data})=>{
                      this.section = data;
                      this.loadedSection = true;

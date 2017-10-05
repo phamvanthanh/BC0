@@ -17,7 +17,7 @@ class Section extends Model
                     ->with('industry')
                     ->with('nation')
                     ->with('job')
-                    ->select(['id', 'name', 'industry_id', 'nation_id', 'user_id', 'requirement', 'description', 'created_at', 'updated_at', 'created_by']);
+                    ->select(['id', 'name', 'industry_id', 'nation_abbr', 'user_id', 'requirement', 'description', 'created_at', 'updated_at', 'created_by']);
     }
     public function packages() {
 

@@ -2,8 +2,7 @@
 
 namespace system\Http\Controllers;
 use DB;
-// use PDO;
-// use Response;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use system\Models\Gwbs;

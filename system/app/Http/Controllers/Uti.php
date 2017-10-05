@@ -71,10 +71,7 @@ class Uti
                      ->where('gwbs.section_id', $gid)
                      ->get();
             // $length = count($gwbs);
-            // for($i = 0; $i < $length; $i++){
-            //     $gwbs[$i]->code = (int) $gwbs[$i]->code;
-            //     $gwbs[$i]->parent_code = (int) $gwbs[$i]->parent_code;
-            // }
+         
             return $gwbs;
 
       
