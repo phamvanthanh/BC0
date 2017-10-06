@@ -288,7 +288,6 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
                 this.$refs.hot.table.render(); 
             },
             onFileChange(e){
-                console.log("Trigger")
                 let files = e.target.files || e.dataTransfer.files
 
                 if (!files.length) {

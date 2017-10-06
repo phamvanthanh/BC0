@@ -1,13 +1,11 @@
 <template>
 <div class="panel panel-flat">
     <div class="panel-heading">
-       <router-link class="text-primary mr-10" :to="{name:'desk.project.section.packages', params: {sid: section_id}}"><i class="icon-cube3"></i> Packages</router-link>                
-       <router-link class="text-primary mr-10" :to="{name:'desk.project.section.gwbs', params: {sid: section_id}}"><i class="icon-tree5"></i> Swbs</router-link>                
-       
+         
         <div class="heading-elements">
             <div class="heading-btn">
     
-                 <div class="form-group">              
+                 <div class="form-group">      
                     
                     <div class="switch-box">												  
                         <label class="switch ">	
@@ -91,7 +89,28 @@ export default {
         bus.$on('refreshPwbs', function(){
           _this.getPwbs(_this.pid);
         });
+       
         
+    },
+    mounted() {
+        var alterNavData = [
+            { name: 'desk.project.section.packages',
+              params: {
+                  sid: this.$route.params.sid
+              },
+              icon: 'icon-cube3',
+              display: 'Packages'  
+            },
+
+            { name: 'desk.project.section.gwbs',
+              params: {
+                  sid: this.$route.params.sid
+              },
+              icon: 'icon-tree5',
+              display: 'Swbs'  
+            }
+        ]
+        bus.$emit('alternav', alterNavData);
     },
 
     components: {      

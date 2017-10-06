@@ -471,7 +471,7 @@ let routes = [
                         name: 'desk.wbs',
                         component: require('./views/desk/wbs/wbs'),
                         meta: { 
-                            display: "Global Work Breakdown Structure",
+                            display: "Global WBS",
                             permission: 'superuser|project_director|sale_manager',
                             fail: './views/error'
                         },
@@ -589,7 +589,7 @@ let routes = [
                                 name: 'desk.project.pwbs',
                                 component: require('./views/desk/projects/project/pwbs'),
                                 meta: {
-                                    display: 'Project Work Breakdown Structure',
+                                    display: 'PWBS',
                                     permission: 'superuser|project_director|sale_manager',
                                     fail: './views/error'
                                 }
@@ -659,7 +659,7 @@ let routes = [
                                                 name: 'desk.project.section.gwbs',
                                                 component: require('./views/desk/projects/project/section/swbs'),
                                                 meta: {
-                                                    display: "Section Work Structure Breakdown",
+                                                    display: "Swbs",
                                                     permission: 'superuser|project_director|sale_manager',
                                                     fail: './views/error'
                                                 }

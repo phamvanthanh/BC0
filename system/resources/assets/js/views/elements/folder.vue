@@ -6,7 +6,7 @@
                 <ul class="icons-list" >
                     <li class="dropdown">
                         <a  href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="menu-icon  icon-menu7 fs-12"></i>
+                            <i class="menu-icon  icon-arrow-down5"></i>
                         </a>
 
                         <ul class="dropdown-menu  dropdown-menu-right">

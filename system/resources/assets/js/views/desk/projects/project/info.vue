@@ -29,7 +29,7 @@
                 <div class="row"> 
                     <div class="col-md-4 ">
                          <div class="form-group">
-                            <label>Project's name: <span class="text-danger">*</span></label>
+                            <label>Project's Name: <span class="text-danger">*</span></label>
                             <input type="text" name="name" v-model="form.name" class="form-control required" placeholder="Project's name" >
                             
                         </div>  

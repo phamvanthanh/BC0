@@ -10,61 +10,60 @@
                 </ul>
             </div>
         </div>
-		 <div :class="{hidden:loading}"  class="panel-body">
-			<div id="org" class="pt-30" >
-			
+		 <div :class="{hidden:loading}"  class="panel-body pb-60">
+			<div id="org" class="pt-30" >			
 				<figure class="org-chart cf pt-30">
 					<ul class="administration">
-					<li>					
-						<ul class="director" v-if="sections.length > 0" >
-						<li class="org-pm" >
-							<a href="#">
-								<span class="post_info fs-12">
-									<span class="">Project: {{job.jobable.name}}</span>
-									<span class="" v-if="job.awarded" >Responder:{{ job.awarded.user.first_name}} {{ job.awarded.user.last_name}}</span>					
-									<span class="" v-if="job.awarded" >Email: {{job.awarded.user.email}}</span>
-									<span class="" v-if="job.awarded" >Phone: {{job.awarded.user.phone}}</span>
-									<span class="">Jid: {{job.id}}</span>
-								</span>
-							</a>
-							<!--<ul class="subdirector">
-							<li><a href="#"><span>Project Manager Assistant</span></a></li>
-							</ul>-->
-							<ul class="departments cf" :data-length="sections.length" >								
-							<!--<li><a href="#"><span></span></a></li>-->
-							
-							<li v-for="section in sections" class="department dep-a">
+						<li>					
+							<ul class="director" v-if="sections.length > 0" >
+							<li class="org-pm" >
 								<a href="#">
 									<span class="post_info fs-12">
-										<span class="">Section: {{section.job.jobable.name }}</span>
-										<span class="" v-if="section.job.awarded" >Responder: {{section.job.awarded.user.first_name}} {{ section.job.awarded.user.last_name}}</span>
-										
-										<span class="" v-if="section.job.awarded" >Email: {{section.job.awarded.user.email}}</span>
-										<span class="" v-if="section.job.awarded" >Phone: {{section.job.awarded.user.phone}}</span>
-										<span class="">Jid: {{section.job.id}}</span>
+										<span class="">Project: {{job.jobable.name}}</span>
+										<span class="" v-if="job.awarded" >Responder:{{ job.awarded.user.first_name}} {{ job.awarded.user.last_name}}</span>					
+										<span class="" v-if="job.awarded" >Email: {{job.awarded.user.email}}</span>
+										<span class="" v-if="job.awarded" >Phone: {{job.awarded.user.phone}}</span>
+										<span class="">Jid: {{job.id}}</span>
 									</span>
 								</a>
-								<ul class="sections">
-								<li v-for="package in section.packages" class="package">
+								<!--<ul class="subdirector">
+								<li><a href="#"><span>Project Manager Assistant</span></a></li>
+								</ul>-->
+								<ul class="departments cf" :data-length="sections.length" >								
+								<!--<li><a href="#"><span></span></a></li>-->
+								
+								<li v-for="section in sections" class="department dep-a">
 									<a href="#">
-										<span class="post_info fs-12" >
-											<span class="">Package: {{package.job.jobable.name }}</span>
-											<span class="" v-if="package.job.awarded" >Responder: {{package.job.awarded.user.first_name}} {{package.job.awarded.user.last_name}}</span>					
-											<span class="" v-if="package.job.awarded">Email: {{package.job.awarded.user.email}}</span>
-											<span class="" v-if="package.job.awarded">Phone: {{package.job.awarded.user.phone}}</span>
-											<span class="">Jid: {{package.job.id}}</span>
-													
+										<span class="post_info fs-12">
+											<span class="">Section: {{section.job.jobable.name }}</span>
+											<span class="" v-if="section.job.awarded" >Responder: {{section.job.awarded.user.first_name}} {{ section.job.awarded.user.last_name}}</span>
+											
+											<span class="" v-if="section.job.awarded" >Email: {{section.job.awarded.user.email}}</span>
+											<span class="" v-if="section.job.awarded" >Phone: {{section.job.awarded.user.phone}}</span>
+											<span class="">Jid: {{section.job.id}}</span>
 										</span>
 									</a>
+									<ul class="sections">
+									<li v-for="package in section.packages" class="package">
+										<a href="#">
+											<span class="post_info fs-12" >
+												<span class="">Package: {{package.job.jobable.name }}</span>
+												<span class="" v-if="package.job.awarded" >Responder: {{package.job.awarded.user.first_name}} {{package.job.awarded.user.last_name}}</span>					
+												<span class="" v-if="package.job.awarded">Email: {{package.job.awarded.user.email}}</span>
+												<span class="" v-if="package.job.awarded">Phone: {{package.job.awarded.user.phone}}</span>
+												<span class="">Jid: {{package.job.id}}</span>
+														
+											</span>
+										</a>
+									</li>
+									
+									</ul>
 								</li>
 								
 								</ul>
 							</li>
-							
-							</ul>
+							</ul>	
 						</li>
-						</ul>	
-					</li>
 					</ul>			
 				</figure>
 			</div>
@@ -127,7 +126,7 @@ export default {
 }
 
 #org .cf:after {
-    clear: both;
+    /*clear: both;*/
 }
 
 /**
@@ -141,10 +140,10 @@ export default {
 
 #org {
     width: 100%;
-	/*max-width: 1142px;*/
+
 	margin: 0 auto;
 	padding: 0 20px;
-    /*background: #F5EEC9;*/
+  
 }
 
 #org a:focus{
@@ -194,7 +193,7 @@ export default {
 	padding-left: auto;
 
 	text-align: left;
-	color: 
+
 }
 #org ul a span.post_info span{
 
@@ -212,7 +211,7 @@ export default {
 
 
 #org .departments{
-	position: absolute;
+	/*position: absolute;*/
 	width: 100%;
 		
 }
@@ -339,14 +338,7 @@ export default {
 	height: 80px;
 	vertical-align: middle;
 	right: -1px;
-	/*background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAuMjUiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
-	background-image: -moz-linear-gradient(-45deg,  rgba(0,0,0,0.25) 0%, rgba(0,0,0,0) 100%) !important;
-	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0%,rgba(0,0,0,0.25)), color-stop(100%,rgba(0,0,0,0)))!important;
-	background-image: -webkit-linear-gradient(-45deg,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%)!important;
-	background-image: -o-linear-gradient(-45deg,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%)!important;
-	background-image: -ms-linear-gradient(-45deg,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%)!important;
-	background-image: linear-gradient(135deg,  rgba(0,0,0,0.25) 0%,rgba(0,0,0,0) 100%)!important;
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40000000', endColorstr='#00000000',GradientType=1 );*/
+	
 }
 
 #org .department li a:hover{

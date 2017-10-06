@@ -97,8 +97,8 @@
                             <ul class="dropdown-menu  dropdown-menu-right">
                                 <li><a @click="editPackage(props.row)" class="text-primary" ><i class="icon-pencil3"></i> Edit</a></li>
                                 <li><a @click="copyPackage(props.row)" class="text-primary" ><i class="icon-copy3"></i> Copy</a></li>
+                                <li><a @click="mirrorPackage(props.row)" class="text-primary" ><i class="icon-mirror"></i> Mirror</a></li>
                                 <li><a @click="deletePackage(props.row)" class="text-danger" ><i class="icon-trash-alt"></i> Delete</a></li>
-                            
                             </ul>
                         </li>
                     </ul>
@@ -148,11 +148,8 @@ export default {
                      
                  },
                  
-                 sortIcon: { 
-                     base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-                 },
-                 templates: {
-             
+                 sortable: ['id', 'name', 'description', 'area', 'complexity', 'from_date', 'to_date', 'status'],
+                 templates: {             
                      status: 'status'
                  },
 
@@ -165,15 +162,12 @@ export default {
                     from_date: 'w-80',
                     to_date: 'w-80',              
                     status: 'w-70',
-                    actions: 'text-right w-40 action'                   
+                    actions: 'text-right w-40 action'           
 
                 
                 },
 
-                 skin: 'table-hover',
-                 texts: {
-                    filter: ''
-                 }
+               
              }        
         }
     },
@@ -189,7 +183,10 @@ export default {
              for(let property in p){              
                 this.form[property] = p[property];
             };
-        })  
+        });
+
+        console.log(this.$parent.$parent.$refs.subnav); 
+        // this.$parent.$parent.$refs.subnav        
 
     },
 
@@ -270,7 +267,12 @@ export default {
             this.editPackage(e);
             this.form.id = null;
         },
-
+        mirrorPackage(e) {
+            this.editPackage(e);
+            this.form.id = null;
+            this.form.mirror_id = this.form.id;
+            this.form.name += ' - Mirror';
+        },
         deletePackage(e) {
             this.form.id = e.id;
             

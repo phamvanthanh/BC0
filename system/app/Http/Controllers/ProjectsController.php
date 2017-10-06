@@ -54,13 +54,15 @@ class ProjectsController extends Controller
     }
 
     public function show($pid) {       
-        return Project::with('user')->with('nation')->with('industry')->with('job')->find($pid);       
+        return Project::with('user')
+                      ->with('industry')
+                      ->with('job')
+                      ->find($pid);       
     }  
 
     public function getProjectsByClient(Request $request) {
         $user_id = $request->user()->id;
-        return Project::with('job')
-                      ->with('nation')
+        return Project::with('job')                     
                       ->with('industry')
                       ->where('user_id', $user_id)->get();
     }

@@ -48,23 +48,22 @@ class PackageForm extends FormRequest
                     'description' => $this->input('description'),
                     'area'        => $this->input('area'),
                     'complexity'  => $this->input('complexity')
+                    
                 ]);
 
         }
         else {
             $exist = Package::where('section_id', $this->input('section_id'))
                             ->where('name', $this->input('name'))
-                            ->first();
-        
+                            ->first();        
             if($exist)
                 return response(['Package name already exists'], 422);            
 
             $package =  Package::create(
-                $this->only(['section_id', 'name', 'area', 'complexity', 'description']));          
+                $this->only(['section_id', 'name', 'area', 'complexity', 'description', 'mirror_id']));          
 
         }
      
-
         $job = Job::updateOrCreate(
             ['jobable_id'=>$package->id, 'jobable_type'=>'package'],
            

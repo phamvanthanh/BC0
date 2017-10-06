@@ -79,12 +79,11 @@ export default {
       return {
            
             projects: [],
-            columns: ['job_id', 'name',  'nation', 'industry', 'from', 'to', 'created', 'status', 'actions'],              
+            columns: ['job_id', 'name',  'nation_abbr', 'industry', 'from', 'to', 'created', 'status', 'actions'],              
             options: {
                  headings: {
-                    job_id: 'Id',                 
-                
-                    nation: 'Nation',
+                    job_id: 'Id',              
+                    nation_abbr: 'Nation',
                     industry: 'Industry',
                     from: 'From',
                     to: 'To',
@@ -146,7 +145,7 @@ export default {
                         id: e.id,
                         job_id: e.job.id,
                         name: e.name,
-                        nation: e.nation.abbreviation,                   
+                        nation_abbr: e.nation_abbr,                   
                         industry: e.industry.name,
                         from: moment(e.job.from_date).format('YY/MM/DD'),
                         to: moment(e.job.to_date).format('YY/MM/DD'),

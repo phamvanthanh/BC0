@@ -135,9 +135,23 @@ Vue.component('page-label', {
     template: '<span class="fs-16" style="line-height: 44px" >{{$route.meta.display}}</span>'
 });
 
+Vue.component('alter-subnav', {
+    props: ['routes'],
+    template: `<div>
+
+            <router-link v-for="r in routes"  
+                    :key="r.name" 
+                    :to="{name: r.name, params: r.params}" 
+                    class="btn btn-link btn-float has-text" >
+                        <i :class="r.icon"></i>
+                        <span>{{r.display}}</span>
+            </router-link> 
+        </div>
+    `
+});
+
 import {ServerTable} from 'vue-tables-2';
 Vue.use(ServerTable);
-
 
 import {ClientTable} from 'vue-tables-2';
 Vue.use(ClientTable);

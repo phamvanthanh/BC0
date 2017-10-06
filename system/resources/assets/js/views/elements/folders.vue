@@ -131,7 +131,7 @@ ul#folder-list > li
     display: block;
     background-color: inherit;   
     width: 100%;
-    border-left: 4px solid transparent;
+    border-left: 3px solid transparent;
     outline: none;
     text-align: left;    
     transition: 0.3s;
@@ -145,20 +145,20 @@ ul#folder-list > li
 
 ul#folder-list > li.active{
 
-  font-weight: $font-weight-focus;
-  border-left-color: $warning-color;
+  /*font-weight: $font-weight-focus;*/
+  border-left-color: $link-active-color;
+  a {
+      color: $link-active-color;
+  }
 
 }
 
 ul#folder-list > li:hover {
-    border-left-color: $warning-color;
+    border-left-color: $link-active-color;
    
 }
 
-#folder-list li.active i.menu-icon {
-  /*color: $text-white;*/
-  
-}
+
 ul.dropdown-menu li {
     padding: 0px;
 }

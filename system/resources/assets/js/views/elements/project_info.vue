@@ -2,7 +2,7 @@
 <div>
      <div class="col-md-5">
         Name: {{project.name}}<br>       
-        Nation: {{project.nation.name}}</br>
+        Nation: {{project.nation_abbr}}</br>
         Client: {{project.user.first_name}} {{project.user.last_name}}
     </div>
     <div class="col-md-5">  

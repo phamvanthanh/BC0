@@ -8,7 +8,7 @@
             </div>
 
             <div class="heading-elements">
-                <div class="heading-btn-group" >
+                <div class="heading-btn-group" ref="subnav" v-if="subnav" >
                      <router-link :to="{name:'desk.project.info', params: {pid: id}}" class="btn btn-link btn-float has-text"><i class=" icon-info22 "></i><span>Info</span></router-link> 
                      <router-link :to="{name:'desk.project.files', params: {pid: id}}" class="btn btn-link btn-float has-text"><i class="icon-files-empty"></i><span>Files</span></router-link>
                      <router-link :to="{name:'desk.project.links', params: {pid: id}}" class="btn btn-link btn-float has-text"><i class="icon-link"></i><span>Links</span></router-link>                    
@@ -19,6 +19,11 @@
                      <router-link :to="{name:'desk.project.reports', params: {pid: id}}" class="btn btn-link btn-float has-text"><i class="icon-statistics"></i><span>Reports</span></router-link>
                      <router-link :to="{name:'desk.project.quantity', params: {pid: id}}" class="btn btn-link btn-float has-text"><i class="icon-table2"></i><span>Quantity</span></router-link>
                      
+                </div>
+                 <div class="heading-btn-group" v-else >
+                    <alter-subnav
+                        :routes="routes"
+                    ></alter-subnav>    
                 </div>
             </div>
         </div>
@@ -48,18 +53,27 @@
     export default {
         data() {
             return {
-                loading: true,
+                 loading: true,
+                 subnav: true,
+                 routes: [],
                  id : this.$route.params.pid,
                  project: null,
             }
         },   
        
         components: {   
-            notify,            
-                      
+            notify,                     
         },
         created() {
+            bus.$on('alternav', (payload)=>{
+               
+                this.routes = payload;
+                this.subnav = false;
+            })
+        },
+        mounted() {
             this.getProject();
+            
         },
         methods: {
        

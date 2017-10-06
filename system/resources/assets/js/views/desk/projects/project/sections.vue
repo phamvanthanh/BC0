@@ -86,7 +86,7 @@
             
         </div>
 
-        <div v-if="sections.length > 0">
+        <div >
             <v-client-table
                 :data="sections"
                 :columns="columns"
@@ -104,6 +104,7 @@
                                 <li><router-link class="text-primary" :to="{name:'desk.project.section.gwbs', params: {sid: props.row.id}}"><i class="icon-tree5"></i> Swbs</router-link></li>
                                 <li><a @click="editSection(props.row)" class="text-primary"  ><i class="icon-pencil3"></i> Edit</a></li>
                                 <li><a @click="copySection(props.row)" class="text-primary"  ><i class="icon-copy3"></i> Copy</a></li>
+                                <li><a @click="mirrorSection(props.row)" class="text-primary"  ><i class="icon-mirror"></i> Mirror</a></li>
                                 <li><a @click="deleteSection(props.row)" class="text-danger" ><i class="icon-trash-alt" ></i> Delete</a></li>
                             </ul>
                         </li>
@@ -113,11 +114,7 @@
                         
             </v-client-table>
         </div>
-        <div v-else>                
-            <div class="table-norecord">
-                <span>No records.</span>
-            </div>                
-        </div>
+        
     </div>
 </div>
      
@@ -171,9 +168,7 @@ export default {
                     actions: ''         
                   
                 },
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-                },
+             
                 templates: {
                     
                      status: 'status'
@@ -191,10 +186,7 @@ export default {
                 
                 },
 
-                skin: 'table-hover',
-                texts: {
-                    filter: ''
-                }
+               
 
             },
         }
@@ -289,6 +281,13 @@ export default {
         copySection(e) {
             this.editSection(e);
             this.form.id = null;
+        },
+        mirrorSection(e) {
+            this.editSection(e);
+            this.form.id = null;
+            this.form.name += ' - Mirror';
+            this.form.mirror_id = this.form.id;
+            
         },  
         
         deleteSection(e) {            
