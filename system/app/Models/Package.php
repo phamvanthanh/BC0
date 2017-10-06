@@ -9,6 +9,7 @@ class Package extends Model
     protected $table = 'packages';
     protected $fillable = [
         'section_id',
+        'mirror_id',
         'name',
         'area',
         'complexity',

@@ -1,5 +1,5 @@
 <template  >          
-    <div class="wrapper">
+    <div class="row">
         <div :class="{loader:loading}"></div>      
         <div :class="{hidden:loading}" class="col-md-12" v-if="editMode">
             <form @submit.prevent="onSubmit" method="post" >
@@ -123,6 +123,7 @@ export default {
              pid: this.$route.params.pid,
              form: new Form({
                  id: null,
+                 mirror_id: null,
                  section_id: null,
                  name: null,
                  area: null,
@@ -183,10 +184,7 @@ export default {
              for(let property in p){              
                 this.form[property] = p[property];
             };
-        });
-
-        console.log(this.$parent.$parent.$refs.subnav); 
-        // this.$parent.$parent.$refs.subnav        
+        });       
 
     },
 
@@ -269,9 +267,14 @@ export default {
         },
         mirrorPackage(e) {
             this.editPackage(e);
-            this.form.id = null;
+            var index = 1;
+            this.packages.forEach(function(e) {
+                if(e.mirror_id)
+                    index++;
+            });
             this.form.mirror_id = this.form.id;
-            this.form.name += ' - Mirror';
+            this.form.id = null;            
+            this.form.name += ' - M'+index;
         },
         deletePackage(e) {
             this.form.id = e.id;

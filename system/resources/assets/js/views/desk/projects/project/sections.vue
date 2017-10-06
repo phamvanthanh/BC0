@@ -141,6 +141,7 @@ export default {
              form: new Form({ // New group form
                  id: null,
                  project_id: this.project_id,
+                 mirror_id: null,
                  name: null,
                  description: null,             
                  from_date: null,
@@ -284,9 +285,15 @@ export default {
         },
         mirrorSection(e) {
             this.editSection(e);
-            this.form.id = null;
-            this.form.name += ' - Mirror';
             this.form.mirror_id = this.form.id;
+            this.form.id = null;
+            var index = 1;
+            this.sections.forEach(function(e){
+                if(e.mirror_id)
+                    index++;
+            })
+            this.form.name += ' - M'+index;
+           
             
         },  
         

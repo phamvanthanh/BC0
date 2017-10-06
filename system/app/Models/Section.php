@@ -9,6 +9,7 @@ class Section extends Model
     protected $table = 'sections';
     protected $fillable = [
         'project_id',
+        'mirror_id',
         'name',
         'description'
     ];
