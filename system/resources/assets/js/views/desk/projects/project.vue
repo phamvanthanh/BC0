@@ -69,6 +69,9 @@
                
                 this.routes = payload;
                 this.subnav = false;
+            });
+            bus.$on('closealternav', ()=>{
+                this.subnav = true;
             })
         },
         mounted() {

@@ -4,6 +4,8 @@ namespace system\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use system\Models\Section;
+use system\Models\Package;
+use system\Http\Requests\PackageForm;
 use system\Models\Job;
 class SectionForm extends FormRequest
 {
@@ -32,6 +34,21 @@ class SectionForm extends FormRequest
            'status'     => 'required'
         ];
     }
+    protected function mirrorPackages($section) {
+        
+        $packages = Package::where('section_id',  $section->mirror_id)
+                            ->get();
+        foreach($packages as $package){
+            $package['name'] .= '-MS';
+            $package['section_id'] = $section->id;
+            $package['mirror_id'] = $package->id;
+            unset($package->id);
+            $packageForm = new PackageForm;
+            $packageForm->replace($package->toArray());
+            $packageForm->persist();
+        }
+        
+    }
     public function persist() {
         
          if($this->input('id')) {
@@ -48,10 +65,12 @@ class SectionForm extends FormRequest
               $exist = Section::where('project_id', $this->input('project_id'))
                                 ->where('name', $this->input('name'))
                                 ->first();
+                                
               if($exist)           
-                  return response(['Section name already exists.'], 400);
+                  return response(['Section name is taken.'], 400);
               
               $section =  Section::create($this->all());
+            
          }
          
 
@@ -66,19 +85,13 @@ class SectionForm extends FormRequest
                 'status'    => $this->input('status')
             ]
         );
+        if(!empty($section->mirror_id)) 
+            $this->mirrorPackages($section);
 
         return response(['Section post succeed'], 200); 
-
-
-
-         
-           
-        // $role = Role::where('name', 'controller')->first();
-        
-        // JobHolder::updateOrCreate(['job_id'=>$job['id'],  'role_id' =>$role['id']]); 
-
-        
+      
         
     }
+
 }
 

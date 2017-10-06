@@ -246,6 +246,7 @@ export default {
                                return {
                                     id: e.id,
                                     project_id: e.project_id,
+                                    mirror_id: e.mirror_id,
                                     name:e.name,
                                     description: e.description,                                    
                                     from_date: e.job.from_date,                                
@@ -288,11 +289,12 @@ export default {
             this.form.mirror_id = this.form.id;
             this.form.id = null;
             var index = 1;
-            this.sections.forEach(function(e){
-                if(e.mirror_id)
+            this.sections.forEach(function(el){
+                console.log(e.id, el.mirror_id);
+                if(el.mirror_id == e.id)
                     index++;
             })
-            this.form.name += ' - M'+index;
+            this.form.name += '-M'+index;
            
             
         },  
@@ -307,7 +309,7 @@ export default {
                 }             
                 this.form.post("/api/projects/"+this.form.project_id+"/sections/delete")
                          .then(({data})=>{
-                             console.log("reach");
+                           
                              this.getSections(this.pid); 
                              notice(this.form.notifications, 6000); })
                          .catch((error)=>{ 

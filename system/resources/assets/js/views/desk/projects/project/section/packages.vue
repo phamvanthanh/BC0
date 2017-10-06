@@ -1,5 +1,5 @@
 <template  >          
-    <div class="row">
+    <div class="wrapper">
         <div :class="{loader:loading}"></div>      
         <div :class="{hidden:loading}" class="col-md-12" v-if="editMode">
             <form @submit.prevent="onSubmit" method="post" >
@@ -268,8 +268,8 @@ export default {
         mirrorPackage(e) {
             this.editPackage(e);
             var index = 1;
-            this.packages.forEach(function(e) {
-                if(e.mirror_id)
+            this.packages.forEach(function(el) {
+                if(el.mirror_id == e.id)
                     index++;
             });
             this.form.mirror_id = this.form.id;

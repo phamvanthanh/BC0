@@ -112,11 +112,14 @@ export default {
         ]
         bus.$emit('alternav', alterNavData);
     },
-
+    beforeDestroy() {
+        bus.$emit('closealternav');
+    },
     components: {      
         pwbsg,
         gwbs      
     },
+
     methods: {
         editToggle() {
             localStorage.setItem('groupingedit', this.editMode);
