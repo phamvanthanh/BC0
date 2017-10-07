@@ -10,7 +10,7 @@ use system\Models\Quantity;
 use system\Models\Job;
 use system\Models\Section;
 use system\Models\Package;
-use system\Http\Controllers\GwbsController;
+use system\Http\Controllers\swbsController;
 use system\Http\Requests\QuantityForm;
 
 use Maatwebsite\Excel\Facades\Excel;
@@ -34,14 +34,14 @@ class QuantityController extends Controller
                $pid = $pid['project_id'];  
              
               
-               $gwbs = DB::table('gwbs')
+               $swbs = DB::table('swbs')
                      ->join('pwbs', function($join) use ($pid) {
-                         $join->on('gwbs.code', '=', 'pwbs.code')
+                         $join->on('swbs.code', '=', 'pwbs.code')
                               ->where('pwbs.project_id', '=', $pid);
                      })
-                     ->leftjoin('wbs', 'gwbs.code', '=', 'wbs.code')
+                     ->leftjoin('wbs', 'swbs.code', '=', 'wbs.code')
                      ->leftjoin('quantity', function($join) use($id) {
-                         $join->on('quantity.code', '=', 'gwbs.code')
+                         $join->on('quantity.code', '=', 'swbs.code')
                               ->where('job_id', '=', $id);
                      })
                      ->leftjoin('quantity_files', 'quantity.id', '=', 'quantity_files.quantity_id')
@@ -50,7 +50,7 @@ class QuantityController extends Controller
                      ->leftjoin('audit_files', 'audit.id', '=', 'audit_files.audit_id')
                      ->leftjoin('audit_markdowns', 'audit.id', '=', 'audit_markdowns.audit_id')
                      ->select(DB::raw('IFNULL(pwbs.parent_code, wbs.parent_code) as parent_code,
-                                       gwbs.code,
+                                       swbs.code,
                                        '.$gid.' as section_id,
                                        IFNULL(pwbs.name, wbs.name) as name,
                                        pwbs.unit,
@@ -82,10 +82,10 @@ class QuantityController extends Controller
                                        audit_markdowns.name as a_markdown,
                                        audit_markdowns.path as a_markdown_path'))
                      
-                     ->where('gwbs.section_id', $gid)
+                     ->where('swbs.section_id', $gid)
                      ->orderBy('code', 'asc')
                      ->get();
-              return $gwbs;
+              return $swbs;
                 // IF(quantity.commit = 1, true, false) as commit,
             //      CAST(audit.commit as INTEGER) as a_commit,
            }       
@@ -132,7 +132,7 @@ class QuantityController extends Controller
 
                     //Sum group quantity from package quantity
                    
-                    // Loop over gwbs items
+                    // Loop over swbs items
                     foreach($base as $index=>$item){
                         $base[$index]['commit_array'] = array();   //Create a commit array for eacch item of the section
                         $base[$index]['project_id'] = $pid;     // Add project_id to each item of the section

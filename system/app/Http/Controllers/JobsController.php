@@ -140,16 +140,18 @@ class JobsController extends Controller
          return DB::table('jobs')
            ->LeftJoin('projects', function($join){
                $join->on('jobs.jobable_id', '=', 'projects.id')
-                    ->where('jobs.jobable_type', '=', 'project')
-                    ->where('jobs.status', '=', 'active');
+                    ->where('jobs.jobable_type', '=', 'project');
+                    // ->where('jobs.status', '=', 'active');
            })
            ->LeftJoin('sections', function($join){
-               $join->on('jobs.jobable_id', '=', 'sections.id');
-               $join->where('jobs.jobable_type', '=', 'section');
+               $join->on('jobs.jobable_id', '=', 'sections.id')
+                    ->where('jobs.jobable_type', '=', 'section');
+                    // ->where('jobs.status', '=', 'active');
            })      
            ->leftJoin('vpackages' , function($join){
                return $join->on('jobs.jobable_id', '=', 'vpackages.id')
                            ->where('jobs.jobable_type', '=', 'package');
+                        //    ->where('jobs.status', '=', 'active');
            })
            ->Join('projects as p', function($join) {
                $join->on('projects.id', '=', 'p.id')
@@ -179,6 +181,7 @@ class JobsController extends Controller
                 bids.status as bid_status     
              '               
            ))
+           ->where('jobs.status', '=', 'active')
            ->where(function($q){
                return $q->whereNull('bids.status')
                         ->orWhere('bids.status', '=', 'withhold');
@@ -358,11 +361,11 @@ class JobsController extends Controller
             switch($job['jobable_type'])
             {
                  case 'package':
-                    $Pk = new GwbsController;
+                    $Pk = new SwbsController;
                     $jwbs = $Pk->index($job['jobable']['section_id']);  
                     break;              
                 case 'section':
-                    $G = new GwbsController;
+                    $G = new SwbsController;
                     $jwbs = $G->index($job['jobable']['id']); 
                     break;
                 case 'project':
@@ -375,6 +378,5 @@ class JobsController extends Controller
             
         }
         return $jwbs;
-
     }
 }

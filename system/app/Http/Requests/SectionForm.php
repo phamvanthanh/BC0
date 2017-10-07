@@ -7,6 +7,7 @@ use system\Models\Section;
 use system\Models\Package;
 use system\Http\Requests\PackageForm;
 use system\Models\Job;
+use system\Models\Swbs;
 class SectionForm extends FormRequest
 {
     /**
@@ -49,6 +50,22 @@ class SectionForm extends FormRequest
         }
         
     }
+    protected function mirrorSwbs($section) {
+        $swbs = Swbs::where('section_id', $section->mirror_id)->get()->toArray();
+        
+        foreach ($swbs as $index=>$item) {
+            $swbs[$index]['section_id'] = $section->id;
+            unset($swbs[$index]['id']);
+                      
+        }
+        Swbs::insert($swbs);
+        
+    }
+    public function mirrorSection($section) {
+        $this->mirrorSwbs($section);
+        $this->mirrorPackages($section);
+
+    }
     public function persist() {
         
          if($this->input('id')) {
@@ -86,7 +103,7 @@ class SectionForm extends FormRequest
             ]
         );
         if(!empty($section->mirror_id)) 
-            $this->mirrorPackages($section);
+            $this->mirrorSection($section);
 
         return response(['Section post succeed'], 200); 
       

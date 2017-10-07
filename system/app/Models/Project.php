@@ -18,6 +18,7 @@ class Project extends Model
         'to_date',       
         'description', 
         'requirement', 
+        'mirror_id'
       
     ];  
     public function nation() {

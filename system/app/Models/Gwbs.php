@@ -4,9 +4,9 @@ namespace system\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Gwbs extends Model
+class Swbs extends Model
 {
-    protected $table = 'gwbs';
+    protected $table = 'swbs';
     protected $fillable = [
         'section_id',
         'code'

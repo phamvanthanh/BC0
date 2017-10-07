@@ -128,11 +128,11 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::post('/projects/{pid}/packages/delete', ['uses'=>'PackagesController@delete']);
 
 
-    Route::get('/projects/sections/{gid}/gwbs', ['uses'=>'GwbsController@index']);
-    Route::get('/projects/{pid}/sections/{gid}', ['uses'=>'GwbsController@gwbsCodesByGroupId']);
-    Route::post('/projects/sections/{gid}/gwbs/pass', ['uses'=>'GwbsController@pass']);
-    Route::post('/projects/sections/{gid}/gwbs/delete', ['uses'=>'GwbsController@delete']);
-    Route::get('/projects/{pid}/gwbs', ['uses'=>'GwbsController@gwbsCodesByProjectId']);
+    Route::get('/projects/sections/{gid}/gwbs', ['uses'=>'SwbsController@index']);
+    Route::get('/projects/{pid}/sections/{gid}', ['uses'=>'SwbsController@swbsCodesByGroupId']);
+    Route::post('/projects/sections/{gid}/gwbs/pass', ['uses'=>'SwbsController@pass']);
+    Route::post('/projects/sections/{gid}/gwbs/delete', ['uses'=>'SwbsController@delete']);
+    Route::get('/projects/{pid}/gwbs', ['uses'=>'SwbsController@swbsCodesByProjectId']);
    
 
 

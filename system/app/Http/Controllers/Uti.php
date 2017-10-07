@@ -52,27 +52,27 @@ class Uti
 
        return $pwbs_records;
     }
-    public function gwbs($gid) {
+    public function swbs($gid) {
         //    $pid = Group::select('project_id')->find($gid);
            $pid = DB::table('sections')->where('id', $gid)->select('project_id')->first();
            
            $pid = $pid->project_id;  
      
-           $gwbs = DB::table('gwbs')
+           $swbs = DB::table('swbs')
                      ->join('pwbs', function($join) use ($pid) {
-                         $join->on('gwbs.code', '=', 'pwbs.code')
+                         $join->on('swbs.code', '=', 'pwbs.code')
                               ->where('pwbs.project_id', '=', $pid);
                      })
-                     ->leftjoin('wbs', 'gwbs.code', '=', 'wbs.code')
+                     ->leftjoin('wbs', 'swbs.code', '=', 'wbs.code')
                      ->select(DB::raw('IFNULL(pwbs.parent_code, wbs.parent_code) as parent_code,
-                                       gwbs.code,
+                                       swbs.code,
                                        IFNULL(pwbs.name, wbs.name) as name,
                                        pwbs.unit'))
-                     ->where('gwbs.section_id', $gid)
+                     ->where('swbs.section_id', $gid)
                      ->get();
-            // $length = count($gwbs);
+            // $length = count($swbs);
          
-            return $gwbs;
+            return $swbs;
 
       
    }

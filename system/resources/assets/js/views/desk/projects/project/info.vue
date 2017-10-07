@@ -10,10 +10,8 @@
                             
                             <div class="slider"></div>
                         </label>
-                    </div>
-                   									
-              
-            </div>
+                    </div>             
+                 </div>
             </div>
         </div>
         
@@ -22,7 +20,6 @@
                 <info
                     v-if="project"
                     :project="project" >
-
                 </info>
             </div>
             <form v-if="edit" @submit.prevent="onSubmit"  @change="form.errors.clear($event.target.name)"   >
@@ -57,8 +54,7 @@
                                 <option v-for="nation in nations" :value="nation.abbr">{{nation.name}}</option> 
                                 
                             </select>
-                        </div>
-                            
+                        </div>                        
                         
                     </div>  
                     
@@ -105,8 +101,7 @@
                     </div>										
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        
+                    <div class="col-md-6">                        
                         <div class="form-group">
                             <label>Status:</label> 
                                 <div class="input-group">                                    
@@ -118,14 +113,17 @@
                     </div>                                   									
                 </div> 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-1">
                         <div class="form-group">                                                                     
                             <button type="submit" name="submit" :disabled="form.errors.any()" class="btn btn-primary">Save</button>
                         </div>
+                    </div> 
+                    <div class="col-md-1">
+                        <div class="form-group">                                                                     
+                            <button type="button" @click="mirrorProject"  class="btn btn-warning">Mirror</button>
+                        </div>
                     </div>                                										
-                </div> 	
-
-                    
+                </div>                   
             </form>
         </div>     
     </div>
@@ -147,6 +145,7 @@ import datepicker from '././../../../elements/Datepicker';
              
               form: new Form({
                     id: null,
+                    mirror_id: null,
                     name: null,
                     user_id: null,
                     nation_abbr: null,
@@ -161,17 +160,14 @@ import datepicker from '././../../../elements/Datepicker';
                         status: null,
                     }
               }),
-
-            }          
-        
+            }       
         },
-        created() {      
+        created() {    
 
             this.getNations();  
             this.getProject();    
 
-        },
-       
+        },       
             
         computed: {
             id: {
@@ -181,14 +177,12 @@ import datepicker from '././../../../elements/Datepicker';
                 set(newVal) {
 
                 }
-            },
-          
+            },          
             
         },  
         components: {         
             info,
-            datepicker
-                      
+            datepicker                      
         },
         methods: {
             editMode(){      
@@ -204,8 +198,7 @@ import datepicker from '././../../../elements/Datepicker';
                  .then(({data})=>{                  
                         this.project = data;
                        
-                        for(let property  in data){
-                    
+                        for(let property  in data){                    
                             this.form[property] = data[property];
                         }                     
                     });
@@ -214,12 +207,18 @@ import datepicker from '././../../../elements/Datepicker';
                 this.form.post('/api/projects')
                     .then(({data})=>{
                        this.getProject();
-                       notice(this.form.notifications, 5000);
+                       notice(this.form.notifications, 6000);
                     })
                     .catch(errors => {
-                       notice(this.form.notifications, 5000);
+                       notice(this.form.notifications, 6000);
                     })
             },
+            mirrorProject() {
+                this.form.mirror_id = this.form.id;
+                this.form.id = null;                
+                this.onSubmit();
+                
+            }
         }
       
     }

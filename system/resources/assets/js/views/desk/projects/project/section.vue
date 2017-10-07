@@ -46,7 +46,7 @@ export default {
              privatechosencodes: [],       
              removecodes: [],
              addcodes: [],       
-             form: new Form({ // Grouping form
+             form: new Form({ 
                  id: null,               
                  section_id: this.$route.params.sid,
                  codes: []
