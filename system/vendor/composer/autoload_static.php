@@ -4485,7 +4485,7 @@ class ComposerStaticInitb9d77bc30f3bec78a59b830b7eadadcf
         'system\\Models\\Role' => __DIR__ . '/../..' . '/app/Models/Role.php',
         'system\\Models\\RoleUser' => __DIR__ . '/../..' . '/app/Models/RoleUser.php',
         'system\\Models\\Section' => __DIR__ . '/../..' . '/app/Models/Section.php',
-        'system\\Models\\Swbs' => __DIR__ . '/../..' . '/app/Models/Gwbs.php',
+        'system\\Models\\Swbs' => __DIR__ . '/../..' . '/app/Models/Swbs.php',
         'system\\Models\\Unread' => __DIR__ . '/../..' . '/app/Models/Unread.php',
         'system\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'system\\Models\\Wbs' => __DIR__ . '/../..' . '/app/Models/Wbs.php',

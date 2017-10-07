@@ -4081,7 +4081,7 @@ return array(
     'system\\Models\\Role' => $baseDir . '/app/Models/Role.php',
     'system\\Models\\RoleUser' => $baseDir . '/app/Models/RoleUser.php',
     'system\\Models\\Section' => $baseDir . '/app/Models/Section.php',
-    'system\\Models\\Swbs' => $baseDir . '/app/Models/Gwbs.php',
+    'system\\Models\\Swbs' => $baseDir . '/app/Models/Swbs.php',
     'system\\Models\\Unread' => $baseDir . '/app/Models/Unread.php',
     'system\\Models\\User' => $baseDir . '/app/Models/User.php',
     'system\\Models\\Wbs' => $baseDir . '/app/Models/Wbs.php',

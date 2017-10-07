@@ -4,6 +4,7 @@ namespace system\Http\Controllers;
 
 use Illuminate\Http\Request;
 use system\Models\Link;
+use system\Http\Requests\LinkForm;
 
 class LinksController extends Controller
 {
@@ -11,25 +12,14 @@ class LinksController extends Controller
         return Link::where('project_id', $pid)->get();
         
     }
-    public function store($pid){
-        $this->validate(request(), [
-            'project_id' => 'required',
-            'caption'    => 'required',
-            'url'        => 'required'
-        ]);
-
-        $request = request(['id', 'project_id', 'caption', 'url']);
-        if(!empty($request['id']))
-        {
-            Link::find($request['id'])->update($request);
-            return;
-        }
-        Link::create($request);
+    public function store(LinkForm $form){
+       return $form->persist();
     }
     public function delete($pid){
         $request = request(['id']);
         $lid = $request['id'];
         Link::find($lid)->delete(); 
+        return response(['Link delete succeed.'], 200);
     }
 
 }
