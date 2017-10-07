@@ -118,11 +118,11 @@ class ProjectForm extends FormRequest
  
     public function persist() {         
 
-        $inputs = $this->only(['name', 'user_id', 'nation_abbr', 'industry_id', 'description', 'requirement', 'mirror_id']);
+        // $inputs = ;
                                 
         $project = Project::updateOrCreate(
             ['id'=>$this->input('id')],
-            $inputs,
+            $this->only(['name', 'user_id', 'nation_abbr', 'industry_id', 'description', 'requirement', 'mirror_id']),
             ['created_by'=>$this->user()->id]
         );
        

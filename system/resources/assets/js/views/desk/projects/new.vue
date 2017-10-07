@@ -123,9 +123,13 @@
                             </div>                                   									
                         </div> 
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-1">
                                 <div class="form-group">                                                                     
                                     <button type="submit" name="submit" :disabled="form.errors.any()" class="btn btn-primary">Save</button>
+                                </div>
+                            </div> 
+                            <div class="col-md-1">
+                                <div class="form-group">                                                                     
                                     <button type="button" @click="clear" class="btn btn-default ml-10">Clear</button>
                                 </div>
                             </div> 
