@@ -67,18 +67,20 @@
                          
                           {data: 'code', readOnly: true, colWidths: '100px'},
                           {data: 'name', readOnly: true, colWidths: function(){
-                               return document.getElementById('hot-preview').offsetWidth - 225;
+                               return document.getElementById('hot-preview').offsetWidth - 305;
                           }},
+                          
                          
                           {data: 'unit', type: 'dropdown', colWidths: '60px',                             
                               source: ['m', 'm2', 'm3', 'kg', 'ton', 'ea', 'set', 'lot'],
                               strict: true,
                               allowInvalid: true
-                          }
+                          },
+                          {data: 'difference', colWidths: '80px'}
                        
                   ],
                   className: "htLeft",
-                  colHeaders: ['Code', 'Name', 'Unit'],
+                  colHeaders: ['Code', 'Name', 'Unit', 'Differ'],
                
                   afterChange: function(change, source) {
                       if(source == 'edit') {
@@ -87,18 +89,19 @@
                           if(change[2] != row.unit){
                         
                               var form = new Form({
-                                    project_id: row.project_id,
+                                  project_id: row.project_id,
                                   code      : row.code,
-                                  unit      : row.unit
+                                  unit      : row.unit,
+                                  difference: row.difference
                               });              
                              
                               form.post('/api/projects/'+row.project_id+'/pwbs/unitify')
                                     .then(({data})=>{
-                                        notice(form.notifications, 5000);
+                                        notice(form.notifications, 6000);
                                         form.reset();
                                     })
                                     .catch((error)=>{
-                                        notice(form.notifications, 5000);
+                                        notice(form.notifications, 6000);
                                         bus.$emit('refreshleave')
                                         form.reset();
 

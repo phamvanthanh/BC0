@@ -33,7 +33,7 @@ class PwbsUnit extends FormRequest
     public function persist() {
          Pwbs::where('project_id', $this->input('project_id'))
               ->where('code', $this->input('code'))
-              ->update($this->only('unit'));
+              ->update($this->only(['unit', 'difference']));
         
         return response(['Unit post succeed'], 200);
 

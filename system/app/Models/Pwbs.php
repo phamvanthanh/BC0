@@ -14,7 +14,7 @@ class Pwbs extends Model
         'name', 
         'description',
         'unit',
-        'quantify',
+        'difference',
         'extension',
         'commit'];    
   

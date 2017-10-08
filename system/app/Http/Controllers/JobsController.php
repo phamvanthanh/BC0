@@ -141,24 +141,19 @@ class JobsController extends Controller
            ->LeftJoin('projects', function($join){
                $join->on('jobs.jobable_id', '=', 'projects.id')
                     ->where('jobs.jobable_type', '=', 'project');
-                    // ->where('jobs.status', '=', 'active');
            })
            ->LeftJoin('sections', function($join){
                $join->on('jobs.jobable_id', '=', 'sections.id')
                     ->where('jobs.jobable_type', '=', 'section');
-                    // ->where('jobs.status', '=', 'active');
            })      
            ->leftJoin('vpackages' , function($join){
                return $join->on('jobs.jobable_id', '=', 'vpackages.id')
                            ->where('jobs.jobable_type', '=', 'package');
-                        //    ->where('jobs.status', '=', 'active');
            })
            ->Join('projects as p', function($join) {
                $join->on('projects.id', '=', 'p.id')
                     ->orOn('sections.project_id', '=', 'p.id')
                     ->orOn('vpackages.project_id', '=', 'p.id');                  
-                            
-               
             })
             ->leftJoin('bids', function($join){
                 return $join->on('jobs.id', '=', 'bids.job_id')
@@ -202,16 +197,16 @@ class JobsController extends Controller
            ->paginate($limit);
 
 
-         $jobs = Job::where('status', 'active')                                  
+        //  $jobs = Job::where('status', 'active')                                  
                   
-                    ->whereDoesntHave('bids', function($query){
-                       $query->where('status', 'like', 'awarded');
-                    })                  
-                    ->get();  
-         foreach($jobs as $index=>$job) {
-             $jobs[$index]['info'] = $this->info($job['id']);
-         }
-         return $jobs;
+        //             ->whereDoesntHave('bids', function($query){
+        //                $query->where('status', 'like', 'awarded');
+        //             })                  
+        //             ->get();  
+        //  foreach($jobs as $index=>$job) {
+        //      $jobs[$index]['info'] = $this->info($job['id']);
+        //  }
+        //  return $jobs;
     }
 
 

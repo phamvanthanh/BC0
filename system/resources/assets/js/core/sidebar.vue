@@ -3,6 +3,7 @@
 
   <div class="menu-list">
     <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager")' to="/myjobs">My Jobs</router-link>
+    <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager|project_directors|sales_manager")' to="/bids">My Bids</router-link>
     <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager|project_directors|sales_manager")' to="/jobs">Jobs</router-link>
     <router-link v-if='$can("surveyor|qto_controller|project_manager")' to="/messenger">Messages</router-link>
     <router-link v-if='$can("surveyor|qto_controller|project_manager|project_director|superuser")' title="Forms" to="/forms" >Forms</router-link>

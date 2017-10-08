@@ -102,7 +102,7 @@ class SectionForm extends FormRequest
                 'status'    => $this->input('status')
             ]
         );
-        if(!empty($section->mirror_id)) 
+        if(!empty($section->mirror_id) && !$this->input('id')) 
             $this->mirrorSection($section);
 
         return response(['Section post succeed'], 200); 

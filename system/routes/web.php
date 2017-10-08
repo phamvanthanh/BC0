@@ -78,15 +78,17 @@ Route::group(['middleware' => 'auth'], function () {
 Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () { 
 
     Route::get('/desk/works', 'JobsController@index');
-    Route::get('/desk/works/{id}/bids', ['uses'=>'BidsController@index']);
+    Route::get('/desk/works/{id}/bids', ['uses'=>'BidsController@jobBids']);
     Route::post('/desk/works/{id}/bids', ['uses'=>'BidsController@store']);
 
 
 
     Route::get('/works', ['uses'=>'JobsController@availJobs']);
     Route::get('/works/{id}', ['uses'=>'JobsController@info']);
-    Route::get('/works/{id}/bids', ['uses'=>'BidsController@index']);
+    Route::get('/works/{id}/bids', ['uses'=>'BidsController@jobBids']);
     Route::post('/works/{id}/bids', ['uses'=>'BidsController@store']);
+
+    Route::get('/bids', 'BidsController@userBids');
 
     Route::get('/jobs', ['uses'=>'JobsController@jobs']);
     Route::get('/jobs/{id}', ['uses'=>'JobsController@awardedInfo']);

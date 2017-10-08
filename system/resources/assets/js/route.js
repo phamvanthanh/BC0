@@ -68,6 +68,17 @@ let routes = [
                            
             }, 
             {
+                path: '/bids',
+                name: 'bids',
+                component:require('./views/mybids/bids.vue'),
+                meta: { 
+                    display: "My Bids",
+                    permission: 'superuser|surveyor|qto_controller|project_manager',
+                    fail: './views/error'
+                }
+                           
+            }, 
+            {
                 path: '/myjobs/:id',
                 component: require('./views/myjobs/job.vue'),
                 meta: { 

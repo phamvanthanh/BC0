@@ -136,7 +136,7 @@ class ProjectForm extends FormRequest
             ]
         );   
 
-        if($this->input('mirror_id')) {
+        if($this->input('mirror_id') && !$this->input('id')) {
             $index = Project::where('mirror_id', $this->input('mirror_id'))->count();
             $project->name .= '-MP'.$index;
             $project->save(); 

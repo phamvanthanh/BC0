@@ -41,7 +41,7 @@ class Uti
             ->select(DB::raw('pwbs.project_id, pwbs.code, 
                         IFNULL(pwbs.parent_code, wbs.parent_code) as parent_code,  
                         IFNULL(pwbs.name, wbs.name) as name,
-                        pwbs.quantify,
+                        pwbs.difference,
                         pwbs.unit,
                         pwbs.extension'
             ))

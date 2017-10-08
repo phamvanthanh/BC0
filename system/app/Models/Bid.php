@@ -14,7 +14,8 @@ class Bid extends Model
     ];
 
     public function job() {
-        return $this->belongsTo('system\Models\Job');
+        return $this->belongsTo('system\Models\Job')
+                    ->with('jobable');
     }
 
     public function user() {
