@@ -200,13 +200,14 @@ import datepicker from '././../../elements/Datepicker';
 
            onSubmit() {
                 this.form.post('/api/projects')
-                    .then((data)=>{                       
+                    .then((data)=>{ 
+                        notice(this.form.notifications, 6000);                      
                         this.form.reset();
-                        notice(this.form.nitifications, 5000);
+                        
                         
                     })
                     .catch(errors => {
-                        notice(this.form.notifications, 5000);                       
+                        notice(this.form.notifications, 6000);                       
                       
                     })
           },

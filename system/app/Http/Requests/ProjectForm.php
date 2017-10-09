@@ -47,7 +47,9 @@ class ProjectForm extends FormRequest
      * @return \Illuminate\Http\Response
      */
     protected function mirrorPwbs($project) {
-        $pwbs = Pwbs::where('project_id', $project->mirror_id)->get()->toArray();
+        $pwbs = Pwbs::where('project_id', $project->mirror_id)
+                    ->get()
+                    ->toArray();
         
         foreach ($pwbs as $index=>$item) {
             $pwbs[$index]['project_id'] = $project->id;
@@ -60,11 +62,15 @@ class ProjectForm extends FormRequest
     }
     protected function mirrorSections($project) {
         $sections = Section::where('project_id',  $project->mirror_id)
+                            ->with('job')
                             ->get();
          foreach($sections as $section){
             $section['name'] .= '-MS';
             $section['project_id'] = $project->id;
             $section['mirror_id'] = $section->id;
+            $section['from_date'] = $section->job->from_date;
+            $section['to_date'] = $section->job->to_date;
+            $section['status'] = $section->job->status;
             unset($section->id);
             $sectionForm = new SectionForm;
             $sectionForm->replace($section->toArray());
@@ -115,6 +121,10 @@ class ProjectForm extends FormRequest
          
                          
     }
+
+    protected function job() {
+        
+    }
  
     public function persist() {         
 
@@ -125,24 +135,26 @@ class ProjectForm extends FormRequest
             ['created_by'=>$this->user()->id]
         );
        
-           
+  
+        if($this->input('mirror_id') && !$this->input('id')) {
+            $index = Project::where('mirror_id', $this->input('mirror_id'))->count();
+            $project->name .= '-MP'.$index;
+            $project->save(); 
+            $this->mirrorProject($project);
+              
+        }
+
+                 
         $job = Job::updateOrCreate(
             ['jobable_id'=>$project->id, 'jobable_type'=>'project'],
             [
-                'jobable_name' => $this->input('name'),
+                'jobable_name' => $project->name,
                 'from_date'    => $this->input('job')['from_date'],
                 'to_date'      => $this->input('job')['to_date'],
                 'status'       => $this->input('job')['status']
             ]
         );   
 
-        if($this->input('mirror_id') && !$this->input('id')) {
-            $index = Project::where('mirror_id', $this->input('mirror_id'))->count();
-            $project->name .= '-MP'.$index;
-            $project->save(); 
-            $this->mirrorProject($project);
-            return response(['Project copy succeed'], 200);    
-        }
             
         
         return response(['Project post succeed'], 200); 
