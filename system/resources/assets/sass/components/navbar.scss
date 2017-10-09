@@ -1,0 +1,79 @@
+@import 'variables';
+
+
+.navbar {
+
+    color: $navbar-color;
+    & a:hover, & a:focus {
+        color: $navbar-hover-color;
+        
+    }
+    .nav {
+            a {
+                background-color: $navbar-focus-bg !important;
+                &:hover {
+                    background-color: inherit !important;
+                }
+            }
+            .dropdown-menu a {
+                color: $text-color;
+               
+            }
+
+    }
+    .navbar-brand {
+        width: $sidebar_width;
+        text-align: center;
+    }
+    .breadcrumbs {
+        padding-left: 20px;
+    }
+}
+
+
+.accordion-content {
+
+    top: 100%;
+    left: 0;
+    z-index: 9;
+    float: left;
+  
+    padding: 0px 0;
+    margin: 0px 0 0;
+}
+.accordion-content > li > a {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.42857143;
+    color: #333;
+    white-space: nowrap;
+}
+
+.navbar a.navbar-brand img.logo {
+    height: 28px;
+    padding-left: 5px;
+    margin-top: -7px;
+}
+
+.navbar li > .has-ul:after {
+    content: "\e9c7";
+    font-family: "icomoon";
+    float: right;
+
+}
+
+
+.navbar li > .has-ul.active:after {
+    transform: rotate(90deg);
+}
+
+.breadcrumbs {
+    font-size: 18px !important;
+    font-weight: 200; 
+    & i {
+        font-size: 18px !important; 
+        font-weight: 200 !important;
+    }
+}

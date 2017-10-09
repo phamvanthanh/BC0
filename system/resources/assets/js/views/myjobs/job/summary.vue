@@ -127,119 +127,152 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
     }
     return '';
 } 
+
+function Diff(instance, td, row, col, prop, value, cellProperties) {
+      
+      var rowData = instance.getSourceDataAtRow(row);
+      if(rowData.quantity && rowData.quantity  != 0 && rowData.a_quantity  ) {
+         
+          if(abs(diff) > rowData.difference)
+            td.style.color = '#ff3333'; 
+          td.innerHTML = diff/rowData.quantity;
+      } 
+        
+      else
+          td.innerHTML = '';        
+      return td; 
+}
+
+function absDiff(instance, td, row, col, prop, value, cellProperties) {
+     
+      var rowData = instance.getSourceDataAtRow(row);
+      if(rowData.quantity && rowData.a_quantity  ) {
+          var diff = rowData.a_quantity - rowData.quantity;
+          if(Math.abs(diff) > rowData.difference)
+            td.style.color = '#ff3333'; 
+         
+          td.innerHTML = diff;
+      }       
+      else 
+        td.innerHTML = '';
+      return td;
+   
+}
+
     
-    export default {
-        data() {              
-            return {
-                searchString: '',
-                quantityId: '',
-                fileType: '',
-                fileFormat: '',
-                uploadUrl: null, 
-             
-                showModal: false,
-                leaves:  null,
-                root: 'root',
-                hotSettings: {
-                  startCols: 10,           
-                  rowHeaders: true,           
-                  className: "htLeft",
-                  rowHeaders: true,
-                  autoColumnSize: true,
-                  preventOverflow: 'horizontal',
-                  search: true,
-                  search: true,            
-                  columns: [
-                         
-                          {data: 'code', readOnly: true, colWidths: '100px'},
-                          {data: 'name', readOnly: true, colWidths: function(){
-                               return document.getElementById('hot-preview').offsetWidth - 705;
-                          }},
-                          {data: 'unit', readOnly: true, colWidths: '45px'},                          
-                          {data: 'quantity', readOnly: true, colWidths: '85px'},
-                          {data: 'a_quantity', readOnly: true, colWidths: '85px'},
-                          {data: 'defer' , readOnly: true, type: 'numeric', format: '00.00 %', colWidths: '80px'},
-                          {data: {}, readOnly: true, renderer: QLink, colWidths: '45px'},
-                          {data: {}, readOnly: true, renderer: ALink, colWidths: '45px'},
-                          {data: 'commit', readOnly: true, type: 'checkbox', colWidths: '40px'},
-                          {data: {}, readOnly: true, renderer: Mrkd, colWidths: '45px'},
-                          {data: {}, readOnly: true, renderer: Amrkd, colWidths: '45px'},
-                          {data: 'a_commit', readOnly: true, type: 'checkbox', colWidths: '40px'},
-                          
-                          
-                     
-                  ],
-                  colHeaders: ['Code', 'Name', 'Unit', 'Quantity', 'CQuantity',   'Defer', 'File', 'CFile', 'Cmt', 'Mrk','CMrk', 'CCmt'],
-                 
-             
-                }
-            }        
-        },
-        props: {
-            info: null
-        },  
-        mounted() {
-            let _this = this;
+export default {
+    data() {              
+        return {
+            searchString: '',
+            quantityId: '',
+            fileType: '',
+            fileFormat: '',
+            uploadUrl: null, 
+            
+            showModal: false,
+            leaves:  null,
+            root: 'root',
+            hotSettings: {
+                startCols: 10,           
+                rowHeaders: true,           
+                className: "htLeft",
+                rowHeaders: true,
+                autoColumnSize: true,
+                preventOverflow: 'horizontal',
+                search: true,
+                search: true,            
+                columns: [
+                        
+                        {data: 'code', readOnly: true, colWidths: '100px'},
+                        {data: 'name', readOnly: true, colWidths: function(){
+                            return document.getElementById('hot-preview').offsetWidth - 775;
+                        }},
+                        {data: 'unit', readOnly: true, colWidths: '45px'},                          
+                        {data: 'quantity', readOnly: true, colWidths: '85px'},
+                        {data: 'a_quantity', readOnly: true, colWidths: '85px'},
+                        {data: '', renderer: Diff, readOnly: true, type: 'numeric', format: '00.00 %', colWidths: '70px'},
+                        {data: '', renderer: absDiff, readOnly: true, type: 'numeric',  colWidths: '70px'},
+                        {data: {}, readOnly: true, renderer: QLink, colWidths: '45px'},
+                        {data: {}, readOnly: true, renderer: ALink, colWidths: '45px'},
+                        {data: 'commit', readOnly: true, type: 'checkbox', colWidths: '40px'},
+                        {data: {}, readOnly: true, renderer: Mrkd, colWidths: '45px'},
+                        {data: {}, readOnly: true, renderer: Amrkd, colWidths: '45px'},
+                        {data: 'a_commit', readOnly: true, type: 'checkbox', colWidths: '40px'},
+                        
+                        
+                    
+                ],
+                colHeaders: ['Code', 'Name', 'Unit', 'Quantity', 'CQuantity',   'Diff', 'absDiff', 'File', 'CFile', 'Cmt', 'Mrk','CMrk', 'CCmt'],
+                
+            
+            }
+        }        
+    },
+    props: {
+        info: null
+    },  
+    mounted() {
+        let _this = this;
+        this.getData();
+        this.uploadUrl='/api/jobs/'+this.info.id+'/quantity/files';
+        window.jid = this.info.id;
+        bus.$on('showUploadModal', function(payload) {                
+                _this.quantityId = payload.quantityId;
+            _this.fileType = payload.type;
+            _this.fileFormat = payload.format;
+            _this.showModal = true;
+
+        });
+        bus.$on('refreshtable', function() {
+            _this.getData();
+            _this.showModal = false;
+        })
+
+    },     
+    watch: {
+        'info.id': function() {
             this.getData();
             this.uploadUrl='/api/jobs/'+this.info.id+'/quantity/files';
             window.jid = this.info.id;
-            bus.$on('showUploadModal', function(payload) {                
-                 _this.quantityId = payload.quantityId;
-                _this.fileType = payload.type;
-                _this.fileFormat = payload.format;
-                _this.showModal = true;
-
-            });
-            bus.$on('refreshtable', function() {
-                _this.getData();
-                _this.showModal = false;
-            })
-
-        },     
-        watch: {
-            'info.id': function() {
-                this.getData();
-                this.uploadUrl='/api/jobs/'+this.info.id+'/quantity/files';
-                window.jid = this.info.id;
-            }
-        },  
-            
-        computed: {
-            notifications() {
-                return this.$store.state.notifications
-            }, 
+        }
+    },  
+        
+    computed: {
+        notifications() {
+            return this.$store.state.notifications
+        }, 
+                
+    },
+    
+    components: {         
+        HotTable,
+                
                     
-        },
-       
-        components: {         
-            HotTable,
-                    
-                      
-        },
-        methods: {
-            getData() {
-                if(this.info.id)
-                axios.get('/api/jobs/'+this.info.id+'/quantity')
-                 .then(({data})=>{        
-                   this.leaves = data.map(function(e){
-                        e.commit = e.commit == 1? true: false;
-                        e.a_commit = e.a_commit == 1? true: false;
-                        e.p_commit = e.p_commit == 1? true: false;
+    },
+    methods: {
+        getData() {
+            if(this.info.id)
+            axios.get('/api/jobs/'+this.info.id+'/quantity')
+                .then(({data})=>{        
+                this.leaves = data.map(function(e){
+                    e.commit = e.commit == 1? true: false;
+                    e.a_commit = e.a_commit == 1? true: false;
+                    e.p_commit = e.p_commit == 1? true: false;
 
-                       return e;
-                   });})
-                 .catch((error)=>{
-                   console.log(error)});               
-            },
-            search() {    
-                var queryResult = this.$refs.hot.table.search.query(this.searchString);                
-                this.$refs.hot.table.render();              
-  
-            }
+                    return e;
+                });})
+                .catch((error)=>{
+                console.log(error)});               
+        },
+        search() {    
+            var queryResult = this.$refs.hot.table.search.query(this.searchString);                
+            this.$refs.hot.table.render();              
 
         }
-      
+
     }
+    
+}
 </script>
 
 

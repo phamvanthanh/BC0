@@ -1,0 +1,55 @@
+.page-header {
+     margin: 0px;
+     padding: auto 36px auto 20px;
+    .page-header-content {
+        position: relative;
+        background-color: inherit;
+        text-transform: uppercase;
+    }
+    .page-title {    
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        padding: 0 10px 0 10px;
+    }
+    .heading-elements{
+        float: right; 
+        a {
+            border-bottom: 3px solid transparent;
+            color: $text-color;
+            &:hover {
+                border-bottom-color: $link-bg !important;
+                -moz-border-bottom-colors:$link-bg; 
+            }
+            &.active, 
+            &.relative-active,  
+            &.router-link-exact-active {
+                color: $link-active-color;
+                border-bottom-color: $link-bg;
+                -moz-border-bottom-colors:$link-bg; 
+            } 
+            &:focus {
+                color: $link-focus-color;
+                border-bottom-color: $link-bg;
+                -moz-border-bottom-colors:$link-bg; 
+            }
+        }
+
+    }
+
+}
+
+
+    
+
+
+
+.heading-elements {
+    float: right;
+    .heading-btn-group {
+        font-size: 0;
+        padding-right: 20px;
+    }    
+}
+
+

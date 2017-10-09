@@ -54,6 +54,7 @@ class QuantityController extends Controller
                                        '.$gid.' as section_id,
                                        IFNULL(pwbs.name, wbs.name) as name,
                                        pwbs.unit,
+                                       pwbs.difference,
                                        pwbs.commit as p_commit,
                                        quantity.id,
                                        '.$id.' as job_id,
@@ -70,9 +71,7 @@ class QuantityController extends Controller
                                        quantity.updated_at as committed_at,                                       
                                        (quantity.commit * '.$quantum.') as cmtd_quantum, 
                                        audit.id as audit_id,                                
-                                       audit.quantity as a_quantity,                                       
-                                       ((audit.quantity - quantity.quantity)/quantity.quantity) as defer,
-                                     
+                                       audit.quantity as a_quantity,       
                                        IF(audit.commit = 1, true, false) as a_commit,
                                        audit.updated_at as audited_at,
                                        audit.updated_at as a_committed_at, 
@@ -144,8 +143,7 @@ class QuantityController extends Controller
                             'name'           => $data[0][$index]['job_name'],
                             'description'    => $data[0][$index]['job_description'],                            
                             'commit'         => $data[0][$index]['commit'],
-                            'a_commit'       => $data[0][$index]['a_commit'],
-                            'defer'          => $data[0][$index]['defer'],
+                            'a_commit'       => $data[0][$index]['a_commit'],                           
                             'committed_at'   => $data[0][$index]['committed_at'],
                             'a_committed_at' => $data[0][$index]['a_committed_at'],                            
                             'quantum'        => $data[0][$index]['quantum']
@@ -178,8 +176,7 @@ class QuantityController extends Controller
                                 'name'           => $data[$i][$index]['job_name'],
                                 'description'    => $data[$i][$index]['job_description'], 
                                 'commit'         => $data[$i][$index]['commit'],
-                                'a_commit'       => $data[$i][$index]['a_commit'],
-                                'defer'          => $data[$i][$index]['defer'],
+                                'a_commit'       => $data[$i][$index]['a_commit'],                              
                                 'committed_at'   => $data[$i][$index]['committed_at'],
                                 'a_committed_at' => $data[$i][$index]['a_committed_at'],                              
                                 'quantum'        => $data[$i][$index]['quantum']

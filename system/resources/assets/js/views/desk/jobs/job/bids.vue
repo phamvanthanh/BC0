@@ -28,8 +28,8 @@
 
                             <ul class="dropdown-menu  dropdown-menu-right" >
                                 <li class="text-primary-600" > 
-                                    <a v-if="props.row.isAwarded  == 'Yes'" @click="withHold(props.row)" class="text-primary" >Withhold Job</a>                      
-                                    <a v-if="props.row.isAwarded == 'No'" @click="award(props.row)" class="text-primary" >Award Job</a>                       
+                                    <a v-if="props.row.isAwarded  == 'Yes'" @click="withHold(props.row)" class="text-primary" >Withhold</a>                      
+                                    <a v-if="props.row.isAwarded == 'No'" @click="award(props.row)" class="text-primary" >Award</a>                       
                                 </li>
                                 <li>
                                    <a class="text-primary" > User details</a>

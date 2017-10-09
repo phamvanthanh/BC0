@@ -1,0 +1,159 @@
+@import 'variables';
+
+
+div.content .panel {
+
+   background-color: #fff;
+}
+
+.panel {
+    margin-bottom: 10px;  
+}
+
+.panel-title {
+    float: left;
+}
+.panel-body {
+    clear: both;
+}
+.panel .panel-heading > a {
+    padding-bottom: 3px;
+    border-bottom: 3px solid transparent;
+}
+
+
+
+
+
+
+// .btn {
+//     position: relative;
+// }
+
+
+
+
+.btn-float i {
+    display: block;
+    margin: 0;
+    top: 0;
+}
+
+
+
+.btn-float > span {
+    display: block;   
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+div#issue-list > ul > li.list-group-item,
+div#issue > ul > li.list-group-item {
+    border: none;
+    border-top: dashed 1px $divider-color;
+}
+
+//WBS 
+ul.ui-wbstree li span.wbstree-title,
+ {
+    padding: 3px 10px 3px 3px;
+}
+ul.ui-wbstree li span.wbstree-title:hover
+{
+    cursor: pointer;
+    background-color: $item-hover-bg;
+}
+ul.ui-wbstree li span.wbstree-expander:hover {
+    cursor:pointer;
+}
+
+ul.icons-list   {
+    -webkit-padding-start: 0px;
+    margin-bottom: 0px;
+}
+
+span.wbstree-active .wbstree-title {
+    background-color: $item-focus-bg;
+    color: $text-white;
+}
+
+span.wbstree-warning .wbstree-title {
+    background-color: $warning-bg;
+    color: $text-white;
+    
+}
+
+span.wbstree-danger .wbstree-title {
+    background-color: $danger-bg;
+    color: $text-white;
+    
+}
+
+span.wbstree-selected .wbstree-title{
+    background-color: $disabled-bg;
+    color: $text-white;
+}
+
+div.reply-heading a.edit-reply {
+    visibility: hidden;
+}
+
+div.reply-heading:hover a.edit-reply {
+    visibility: visible;
+}
+
+
+.action-list li ul.dropdown-menu li{
+    display: block !important
+}
+
+
+td.action{
+  overflow: visible;
+}
+
+.box {
+	height: calc(100vh - 180px);
+	overflow-y: auto;
+    border-top: none;
+    box-sizing: border-box;
+}
+
+.bootstrap-duallistbox-container .tree-search {
+    width: calc(100% - 120px);
+}
+
+
+
+.wbstree-expander {
+    cursor: pointer;
+}
+#hot-preview {
+    width: 100%;
+    height: 100%;
+
+}
+
+
+ul.pagination {
+    margin-top: 10px !important;
+    margin-bottom: 0px !important;
+}
+
+.pagination li a {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.pagination li:first-child,
+.pagination li:last-child {
+    display: none;
+}
+
+div.quillWrapper .ql-toolbar {
+    padding: 2px 8px !important;
+}
+
+.search-input {
+    padding-right: calc(100% - 176px);
+}

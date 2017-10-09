@@ -100,7 +100,7 @@ export default {
                     actions: 'text-right w-40 action',
                       
                 },
-                sortable:['id', 'name', 'jobable_type', 'project', 'from_date', 'to_date', 'bid_status', 'status'],
+                sortable:['id', 'name', 'jobable_type', 'project', 'nation_abbr', 'from_date', 'to_date', 'bid_count', 'bid_status', 'status'],
                 perPage: 25,        
 
             }        

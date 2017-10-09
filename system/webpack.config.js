@@ -133,10 +133,7 @@ let rules = [
                     fallback: 'vue-style-loader'
                 })
             }: {
-                // js: 'babel-loader' + Mix.babelConfig(),
-                // query: {
-                //     presets: ['es2015']
-                // },
+            
                 scss: 'vue-style-loader!css-loader!sass-loader',
                 sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
                 less: 'vue-style-loader!css-loader!less-loader',
@@ -162,10 +159,10 @@ let rules = [
           presets: ['es2015']
         }
     },
-    {
-        test: /\.css$/,
-        loaders: ['style-loader', 'css-loader']
-    },
+    // {
+    //     test: /\.css$/,
+    //     loaders: ['style-loader', 'css-loader']
+    // },
     {
         test: /\.html$/,
         loaders: ['html-loader']
@@ -392,40 +389,8 @@ plugins.push(
     // })
 );
 
-if (Mix.browserSync) {
-    plugins.push(
-        new webpackPlugins.BrowserSyncPlugin(
-            Object.assign({
-                host: 'localhost',
-                port: 3000,
-                proxy: 'app.dev',
-                files: [
-                    'app/**/*.php',
-                    'resources/views/**/*.php',
-                    'public/js/**/*.js',
-                    'public/css/**/*.css'
-                ]
-            }, Mix.browserSync),
-            {
-                reload: false
-            }
-        )
-    );
-}
 
-if (Mix.options.notifications) {
-    plugins.push(
-        new webpackPlugins.WebpackNotifierPlugin({
-            title: 'Laravel Mix',
-            alwaysNotify: true,
-            contentImage: Mix.Paths.root('node_modules/laravel-mix/icons/laravel.png')
-        })
-    );
-}
 
-if (Mix.copy.length) {
-    new webpackPlugins.CopyWebpackPlugin(Mix.copy);
-}
 
 if (Mix.entry().hasExtractions()) {
     plugins.push(

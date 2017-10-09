@@ -107,6 +107,38 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
     return '';
 } 
 
+function Diff(instance, td, row, col, prop, value, cellProperties) {
+      
+      var rowData = instance.getSourceDataAtRow(row);
+      if(rowData.quantity && rowData.quantity  != 0 && rowData.a_quantity  ) {
+         
+          if(abs(diff) > rowData.difference)
+            td.style.color = '#ff3333'; 
+          td.innerHTML = diff/rowData.quantity;
+      } 
+        
+      else
+          td.innerHTML = '';        
+      return td; 
+}
+
+function absDiff(instance, td, row, col, prop, value, cellProperties) {
+     
+      var rowData = instance.getSourceDataAtRow(row);
+      if(rowData.quantity && rowData.a_quantity  ) {
+          var diff = rowData.a_quantity - rowData.quantity;
+          if(Math.abs(diff) > rowData.difference)
+            td.style.color = '#ff3333'; 
+         
+          td.innerHTML = diff;
+      }       
+      else 
+        td.innerHTML = '';
+      return td;
+   
+}
+
+
     
     export default {
         ref:"pkq",
@@ -147,7 +179,7 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
                          
                           {data: 'code', readOnly: true, colWidths: '80px'},
                           {data: 'name', readOnly: true, colWidths: function(){
-                              return document.getElementById('hot-preview').offsetWidth - 685;}
+                              return document.getElementById('hot-preview').offsetWidth - 755;}
                           },
                           {data: 'quantity', readOnly: true, type: 'numeric', format: '0.00', colWidths: '90px'},
                           {data: 'unit', readOnly: true, colWidths: '45px' },   
@@ -155,14 +187,16 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
                           {data: 'markdown', readOnly: true, renderer: Mrkd, colWidths: '45px'},                      
                           {data: 'commit', type: 'checkbox', readOnly: true, colWidths: '40px'},
                           {data: 'a_quantity', readOnly: true, type: 'numeric', format: '0.00', colWidths: '90px'}, 
-                          {data: 'defer', type: 'numeric', format: '00.00 %', readOnly: true, colWidths: '70px'},                                              
+                          {data: '', renderer: Diff, type: 'numeric', format: '00.00 %', readOnly: true, colWidths: '70px'},                                              
+                          {data: '', renderer: absDiff, type: 'numeric',  readOnly: true, colWidths: '70px'},             
+                          
                           {data: 'a_file', renderer: ALink, colWidths: '45px' },
                           {data: 'a_markdown', renderer: Amrkd, colWidths: '45px'},
                           {data: 'a_commit', type: 'checkbox', colWidths: '40px'},
 
                   ],
                  
-                  colHeaders: ['Code', 'Name', 'Quantity', 'Unit', 'File', 'Mrk.', 'Cmt', 'C.Quantity', 'Defer',  'CFile', 'CMrk.', 'CCmt.'],
+                  colHeaders: ['Code', 'Name', 'Quantity', 'Unit', 'File', 'Mrk.', 'Cmt', 'C.Quantity', 'Diff', 'absDiff', 'CFile', 'CMrk.', 'CCmt.'],
                   
                   afterChange: function(change, source) {                      
                       if(source == 'edit') {

@@ -1,0 +1,46 @@
+
+.vertical-menu {
+   
+    a {  
+   
+        display: block; 
+        padding: 0px 0px 4px 45px; 
+        box-sizing: border-box;
+        border-left: 3px solid transparent;
+        &:hover {
+            border-left-color: $link-bg;
+        }
+        &.active, 
+        &.relative-active,  
+        &.router-link-exact-active {
+            color: $link-active-color;
+            border-left-color: $link-bg;
+        } 
+        &:focus {
+            color: $link-focus-color;
+            border-left-color: $link-bg;
+        }
+    }
+    .menu-list {
+        padding-top: 16px;
+        height: 100%;      
+        overflow-y: auto;
+        
+    }
+   
+}
+
+.vertical-menu a.relative-active.home {
+    background-color: transparent;
+    color: inherit;
+    border-left-color: transparent
+}
+.vertical-menu a.router-link-exact-active.home {
+    background-color:  $sidebar-focus-bg; 
+    color: $sidebar-focus-color;
+    border-left-color: $warning-bg;    
+}
+
+.vertical-menu span {
+    padding-left: 25px;
+}
