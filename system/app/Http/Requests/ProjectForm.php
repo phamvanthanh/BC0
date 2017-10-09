@@ -118,7 +118,6 @@ class ProjectForm extends FormRequest
  
     public function persist() {         
 
-        // $inputs = ;
                                 
         $project = Project::updateOrCreate(
             ['id'=>$this->input('id')],
@@ -130,9 +129,10 @@ class ProjectForm extends FormRequest
         $job = Job::updateOrCreate(
             ['jobable_id'=>$project->id, 'jobable_type'=>'project'],
             [
-                'from_date' => $this->input('job')['from_date'],
-                'to_date'   => $this->input('job')['to_date'],
-                'status'    => $this->input('job')['status']
+                'jobable_name' => $this->input('name'),
+                'from_date'    => $this->input('job')['from_date'],
+                'to_date'      => $this->input('job')['to_date'],
+                'status'       => $this->input('job')['status']
             ]
         );   
 

@@ -156,7 +156,7 @@ export default {
 
                 columnsClasses: {
                     id: 'w-70',
-                    name: 'w-150',
+                    name: 'w-200',
                     description: 'column-expanded',                
                     area: 'w-70',
                     complexity: 'w-70',

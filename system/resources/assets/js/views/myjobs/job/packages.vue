@@ -47,11 +47,7 @@ export default {
                   headings: {                
                         actions: ''
                     },
-              
-                    skin: 'table-hover',
-                    texts: {
-                        filter: ''
-                    },
+
                     columnsClasses: {
                         id: 'w-70',
                         name: 'w-150',
@@ -63,11 +59,7 @@ export default {
                         actions: 'text-right w-40 action' 
                        
                     },
-                    sortIcon: { 
-                        base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                    },
-
+                 
             }
         }
     },
@@ -98,7 +90,7 @@ export default {
                              name: e.name,
                              description: e.description,
                              quantum: e.quantum,                            
-                             assign_date: e.job.awarded? e.job.awarded.created_at: 'Pending asign',
+                             assign_date: e.job.awarded? e.job.awarded.created_at: 'Pending award',
                              rate: e.job.rate,
                              comment: e.job.comment,
                              status: e.job.status

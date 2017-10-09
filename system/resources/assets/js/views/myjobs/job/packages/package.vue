@@ -33,9 +33,7 @@
 </template>
 <script>
 
-// import numbro from 'numbro';
-// import pikaday from 'pikaday';
-// import Zeroclipboard from 'zeroclipboard';
+
 
 import HotTable from 'vue-handsontable-official';
 import Handsontable from 'handsontable';
@@ -264,26 +262,17 @@ function absDiff(instance, td, row, col, prop, value, cellProperties) {
                 this.form.code        = payload.code;
                 this.form.fileType    = payload.type;
                 this.form.fileFormat  = payload.format;
-                // _this.showModal   = true;
+            
                 this.uploadFile();
-              // _this.uploadUrl = '/jobs/'+this.sid+'/audit/files';  
+              
             });
              bus.$on('refreshtable', ()=>{
                 this.getData();
                
             })
 
-        },       
-            
+        },            
    
-        watch: {
-            // 'info.id': function() {
-            //     window.jid = this.sid;
-            
-            //     this.getData();
-                
-            // }
-        },
         destroyed() {
             bus.$off();
         },

@@ -38,12 +38,17 @@ class SectionForm extends FormRequest
     protected function mirrorPackages($section) {
         
         $packages = Package::where('section_id',  $section->mirror_id)
-                            ->get();
+                           ->with('job') 
+                           ->get();
         foreach($packages as $package){
             $package['name'] .= '-MS';
             $package['section_id'] = $section->id;
             $package['mirror_id'] = $package->id;
+            $package['from_date'] = $package->job->from_date;
+            $package['to_date']   = $package->job->to_date;
+            $package['status'] =    $package->job->status;
             unset($package->id);
+            unset($package->job);
             $packageForm = new PackageForm;
             $packageForm->replace($package->toArray());
             $packageForm->persist();
@@ -97,9 +102,10 @@ class SectionForm extends FormRequest
             ['jobable_id'=>$section->id, 'jobable_type'=>'section'],
         
             [
-                'from_date' => $this->input('from_date'),
-                'to_date'   => $this->input('to_date'),
-                'status'    => $this->input('status')
+                'jobable_name'   => $this->input('name'),
+                'from_date'      => $this->input('from_date'),
+                'to_date'        => $this->input('to_date'),                
+                'status'         => $this->input('status')
             ]
         );
         if(!empty($section->mirror_id) && !$this->input('id')) 

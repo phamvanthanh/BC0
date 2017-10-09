@@ -30,19 +30,34 @@ class SectionsController extends Controller
         return $this->destroy($request['id']);
 
     }
-    public function destroy($id){
+    public function destroy($section_id){
         
-        if(Job::where('jobable_id', $id)->where('jobable_type', 'section')->delete()) {
-            $p = new PackagesController;
-            $packages = $p->index($id);
-            foreach($packages as $package) {
-                $p->destroy($package['id']); // Destroy package and job
-            }
+        //Sequences
+        //1. Delete jobs
+        //2. Delete packages
+        //3. Delete the section
+        //4. Repeat steps 1->3 for Mirrored sections
 
-            Section::find($id)->delete(); 
+        Job::where('jobable_id', $section_id)
+            ->where('jobable_type', 'section')
+            ->delete();
+        
+        $p = new PackagesController;
+
+        $packages = $p->index($section_id);
+
+        foreach($packages as $package)          
+            $p->destroy($package->id); // Destroy package and job         
+        
+        Section::find($section_id)->delete(); 
+            
+        $msections = Section::where('mirror_id', $section_id)
+                ->get();
+        foreach ($msections as $ms)                     
+            $this->destroy($ms->id);         
 
             return response(['Section delete succeed'], 200);
-        }
+        
         
     }
 }

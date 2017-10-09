@@ -32,8 +32,8 @@ class PackageForm extends FormRequest
             'name'        => 'required',
             'area'        => 'required | integer',
             'complexity'  => 'required',        
-            'from_date'   => 'required | date |date_format:Y-m-d',
-            'to_date'     => 'required | date |date_format:Y-m-d',
+            'from_date'   => 'required | date|date_format:Y-m-d',
+            'to_date'     => 'required | date|date_format:Y-m-d',
             'status'      => 'required'
         ];
     }
@@ -69,9 +69,10 @@ class PackageForm extends FormRequest
             ['jobable_id'=>$package->id, 'jobable_type'=>'package'],
            
             [
-                'from_date' => $this->input('from_date'),
-                'to_date'   => $this->input('to_date'),
-                'status'    => $this->input('status')
+                'jobable_name'  => $this->input('name'),
+                'from_date'     => $this->input('from_date'),
+                'to_date'       => $this->input('to_date'),
+                'status'        => $this->input('status')
             ]
         ); 
       

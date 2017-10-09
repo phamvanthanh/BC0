@@ -48,8 +48,23 @@ class PackagesController extends Controller
         return $this->destroy($request['id']);
     }
     public function destroy($id){
-        if(Job::where('jobable_id', $id)->where('jobable_type', 'package')->delete())
-           Package::find($id)->delete(); 
+        //Sequences
+        //1. Delete job first
+        //2. Delete the package
+        //3. Repeat for the mirrored packages 
+         
+        Job::where('jobable_id', $id)
+          ->where('jobable_type', 'package')
+          ->delete();
+        Package::find($id)->delete();
+        
+        $mpackages = Package::where('mirror_id', $id)
+                            ->get();
+        foreach($mpackages as $mp)
+            $this->destroy($mp->id);        
+        
+
+        return response(['Package delete succeed.'], 200);   
     }
    
 }

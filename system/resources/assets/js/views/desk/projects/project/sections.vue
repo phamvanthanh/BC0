@@ -290,7 +290,7 @@ export default {
             this.form.id = null;
             var index = 1;
             this.sections.forEach(function(el){
-                console.log(e.id, el.mirror_id);
+            
                 if(el.mirror_id == e.id)
                     index++;
             })
