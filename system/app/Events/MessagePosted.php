@@ -33,20 +33,13 @@ class MessagePosted implements ShouldBroadcast
     * Job
     * @var Job 
     */
-    public $job;
-
-    public $jobable;
-
-    public $type;
+  
 
     public $channel;
 
-    public function __construct($message, $job, $jobable, $type, $channel)
+    public function __construct($message,  $channel)
     {
-        $this->message = $message;
-        $this->job = $job;
-        $this->type = $type;
-        $this->jobable = $jobable;
+        $this->message = $message;      
         $this->channel = $channel;
     }
 
@@ -57,6 +50,6 @@ class MessagePosted implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel($this->channel.$this->type.$this->job->id);     
+        return new Channel($this->channel);     
     }
 }

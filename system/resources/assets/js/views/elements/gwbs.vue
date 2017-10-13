@@ -12,12 +12,13 @@
         </span>
     
         <ul v-show="open" v-if="isFolder">
-            <gwbs
-                class="gwbs"
-                v-for="node in node.children" v-bind:key="node.code"
+            <swbs
+                class="swbs"
+                v-for="node in filterlist" v-bind:key="node.code"
                 :node="node" 
-                :removecodes="removecodes" >
-            </gwbs>
+                :removecodes="removecodes"
+                :filterString="filterString" >
+            </swbs>
             
             
         </ul>
@@ -28,7 +29,11 @@
 import treemixin from './treemixin';
 export default {
     mixins: [treemixin],
-    name: 'gwbs',
+    name: 'swbs',
+    props: [
+        'removecodes',
+        'filterString'
+    ],
     data() {
         return {     
           edit: false,
@@ -43,17 +48,45 @@ export default {
           })
         }
     },
-    props: {
-        removecodes: null,
-    
-    },
+   
 
     computed: { 
         isActive : function(){
             if(this.removecodes.indexOf(this.node.code) >=0)
                 return true;
             return false;
+        },         
+        filterlist: {
+            get() {
+                var exp = new RegExp(this.filterString, 'i');
+
+                function treeFilter(node, flag){        
+                    return node.children.filter(function(item){
+                        if(exp.test(item.code+' - '+item.name)) {                      
+                            return true; 
+                        }
+                                
+                        let c = item.children ? treeFilter(item) : false;
+
+                        if(c.length == 0){
+                            return false;
+                        }else{
+                            return c;
+                        }
+                    })
+                    
+                }
+
+                let filtering = treeFilter(this.node, false) 
+                if(this.node.children && filtering.length == 0 && this.$parent.filterlist.length > 0)
+                    filtering = this.node.children;
+                return filtering;
+            },
+            set(newVal) {
+                
+            }
         }
+  
     },
     methods: {
    

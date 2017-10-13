@@ -38,22 +38,7 @@
 
                         <template slot="actions" scope="props">
                             <router-link class="text-primary" :to="{name:'client.project.info', params: {pid: props.row.id}}">   <i class="icon-unfold"></i></router-link>
-                            <!--<ul class="icons-list" >
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                        <i class="icon-menu7"></i>
-                                    </a>
-
-                                    <ul class="dropdown-menu  dropdown-menu-right">
-                                        <li><router-link class="text-primary" :to="{name:'client.project.info', params: {pid: props.row.id}}">   <i class="icon-info22"></i> Info</router-link></li>
-                                        <li><router-link class="text-primary" :to="{name:'client.project.files', params: {pid: props.row.id}}">  <i class="icon-files-empty"></i> Files</router-link></li>
-                                        <li><router-link class="text-primary" :to="{name:'client.project.links', params: {pid: props.row.id}}">  <i class="icon-link2"></i> Links</router-link></li>
-                                        <li><router-link class="text-primary" :to="{name:'client.project.pwbs', params: {pid: props.row.id}}">   <i class="icon-list-ordered"></i> Pwbs</router-link></li>                                    
-                                        <li><router-link class="text-primary" :to="{name:'client.project.reports', params: {pid: props.row.id}}"><i class="icon-statistics"></i> Reports</router-link></li>
-                                        <li><router-link class="text-primary" :to="{name:'client.project.issues', params: {pid: props.row.id}}"> <i class="icon-notification2"></i> Issuses</router-link></li>
-                                        
-                                    </ul>
-                                </li>-->
+                           
                             </ul>
                         
                         </template>
@@ -139,7 +124,7 @@ export default {
         getProjects() {
             axios.get('/api/clients/projects')
                 .then(({data})=> {
-         //   this.projects = data;
+        
                 this.projects = data.map(function(e){
                     return {
                         id: e.id,

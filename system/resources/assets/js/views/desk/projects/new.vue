@@ -181,8 +181,7 @@ import datepicker from '././../../elements/Datepicker';
               
           }
       },
-      created() {
-       
+      created() {       
 
         this.getNations();
         this.getClients();
@@ -202,8 +201,7 @@ import datepicker from '././../../elements/Datepicker';
                 this.form.post('/api/projects')
                     .then((data)=>{ 
                         notice(this.form.notifications, 6000);                      
-                        this.form.reset();
-                        
+                        this.form.reset();                        
                         
                     })
                     .catch(errors => {
@@ -214,8 +212,7 @@ import datepicker from '././../../elements/Datepicker';
 
           formNotify() {
                 this.$store.commit('loadNotifications', this.form.notifications)
-               
-                
+                          
           },
 
           getNations() {

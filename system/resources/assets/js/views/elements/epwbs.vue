@@ -88,8 +88,7 @@ export default {
         }
     },
     
-     created() {     
-                         
+    mounted() {                            
         bus.$emit('disabledcode', this.node.code);    
     },
     computed: { 
@@ -178,12 +177,6 @@ export default {
                     console.log(errors);
                 })
         },
-        formNotify: function() {
-            this.$store.commit('loadNotifications', this.form.notifications);           
-            
-        },
-   
-        
     }
     
 }

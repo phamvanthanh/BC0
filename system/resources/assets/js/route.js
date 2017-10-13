@@ -110,7 +110,7 @@ let routes = [
                         name:'myjob.jwbs',
                         component:require('./views/myjobs/job/jwbs.vue'),
                         meta: { 
-                            display: "Work Breakdown Structure Jwbs",
+                            display: "JWBS",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
                             fail: './views/error'
                         }
@@ -137,7 +137,7 @@ let routes = [
                         name:'myjob.links',
                         component:require('./views/myjobs/doclinks.vue'),
                         meta: { 
-                            display: "Cloud Storage Links",
+                            display: "Storage Links",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
                             fail: './views/error'
                         }
@@ -774,7 +774,7 @@ let routes = [
                                             name: 'client.project.pwbs',
                                             component: require('./views/clients/client/pwbs'),
                                             meta: {
-                                                display: "Work Structure Breakdown Structure",
+                                                display: "PWBS",
                                                 permission: 'superuser|client',
                                                 fail: './views/error' 
                                             }

@@ -61,9 +61,7 @@ class Job extends Model
                 break;
             default:
                 break;
-
-
-
+                
         }
         return Role::where('name', $name);
     }
@@ -83,7 +81,8 @@ class Job extends Model
 
                 $project_job = Job::where('jobable_id', $group_job->jobable['project_id'])
                                   ->where('jobable_type', 'project')
-                                  ->with('jobable')->first();
+                                  ->with('jobable')
+                                  ->first();
 
                 array_push($relatedJobs,  $group_job, $project_job);
                 

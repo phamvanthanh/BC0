@@ -63,6 +63,11 @@ export default {
             
         }
     },
+    created() {
+        bus.$on('uploadsuccess', ()=>{
+            this.$refs.file_table.refresh();
+        })
+    },
   
 
     computed: {

@@ -113,11 +113,12 @@ export default {
 
     },
     mounted: function(){
-        var _this = this;
-        bus.$on('disabledcode', function(e){
-          _this.disabledcodes.push(e);
-          if(_this.disabledcodes.indexOf(0) < 0)
-            _this.disabledcodes.unshift(0); 
+     
+     
+        this.disabledcodes.push("0");
+        bus.$on('disabledcode', (e)=>{
+          this.disabledcodes.push(e);
+         
         })
     },
  

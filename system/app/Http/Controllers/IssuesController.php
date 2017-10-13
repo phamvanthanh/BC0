@@ -11,10 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class IssuesController extends Controller
 {
     public function index($id)  { // params job id
-
-        // return Issue::where('job_id', $id)
-        //             ->with('job')                
-        //             ->get();    
+   
 
         $user = Auth::user();
 

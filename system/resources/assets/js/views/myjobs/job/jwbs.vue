@@ -87,9 +87,6 @@ export default {
     created() {    
        
         this.getJwbs(this.id);
-
-        console.log('It is me');
-        
         
     },
     watch: {
@@ -133,20 +130,6 @@ export default {
                  .catch((error)=>{console.log(error)});
         }, 
 
-       
-      
-      
-        // getJwbs(id) {    
-        //      if(this.info.id)
-        //     axios.get('/api/jobs/'+id+'/jwbs')
-        //          .then(({data})=>{
-        //              this.jwbs = data; 
-        //              this.loading = false;
-        //             })
-        //          .catch((error)=>{console.log(error)});
-        // }, 
-         
-        
 
     }
 

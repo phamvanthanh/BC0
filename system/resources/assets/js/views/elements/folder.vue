@@ -92,8 +92,7 @@ export default {
                  this.form.name = this.folder.name;
                  this.form.post('/api/projects/'+this.pid+'/folders/delete')
                           .then(({data})=>{
-                              notice(this.form.notifications, 5000);
-                              
+                              notice(this.form.notifications, 5000);                              
                               bus.$emit('refreshfolders');
                               bus.$emit('activefolder', {id: null, name: null});
                           })
@@ -121,12 +120,11 @@ export default {
             else {
                   this.form.post('/api/projects/'+this.pid+'/folders')
                         .then(({data})=>{
-                            this.close();
-                            bus.$emit('refreshfolders');
-                            notice(this.form.notifications, 5000); 
+                            this.close();                           
+                            notice(this.form.notifications, 6000); 
                             this.isNewFolder = false; })
                         .catch(({error})=>{
-                            notice(this.form.notifications, 5000); })
+                            notice(this.form.notifications, 6000); })
             }                 
 
         },
