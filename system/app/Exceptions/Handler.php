@@ -47,24 +47,24 @@ class Handler extends ExceptionHandler
     
     public function render($request, Exception $e)
     {
-        // if ($e instanceof AuthorizationException)
-        // {
-        //     return response()->json(['Action is not authorized.'],403);
-        // }
-        // if ($e instanceof  AuthenticationException) {
-        //     return redirect()->guest(route('login'));
-        // }
+        if ($e instanceof AuthorizationException)
+        {
+            return response()->json(['Action is not authorized.'],403);
+        }
+        if ($e instanceof  AuthenticationException) {
+            return redirect()->guest(route('login'));
+        }
 
-        // if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
-        //     return Redirect::back()->withInput(Input::except('_token'))
-        //         ->withMessage('Your session has expired. Please try again.');
-        // }
+        if ($exception instanceof \Illuminate\Session\TokenMismatchException) {
+            return Redirect::back()->withInput(Input::except('_token'))
+                ->withMessage('Your session has expired. Please try again.');
+        }
        
-        // if (!$this->isHttpException($e))  {
+        if (!$this->isHttpException($e))  {
 
-        //     // $e = new \Symfony\Component\HttpKernel\Exception\HttpException(500);
+            $e = new \Symfony\Component\HttpKernel\Exception\HttpException(500);
 
-        // }       
+        }       
         
      
         return parent::render($request, $e);

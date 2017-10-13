@@ -7,15 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $table = 'messages';
-
     protected $fillable = [
-      
-        'user_id',
-        'message'
+        'id',
+        'sender_id',
+        'message',
+        'parent_message_id'
     ];
-
-
-    public function jobs() {
-        return $this->belongsTo('system\Models\JobMessage', 'id', 'message_id');
-    }
 }

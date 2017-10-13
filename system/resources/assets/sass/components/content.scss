@@ -21,15 +21,76 @@ div.content .panel {
     border-bottom: 3px solid transparent;
 }
 
+// CHAT PAGE 
 
+#chat-page {
+	overflow: hidden;
+    .chatroom {
 
+        .chatroom-heading {
+            background-color: $default-bg;
+	        border-bottom: solid 1px $border-basic-color;
+            span {
+                line-height: 40px;
+            }
+        }
+    }
+    .chatroom-log {
+        height: calc(100vh - 170px);
+        overflow-y: auto; 
+        .bottom-padding {
+            height: 80px;
+        }
+        .message {
+            display: inline-block;
+            width: 75%;
+            padding-right: 20px;
+            overflow-x: hidden;
+            
+        }
+        .time {
+            display: inline-block;
+            width: 25%;
+            text-align: right;
+        }
+        
 
+    }
 
+}
 
-// .btn {
-//     position: relative;
-// }
-
+.chatnav {
+    border-right: solid 1px $border-basic-color;
+    .chattab {
+        vertical-align: middle;
+        height: 40px;
+        background-color: $default-bg;
+        border-bottom: solid 1px $border-basic-color;
+        padding-top: 10px;
+        a {
+            line-height: 20px;
+            padding: 5px 15px 5px 15px;
+            &.active {
+                background-color: $link-active-color;
+                color: #fff;
+            }
+        }
+    }
+    .chatnav-list {
+        padding-top: 30px;
+        ul {
+            padding-left: 0px;
+            li { 
+                padding: 10px 10px 10px 20px;
+                &.active {
+                    background-color: $default-bg;
+                    border-right: solid 3px $link-active-color;
+                    color: $link-active-color;
+                }
+            }
+        }
+    }
+}
 
 
 

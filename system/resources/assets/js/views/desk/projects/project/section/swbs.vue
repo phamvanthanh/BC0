@@ -4,7 +4,7 @@
     <div  class="col-md-6" v-show="editMode" >
         <div class="row ml-0 mr-0 display-flex">
             
-                <input   class="tree-search" placeholder="Search for pwbs..." >   	
+                <input @keyup="pwbsSearch"  class="tree-search" placeholder="Search for pwbs..." >   	
            
                 <button @click="reset('pwbs')" type="button" class="btn  btn-default w-60"> 
                     <i class="icon-reset"></i>
@@ -22,7 +22,8 @@
                     :node.sync="pwbs"
                     :addcodes="addcodes"
                     :disabledcodes="disabledcodes" 
-                    :privatechosencodes="privatechosencodes" >
+                    :privatechosencodes="privatechosencodes"
+                    :filterString = "pwbsFilterString" >
                 </pwbsg>
             </ul>
         </div>
@@ -38,7 +39,7 @@
                     <i class="icon-reset"></i>
                 </button>    
         
-                <input   class="tree-search" placeholder="Search for gwbs..." >             									
+                <input @keyup="swbsSearch"  class="tree-search" placeholder="Search for swbs..." >             									
 								
             </div>
         </div>								
@@ -46,7 +47,8 @@
             <ul id="pwbs-edit-ul" class="ui-wbstree wbstree-container wbstree-plain" >
                 <gwbs										
                     :node="gwbs"                                        
-                    :removecodes="removecodes"  >
+                    :removecodes="removecodes" 
+                    :filterString = "swbsFilterString" >
                 </gwbs>							
                 
             </ul>
@@ -62,7 +64,8 @@ import gwbs     from './../../../../elements/gwbs';
 
 export default {  
     data() {
-        return {            
+        return {
+
              pid : this.$route.params.pid,           
              section_id : this.$route.params.sid,
              pwbs: [],
@@ -79,7 +82,11 @@ export default {
              group: {
                  id: null,
                  name: null
-             }
+             },
+             pwbsFilterString: '',
+             swbsFilterString: '',
+             filterlist: []           
+
         }
     },
     props: {
@@ -209,7 +216,14 @@ export default {
                     .catch((errors) =>{
                         console.log(errors); })
                     
-        },       
+        },      
+
+        pwbsSearch(event) {
+            this.pwbsFilterString = event.target.value;
+        },
+        swbsSearch(event) {
+            this.swbsFilterString = event.target.value;
+        }, 
 
     }
 

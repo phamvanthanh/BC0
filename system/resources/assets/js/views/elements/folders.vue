@@ -52,14 +52,9 @@ export default {
     
        
     },
-    mounted: function() {
-        let _this = this;
-       
-     
-    },
+
     components: {
-        foldercomp,
-       
+        foldercomp,       
     },
     methods: {
         getFolders(id) {

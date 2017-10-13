@@ -99,7 +99,7 @@ export default {
         },
         deselectNode() {            
             bus.$emit('deselectraddcode', this.node.code);
-           // this.isActive = false;              
+                   
             if(this.$children)
             for( var i=0; i < this.$children.length; i++) {                      
               if(this.$children[i].isActive)

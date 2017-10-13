@@ -4,9 +4,8 @@ namespace system\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use system\Models\Message;
-use system\Models\JobMessage;
-use system\Models\Unread;
-use system\Models\Job;
+use DB;
+
 
 class MessageForm extends FormRequest
 {
@@ -28,8 +27,7 @@ class MessageForm extends FormRequest
     public function rules()
     {
         return [
-            'from_job_id'  => 'required: integer',
-            'to'           => 'required',           
+            'recipient_id' => 'required',
             'message'      => 'required'
         ];
     }
@@ -38,33 +36,17 @@ class MessageForm extends FormRequest
         
         $message =  Message::create(            
              [
-                 'user_id' => $this->user()->id,
-                 'message' => $this->input('message')
+                 'sender_id' => $this->user()->id,
+                 'message'      => $this->input('message')
              ]
         );
- 
-        if(!$this->input('private')) {
-                
-             foreach($this->input('to') as $to) {
-                JobMessage::create([
-                    'message_id'  => $message['id'],
-                    'from_job_id' => $this->input('from_job_id'),
-                    'to_job_id'   => $to
-                ]);
-            }
-        }
-        else {       
-
-            JobMessage::create([
-                'message_id'  => $message['id'],
-                'from_job_id' => $this->input('from_job_id'),
-                'to_job_id'   => $this->input('to'),
-                'private'     => 1
-            ]);
-        }
-
-            
-        $message['from_job_id'] = $this->input('from_job_id');
+        
+        DB::table('message_recipient')
+          ->insert([
+              'recipient_id' => $this->input('recipient_id'),
+              'message_id'   => $message->id
+          ]);      
+       
      
         return $message;        
 
