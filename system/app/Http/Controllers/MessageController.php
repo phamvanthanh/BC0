@@ -58,8 +58,15 @@ class MessageController extends Controller
     public function readMessages() {
 
     }
-    public function count() {
-
+    public function count(Request $request) {
+        $sender_id = $request['sender_id'];
+        $recipient_id =  $request['recipient_id'];
+        return DB::table('messages')
+                 ->join('message_recipient', 'messages.id', '=', 'message_recipient.message_id' )
+                 ->where('message_recipient.recipient_id', $recipient_id )
+                 ->where('messages.sender_id', $sender_id )
+                 ->whereNull('is_read')
+                 ->count();
     }
     public function store(MessageForm $form) {
         $message = $form->persist();       

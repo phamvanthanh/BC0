@@ -211,9 +211,11 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::post('/messages', ['uses'=>'MessageController@store']);
     Route::post('/messages/read', 'MessageController@read');
     Route::get('/messages/address', 'ChatAddressController@index');
-   
-    Route::get('/umessages', ['uses'=>'UMessagesController@getPrivateMessages']);
+    Route::get('/messages/countunreads', 'MessageController@count');
     Route::post('/messages/address/loadcontacts', 'ChatAddressController@addressAutomate'); 
+    // Route::get('/umessages', ['uses'=>'UMessagesController@getPrivateMessages']);
+    // 
+    
     // Route::post('/messages', function(){
     //     $pusher = new Pusher('806c86de02562f12daec', 'ab595dec877a07a29f3c', '368420');
     //     $pusher->trigger('my-channel', 'my-event', ['test'=>'thanh']);
