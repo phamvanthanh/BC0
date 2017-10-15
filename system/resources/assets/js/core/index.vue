@@ -1,5 +1,5 @@
 <template>
-  <div v-cloak  class="wrapper">
+  <div class="wrapper">
 	  <navbar >	
 			
 	  </navbar>
@@ -8,9 +8,6 @@
 		  <vs-crumbs slot="crumbs" ></vs-crumbs>		
 	  </maincontent>
   </div>
-  
-
-
 </template>
 
 <script>

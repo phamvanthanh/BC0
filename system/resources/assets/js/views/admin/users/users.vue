@@ -36,21 +36,22 @@
                 <div class="col-md-12">
 
                      <v-server-table 
-                            url="/api/admin/users"                  
+                            url="/api/admin/users"      
                        
-                            ref="user_table"
-                        
+                            ref="user_table"                        
                             :columns="columns" 
                             :options="options">
-                         
+                            <template slot="active" scope="props">
+                                <span v-if="props.row.active==1"  class="label label-success">Active</span>
+                                <span v-else class="label label-default">Deactive</span>
+                            </template>
                             <template slot="full_name" scope="props">
                                 {{props.row.first_name}} {{props.row.last_name}}
                             </template>
                             <template slot="actions" scope="props">
                                 <router-link class="text-primary" :to="{name: 'users.user.info', params: {uid: props.row.id}}"><i class="icon-unfold"></i></router-link>
                                  
-                            </template>
-                            
+                            </template>                
                    
                       </v-server-table>
 
@@ -83,26 +84,23 @@ export default {
                  email: null,
                  phone: null,
                  organization: null,
-                 status: null                
+                 active: null                
                  
              }),
 
              users: [],
-             columns: ['id', 'full_name',  'email', 'phone', 'organization', 'nation_abbr', 'status', 'actions'],
+             columns: ['id', 'full_name',  'email', 'phone', 'organization', 'nation_abbr', 'active', 'actions'],
              options: {
              
                 headings: {
                     full_name: 'Name',
                     nation_abbr: 'Nation',
                     origanization: 'Ogr',
-                    actions: ''
-                },
-
-                templates: {      
-                    status: 'status'
+                    actions: '',
+                    active: 'Status'
                 },
                 
-                sortable: ['id', 'full_name', 'email', 'phone', 'organization', 'nation_abbr', 'status'],
+                sortable: ['id', 'full_name', 'email', 'phone', 'organization', 'nation_abbr', 'active'],
                 columnsClasses: {
                   
                     id: 'w-70',
@@ -112,19 +110,12 @@ export default {
                     email: 'w-250',
                     phone: 'w-125',                 
                     organization: 'w-200',
-                    status: 'w-70',   
+                    active: 'w-70',   
                     actions: 'text-right w-40 action',
                 },
           
                 perPage: 25,
-                // responseAdapter: function responseAdapter(resp) {
-                 
-                //     return {
-                //         data: resp,
-                //         count: resp.total
-                //     };
-                // },
-                
+               
              }
         
         }

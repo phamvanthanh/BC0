@@ -51,7 +51,7 @@ export default {
                 email: null,
                 phone: null,
                 organization: null,
-                status: null 
+                active: null 
              }
         }
 

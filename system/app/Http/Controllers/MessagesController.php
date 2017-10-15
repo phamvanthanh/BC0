@@ -173,7 +173,8 @@ class MessagesController extends Controller
     */
     protected function read(Request $request) {
            
-        $unread_ids = $request['ids'];  
+        $unread_ids = $request['ids']; 
+        return $unread_ids; 
                   
         JobMessage::whereIn('id',  $unread_ids)
                   ->update(['read' => 1]);         

@@ -19,11 +19,29 @@
 	<link href="/css/app.css" rel="stylesheet" type="text/css">
 
   
+<script>
 
+$( window ).on( 'unload', function() {
+   $.ajax({
+	   type: 'POST',
+	   url: 'api/users/status/offline',
+	   async:false,
+	   data:{
+		   "_token": "{{ csrf_token() }}",
+	   }
+	 }).done(function(data) {                
+        console.log('useroffline');
+    });
+} );
+
+</script>
 
 </head>
 
+
 <body>
+<div id="overlay">
+</div>
 @if(Auth::check())
 <div id="app" >
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

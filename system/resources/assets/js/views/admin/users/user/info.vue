@@ -67,8 +67,8 @@
                                 <div class="form-group">
                                     <label>Status:</label> 
                                     <div class="input-group input-sm">
-                                        <label class="radio-inline"><input type="radio"   value="1" v-model="form.status" checked>Active</label>
-                                        <label class="radio-inline"><input type="radio"   value="0" v-model="form.status" >Deactive</label>
+                                        <label class="radio-inline"><input type="radio"   value="1" v-model="form.active" checked>Active</label>
+                                        <label class="radio-inline"><input type="radio"   value="0" v-model="form.active" >Deactive</label>
                                     </div>
                                 </div>
                             </div>                       
@@ -114,7 +114,7 @@ export default {
                     email: this.user.email,
                     phone: this.user.phone,
                     organization: this.user.organization,
-                    status: this.user.status                
+                    active: this.user.active                
                     
                 });
              
@@ -127,11 +127,7 @@ export default {
    
     created() {                
 
-        // var _this = this;   
 
-        // bus.$on('edituser', function(e){                    
-           
-        // })
     },
     created() {
          this.getNations();

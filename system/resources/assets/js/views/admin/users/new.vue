@@ -79,8 +79,8 @@
                                 <div class="form-group">
                                     <label>Status:</label> 
                                     <div class="input-group input-sm">
-                                        <label class="radio-inline"><input type="radio"   value="1" v-model="form.status" checked>Active</label>
-                                        <label class="radio-inline"><input type="radio"   value="0" v-model="form.status" >Deactive</label>
+                                        <label class="radio-inline"><input type="radio"   value="1" v-model="form.active" checked>Active</label>
+                                        <label class="radio-inline"><input type="radio"   value="0" v-model="form.active" >Deactive</label>
                                     </div>
                                 </div>
                             </div>                       
@@ -124,7 +124,7 @@ export default {
                     email: null,
                     phone: null,
                     organization: null,
-                    status: null 
+                    active: null 
                 }),          
         
         }

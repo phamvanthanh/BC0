@@ -82,17 +82,25 @@ export default {
         var x = $('ul.panel.accordion-content').toggleClass('hidden');
         $(e.target).toggleClass('active');;
     },
-    logout() {
-      axios.post('/logout')
-           .then((data)=>{
-             this.loading = true;
-             location.reload();
+    logout() {  
+
+      var masterpage = document.getElementById("overlay");
+      masterpage.className = "overlay";
+			axios.post("/api/users/status/offline")
+           .then(()=>{
+                  axios.post('/logout')
+                    .then(()=>{
+                      this.loading = true;
+                      location.reload();
+                    })
+                    .catch(error=>{
+                      location.reload();
+                      console.log(error);
+                        
+                    })
            })
-           .catch(error=>{
-             location.reload();
-             console.log(error);
-              
-           })
+	
+
     }
 
    

@@ -20,7 +20,8 @@ class ChatAddressController extends Controller
                 ->select(DB::raw('chat_addresses.sender_id,
                     chat_addresses.recipient_id,
                     users.first_name,
-                    users.last_name
+                    users.last_name,
+                    users.status
 
                 '))
                 ->orderBy('users.first_name')

@@ -3,9 +3,9 @@
 namespace system\Http\Controllers;
 
 use Illuminate\Http\Request;
-use system\Models\User;
-use system\Models\RoleUser;
 use Illuminate\Support\Facades\Auth;
+use system\Models\User;
+use system\Events\UserOnline;
 use system\Http\Requests\UserForm; 
 use system\Http\Requests\RoleUserForm; 
 use DB;
@@ -34,29 +34,34 @@ class UsersController extends Controller
         
     }
    
-    public function show($id) {        
+    public function show($id) { 
+               
         return USER::with('roles')->find($id);        
-    }   
+    }  
+
     public function store(UserForm $form) {
 
         return $form->persist();          
     }
+
     public function assignRole(RoleUserForm $form) {
+
         return $form->persist();
     }
+
     public function detachRole(RoleUserForm $form) {
         
-        return $form->detachRole();
-        
+        return $form->detachRole();        
     }
-    public function loggedInUser() {
-        if(Auth::check()) {
-            $id = Auth::id();
-            $user =  User::with('roles')->find($id);
+
+    public function loggedInUser() {       
+      
+            $id = request()->user()->id;
+            $user =  User::with('roles')->find($id);     
          
-            return $user;                
+            return $user;         
                
-        }
+        
     }
    
 

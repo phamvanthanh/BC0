@@ -137,12 +137,7 @@
                         </div>                       
                  </form>
             </div>
-           
-            
-         
         </div>
-
-
     </div>
   
     <notify :warns="$store.state.notifications"></notify>

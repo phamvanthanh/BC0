@@ -1,7 +1,8 @@
 <?php
 
-namespace Snail\Events;
+namespace system\Events;
 
+use system\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -10,7 +11,7 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class NewMessage
+class UserStatus implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
@@ -19,9 +20,11 @@ class NewMessage
      *
      * @return void
      */
-    public function __construct()
+    public $id;
+
+    public function __construct($id)
     {
-        //
+         $this->id = $id;
     }
 
     /**
@@ -31,6 +34,6 @@ class NewMessage
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new Channel("user_".$this->id);
     }
 }

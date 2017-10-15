@@ -46,16 +46,24 @@ class MessageController extends Controller
                     messages.message,
                     messages.created_at,
                     message_recipient.recipient_id,
+                    message_recipient.is_read,
                     CONCAT(recipient.first_name, " ", recipient.last_name) as recipient_name                    
                     
                  '))
-                 ->orderBy('messages.created_at', 'ASC')
-                 ->limit(5000)
-                 ->get();
+                 ->orderBy('messages.created_at', 'DESC')                 
+                 ->paginate(20);
 
      
     }
-    public function readMessages() {
+    public function readMessages(Request $request) {
+
+        $unread_ids = $request['ids']; 
+        $recipient_id = $request['recipient_id'];  
+                     
+        DB::table('message_recipient')
+          ->whereIn('message_id',  $unread_ids)
+          ->where('recipient_id', $recipient_id)
+          ->update(['is_read' => 1]);      
 
     }
     public function count(Request $request) {

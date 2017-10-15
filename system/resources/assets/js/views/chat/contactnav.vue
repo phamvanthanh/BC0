@@ -30,6 +30,10 @@ export default {
     },
     created() {
         this.getContacts();
+        // this.startChannel();
+        this.$on('userstatuschange', ()=>{
+            this.getContacts();
+        })
     },
     components: {
         contact
@@ -66,11 +70,10 @@ export default {
             else {
                 this.$refs.user_tab.className = "active";
                 this.current_tab = 'user';
-
             }
-                
-           
-        }
+   
+        },
+       
     }
 }
 

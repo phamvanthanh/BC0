@@ -4,8 +4,8 @@
            <span class="display-block fs-16 fw-600">{{contact.first_name}} {{contact.last_name}}</span>                                 
     </div>
 
-    <div id="chatroom-log" class="chatroom-log pt-10"    >     <!--@scroll="scrollFunction"-->  
-            <div  :id="message.id" v-for="message in messages" :class="{owner: !message.isGuest}" class="display-block">
+    <div id="chatroom-log" class="chatroom-log pt-10"  @scroll="scrollFunction"  >    
+            <div  :id="message.id" v-for="message in messages"  class="display-block">
                 <div  class="display-block text-center day-block" >
                     
                 </div>
@@ -39,7 +39,8 @@ export default {
         return {
             scrollBottom: true,
             oldHeight: 0,
-            messages: [], 
+            messages: [],
+            page: 1 
         }        
     },
     created() {
@@ -54,7 +55,12 @@ export default {
    
         bus.$on('newmessage', (message)=>{
             this.notsent = false;
-            let last = this.messages[this.messages.length-1];
+            let last = {
+                sender_id: null,
+            }
+            if(this.messages.length > 0) 
+                last = this.messages[this.messages.length-1];          
+
             message = this.formatNewMessage(message, last);
             this.messages.push(message);
         });
@@ -102,9 +108,9 @@ export default {
          
             this.scrollBottom = true;
 
-            axios.get('/api/messages', {params: {recipient_id: this.contact.recipient_id}})
-                .then(({data})=>{
-                    this.messages = this.formatMessages(data);
+            axios.get('/api/messages', {params: {recipient_id: this.contact.recipient_id, page: 1}})
+                .then(({data})=>{                   
+                    this.messages = this.formatMessages(data.data.reverse());
                             
                 })
                 .catch((error) => {
@@ -113,16 +119,19 @@ export default {
             			
 		},
         formatMessages(messages) {
-            var length = messages.length, i = 0;
+            var length = messages.length, i = 0, unreads = [];
+
             for(i; i < length; i++) {
                 
-               
+                if(messages[i].is_read != 1)
+                    unreads.push(messages[i].id);
 
                 if(i == 0) {
                 
                     messages[i].time = moment(messages[i].created_at).format('lll'); 
                     messages[i].displayUser = true;
                     messages[i].displayTime = true;
+                   
                     
                 }
                 
@@ -132,23 +141,27 @@ export default {
                     var nowday = moment(messages[i].created_at).format("L");
                                     
                     if(nowday != lastday){
-                        messages[i].displayDay = true;
+                      
                         messages[i].displayTime = true;
                         messages[i].time = moment(messages[i].created_at).format('lll');                        
                     }                           
                     else {
-                        messages[i].displayDay = false;                                                
+                                                                   
                         messages[i].time = moment(messages[i].created_at).format('LT');
                         messages[i].displayTime = true; 
                     } 
 
-                    if (messages[i-1].sender_id != messages[i].sender_id) 
+                    if (messages[i].sender_id != messages[i-1].sender_id) 
                         messages[i].displayUser = true; 
                     else 
                         messages[i].displayUser = false;
                   
                 }
     
+            }
+
+            if(unreads.length > 0) {             
+                this.read(unreads, this.contact.sender_id); 
             }
             return messages;
         },
@@ -175,26 +188,32 @@ export default {
         scrollFunction() {           
           
             if ($('#chatroom-log').scrollTop() < 1){
-                this.scrollBottom = false; 
-                if(this.messages.length > 0)   
-                    var last_id = this.messages[0].id;
-                else
-                    var last_id = null;
-
-                this.oldHeight = this.$el.querySelector("#chatroom-log").scrollHeight;
-                var params = {                
-                    job_id: this.job.job_id,                  
-                    private: this.job.private,
-                    last_id: last_id
-                };
-                this.loading = true;
-				axios.get('/api/messages/jobs', {params})               
                 
+                this.scrollBottom = false; 
+                               
+                this.page++;
+                this.oldHeight = this.$el.querySelector("#chatroom-log").scrollHeight;
+                var params = {              
+                                  
+                    recipient_id: this.contact.recipient_id,
+                    page: this.page
+                };
+
+                var last = this.messages[0];
+               
+				axios.get('/api/messages', {params})               
 				 .then(({data})=>{
-                     this.loading = false;
-                     if(data.length > 0) {
+                     
+                     if(data.data.length > 0) {
                             
-                        var newMessages = this.formatMessages(data, this.$store.state.user.id);                       
+                        var newMessages = data.data.reverse();;
+                        newMessages.unshift(last);
+                   
+                        newMessages = this.formatMessages(newMessages);  
+                        // console.log(newMessages)
+                        newMessages.shift();
+                        if(this.page >= data.last_page)
+                            newMessages[0].displayUser = true;                     
                         this.messages.unshift(...newMessages); 
                    
                      }
@@ -203,15 +222,15 @@ export default {
 				
 			}
 		}, 
-        read(ids) {
+        read(ids, recipient_id) {
             var data = {
-                ids: ids            
-
+                ids: ids,
+                recipient_id: recipient_id
             };
             axios.post('/api/messages/read', data)
-                 .then(({
-
-                 }))
+                 .then(({data}) => {           
+                     bus.$emit('readmessages', this.contact.recipient_id);
+                 })
                  .catch((error)=>{console.log(error)})
         },
         startChannel() {       

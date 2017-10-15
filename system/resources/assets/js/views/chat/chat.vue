@@ -26,16 +26,12 @@
 							
 						</div>
 						<div class="chatroom col-md-9 pr-0 pl-0 ml-0" v-if="activecontact.recipient_id" >
-						
-														
-												
-								<chat-log 
-									
-									:contact="activecontact"
-									>
-								</chat-log>	
 							
-							
+							<chat-log 
+								
+								:contact="activecontact"
+								>
+							</chat-log>	
 							
 							<div id="chatroom-composer" >
 								<chat-composer
@@ -65,7 +61,7 @@ export default {
 	data() {
 		return  {
 			channel: hasRole(this.$store.state.user.roles, 'client')? 2: 1,
-		    jobs: [],
+		 
 			activecontact: {
 				sender_id: null,
 				recipient_id: null,
@@ -84,10 +80,14 @@ export default {
 		}
 	},	
 	created() {
+		// this.userOnline();
+		// this.startChannel();
 		bus.$on('activecontact', (e)=>{
             this.activecontact = e;
         });
 	},
+
+
     components: {
         contactNav,
 		chatComposer,
@@ -100,17 +100,9 @@ export default {
 			return capitalize(val);
 		}
 	},
-    mounted() {
-		
-	},
-
-	computed: {
-		
-		
-	},
-
-
 	methods: {
+		
+		
 		
 	}
 }

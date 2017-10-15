@@ -31,7 +31,7 @@ class UserForm extends FormRequest
              'last_name' =>'required | string',
              'email'     =>'required | email',
              'nation_abbr' =>'required |string',
-             'status'    =>'required | integer'
+             'active'      =>'required | integer'
                        
         ];
         if($this->input('id'))
@@ -47,8 +47,8 @@ class UserForm extends FormRequest
                 'email', 
                 'phone',
                 'organization',
-                'nation_abbr', 
-                'status',         
+                'nation_abbr',
+                'active',                        
                 'created_by']);
                 
         if($this->user()->can('update-user'))

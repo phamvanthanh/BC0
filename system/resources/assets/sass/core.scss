@@ -466,6 +466,9 @@ td{
 .fs-8 {
   font-size: 8px;
 }
+.fs-9 {
+  font-size: 9px;
+}
 .fs-10 {
   font-size: 10px;
 }
@@ -596,12 +599,18 @@ input:checked + .slider:before {
   border-radius: 0px;
 }
 
-
+//COLORS
+.bg-warning {
+  background-color:$danger-color;
+}
 
 .text-danger {
   color: $danger-color !important;
 }
 
+.text-white {
+  color: $text-white;
+}
 // .text-muted {
 //   color: $muted-color !important;
 // }
@@ -723,4 +732,25 @@ ul.pd-0 {
     width: 28px;  
     padding: auto;
    
+}
+
+//COLORS
+.disabled-color {
+  color: $disabled-bg
+}
+.wrapper {
+  // z-index: 99999;
+}
+#overlay {
+  display: none;
+}
+.overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 999999999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: block !important;
 }

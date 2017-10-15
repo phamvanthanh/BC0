@@ -57,6 +57,13 @@ window.app =  new Vue({
     data: {
         loggedIn: false
     },
+    created() {
+        this.userOnline();
+        
+    },
+    destroyed() {
+		this.userOffline();
+	},
 	beforeCreate() {
 		
         axios.get('/loggedInUser')
@@ -72,7 +79,25 @@ window.app =  new Vue({
             .catch((error)=>console.log(error));  
 
 		
-	}
+	},
+    methods: {
+        // startChannel() {       
+
+        //     new Pusher('806c86de02562f12daec', {
+        //         cluster: 'ap1',
+        //         encrypted: true
+        //     });
+   
+        // },
+        userOnline() {
+			axios.post("/api/users/status/online");
+				 	
+		},
+		userOffline() {
+			axios.post("/api/users/status/offline");
+				 	
+		},
+    }
    
 });
 

@@ -2,9 +2,6 @@
 
 namespace system\Events;
 
-// use system\Models\Message;
-// use system\Models\Job;
-
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Broadcasting\PrivateChannel;
@@ -13,10 +10,10 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class MessagePosted implements ShouldBroadcast
+class MessagePosted 
 {
-    // use Dispatchable, InteractsWithSockets, SerializesModels;
-    use SerializesModels;
+    use Dispatchable, InteractsWithSockets, SerializesModels;
+    // use SerializesModels;
 
     /**
      * Create a new event instance.
@@ -29,10 +26,6 @@ class MessagePosted implements ShouldBroadcast
     */
     public $message;
 
-    /**
-    * Job
-    * @var Job 
-    */
   
 
     public $channel;

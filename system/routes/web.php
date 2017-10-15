@@ -2,6 +2,7 @@
 
 use system\Http\Controllers\UsersController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -52,21 +53,23 @@ Route::get('/registrations', function(){
 Route::post('registration', 'LeadsController@store');
 
 Route::group(['middleware' => 'auth'], function () { 
+    
+    
 
     Route::get('/localhost/loggedInUser',['uses'=>'UsersController@loggedInUser'] );
 
     Route::get('/loggedInUser',['uses'=>'UsersController@loggedInUser'] );
 
-    Route::get('/changeRole/{id}', function($id){
-        $user = new UsersController;
-        $user->activateRole($id);
-        return redirect('/');
-    }); 
+    // Route::get('/changeRole/{id}', function($id){
+    //     $user = new UsersController;
+    //     $user->activateRole($id);
+    //     return redirect('/');
+    // }); 
 
-    Route::post('broadcasting/auth', function() {
+    // Route::post('broadcasting/auth', function() {
        
-       response('OK', 200); //  Auth::check();
-    });
+    //    response('OK', 200); //  Auth::check();
+    // });
 
   
     Route::get('{all}', function () {
@@ -81,7 +84,8 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::get('/desk/works/{id}/bids', ['uses'=>'BidsController@jobBids']);
     Route::post('/desk/works/{id}/bids', ['uses'=>'BidsController@store']);
 
-
+    Route::post('users/status/online', 'UserStatusController@online');
+    Route::post('users/status/offline', 'UserStatusController@offline');
 
     Route::get('/works', ['uses'=>'JobsController@availJobs']);
     Route::get('/works/{id}', ['uses'=>'JobsController@info']);
@@ -208,19 +212,13 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::get('/reports/{id}', ['uses'=>'ReportsController@index']);
 
     Route::get('/messages', 'MessageController@getPrivateMessages');
+
     Route::post('/messages', ['uses'=>'MessageController@store']);
-    Route::post('/messages/read', 'MessageController@read');
+    Route::post('/messages/read', 'MessageController@readMessages');
     Route::get('/messages/address', 'ChatAddressController@index');
     Route::get('/messages/countunreads', 'MessageController@count');
     Route::post('/messages/address/loadcontacts', 'ChatAddressController@addressAutomate'); 
-    // Route::get('/umessages', ['uses'=>'UMessagesController@getPrivateMessages']);
-    // 
-    
-    // Route::post('/messages', function(){
-    //     $pusher = new Pusher('806c86de02562f12daec', 'ab595dec877a07a29f3c', '368420');
-    //     $pusher->trigger('my-channel', 'my-event', ['test'=>'thanh']);
-    //     return 'Done';
-    // });
+
     Route::post('/messages/files', ['uses'=>'MessagesController@uploadFile']);
 
     Route::get('/jobs/{id}/issues', ['uses'=>'IssuesController@index']);
