@@ -45,17 +45,16 @@ export default {
             page: 1 
         }        
     },
-    created() {
-        
-    },
+
     mounted() {
      
-         this.getMessages();  
+        this.getMessages();  
         if(this.contact) {
             this.startMessageChannel();      
         }
    
-        bus.$on('newmessage', (message)=>{
+        bus.$on('newmessage', (message)=>{ // SENDER SIDE
+
             this.notsent = false;
             let last = {
                 sender_id: null,
@@ -66,7 +65,7 @@ export default {
             message = this.formatNewMessage(message, last);
             this.messages.push(message);
         });
-        bus.$on('messagenotsent', (e)=>{
+        bus.$on('messagenotsent', (e)=>{ // SENDER SIDE
             var notsent_el = 'notice'+e.id;         
             this.$refs[notsent_el][0].className = "time pull-right pr-20 text-danger";
             
@@ -95,15 +94,18 @@ export default {
     watch: {
         'contact.recipient_id' : function(val, oldVal) {
             if(val != oldVal && oldVal != null){
+                  
                  this.getMessages();
-                 this.startChannel();
+                 this.page=1;
+                 this.startMessageChannel();
                  this.loading = true;
+                 
             }
                
         }
     },
-    destroyed() {
-        bus.$off();
+    destroyed() { 
+        bus.$off('readmessages');
     },
     methods: {
         getMessages() {
@@ -133,10 +135,7 @@ export default {
                     messages[i].time = moment(messages[i].created_at).format('lll'); 
                     messages[i].displayUser = true;
                     messages[i].displayTime = true;
-                   
-                    
-                }
-                
+                }                
                 else {      
                     
                     var lastday = moment(messages[i-1].created_at).format("L"); 
@@ -156,10 +155,8 @@ export default {
                     if (messages[i].sender_id != messages[i-1].sender_id) 
                         messages[i].displayUser = true; 
                     else 
-                        messages[i].displayUser = false;
-                  
-                }
-    
+                        messages[i].displayUser = false;                  
+                }    
             }
 
             if(unreads.length > 0) {             
@@ -185,8 +182,6 @@ export default {
                        
         },
 
-   
-    
         scrollFunction() {           
           
             if ($('#chatroom-log').scrollTop() < 1){
@@ -212,7 +207,7 @@ export default {
                         newMessages.unshift(last);
                    
                         newMessages = this.formatMessages(newMessages);  
-                        // console.log(newMessages)
+                  
                         newMessages.shift();
                         if(this.page >= data.last_page)
                             newMessages[0].displayUser = true;                     
@@ -236,14 +231,9 @@ export default {
                  .catch((error)=>{console.log(error)})
         },
         startMessageChannel() {       
-
-            var pusher = new Pusher('806c86de02562f12daec', {
-                cluster: 'ap1',
-                encrypted: true
-            });
                      
-            var channel = pusher.subscribe(this.contact.recipient_id+'_'+this.contact.sender_id);            
-            channel.bind('system\\Events\\MessagePosted',(data)=>{
+            var message = pusher.subscribe(this.contact.recipient_id+'_'+this.contact.sender_id);            
+            message.bind('system\\Events\\MessagePosted',(data)=>{
                 
                     let last = this.messages[this.messages.length-1];
                     data.message.sender_name = this.contact.first_name+' '+this.contact.last_name; 
@@ -251,12 +241,9 @@ export default {
                     this.scrollBottom = true;                                      
                     this.messages.push(message);
                     this.read([message.id], this.contact.sender_id);
-            });          
-   
+            }); 
         }
-
     }
-
 }
 
 </script>

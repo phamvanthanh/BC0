@@ -217,6 +217,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::post('/messages/read', 'MessageController@readMessages');
     Route::get('/messages/address', 'ChatAddressController@index');
     Route::get('/messages/countunreads', 'MessageController@count');
+    Route::get('/messages/countallunreads', 'MessageController@countAllUnreads');
     Route::post('/messages/address/loadcontacts', 'ChatAddressController@addressAutomate'); 
 
     Route::post('/messages/files', ['uses'=>'MessagesController@uploadFile']);

@@ -21,10 +21,10 @@
   
 <script>
 
-$( window ).on( 'unload', function() {
+$( window ).on('unload', function() {
    $.ajax({
 	   type: 'POST',
-	   url: 'api/users/status/offline',
+	   url: '/api/users/status/offline',
 	   async:false,
 	   data:{
 		   "_token": "{{ csrf_token() }}",

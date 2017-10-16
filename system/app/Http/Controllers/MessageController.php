@@ -76,10 +76,18 @@ class MessageController extends Controller
                  ->whereNull('is_read')
                  ->count();
     }
+    public function countAllUnreads(Request $request) {
+        $recipient_id =  $request->user()->id;
+        return DB::table('messages')
+                 ->join('message_recipient', 'messages.id', '=', 'message_recipient.message_id' )
+                 ->where('message_recipient.recipient_id', $recipient_id )              
+                 ->whereNull('is_read')
+                 ->count();
+    }
     public function store(MessageForm $form) {
         $message = $form->persist();       
         $channel = $form->user()->id."_".$form->input('recipient_id');
-        event(new MessagePosted($message, $channel));
+        // event(new MessagePosted($message, $channel));        
         return ;
 
     }

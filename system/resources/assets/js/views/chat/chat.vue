@@ -27,7 +27,8 @@
 						</div>
 						<div class="chatroom col-md-9 pr-0 pl-0 ml-0" v-if="activecontact.recipient_id" >
 							
-							<chat-log 								
+							<chat-log 
+								v-if="activecontact.recipient_id"								
 								:contact="activecontact"
 							>
 							</chat-log>	
@@ -80,8 +81,8 @@ export default {
 	},	
 	created() {
 
-		bus.$on('activecontact', (e)=>{
-            this.activecontact = e;
+		bus.$on('activecontact', (e)=>{		
+			this.activecontact = e;
         });
 	},
 

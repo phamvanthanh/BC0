@@ -38,6 +38,9 @@ export default {
             }
         }
     },
+    destroyed() {
+         bus.$off('userstatuschange');
+    },
     methods: {
          activate(){                            
             var i;
@@ -58,27 +61,21 @@ export default {
                  .catch((error)=>console.log(error));
         },
 
-         startChannel() {       
+        startChannel() {      
 
-            var pusher = new Pusher('806c86de02562f12daec', {
-                cluster: 'ap1',
-                encrypted: true
-            });
-    
             var user_status = pusher.subscribe('user_'+this.contact.recipient_id);            
             user_status.bind('system\\Events\\UserStatus',(data)=>{
                 bus.$emit('userstatuschange', data);
-               
             }); 
 
             var new_message = pusher.subscribe(this.contact.recipient_id+'_'+this.contact.sender_id);            
-            new_message.bind('system\\Events\\MessagePosted',(data)=>{
-                bus.$emit('userstatuschange', data);                 
+          
+            new_message.bind('system\\Events\\MessagePosted',(data)=>{             
+                this.countUnreads();
+                          
             });          
    
         }
-       
-
 
     }
 }

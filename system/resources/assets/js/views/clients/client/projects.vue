@@ -83,20 +83,12 @@ export default {
                     status: 'status'
                 },
            
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                },   
-
-                skin: 'table-striped table-hover',
-                texts: {
-                    filter: ''
-                },
+          
                 columnsClasses: {
                    
                     job_id: 'w-70',
                     name: 'column-expanded',                   
-                    nation: 'w-70',
+                    nation_abbr: 'w-70',
                     industry: 'w-70',
                     from: 'w-80',
                     to: 'w-80',

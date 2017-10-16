@@ -31,12 +31,15 @@ export default {
     created() {
         this.getContacts();
       
-        bus.$on('userstatuschange', ()=>{
+        bus.$on('userstatuschange', ()=>{          
             this.getContacts();
         })
     },
     components: {
         contact
+    },
+    destroy() {
+        //   bus.$off();
     },
     methods: {
         activate(user) {

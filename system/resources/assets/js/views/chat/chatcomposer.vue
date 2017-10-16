@@ -27,6 +27,9 @@ export default {
             })
         }
     },
+    destroyed() {
+        bus.$off();
+    },
     methods: {
         uploadFile() {	
 			$("#file-input").click();

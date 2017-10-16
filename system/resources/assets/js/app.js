@@ -81,14 +81,7 @@ window.app =  new Vue({
 		
 	},
     methods: {
-        // startChannel() {       
 
-        //     new Pusher('806c86de02562f12daec', {
-        //         cluster: 'ap1',
-        //         encrypted: true
-        //     });
-   
-        // },
         userOnline() {
 			axios.post("/api/users/status/online");
 				 	
@@ -181,5 +174,8 @@ Vue.use(ServerTable);
 import {ClientTable} from 'vue-tables-2';
 Vue.use(ClientTable);
 
-
+window.pusher = new Pusher('806c86de02562f12daec', {
+                cluster: 'ap1',
+                encrypted: true
+            });
  

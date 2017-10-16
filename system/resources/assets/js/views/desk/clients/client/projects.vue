@@ -31,17 +31,15 @@
 
 </template>
 <script>
-import  ClientTable from 'vue-tables-2';
-
     export default {
         props:['client'],
         data() {
             return {               
-                columns: ['job_id', 'name', 'nation', 'industry', 'from_date', 'to_date', 'status', 'actions'],              
+                columns: ['job_id', 'name', 'nation_abbr', 'industry', 'from_date', 'to_date', 'status', 'actions'],              
                 options: {
                  headings: {
                     job_id: 'Id',
-                    nation_name: 'Nation',                    
+                    nation_abbr: 'Nation',                    
                     industry: 'Ind.',
                     from_date: 'From',
                     to_date: 'To',
@@ -54,19 +52,10 @@ import  ClientTable from 'vue-tables-2';
                     status: 'status',
                 },            
 
-                sortIcon: { 
-                    base: '',  up:'icon-arrow-up5', down:'icon-arrow-down5'
-
-                },     
-
-                skin: 'table-hover',
-                texts: {
-                    filter: 'Filter: '
-                },
                 columnsClasses: {
                     job_id: 'w-70',
                     name: 'w-150',
-                    nation: 'w-70',
+                    nation_abbr: 'w-70',
                     industry: 'w-70',                                
                     from_date: 'w-80',
                     to_date: 'w-80',              
@@ -90,7 +79,7 @@ import  ClientTable from 'vue-tables-2';
                             id: e.id,
                             job_id: e.job.id,
                             name: e.name,
-                            nation: e.nation.abbreviation,
+                            nation_abbr: e.nation.abbreviation,
                             industry: e.industry.name,
                             from_date: e.job.from_date,
                             to_date: e.job.to_date,
