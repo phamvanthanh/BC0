@@ -250,6 +250,7 @@ export default {
                     let message = this.formatNewMessage(data.message, last);                
                     this.scrollBottom = true;                                      
                     this.messages.push(message);
+                    this.read([message.id], this.contact.sender_id);
             });          
    
         }
