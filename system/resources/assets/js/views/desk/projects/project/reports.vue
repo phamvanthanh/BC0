@@ -8,9 +8,9 @@
         :job="job">
     </lines>
     <div class="horizontal-divider"></div>
-    <!--<grid 
+    <grid 
         :job="job">
-    </grid>-->
+    </grid>
 </div>
 </template>
 <script>

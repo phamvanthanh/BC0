@@ -33,7 +33,7 @@ export default Scatter.extend({
             },
 
             title: {
-                text: 'Overall Progess'
+                // text: 'Overall Progess'
             },
             pointBackgroundColor: '#fff',
             pointBorderColor: '#fff',

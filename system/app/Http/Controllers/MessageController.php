@@ -3,6 +3,7 @@
 namespace system\Http\Controllers;
 
 use system\Events\MessagePosted;
+use system\Events\NewMessage;
 use Illuminate\Http\Request;
 use system\Models\Message;
 use system\Http\Requests\MessageForm;
@@ -87,7 +88,8 @@ class MessageController extends Controller
     public function store(MessageForm $form) {
         $message = $form->persist();       
         $channel = $form->user()->id."_".$form->input('recipient_id');
-        // event(new MessagePosted($message, $channel));        
+        event(new MessagePosted($message, $channel)); 
+        event(new NewMessage('message_to_'.$form->input('recipient_id')));       
         return ;
 
     }

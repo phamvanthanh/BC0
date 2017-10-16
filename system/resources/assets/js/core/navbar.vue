@@ -83,7 +83,7 @@ export default {
     stay(e) {      
         e.stopPropagation();
         var x = $('ul.panel.accordion-content').toggleClass('hidden');
-        $(e.target).toggleClass('active');;
+        $(e.target).toggleClass('active');
     },
     countAllUnreads() {
          axios.get('/api/messages/countallunreads')
@@ -92,8 +92,8 @@ export default {
     },
     messageCountChannel() {
       var uid = this.$store.state.user.id;
-      var allmessages = pusher.subscribe(['*._'+uid]);
-       allmessages.bind('system\\Events\\MessagePosted',(data)=>{
+      var allmessages = pusher.subscribe('message_to_'+uid);
+       allmessages.bind('system\\Events\\NewMessage',(data)=>{
            
             this.countAllUnreads();    
        }); 
@@ -133,6 +133,6 @@ export default {
   #msg-count {
     position: absolute;
     top: 15%;
-    right: -8%
+    left: 60%
   }
 </style>

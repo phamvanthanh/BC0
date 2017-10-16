@@ -178,4 +178,5 @@ window.pusher = new Pusher('806c86de02562f12daec', {
                 cluster: 'ap1',
                 encrypted: true
             });
- 
+
+window.d3 = require("d3"); 

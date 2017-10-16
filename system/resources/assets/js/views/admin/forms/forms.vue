@@ -92,8 +92,8 @@
                             url="/api/forms" 
                             :columns="columns" 
                             :options="options">
-                            <template slot="code" scope="props">
-                                <a :href="props.row.path" download>{{props.row.code}}</a>
+                            <template slot="name" scope="props">
+                                <a :href="props.row.path" download>{{props.row.name}}</a>
                             </template>
 
                             <template v-if="$can('admin|superuser')" slot="actions" scope="props">
