@@ -31,7 +31,13 @@ export default {
         });
         this.startChannel();     
     },
-
+    watch: {
+        'contact': function(val){
+            if(this.isActive){              
+                 bus.$emit('activecontact', val);
+            }
+        }
+    },
     methods: {
          activate(){                            
             var i;
@@ -39,7 +45,7 @@ export default {
                 this.$parent.$children[i].isActive = false;
             }
             this.isActive = true;
-            bus.$emit('activecontact', this.contact)
+            bus.$emit('activecontact', this.contact);
             
         },
         countUnreads() {
@@ -58,12 +64,16 @@ export default {
                 cluster: 'ap1',
                 encrypted: true
             });
+    
+            var user_status = pusher.subscribe('user_'+this.contact.recipient_id);            
+            user_status.bind('system\\Events\\UserStatus',(data)=>{
+                bus.$emit('userstatuschange', data);
+               
+            }); 
 
-            var i;            
-                     
-            var channel = pusher.subscribe('user_'+this.contact.recipient_id);            
-            channel.bind('system\\Events\\UserStatus',(data)=>{
-                this.$parent.$emit('userstatuschange');
+            var new_message = pusher.subscribe(this.contact.recipient_id+'_'+this.contact.sender_id);            
+            new_message.bind('system\\Events\\MessagePosted',(data)=>{
+                bus.$emit('userstatuschange', data);                 
             });          
    
         }

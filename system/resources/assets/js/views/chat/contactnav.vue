@@ -30,8 +30,8 @@ export default {
     },
     created() {
         this.getContacts();
-        // this.startChannel();
-        this.$on('userstatuschange', ()=>{
+      
+        bus.$on('userstatuschange', ()=>{
             this.getContacts();
         })
     },
@@ -51,7 +51,7 @@ export default {
         loadContacts() {
             axios.post('api/messages/address/loadcontacts')
                  .then((data)=>{
-                     this.getContacts();
+                     this.getContacts();                    
                  })
                  .catch((error)=>{
                      console.log(error);

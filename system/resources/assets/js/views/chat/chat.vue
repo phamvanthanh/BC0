@@ -27,15 +27,13 @@
 						</div>
 						<div class="chatroom col-md-9 pr-0 pl-0 ml-0" v-if="activecontact.recipient_id" >
 							
-							<chat-log 
-								
+							<chat-log 								
 								:contact="activecontact"
-								>
+							>
 							</chat-log>	
 							
 							<div id="chatroom-composer" >
-								<chat-composer
-     								
+								<chat-composer     								
 									:contact="activecontact"
 								>
 								</chat-composer>
@@ -67,6 +65,7 @@ export default {
 				recipient_id: null,
 				first_name: null,
 				last_name: null,
+				status: null
 			},
 		
 			form: new Form({
@@ -80,8 +79,7 @@ export default {
 		}
 	},	
 	created() {
-		// this.userOnline();
-		// this.startChannel();
+
 		bus.$on('activecontact', (e)=>{
             this.activecontact = e;
         });

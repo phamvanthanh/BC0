@@ -1,7 +1,9 @@
 <template>
 <div class="msg-wrapper">
     <div   class="chatroom-heading pl-5 pt-5">							   
-           <span class="display-block fs-16 fw-600">{{contact.first_name}} {{contact.last_name}}</span>                                 
+           <span class="display-block fs-16 fw-600">{{contact.first_name}} {{contact.last_name}}</span> 
+           <span :class='[contact.status=="online"? "text-success": "disabled-color"]'>{{contact.status}}</span>
+                             
     </div>
 
     <div id="chatroom-log" class="chatroom-log pt-10"  @scroll="scrollFunction"  >    
@@ -50,7 +52,7 @@ export default {
      
          this.getMessages();  
         if(this.contact) {
-            this.startChannel();      
+            this.startMessageChannel();      
         }
    
         bus.$on('newmessage', (message)=>{
@@ -233,14 +235,12 @@ export default {
                  })
                  .catch((error)=>{console.log(error)})
         },
-        startChannel() {       
+        startMessageChannel() {       
 
             var pusher = new Pusher('806c86de02562f12daec', {
                 cluster: 'ap1',
                 encrypted: true
             });
-
-            var i;            
                      
             var channel = pusher.subscribe(this.contact.recipient_id+'_'+this.contact.sender_id);            
             channel.bind('system\\Events\\MessagePosted',(data)=>{

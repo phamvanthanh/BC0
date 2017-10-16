@@ -28,11 +28,26 @@ export default {
         }
     },
     methods: {
-        uploadFile() {
-
-        },
-        onFileChange() {
-            
+        uploadFile() {	
+			$("#file-input").click();
+		},
+	 	onFileChange (e) {		
+			let files = e.target.files || e.dataTransfer.files
+			if (!files.length) {
+				return
+			};
+		    this.file = files[0]
+			let formData = new FormData()
+			formData.append('file', this.file)
+			axios.post('/api/messages/files', formData)
+				.then(({data})=>{
+					this.form.message = '<img src="'+data.url+'" >';
+					this.submit();
+					this.form.message = null;
+				})
+				.catch((error)=>{
+				})     
+      
         },
         submit() {
             var date = new Date();

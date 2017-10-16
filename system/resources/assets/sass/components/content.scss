@@ -30,9 +30,7 @@ div.content .panel {
         .chatroom-heading {
             background-color: $default-bg;
 	        border-bottom: solid 1px $border-basic-color;
-            span {
-                line-height: 40px;
-            }
+            line-height: 16px;
         }
     }
     .chatroom-log {

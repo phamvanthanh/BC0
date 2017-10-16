@@ -29,9 +29,7 @@ $( window ).on( 'unload', function() {
 	   data:{
 		   "_token": "{{ csrf_token() }}",
 	   }
-	 }).done(function(data) {                
-        console.log('useroffline');
-    });
+	 }).done();
 } );
 
 </script>
