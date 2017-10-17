@@ -69,7 +69,8 @@ export default {
                                     cmtdLineData.push({date:cmt.committed_at,  quantum: cmt.quantum, commit: cmt.commit, a_commit: cmt.a_commit});
                             }
                             if(cmt.a_commit == 1) {
-                                auditCmtdLineData.push({a_date:cmt.a_commited_at, quantum: cmt.quantum, a_commit: cmt.a_commit});
+                                // if a package item is audited, push data to auditCmtdLineData
+                                auditCmtdLineData.push({a_date:cmt.a_committed_at, quantum: cmt.quantum, a_commit: cmt.a_commit});
                             }
                                 
                         }

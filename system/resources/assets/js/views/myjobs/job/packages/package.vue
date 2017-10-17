@@ -109,8 +109,8 @@ function Diff(instance, td, row, col, prop, value, cellProperties) {
       
       var rowData = instance.getSourceDataAtRow(row);
       if(rowData.quantity && rowData.quantity  != 0 && rowData.a_quantity  ) {
-         
-          if(abs(diff) > rowData.difference)
+          var diff = rowData.a_quantity - rowData.quantity;
+          if(Math.abs(diff) > rowData.difference)
             td.style.color = '#ff3333'; 
           td.innerHTML = diff/rowData.quantity;
       } 
@@ -194,7 +194,7 @@ function absDiff(instance, td, row, col, prop, value, cellProperties) {
 
                   ],
                  
-                  colHeaders: ['Code', 'Name', 'Quantity', 'Unit', 'File', 'Mrk.', 'Cmt', 'C.Quantity', 'Diff', 'absDiff', 'CFile', 'CMrk.', 'CCmt.'],
+                  colHeaders: ['Code', 'Name', 'Qty', 'Unit', 'File', 'Mrk.', 'Cmt', 'C.Qty', 'Diff', 'absDiff', 'CFile', 'CMrk.', 'CCmt.'],
                   
                   afterChange: function(change, source) {                      
                       if(source == 'edit') {
@@ -232,10 +232,10 @@ function absDiff(instance, td, row, col, prop, value, cellProperties) {
                           this.destroyEditor();
                           return false;
                       }
-                      if(col == 9 || col == 10) {
+                      if(col == 10 || col == 11) {
                            var rowData  = this.getSourceDataAtRow(row);                          
                     
-                           let type =  col == 9? 'quantity': 'markdown'; 
+                           let type =  col == 10? 'quantity': 'markdown'; 
                            let format  = type =='quantity'? 'xls,xlsx,csv' : 'pdf,png,gif,jpg';
                      
                            let payload = {format: format, type: type, code: rowData.code, id: rowData.id, quantity_id: rowData.quantity_id, audit_id: rowData.audit_id};
@@ -321,7 +321,7 @@ function absDiff(instance, td, row, col, prop, value, cellProperties) {
                 var extension = this.file.name.split('.').pop();
              
                 if(this.form.fileFormat.indexOf(extension) < 0 ){
-                    notice({status: 400, data:['File format is not accepted']}, 6000);
+                    notice({status: 422, data:['File format is not accepted']}, 6000);
                     return;
                 }
           
