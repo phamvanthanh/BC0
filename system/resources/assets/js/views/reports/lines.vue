@@ -1,15 +1,13 @@
 <template>
-    <div class="panel panel-flat"  >
-
+    <div class="panel panel-flat" id="timelines_chart" >
         <timelines
             v-if="datasets[0].data.length >0"
             :datasets="datasets"
             yText="Complete (%)"
             :height="350"
-            :width="920"
+            :width="width"
         >
-        </timelines>        
-
+        </timelines>
     </div>
 </template>
 <script>
@@ -22,7 +20,7 @@ export default {
 
     data() {
         return {     
-
+            width: 0,
             datasets: [{
                 label: 'Quantify Progress %',
                 data:[],             
@@ -42,6 +40,7 @@ export default {
     mounted() {
         if(this.job)
             this.getData(this.job.id);
+        this.width = document.getElementById('timelines_chart').offsetWidth - 100;
     },
 
     watch: {
