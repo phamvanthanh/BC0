@@ -691,7 +691,7 @@ let routes = [
                                 name: 'desk.project.reports',
                                 component: require('./views/desk/projects/project/reports'),
                                 meta: {
-                                    display: "Progressive Reports",
+                                    display: "Reports",
                                     permission: 'superuser|project_director|sale_manager',
                                     fail: './views/error'
                                 }

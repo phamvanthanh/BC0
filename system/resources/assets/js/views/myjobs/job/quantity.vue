@@ -86,7 +86,7 @@ function Mrkd(instance, td, row, col, prop, value, cellProperties) {
                 uploadUrl: null, 
                 code: null,
                 showModal: false,
-                leaves:  null,
+                leaves:  [],
                 root: 'quantity',
 
                 form: new Form({

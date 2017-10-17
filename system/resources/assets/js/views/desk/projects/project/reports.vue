@@ -1,13 +1,14 @@
 <template>
 <div>
-    <itemProgresses
-        :job="job">
-    </itemProgresses>
-    <div class="horizontal-divider"></div>
     <lines
         :job="job">
     </lines>
-    <div class="horizontal-divider"></div>
+    <itemProgresses
+        :job="job">
+    </itemProgresses>
+   
+
+
     <grid 
         :job="job">
     </grid>
