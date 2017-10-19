@@ -6,9 +6,6 @@
     <itemProgresses
         :job="job">
     </itemProgresses>
-   
-
-
     <grid 
         :job="job">
     </grid>

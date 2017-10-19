@@ -7,6 +7,7 @@
             :width="width"
             :keys="keys"
             :options="options"
+            title="Work Item Progresses"
             >
         </horizontal-bars>
     </div>

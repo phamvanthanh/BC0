@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-    props: ['data', 'barHeight', 'width', "keys", "options"],
+    props: ['data', 'barHeight', 'width', "keys", "options", 'title'],
 
     mounted() {
         this.initBarChart();
@@ -14,8 +14,10 @@ export default {
         initBarChart() {
             var data = this.data,
             keys = this.keys,
+            title = this.title,
             notes = this.options.notations,
-            margin = {top: 60, right: 20, bottom: 30, left: 100},                      
+            left = 100,
+            margin = {top: 60, right: 20, bottom: 30, left: left},                      
             height = this.barHeight*this.data.length,
 
             // select svg chart container
@@ -37,7 +39,7 @@ export default {
             });
 
             // Set margin.left relative to max label width
-            margin.left = Math.round(maxw+20);
+            margin.left = Math.round(maxw+margin.left);
 
             //Define chart width
             var width = this.width - margin.left - margin.right;
@@ -77,9 +79,17 @@ export default {
                 .attr('class', 'xAxis')
                 .call(d3.axisBottom(x));
 
+            var title = svg.append('g')
+                .attr('class', 'title_group')
+                .attr("transform", "translate(" + left + "," + 36 + ")")
+                .append('text')
+                .text(title);
+
             var legend = svg.append("g")
                 .attr("class", "legend_container")
                 .attr("transform", "translate(" + (width + margin.left + margin.right) + "," + 20 + ")" );
+            
+      
 
             var legend_items = legend.selectAll('g.legend')
                 .data(notes)
@@ -89,14 +99,14 @@ export default {
                 .attr('transform', function(d, i) { return  'translate(' + (150*i - 150*(notes.length)) + ',' + 0 + ')'; });
 
             legend_items.append('rect')
-                .attr('width', 18)
-                .attr('height', 18)
+                .attr('width', 16)
+                .attr('height', 16)
                 .attr('x', 0)
                 .attr('fill', function(d){
                     return d.color;
                 });
             legend_items.append('text')
-                .attr('x', 23)
+                .attr('x', 21)
                 .attr("y", 9)
                 .attr("dy", ".35em")                
                 .text(function(d) { return d.name; });

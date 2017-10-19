@@ -6,6 +6,7 @@
         barHeight="20"
         :width="width"
         :options = "options"
+        title="Stacked Packages"
         
     >
     </stacked-bars>

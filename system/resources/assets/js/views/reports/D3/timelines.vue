@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-    props: ['datasets', 'width', 'height', 'yText'],
+    props: ['datasets', 'width', 'height', 'yText', 'title'],
 
     data() {
         return {};
@@ -22,8 +22,9 @@ export default {
            
             var title = this.yText,
             datasets = this.datasets,
-          
-            margin = {top: 60, right: 20, bottom: 30, left: 100},
+            title = this.title,      
+            left = 100,    
+            margin = {top: 60, right: 20, bottom: 30, left: left},
             width = this.width - margin.left - margin.right,
             height = this.height - margin.top - margin.bottom;
             
@@ -63,6 +64,13 @@ export default {
             var svg = d3.select("svg")
                 .attr("width", width + margin.left + margin.right)
                 .attr("height", height + margin.top + margin.bottom),
+
+            
+            title = svg.append('g')
+                .attr('class', 'title_group')
+                .attr("transform", "translate(" + left + "," + 36 + ")")
+                .append('text')
+                .text(title),
                         
             g = svg.append("g")
                        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
@@ -108,14 +116,14 @@ export default {
                 .attr('transform', function(d, i) { return  'translate(' + (150*i - 150*(datasets.length)) + ',' + 0 + ')'; });
 
             legend_items.append('rect')
-                .attr('width', 18)
-                .attr('height', 18)
+                .attr('width', 16)
+                .attr('height', 16)
                 .attr('x', 0)
                 .attr('fill', function(d){
                     return d.color;
                 });
             legend_items.append('text')
-                .attr('x', 23)
+                .attr('x', 21)
                 .attr("y", 9)
                 .attr("dy", ".35em")                
                 .text(function(d) { return d.label; });         

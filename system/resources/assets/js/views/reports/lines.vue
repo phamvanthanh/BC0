@@ -6,6 +6,7 @@
             yText="Complete (%)"
             :height="300"
             :width="width"
+            title="Overall Progress"
         >
         </timelines>
     </div>
