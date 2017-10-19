@@ -6,15 +6,15 @@
     <itemProgresses
         :job="job">
     </itemProgresses>
-    <grid 
+    <stacked-packages 
         :job="job">
-    </grid>
+    </stacked-packages>
 </div>
 </template>
 <script>
 import itemProgresses  from './../../../reports/item-progresses';
 import lines  from './../../../reports/lines';
-import grid  from './../../../reports/grid';
+import stackedPackages  from './../../../reports/stackedpackages';
 
 export default {
     props: ['job'],
@@ -22,7 +22,7 @@ export default {
     components: {
        itemProgresses,
        lines,
-       grid
+       stackedPackages
     },
 
 }

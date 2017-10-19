@@ -1,6 +1,6 @@
 <template>
 <div>
-    <div :class="{loader:loading}"></div>
+    <!--<div :class="{loader:loading}"></div>
     <div :class="{hidden:loading}">
         <div  class="panel panel-flat">
             
@@ -44,7 +44,6 @@
             
             <div  class="panel-body">
                 <div  class="chart-wrapper"  >
-                    <!--<canvas id="lineCanvas" count="1"></canvas>   v-if="cmtLineLabels.length > 0 && totalQuantum > 0"-->
                     <scatter
                         :datasets="scatterDataSets"
                         :options="scatterOptions"
@@ -63,19 +62,19 @@
             :labels="labels"                        
             >
         </grid>
-    </div>
+    </div>-->
 
 
 </div>
 </template>
 <script>
 
-import 'chart.js';
-import 'hchs-vue-charts';
-import grid  from './../../reports/grid';
-import scatter from './reports/scatter';
 
- Vue.use(window.VueCharts);
+
+// import grid  from './../../reports/grid';
+// import scatter from './reports/scatter';
+
+//  Vue.use(window.VueCharts);
 
 
 
@@ -237,8 +236,7 @@ export default {
     },    
 
     components: {
-        grid,
-        scatter
+      
     },
     created() {
        

@@ -15,7 +15,7 @@
 
 <script>
 
-import horizontalBars from './D3/horizontalBars';
+import horizontalBars from '../charts/horizontalBars';
 
 export default {
     props: ['job', 'data'],

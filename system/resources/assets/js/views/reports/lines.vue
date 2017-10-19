@@ -13,7 +13,7 @@
 </template>
 <script>
 
-import timelines from './D3/timelines';
+import timelines from '../charts/timelines';
 
 export default {
 

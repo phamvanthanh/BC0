@@ -14,7 +14,7 @@
 
 </template>
 <script>
-import stackedBars from './D3/stackedBars';
+import stackedBars from '../charts/stackedBars';
 export default {
     props: ['job', 'data', 'labels'],
     data(){
