@@ -6,15 +6,12 @@
             <div class="page-title">
                 <page-label></page-label>       
             </div>
-
             <div class="heading-elements">
                 <div class="heading-btn-group" >
                    
                 </div>
             </div>
-        </div>
-
-    
+        </div>    
     </div>
     <div class="content">      
           

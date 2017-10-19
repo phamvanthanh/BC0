@@ -37,55 +37,52 @@
                 </div>
             </div>
           
-            <div class="panel-body">
-           
-                    <form @submit.prevent="onSubmit" method="post"  v-if="editMode" >
-                        <div class="row">
-                            <div class="col-sm-2 pl-0">
-                                <div class="form-group">
-                                    <label>Code: <span class="text-danger">*</span></label>
-                                    <input v-model="form.code" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>Name: <span class="text-danger">*</span></label>
-                                    <input v-model="form.name" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label>File: <span class="text-danger">*</span></label>
-                                    <input name="form.fileUpload" @change="onFileChange" id="file-input" class="" type="file" >
-                                </div>
+            <div class="panel-body">           
+                <form @submit.prevent="onSubmit" method="post"  v-if="editMode" >
+                    <div class="row">
+                        <div class="col-sm-2 pl-0">
+                            <div class="form-group">
+                                <label>Code: <span class="text-danger">*</span></label>
+                                <input v-model="form.code" class="form-control">
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-4 pl-0">
-                                <div class="form-group">
-                                    <label>Note: <span class="text-danger"></span></label>
-                                    <input v-model="form.note" class="form-control">
-                                </div>
-                            </div>
-                
-                            <div class="col-sm-1">
-                                <div class="form-group">
-                                    <label class="transparent" >*</label>
-                                    <button type="submit" class="btn btn-primary form-control">Save</button>
-                                </div>
-                            </div>
-                            <div class="col-sm-1">
-                                <div class="form-group">
-                                    <label class="transparent" >*</label>
-                                    <button @click="form.reset()" type="button" class="btn btn-default form-control">Clear</button>
-                                </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>Name: <span class="text-danger">*</span></label>
+                                <input v-model="form.name" class="form-control">
                             </div>
                         </div>
-                        
-                    </form>
-                    <div class="row horizontal-divider mb-10 "></div>
-               
-                
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>File: <span class="text-danger">*</span></label>
+                                <input name="form.fileUpload" @change="onFileChange" id="file-input" class="" type="file" >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 pl-0">
+                            <div class="form-group">
+                                <label>Note: <span class="text-danger"></span></label>
+                                <input v-model="form.note" class="form-control">
+                            </div>
+                        </div>
+            
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                                <label class="transparent" >*</label>
+                                <button type="submit" class="btn btn-primary form-control">Save</button>
+                            </div>
+                        </div>
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                                <label class="transparent" >*</label>
+                                <button @click="form.reset()" type="button" class="btn btn-default form-control">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </form>
+                <div class="row horizontal-divider mb-10 "></div>               
                 <div class="row">
                       <v-server-table 
                             ref="form_table"
@@ -110,8 +107,7 @@
                                     </li>
                                 </ul>
                             </template>
-                      </v-server-table>
- 
+                      </v-server-table> 
                 </div>
             </div>           
          

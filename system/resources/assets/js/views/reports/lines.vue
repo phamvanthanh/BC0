@@ -4,7 +4,7 @@
             v-if="datasets[0].data.length >0"
             :datasets="datasets"
             yText="Complete (%)"
-            :height="350"
+            :height="300"
             :width="width"
         >
         </timelines>
@@ -22,14 +22,14 @@ export default {
         return {     
             width: 0,
             datasets: [{
-                label: 'Quantify Progress %',
+                label: 'Quantified (%)',
                 data:[],             
-                color: 'rgba(255,0,0,0.6)'
+                color: 'orange'
               
             }, {
-                label: 'Audit Progress %',
+                label: 'Audited (%)',
                 data: [],               
-                color: 'rgba(76,175,80,0.8)'               
+                color: 'steelblue'               
             }],       
             
         }

@@ -1,17 +1,33 @@
-<template>   
-   <grid       
-        :data="gridData"
-        :labels="localLabels" >
-   </grid>
+<template>
+<div class="panel panel-flat" id="stackedbar_chart" >
+    <stacked-Bars
+        v-if="localdata"
+        :data ="localdata"
+        barHeight="20"
+        :width="width"
+        :options = "options"
+        
+    >
+    </stacked-bars>
+</div>
+
 </template>
 <script>
-import grid from './grid/grid';
+import stackedBars from './D3/stackedBars';
 export default {
     props: ['job', 'data', 'labels'],
     data(){
         return {
-            gridData: null,
-            localLabels: []
+            localdata: null, 
+            options: {
+                notations: [
+                    {name: 'Not Quantified', color: '#E8E8E8'},
+                    {name: 'Quantified', color: 'orange'},
+                    {name: 'Audited', color: 'steelblue' }],
+            },
+            width: 0
+            
+
         }
     },
     created() {
@@ -24,49 +40,52 @@ export default {
             this.gridData = this.data;
         }            
     },
+    mounted() {
+        this.width = document.getElementById('stackedbar_chart').offsetWidth - 100;
+    },
     watch: {
         'job.id': function(val) {
             this.getData(val);
         }
     },
-
     components: {
-        grid,
+        stackedBars
     },
-
+ 
     methods: {
-
         getData(id) {            
             axios.get('/api/jobs/'+id+'/quantity')
                  .then(({data})=>{
                      if(data){
-                          data = data.sort(function(a, b){
-                            return a.code - b.code > 0? 1 : a.code - b.code < 0? -1: 0;
+                        data = data.sort(function(a, b){
+                            return parseInt(b.code) - parseInt(a.code);
                         });
-                        this.localLabels = data.map(function(e) {
-                            return (e.name +' - '+ e.code).toString();
+                     
+                        var localdata = data.map(function(e) {
+                            return {
+                                label: e.name + ' - ' + e.code,
+                                code: e.code,
+                                quantum: e.quantum,
+                                packages: e.commit_array
+                                
+                            }
                         }); 
-                        this.gridData = data.map(function(e) {
-                            return e.commit_array.map(function(u){
-                                return {
-                                    
-                                    job_id: u.job_id,
-                                    code: e.code,
-                                    name: e.name,
-                                    package: u.name,
-                                    quantum: u.quantum,
-                                    totalQuantum: e.quantum,
-                                    quantified: u.commit == 1? 'Yes': 'No',
-                                    audited: u.a_commit == 1? 'Yes': 'No',
-                                    color: u.a_commit == 1? 'rgba(76,175,80,0.7)': u.commit == 1? 'rgba(255,0,0,0.4)': 'rgba(204, 204, 204, 0.3)',
-                                    
-                                }
-                            })                           
-                        });         
-                     }                              
 
-                 })           
-             
+                         this.localdata = localdata.map(function(e){
+                                var packages = e.packages
+                                for( var i = 0; i < packages.length; i++) {
+                                
+                                    if(i > 0)
+                                        packages[i].x = packages[i-1].x + packages[i].quantum;
+                                    else
+                                        packages[i].x = 0;
+                                }
+                                return e;
+                        });
+
+        
+                    }                 
+            })             
         }
     }
 }

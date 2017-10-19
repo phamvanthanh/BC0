@@ -40,8 +40,7 @@
                                 <router-link :to="{name: 'myjob.info', params: {id: props.row.id}}" ><i class="icon-unfold"></i></router-link>
                             </template>
                     </v-client-table>     
-                </div>
-               
+                </div>               
             </div>        
         </div>
     </div>

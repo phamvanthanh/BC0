@@ -1,6 +1,6 @@
 <template>
 
-    <svg :width="width" :height="height">
+    <svg  >
 
     </svg>
 
@@ -22,11 +22,11 @@ export default {
            
             var title = this.yText,
             datasets = this.datasets,
-            svg = d3.select("svg"),
-            margin = {top: 20, right: 20, bottom: 30, left: 50},
-            width = +svg.attr("width") - margin.left - margin.right,
-            height = +svg.attr("height") - margin.top - margin.bottom,
-            g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+          
+            margin = {top: 60, right: 20, bottom: 30, left: 100},
+            width = this.width - margin.left - margin.right,
+            height = this.height - margin.top - margin.bottom;
+            
             var parseTime = d3.timeParse("%Y-%m-%d %H:%M:%S");
 
             var maxs = datasets.map(function(e){
@@ -60,21 +60,27 @@ export default {
                 .x(function(d) { return x(parseTime(d.x)); })
                 .y(function(d) { return y(d.y); });
 
+            var svg = d3.select("svg")
+                .attr("width", width + margin.left + margin.right)
+                .attr("height", height + margin.top + margin.bottom),
+                        
+            g = svg.append("g")
+                       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
                 g.append("g")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x))
-                .select(".domain")
-                .remove();
+                 .attr("transform", "translate(0," + height + ")")
+                 .call(d3.axisBottom(x))
+                 .select(".domain")
+                 .remove();
                 
                 g.append("g")
-                .call(d3.axisLeft(y))
-                .append("text")
-                .attr("fill", "#000")
-                .attr("transform", "rotate(-90)")
-                .attr("y", 6)
-                .attr("dy", "0.71em")
-                .attr("text-anchor", "end")
-                .text(title);
+                 .call(d3.axisLeft(y))
+                 .append("text")
+                 .attr("fill", "#000")
+                 .attr("transform", "rotate(-90)")
+                 .attr("y", 6)
+                 .attr("dy", "0.71em")
+                 .attr("text-anchor", "end")
+                 .text(title);
 
             
             for(var i = 0; i < datasets.length; i++) {
@@ -88,7 +94,31 @@ export default {
                 .attr("stroke-linecap", "round")
                 .attr("stroke-width", 1.5)
                 .attr("d", line);
-            }            
+            }   
+
+            var legend = svg.append("g")
+                .attr("class", "legend_container")
+                .attr("transform", "translate(" + (width + margin.left + margin.right) + "," + 20 + ")" );
+
+            var legend_items = legend.selectAll('g.legend')
+                .data(datasets)
+                .enter()
+                .append('g')
+                .attr('class', 'legend')
+                .attr('transform', function(d, i) { return  'translate(' + (150*i - 150*(datasets.length)) + ',' + 0 + ')'; });
+
+            legend_items.append('rect')
+                .attr('width', 18)
+                .attr('height', 18)
+                .attr('x', 0)
+                .attr('fill', function(d){
+                    return d.color;
+                });
+            legend_items.append('text')
+                .attr('x', 23)
+                .attr("y", 9)
+                .attr("dy", ".35em")                
+                .text(function(d) { return d.label; });         
         }
     }
 }

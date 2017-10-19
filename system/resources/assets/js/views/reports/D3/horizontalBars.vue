@@ -1,35 +1,34 @@
 <template>
-    <svg >
+    <svg id="horizontalbar_svg">
 
     </svg>
 </template>
 <script>
 export default {
-    props: ['data', 'barHeight', 'width', "keys", "colors"],
+    props: ['data', 'barHeight', 'width', "keys", "options"],
 
     mounted() {
-        this.initStackedBarChart();
+        this.initBarChart();
     },  
     methods: {
-        initStackedBarChart() {
+        initBarChart() {
             var data = this.data,
             keys = this.keys,
-            colors = this.colors,
-            margin = {top: 20, right: 20, bottom: 30, left: 100},                      
+            notes = this.options.notations,
+            margin = {top: 60, right: 20, bottom: 30, left: 100},                      
             height = this.barHeight*this.data.length,
 
             // select svg chart container
-            svg = d3.select("svg"),            
+            svg = d3.select("svg#horizontalbar_svg"),            
             // set y axis
             y = d3.scaleBand()
                     .range([height, 0])
-                    .padding(0.2)
+                    .padding(0.1)
                     .domain(data.map(function(d) {  return d.label; }));
             
             //Add left axis group and build
             var yAxisContainer = svg.append("g")
-                  .attr('class', 'item_label')
-              
+                  .attr('class', 'item_label')              
                   .call(d3.axisLeft(y));
 
             var maxw = 0; //Find max label width
@@ -65,7 +64,7 @@ export default {
                 .enter()
                 .append("rect")
                 .attr("class", keys[i])
-                .attr("fill", colors[i])
+                .attr("fill", notes[i].color)
                 .attr("width", function(d) {return x(d[keys[i]]); } )
                 .attr("y", function(d) { return y(d.label); })
                 .attr("height", y.bandwidth());
@@ -77,6 +76,30 @@ export default {
                 .attr("transform", "translate(" + 0 +"," + height +")")
                 .attr('class', 'xAxis')
                 .call(d3.axisBottom(x));
+
+            var legend = svg.append("g")
+                .attr("class", "legend_container")
+                .attr("transform", "translate(" + (width + margin.left + margin.right) + "," + 20 + ")" );
+
+            var legend_items = legend.selectAll('g.legend')
+                .data(notes)
+                .enter()
+                .append('g')
+                .attr('class', 'legend')
+                .attr('transform', function(d, i) { return  'translate(' + (150*i - 150*(notes.length)) + ',' + 0 + ')'; });
+
+            legend_items.append('rect')
+                .attr('width', 18)
+                .attr('height', 18)
+                .attr('x', 0)
+                .attr('fill', function(d){
+                    return d.color;
+                });
+            legend_items.append('text')
+                .attr('x', 23)
+                .attr("y", 9)
+                .attr("dy", ".35em")                
+                .text(function(d) { return d.name; });
         }
     }
 }

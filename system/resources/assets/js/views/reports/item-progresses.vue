@@ -6,7 +6,7 @@
             barHeight="18"
             :width="width"
             :keys="keys"
-            :colors="colors"
+            :options="options"
             >
         </horizontal-bars>
     </div>
@@ -26,6 +26,12 @@ export default {
             keys: ['quantify', 'audit'],
             colors: ["rgb(255, 165, 0)", "rgb(70, 130, 180)" ],
             localdata: null,
+            options: {
+                notations: [
+                    {name: 'Quantified (%)', color: "rgb(255, 165, 0)"},
+                    {name: 'Audited (%)', color: "rgb(70, 130, 180)"}
+                ]
+            }
           
         }
     },
