@@ -19,7 +19,11 @@
 
     <div class="content">
        
+        <div class="panel panel-flat">
+            <dashboard>
 
+            </dashboard>
+        </div>
               
      
     </div>
@@ -29,62 +33,60 @@
 
 </template>
 <script>
-// import dashboard from './dashboard';
+import dashboard from './dashboard';
 
 export default {
 
 
     created() {
-        if(this.$store.state.user.roles) {
-            if(this.hasRole(this.$store.state.user.roles, 'client')) 
-                router.push({name: 'client.projects'})
+        // if(this.$store.state.user.roles) {
+        //     if(this.hasRole(this.$store.state.user.roles, 'client')) 
+        //         router.push({name: 'client.projects'})
             
-            if(this.hasRole(this.$store.state.user.roles, 'admin')) 
-                router.push({name: 'admin.users'})
+        //     if(this.hasRole(this.$store.state.user.roles, 'admin')) 
+        //         router.push({name: 'admin.users'})
 
-            if(this.hasRole(this.$store.state.user.roles, 'project_manager')) 
-                router.push({name: 'myjobs'})
+        //     if(this.hasRole(this.$store.state.user.roles, 'project_manager')) 
+        //         router.push({name: 'myjobs'})
 
-            if(this.hasRole(this.$store.state.user.roles, 'qto_controller')) 
-                router.push({name: 'myjobs'})
+        //     if(this.hasRole(this.$store.state.user.roles, 'qto_controller')) 
+        //         router.push({name: 'myjobs'})
 
-            if(this.hasRole(this.$store.state.user.roles, 'surveyor')) 
-                router.push({name: 'myjobs'})
+        //     if(this.hasRole(this.$store.state.user.roles, 'surveyor')) 
+        //         router.push({name: 'myjobs'})
             
-            if(this.hasRole(this.$store.state.user.roles, 'project_director')) 
-                router.push({name: 'desk.projects'})
-        }
-
-    
+        //     if(this.hasRole(this.$store.state.user.roles, 'project_director')) 
+        //         router.push({name: 'desk.projects'})
+        // }  
     
 
     },
     watch: {
-        '$store.state.user.roles': function(val) {
+        // '$store.state.user.roles': function(val) {
 
            
-            if(hasRole(val, 'client')) 
-                router.push({name: 'client.projects'})
+        //     if(hasRole(val, 'client')) 
+        //         router.push({name: 'client.projects'})
             
-            if(hasRole(val, 'admin')) 
-                router.push({name: 'admin.users'})
+        //     if(hasRole(val, 'admin')) 
+        //         router.push({name: 'admin.users'})
 
-            if(hasRole(val, 'project_manager')) 
-                router.push({name: 'myjobs'})
+        //     if(hasRole(val, 'project_manager')) 
+        //         router.push({name: 'myjobs'})
 
-            if(hasRole(val, 'qto_controller')) 
-                router.push({name: 'mytjobs'})
+        //     if(hasRole(val, 'qto_controller')) 
+        //         router.push({name: 'mytjobs'})
 
-            if(hasRole(val, 'surveyor')) 
-                router.push({name: 'myjobs'})
+        //     if(hasRole(val, 'surveyor')) 
+        //         router.push({name: 'myjobs'})
 
-            if(hasRole(val, 'project_director')) 
-                router.push({name: 'desk.projects'})
+        //     if(hasRole(val, 'project_director')) 
+        //         router.push({name: 'desk.projects'})
 
-        }
+        // }
     },
     components: {
-        // dashboard,
+        dashboard,
     },
 
     methods: {

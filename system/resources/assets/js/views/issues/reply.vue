@@ -1,7 +1,7 @@
 <template>
     <li class="issue-reply list-group-item">
         <div class="reply-heading">
-            <span class="fs-14 ">{{reply.role}} </span><span class="text-muted"> {{reply.created_at}}</span><a v-if="reply.user_id == $store.state.user.id"
+            <span class="fs-14 ">#{{reply.job_id}} {{reply.role}} </span><span class="text-muted"> {{reply.created_at}}</span><a v-if="reply.user_id == $store.state.user.id"
                 @click="edit" class="edit-reply pull-right"><i class="icon-pencil3"></i></a>
             <p v-if="!isEditReply" class="pt-10, pl-20" v-html="reply.reply"> </p>
         </div>

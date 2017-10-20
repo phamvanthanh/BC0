@@ -210,7 +210,7 @@ let routes = [
                         name: 'myjob.reports',
                         component: require('./views/myjobs/job/reports'),
                         meta: { 
-                            display: "Quantity Progressive Reports",
+                            display: "Quantity Reports",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
                             fail: './views/error'
                         }

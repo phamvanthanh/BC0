@@ -16,7 +16,7 @@
                 :options="options">
 
                 <template slot="isAwarded" scope="props"> 
-                        <span :class="[props.row.isAwarded == 'Yes'? 'label-success': 'label-default', 'label' ]">{{props.row.isAwarded}}</span>
+                    <span :class="[props.row.isAwarded == 'Yes'? 'label-success': 'label-default', 'label' ]">{{props.row.isAwarded}}</span>
                     
                 </template>
                 <template slot="actions" scope="props">

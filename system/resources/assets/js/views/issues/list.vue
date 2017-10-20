@@ -20,7 +20,7 @@
                     :key="issue.id" 
                     class="list-group-item">
                     <span class="mr-5"><i :class="[issue.status=='closed'? 'text-success': 'text-warning','icon-notification2']"></i></span>
-                    <span><router-link :to="{name: $route.name+'.issue', params:{iid:issue.id}}" class="fs-16" >{{issue.title}}</router-link></span><br>
+                    <span><router-link :to="{name: $route.name+'.issue', params:{iid:issue.id}}" class="fs-16" >{{issue.title}} - #{{issue.id}}</router-link></span><br>
                     <span class="text-muted pl-25" >Opened by {{issue.jobable_name}} {{issue.role}} {{issue.created_at}}</span>                
                 </li>       
 

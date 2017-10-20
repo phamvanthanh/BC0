@@ -15,13 +15,14 @@
            <div class="search-input form-group " >
                 <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
            </div>    
-           <div  id="hot-preview">            
-                <HotTable   ref="hot"
-                            :root="root" 
-                            :settings="hotSettings"
-                            :data="leaves"
-                            
-                            >
+           <div  id="client_quantity">            
+                <HotTable   
+                    ref="client_quantity"
+                    :root="root" 
+                    :settings="hotSettings"
+                    :data="leaves"
+                    
+                    >
                 </HotTable>            
            </div>        
     </div>
@@ -31,15 +32,9 @@
 </template>
 <script>
 
-// import moment from 'moment';
-// import numbro from 'numbro';
-// import pikaday from 'pikaday';
-// import Zeroclipboard from 'zeroclipboard';
+
 import HotTable from 'vue-handsontable-official';
-
 import Handsontable from 'handsontable';
-
-
 
 function strip_tags(input, allowed) {
     var tags = /<\/?([a-z][a-z0-9]*)\b[^>]*>/gi,
@@ -110,7 +105,8 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
                 leaves:  null,
                 root: 'quantity',
                 hotSettings: {
-                  startCols: 10,           
+                  startCols: 10, 
+                  renderAllRows: true,           
                   rowHeaders: true,            
                   className: "htLeft",
                   rowHeaders: true,
@@ -120,7 +116,7 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
                          
                           {data: 'code', readOnly: true, colWidths: '100px'},
                           {data: 'name', readOnly: true, colWidths: function(){
-                               return document.getElementById('hot-preview').offsetWidth - 410;
+                               return document.getElementById('client_quantity').offsetWidth - 410;
                           }},
                           {data: 'unit', readOnly: true, colWidths: '45px'},                         
                           {data: 'a_quantity', readOnly:true, colWidths: '80px'},                       
@@ -128,7 +124,7 @@ function Amrkd(instance, td, row, col, prop, value, cellProperties) {
                           {data: '', renderer: Amrkd, readOnly: true, colWidths: '45px'},
                           {data: 'p_commit', type: 'checkbox', readOnly: true, colWidths: '45px'}
                   ],
-                  colHeaders: ['Code', 'Name', 'Unit', 'Quantity', 'AFile', 'AMrk', 'Cmt'],
+                  colHeaders: ['Code', 'Name', 'Unit', 'Qty', 'CFile', 'CMrk', 'Cmt'],
        
                 }
             }        

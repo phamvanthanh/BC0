@@ -43,7 +43,7 @@
 }
 .accordion-content > li > a {
     display: block;
-    padding: 3px 20px;
+    padding: 3px 10px 3px 35px;
     clear: both;
     font-weight: normal;
     line-height: 1.42857143;
@@ -57,7 +57,7 @@
     margin-top: -7px;
 }
 
-.navbar li > .has-ul:after {
+.navbar li > .has-ul:before {
     content: "\e9c7";
     font-family: "icomoon";
     float: right;
@@ -65,7 +65,7 @@
 }
 
 
-.navbar li > .has-ul.active:after {
+.navbar li > .has-ul.active:before {
     transform: rotate(90deg);
 }
 

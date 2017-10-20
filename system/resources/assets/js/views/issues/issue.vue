@@ -3,19 +3,19 @@
     <div :class="{loader:loading}"></div>
     <div :class="{hidden:loading}"  class="panel-heading">
         <div class="pull-left col-md-6">
-            <span class="panel-title fs-18">{{issue.title}} #{{issue.id}}</span><br>
+            <span class="panel-title fs-18">{{issue.title}} - #{{issue.id}}</span><br>
              <span class="text-muted pull-left"  >         
                  <span  :class="['label mr-5 pt-5 pb-5', issue.status=='closed'?'label-success': 'label-warning']"><i class="icon-notification2"></i><span class="fs-15" v-if="issue" > {{issue.status | capitalize}}</span></span>{{issue.role}} opened {{issue.created_at}}
             </span>
         </div>
         <div class="heading-elements">
-            <ul class="pt-10">
-                <li v-if="isOpener" ><router-link :to="{name: $route.name+'.edit'}" ><button class="btn btn-default" >Edit</button></router-link></span></li>
-                <li v-if="isOpener && isOpen" ><button  @click="closeIssue" class="btn btn-primary" >Close Issue</button></li>  
-                <li v-if="isOpener && !isOpen" ><button  @click="openIssue" class="btn btn-danger" >Open Issue</button></li>           
-                <li><router-link :to="{name: $route.meta.parentName+'.new'}" ><button class="btn btn-success" >New Issue</button></router-link></span></li> 
+            <div class="pt-10 heading-btn-group">
+                <router-link v-if="isOpener" :to="{name: $route.name+'.edit'}"  ><button class="btn btn-default" >Edit</button></router-link>
+                <button v-if="isOpener && isOpen" @click="closeIssue"  class="btn btn-primary ml-10" >Close Issue</button>
+                <button v-if="isOpener && !isOpen"  @click="openIssue" class="btn btn-danger ml-10" >Open Issue</button>        
+                <router-link :to="{name: $route.meta.parentName+'.new'}" class="ml-10" ><button class="btn btn-success" >New Issue</button></router-link>
                 
-            </ul>
+            </div>
         </div>
     </div>
     
@@ -165,7 +165,7 @@ export default {
                                      user_id: e.user_id,
                                      reply: e.reply,
                                      created_at: moment(e.created_at).startOf('hour').fromNow(),
-                                     role: e.job.jobable_type == 'package'? 'Surveyor': e.job.jobable_type == 'group'? 'Controller': (e.job.jobable_type == 'project' && e.user_id == e.job.jobable.user_id)? 'Client' : 'Project Manager',  
+                                     role: e.job.jobable_type == 'package'? 'Surveyor': e.job.jobable_type == 'section'? 'Controller': (e.job.jobable_type == 'project' && e.user_id == e.job.jobable.user_id)? 'Client' : 'Project Manager',  
                                  }
                              })
 

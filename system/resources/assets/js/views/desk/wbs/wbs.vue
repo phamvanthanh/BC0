@@ -12,7 +12,7 @@
   </div>
 
   <div class="content">
-    <div :class="{loader:loading}"></div>   
+    <i :class="{loader:loading}"></i>    
     <div :class="{hidden:loading}" class="panel panel-flat">
       <div class="panel-heading">  
         <input id="wbs-search"  placeholder="Search..." @keyup="search" >   				

@@ -7,11 +7,11 @@ div.content .panel {
 }
 
 .panel {
-    margin-bottom: 10px;  
+    margin: 20px 20px 10px 20px !important;  
 }
 
 .panel-title {
-    float: left;
+    // float: left;
 }
 .panel-body {
     clear: both;
@@ -216,4 +216,27 @@ div.quillWrapper .ql-toolbar {
 
 .search-input {
     padding-right: calc(100% - 176px);
+}
+
+//Handsontable Style
+
+.wtHolder {
+
+  height: auto !important;
+}
+
+.wtHider {
+  padding: 0 5px 5px 0;
+}
+
+.ht_clone_top {
+  width: auto !important;
+}
+
+.ht_clone_left {
+  height: auto !important;
+}
+
+.ht_clone_top, .ht_clone_left, .ht_clone_top_left_corner {
+  z-index: 1 !important;
 }

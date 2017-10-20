@@ -20,7 +20,7 @@
                         Name: {{info.jobable.name}}<br>
                         Type: {{info.jobable_type | capital}}<br>
                         Project: {{info.project.name}}<br>
-                        Nation: {{info.project.nation.name }}
+                        Nation: {{info.project.nation_abbr }}
 
                     </div>
                     <div class="col-md-5">                     

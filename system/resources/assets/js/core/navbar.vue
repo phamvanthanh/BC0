@@ -35,8 +35,8 @@
 
                 <span>Your Roles</span>
               </a>
-              <ul class="panel accordion-content hidden pb-0 mb-0">
-                <li v-for="role in user.roles"><a href="#">{{role.display_name}}</a></li>
+              <ul class="accordion-content hidden  pb-0 mb-0">
+                <li v-for="role in user.roles" ><a href="#"  >{{role.display_name}}</a></li>
 
               </ul>
             </li>
@@ -82,7 +82,7 @@ export default {
   methods: {
     stay(e) {      
         e.stopPropagation();
-        var x = $('ul.panel.accordion-content').toggleClass('hidden');
+        var x = $('ul.accordion-content').toggleClass('hidden');
         $(e.target).toggleClass('active');
     },
     countAllUnreads() {

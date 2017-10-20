@@ -40,7 +40,7 @@
                         </template>
                         <template slot="actions" scope="props">
                             <div>
-                                <router-link :to="{name: 'desk.project.info', params: {pid: props.row.id}}" ><i class="icon-unfold"></i></router-link>
+                                <router-link :to="{name: 'desk.project.info', params: {pid: props.row.id}}" class="text-primary" ><i class="icon-unfold"></i></router-link>
                             </div>
                         </template>
                     </v-server-table>

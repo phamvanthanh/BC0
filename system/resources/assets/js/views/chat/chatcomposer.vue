@@ -68,12 +68,13 @@ export default {
                 this.form.recipient_id = this.contact.recipient_id;
                 this.form.post('/api/messages')
                         .then(()=>{
-                            this.form.reset();                        
+                                                   
                         })
                         .catch(()=>{
                             bus.$emit('messagenotsent', message);
-                            this.form.reset();
+                            
                         });
+                this.form.reset();
             }
         }
         

@@ -5,7 +5,7 @@
     <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager")' to="/myjobs">My Jobs</router-link>
     <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager|project_directors|sales_manager")' to="/bids">My Bids</router-link>
     <router-link v-if='$can("superuser|surveyor|qto_controller|project_manager|project_directors|sales_manager")' to="/jobs">Jobs</router-link>
-    <router-link v-if='$can("surveyor|qto_controller|project_manager")' to="/messenger">Messages</router-link>
+    <router-link  to="/messenger">Messages</router-link>
     <router-link v-if='$can("surveyor|qto_controller|project_manager|project_director|superuser")' title="Forms" to="/forms" >Forms</router-link>
     <span v-if='$can("superuser|project_director|sales_manager")' >DESK</span>
     <router-link v-if='$can("superuser|project_director|sales_manager")' to="/desk/projects">Projects</router-link>    
@@ -20,7 +20,7 @@
     <router-link v-if='$can("superuser|admin")' to="/admin/nations">Nations</router-link>
     <router-link v-if='$can("superuser|admin")' to="/admin/forms">Forms</router-link>
     <span v-if='$can("superuser|admin")' >CLIENTS </span>
-    <router-link v-if='$can("superuser|client")' to="/clients/projects">Projects</router-link>
+    <router-link v-if='$can("client")' to="/clients/projects">Projects</router-link>
     <router-link v-if='$can("client")' to="/messenger">Messages</router-link>
     
   </div>

@@ -12,7 +12,7 @@
     </div>
     
     <div  :class="{hidden:loading}" class="panel-body">
-        <div v-if="leaves.length > 0" > 
+        <div v-if="leaves" > 
             <div class="search-input form-group " >
                 <input id="search_field" type="search" class="form-control" v-model="searchString" @keyup="search" placeholder="Search">
             </div>
@@ -119,8 +119,8 @@ function Diff(instance, td, row, col, prop, value, cellProperties) {
       
       var rowData = instance.getSourceDataAtRow(row);
       if(rowData.quantity && rowData.quantity  != 0 && rowData.a_quantity  ) {
-         
-          if(abs(diff) > rowData.difference)
+          var diff = rowData.a_quantity - rowData.quantity;
+          if(Math.abs(diff) > rowData.difference)
             td.style.color = '#ff3333'; 
           td.innerHTML = diff/rowData.quantity;
       } 
@@ -189,7 +189,7 @@ export default {
                         {data: 'a_commit', type: 'checkbox', readOnly: true, colWidths: '45px'},
                         {data: 'p_commit', type: 'checkbox', readOnly: true, colWidths: '45px'}
                 ],
-                colHeaders: ['Code', 'Name', 'Unit', 'Quantity', 'CQuantity', 'Diff', 'absDiff', 'File', 'Mrk.', 'Cmt.', 'File', 'Mrk.', 'CCmt.', 'PCmt.'],
+                colHeaders: ['Code', 'Name', 'Unit', 'Qty', 'CQty', 'Diff', 'AbsDiff', 'File', 'Mrk.', 'Cmt.', 'File', 'Mrk.', 'CCmt.', 'PCmt.'],
     
     
             }

@@ -5,7 +5,6 @@ namespace system\Http\Controllers;
 use Illuminate\Http\Request;
 
 use DB;
-use PDO;
 use Response;
 use system\Models\Project;
 use system\Models\User;

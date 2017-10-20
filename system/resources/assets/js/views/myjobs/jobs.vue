@@ -37,7 +37,7 @@
                                 {{props.row.jobable_type | capital}}
                             </template>
                             <template slot="actions" scope="props">
-                                <router-link :to="{name: 'myjob.info', params: {id: props.row.id}}" ><i class="icon-unfold"></i></router-link>
+                                <router-link :to="{name: 'myjob.info', params: {id: props.row.id}}" class="text-primary" ><i class="icon-unfold"></i></router-link>
                             </template>
                     </v-client-table>     
                 </div>               
@@ -118,7 +118,7 @@ export default {
                             name: e.info.jobable.name,
                             jobable_type: capitalize(e.info.jobable_type),
                             project: e.info.project.name,
-                            nation: e.info.project.nation.abbreviation,
+                            nation_abbr: e.info.project.nation_abbr,
                             from_date: moment(e.info.from_date).format('YY/MM/DD'),
                             to_date: moment(e.info.to_date).format('YY/MM/DD'),
                             status: e.info.status

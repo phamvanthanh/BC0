@@ -72,7 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     // });
 
   
-    Route::get('{all}', function () {
+Route::get('{all}', function () {
         $user = new UsersController;
         $user = $user->loggedInUser();
         return view('index')->with('user', $user); 
@@ -238,6 +238,9 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::get('/forms', ['uses' => 'FormsController@index']);
     Route::get('/forms/{id}', ['uses' => 'FormsController@show']);
     Route::post('/forms/delete', ['uses' => 'FormsController@delete']);
+
+    //Dashboard
+    Route::get('/dashboard/countprojects', 'DashBoardController@countProjects');
 
     });
     

@@ -1,13 +1,14 @@
 <template>
 
 
-    <dashboard :is="currentDashboard">
-    </dashboard>
+    <projects>
+    
+    </projects>
 
 </template>
 
 <script>
-import pm from './dashboards/projectManager.vue';
+import projects from './dashboards/projects.vue';
 import qtoc from './dashboards/qtoController.vue';
 import qs from './dashboards/surveyor.vue';
 import admin from './dashboards/admin.vue';
@@ -23,39 +24,14 @@ import client from './dashboards/client.vue';
             
         },
         computed: {
-            currentDashboard: function() {
-                var current = '';
-                switch(this.role) {
-                    case 'admin': 
-                        current = 'admin';
-                        break;
-                    
-                    case 'project_manager': 
-                        current = 'pm';
-                        break;
-
-                    case 'surveyor': 
-                        current = 'qs';
-                        break;
-
-                    case 'qto_controller': 
-                        current = 'qtoc';
-                        break;
-                    case 'client': 
-                        current = 'client';
-                        break;
-                    default:
-                        break;
-                }
-                return current;
-            } 
+            
         },
         mounted() {
         
               
         },
         components: {
-            pm,
+            projects,
             qtoc,
             qs,
             admin,

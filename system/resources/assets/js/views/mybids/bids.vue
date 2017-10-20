@@ -37,7 +37,7 @@
                                 {{props.row.jobable_type | capital}}
                             </template>
                             <template slot="actions" scope="props">
-                                <router-link :to="{name: 'job', params: {id: props.row.id}}"><i class="icon-unfold"></i></router-link>
+                                <router-link :to="{name: 'job', params: {id: props.row.id}}" class="text-primary" ><i class="icon-unfold"></i></router-link>
                             </template>
                     </v-server-table>     
                 </div>

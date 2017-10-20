@@ -38,7 +38,7 @@
                         </template>
                         <template slot="actions" scope="props">
                            
-                                <router-link :to="{name: 'desk.job', params: {id: props.row.id}}" ><i class="icon-unfold"></i></router-link>
+                                <router-link :to="{name: 'desk.job', params: {id: props.row.id}}"  class="text-primary" ><i class="icon-unfold"></i></router-link>
                            
                         </template>
                         <template slot="bid_status" scope="props">  

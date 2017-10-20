@@ -12,7 +12,7 @@ export default {
         initTree() {
             var treeData = this.data;
             // Set the dimensions and margins of the diagram
-            var margin = {top: 20, right: 90, bottom: 30, left: 100},
+            var margin = {top: 20, right: 90, bottom: 30, left: 200},
                 width = this.width - margin.left - margin.right,
                 height = this.height - margin.top - margin.bottom;
 
@@ -120,6 +120,10 @@ export default {
                     return d.children || d._children ? "end" : "start";
                 })
                 .text(function(d) { return d.data.name; });
+            
+          
+                
+                
 
             // UPDATE
             var nodeUpdate = nodeEnter.merge(node);
@@ -227,17 +231,18 @@ export default {
 .node circle {
   fill: #fff;
   stroke: steelblue;
-  stroke-width: 3px;
+  stroke-width: 2px;
 }
 
 .node text {
   font: 12px sans-serif;
+  background-color: #fff;
 }
 
 .link {
   fill: none;
   stroke: #ccc;
-  stroke-width: 2px;
+  stroke-width: 1px;
 }
 
 </style>

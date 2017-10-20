@@ -30,7 +30,7 @@
                              {{props.row.first_name}} {{props.row.last_name}}                          
                         </template>
                         <template slot="actions" scope="props">                        
-                                <router-link :to="{name: 'desk.client', params: {uid: props.row.id}}" ><i class="icon-unfold"></i></router-link>
+                                <router-link :to="{name: 'desk.client', params: {uid: props.row.id}}"  class="text-primary" ><i class="icon-unfold"></i></router-link>
                         </template>
                
                     </v-server-table>
