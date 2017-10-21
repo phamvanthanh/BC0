@@ -11,8 +11,11 @@ class DashBoardController extends Controller
         
         $projectUti = new ProjectUti;
         $count = [
-            'actives' => $projectUti->countActiveProjects(),
-            'finishes'=> $projectUti->countFinishedProjects()
+            'actives'  => $projectUti->countActiveProjects(),
+            'awardeds' => $projectUti->countUnwardedProjects(),
+            'finishes' => $projectUti->countFinishedProjects(),
+            'all'      => $projectUti->countAllProjects()
+            
         ];
         return $count;
     }

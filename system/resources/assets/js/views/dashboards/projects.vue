@@ -1,15 +1,21 @@
 <template>
 <div class="panel panel-flat">
     <div class="panel panel-flat">
-							
+        <div class="panel-heading">
+            <h6 class="panel-title">Projects</h6>
+            <div class="heading-elements">
+                
+            </div>
+        </div>
+    
         <div class="container-fluid">
                 <div class="row">
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <ul class="list-inline text-center">
                            
                             <li class="text-center">
                                 <div class="fw-600 fs-30">{{counts.actives}}</div>
-                                <div class="text-bold">Active Projects</div>
+                                <div class="text-bold">Active</div>
                             </li>
                         </ul>
 
@@ -18,12 +24,12 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <ul class="list-inline text-center">
                      
                             <li class="text-center">
-                                <div class="fw-600 fs-30">{{counts.finishes}}</div>
-                                <div class="text-bold">Finished Projects</div>
+                                <div class="fw-600 fs-30">{{counts.awardeds}}</div>
+                                <div class="text-bold">Awarded</div>
                             </li>
                         </ul>
 
@@ -32,14 +38,25 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-4">
+                    <div class="col-lg-3">
                         <ul class="list-inline text-center">
-                            <li>
-                                <a href="#" class="btn border-indigo-400 text-indigo-400 btn-flat btn-rounded btn-icon btn-xs valign-text-bottom"><i class="icon-people"></i></a>
+                         
+                            <li class="text-center">
+                                <div class="fw-600 fs-30">{{counts.finishes}}</div>
+                                <div class="text-bold">Finished</div>
                             </li>
-                            <li class="text-left">
-                                <div class="text-semibold">Total online</div>
-                                <div class="text-muted"><span class="status-mark border-success position-left"></span> 5,378 avg</div>
+                        </ul>
+
+                        <div class="col-lg-10 col-lg-offset-1">
+                            <div class="content-group" id="total-online"></div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <ul class="list-inline text-center">
+                         
+                            <li class="text-center">
+                                <div class="fw-600 fs-30">{{counts.all}}</div>
+                                <div class="text-bold">Total</div>
                             </li>
                         </ul>
 

@@ -26,9 +26,7 @@ class QuantityMarkdownsController extends Controller
             
             );
             return response(['Markdown upload succeed.'], 200);
-        }
-        
-     
+        }   
 
     }
 }

@@ -13,7 +13,7 @@ class ProjectUti extends Controller
         return DB::table('projects')
                 ->join('jobs', function($q){
                     $q->on('projects.id', '=', 'jobs.jobable_id')
-                        ->where('jobs.jobable_type', 'project');
+                      ->where('jobs.jobable_type', 'project');
                 })
                 ->where('jobs.status', 'active')
                 ->count();
@@ -30,12 +30,19 @@ class ProjectUti extends Controller
          return DB::table('projects')
                     ->join('jobs', function($q){
                         $q->on('projects.id', '=', 'jobs.jobable_id')
-                            ->where('jobs.jobable_type', 'project');
+                          ->where('jobs.jobable_type', 'project');
                     })
                     ->where('jobs.status', 'finished')
                     ->count();
     } 
     public function countUnwardedProjects() {
-        
+        return DB::table('projects')
+                 ->join('jobs', function($q){
+                        $q->on('projects.id', '=', 'jobs.jobable_id')
+                            ->where('jobs.jobable_type', 'project');
+                   })
+                 ->join('bids', 'jobs.id', '=', 'bids.job_id') 
+                 ->where('bids.status', 'awarded')
+                 ->count();
     }
 }

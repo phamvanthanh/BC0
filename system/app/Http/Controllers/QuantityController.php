@@ -3,18 +3,14 @@
 namespace system\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-use Illuminate\Support\Facades\Auth;
-
+// use Illuminate\Support\Facades\Auth;
 use system\Models\Quantity;
 use system\Models\Job;
 use system\Models\Section;
 use system\Models\Package;
 use system\Http\Controllers\swbsController;
 use system\Http\Requests\QuantityForm;
-
 use Maatwebsite\Excel\Facades\Excel;
-// use LynX39\LaraPdfMerger\PdfManage;
 
 use DB;
 use ZipArchive;
@@ -268,9 +264,7 @@ class QuantityController extends Controller
            
 
     } 
-    
-   
-    
+      
     public function index($jid) { 
 
         return $this->pullJobItems($jid);          
@@ -450,7 +444,6 @@ class QuantityController extends Controller
 
                     }
                    
-                  
                     if($item['combined_markdowns']) {
                         
                         $file_array = $item['combined_markdowns'];    
@@ -460,20 +453,10 @@ class QuantityController extends Controller
                 }
           }
           
-          $down_name = $jid.'_'.$code.'_mrkd';
-
-        // //   $pdf = new PdfManage;
+          $down_name = $jid.'_'.$code.'_mrkd';     
 
           if(!empty($file_array)) {
-        //     //  foreach($file_array as $file) {
-                 
-        //     //      $pdf->addPDF($file, 'all');
-
-        //     //  }
-        //     //  $pdf->merge('download', $down_name);
-
-        //     // $files = array('readme.txt', 'test.html', 'image.gif');
-        //     // $file_array
+   
             $zipname = $down_name.'.zip';
             $zip = new ZipArchive;
             if($zip->open($zipname, ZipArchive::CREATE) === TRUE) {
@@ -489,7 +472,6 @@ class QuantityController extends Controller
             header('Content-Length: ' . filesize($zipname));
             readfile($zipname);
 
-            // response()->download($zipname); 
             unlink($zipname);
             return;
 
@@ -517,7 +499,6 @@ class QuantityController extends Controller
                         
                     }
                      
-
                     if($item['combined_a_markdowns']) {
                         
                         $file_array = $item['combined_a_markdowns'];    
@@ -527,18 +508,9 @@ class QuantityController extends Controller
                 }
           }
           
-          $down_name = $jid.'_'.$code.'_amrkd';
-
-        //   $pdf = new PdfManage;
+          $down_name = $jid.'_'.$code.'_amrkd';    
 
           if(!empty($file_array)) {
-        //      foreach($file_array as $file) {
-                 
-        //          $pdf->addPDF($file, 'all');
-
-        //      }
-        //      $pdf->merge('download', $down_name);
-        //   }
 
          $zipname = $down_name.'.zip';
             $zip = new ZipArchive;
@@ -555,7 +527,6 @@ class QuantityController extends Controller
             header('Content-Length: ' . filesize($zipname));
             readfile($zipname);
 
-            // response()->download($zipname); 
             unlink($zipname);
             return;
 

@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "webpack": "webpack  --hide-modules",
+    "webpack": "webpack  --progress --display-error-details",
     "dev": "webpack --hide-modules --watch",
     "build": "webpack -p"
   },

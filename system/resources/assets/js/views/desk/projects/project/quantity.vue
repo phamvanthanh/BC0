@@ -124,8 +124,8 @@ function Diff(instance, td, row, col, prop, value, cellProperties) {
       
       var rowData = instance.getSourceDataAtRow(row);
       if(rowData.quantity && rowData.quantity  != 0 && rowData.a_quantity  ) {
-         
-          if(abs(diff) > rowData.difference)
+          var diff = rowData.a_quantity - rowData.quantity;
+          if(Math.abs(diff) > rowData.difference)
             td.style.color = '#ff3333'; 
           td.innerHTML = diff/rowData.quantity;
       } 
@@ -191,7 +191,7 @@ function absDiff(instance, td, row, col, prop, value, cellProperties) {
                           {data: 'a_commit', type: 'checkbox', readOnly: true, colWidths: '45px'},
                           {data: 'p_commit', type: 'checkbox', readOnly: true, colWidths: '45px'}
                   ],
-                  colHeaders: ['Code', 'Name', 'Unit', 'Quantity', 'CQuantity', 'Diff', 'absDiff', 'File', 'Mrk', 'Cmt', 'CFile', 'CMrk', 'CCmt', 'PCmt'],
+                  colHeaders: ['Code', 'Name', 'Unit', 'Qty', 'CQty', 'Diff', 'AbsDiff', 'File', 'Mrk', 'Cmt', 'CFile', 'CMrk', 'CCmt', 'PCmt'],
        
                 }
             }        

@@ -1,9 +1,12 @@
 <template>
-
-
-    <projects>
+<div >
+    <div class="col-md-6">
+         <projects>
     
-    </projects>
+        </projects>
+    </div>
+</div>
+   
 
 </template>
 
