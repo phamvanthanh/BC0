@@ -4,6 +4,7 @@ let webpack = require('webpack');
 let Mix = require('laravel-mix').config;
 let webpackPlugins = require('laravel-mix').plugins;
 let dotenv = require('dotenv');
+let UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 
 /*
  |--------------------------------------------------------------------------
@@ -429,7 +430,13 @@ if (Mix.options.purifyCss) {
 
 if (Mix.inProduction && Mix.options.uglify) {
     plugins.push(
-        new webpack.optimize.UglifyJsPlugin(Mix.options.uglify)
+        new UglifyJSPlugin({
+            parallel: 4, // Speed up build
+            uglifyOptions: {
+                ecma: 5
+            }
+        })
+        // new webpack.optimize.UglifyJsPlugin(Mix.options.uglify)
     );
 }
 

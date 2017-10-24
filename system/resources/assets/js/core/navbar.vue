@@ -2,20 +2,27 @@
   <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header display-flex">
-        <a href="https://breakcost.com" class="navbar-brand" style="font-size: 26px; font-weight: 600">
+         <router-link to="/dashboard" class="navbar-brand" style="font-size: 26px; font-weight: 600" > 
+      
           <span class="pr-0" style="color:#3097D1 !important">B</span>
 
-        </a>        
+        </router-link>      
          <window-heading2></window-heading2> 
       </div>
 
       <ul class="nav navbar-nav navbar-right">
-
         <li>
           <router-link  to="/messenger">
               <i class="icon-bubble2"></i>
               <span id="msg-count" v-if="unreads > 0" class="badge bg-warning fs-10">{{unreads}}</span>
           </router-link>
+       
+        </li>
+        <li>
+          <a  >
+              <i class="icon-bell2"></i>
+              <span id="msg-count"  class="badge bg-warning fs-10"></span>
+          </a>
        
         </li>
         <li class="dropdown">
@@ -41,7 +48,7 @@
               </ul>
             </li>
             <li>
-              <router-link to="/mysettings">My Settings</router-link>            
+              <router-link to="/settings">Settings</router-link>            
             </li>
             <li>
 
@@ -63,7 +70,8 @@ export default {
   data() {
     return {
         loading: false,
-        unreads: 0
+        unreads: 0,
+        notifications: 0,
     }
 
   },
@@ -73,6 +81,7 @@ export default {
        this.countAllUnreads();
     });
     this.messageCountChannel();
+    this.getNotifications();
   },
   computed : {
     user: function() {
@@ -90,6 +99,11 @@ export default {
                .then(({data})=>this.unreads = data)
                .catch((error)=>console.log(error));
     },
+    getNotifications() {
+      axios.get('/api/notifications')
+           .then(({data})=>this.notifications = data)
+           .catch((error)=>console.log(error))
+    },    
     messageCountChannel() {
       var uid = this.$store.state.user.id;
       var allmessages = pusher.subscribe('message_to_'+uid);
@@ -103,6 +117,8 @@ export default {
 
       var masterpage = document.getElementById("overlay");
       masterpage.className = "overlay";
+      sessionStorage.removeItem('perms');
+      router.push({'name': 'dashboard'});
 			axios.post("/api/users/status/offline")
            .then(()=>{
                   axios.post('/logout')

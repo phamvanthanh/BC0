@@ -136,7 +136,7 @@ export default {
              loading: true,        
              group_id: this.$route.params.gid,
              isGrouping: false,
-             editMode: (localStorage.getItem('groupsedit') =="false"? false: true),  
+             editMode: sessionStorage.sectionsedit =="true"? true: false,  
              pid: this.$route.params.pid,
              form: new Form({ // New group form
                  id: null,
@@ -220,7 +220,7 @@ export default {
     },
     methods: {
         editToggle() {
-            localStorage.setItem('groupsedit', this.editMode);
+            sessionStorage.sectionedit = this.editMode;
         },
         onSubmit() { 
             this.form.post('/api/projects/'+this.pid+'/sections')

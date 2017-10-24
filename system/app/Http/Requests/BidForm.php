@@ -68,13 +68,19 @@ class BidForm extends FormRequest
             
            
         }
-        // If user is update bid record ( award or withhold a bid)
+        //  award or withhold a bid
         if($this->user()->can('award-withhold-job')) {
              if(!empty($job->awarded) && $this->input('status') == 'awarded')                  
                  return response(['This job is already awarded.'], 403);
             
             // Role::where('name', )
             Bid::where('id', $this->input('id'))->update($this->only(['status']));
+            if ($this->input('status') == 'awarded')
+                Job::where('id', $this->input('job_id'))
+                    ->update(['user_id' => $this->input('user_id')]);
+            else 
+                Job::where('id', $this->input('job_id')) 
+                    ->update(['user_id' => NULL]);
             // JobHolder::createOrUpdate(['job_id'=>$this->input('job_id'),  'role_id'])
                 return response(['Job status updated.'], 200);
         }

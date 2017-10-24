@@ -57,8 +57,7 @@ class PackageForm extends FormRequest
                             ->where('name', $this->input('name'))
                             ->first();        
             if($exist)
-                return response(['Package name is taken'], 422);            
-         
+                return response(['Package name is taken'], 422);      
 
             $package =  Package::create(
                 $this->only(['section_id', 'name', 'area', 'complexity', 'description', 'mirror_id']));          
@@ -78,6 +77,10 @@ class PackageForm extends FormRequest
       
 
         return response(['Package post succeed'], 200);   
+    }
+
+    protected function activate() {
+
     }
 }
 

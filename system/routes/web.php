@@ -229,7 +229,6 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::post('/jobs/issues/{id}/reply', ['uses'=>'IssueReplyController@store']);
     Route::post('/jobs/issues/image/delete', ['uses'=>'IssuesController@deleteFile']); 
    
-
     Route::get('/widgets/clients/{uid}/projects', [
         'uses' => 'WidgetsController@clientProjects'
     ]);
@@ -241,7 +240,15 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
 
     //Dashboard
     Route::get('/dashboard/countprojects', 'DashBoardController@countProjects');
-
+    Route::get('/dashboard/countjobs', 'DashBoardController@countJobs');
+    Route::get('/dashboard/countleads', 'DashBoardController@countLeads');
+    Route::get('/dashboard/countclients', 'DashBoardController@countClients');
+    Route::get('/dashboard/countissues', 'DashBoardController@countIssues');
+    Route::get('/dashboard/newjobs', 'DashBoardController@newJobs');
+    Route::get('/dashboard/newprojects', 'DashBoardController@newProjects');
+   //Notifications
+    Route::get('/notifications', 'NotificationController@index');
+    
     });
     
  });

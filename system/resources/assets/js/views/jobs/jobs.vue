@@ -102,8 +102,8 @@ import {capitalize} from './../../core/filters';
             capital(value) {
                 return capitalize(value);
             }
-        }
-      
+        },
+     
      
       
     }

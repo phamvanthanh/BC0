@@ -5,7 +5,7 @@ namespace system\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use system\Models\Quantity;
 use system\Models\Audit;
-
+use DB;
 class QuantityForm extends FormRequest
 {
     /**

@@ -35,7 +35,7 @@
     <div class="content">
         <div :class="{loader:loading}"></div> 
 
-        <router-view 
+        <router-view           
             :class="{hidden:loading}"
             :project_id="id"
             :job="project">

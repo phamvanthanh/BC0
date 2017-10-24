@@ -16,6 +16,7 @@
                         <router-link v-if="info.jobable_type == 'project'" :to="{name: 'myjob.units', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-pencil-ruler"></i><span>Units</span></router-link>
                         <router-link :to="{name: 'myjob.files', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-files-empty"></i><span>Files</span></router-link>
                         <router-link :to="{name: 'myjob.links', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-link"></i><span>Links</span></router-link>
+                        <router-link v-if="info.jobable_type == 'project'" :to="{name:'myjob.org', params: {pid: id}}" class="btn btn-link btn-float has-text"><i class="icon-tree7"></i><span>Org</span></router-link>  
                         <router-link v-if="info.jobable_type == 'package'" :to="{name: 'myjob.quantity', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-table2"></i><span>Quantity</span></router-link>
                         <router-link v-if="info.jobable_type == 'section'" :to="{name: 'myjob.packages', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-cube3"></i><span>Packages</span></router-link>
                         <router-link v-if="info.jobable_type == 'section'" :to="{name: 'myjob.summary', params: { id: id }}" class="btn btn-link btn-float has-text"><i class="icon-sigma"></i><span>Section Sum</span></router-link>
@@ -37,7 +38,9 @@
          <router-view 
             :class="{hidden:loading}"
             :info="info" 
+            :job="info"
             :job_id="info.id"
+            :project_id="info.project.id"
          ></router-view>      
          <notify :warns="$store.state.notifications"></notify>
     </div>
@@ -80,6 +83,13 @@ export default {
     },
     created() {       
         this.getJob();
+    },
+
+    computed: {
+        pid: function() {
+            if(this.info.jobable_type == 'project')
+                return this.info.jobable_id
+        }
     },
    
     methods: {

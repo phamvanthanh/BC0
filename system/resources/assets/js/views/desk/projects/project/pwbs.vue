@@ -137,8 +137,8 @@ export default {
             pwbsLoading: true,
             pwbsFilterString: '',
             epwbsFilterString: '',
-            edit: (localStorage.getItem('editmode') =="false"? false: true),
-            isShowWbs: localStorage.getItem('isShowWbs') == "false"? false: true,
+            edit: sessionStorage.editpwbs =="true"? true: false,
+            isShowWbs: sessionStorage.isShowWbs == "true"? true: false,
             disabledcodes: [],            
             removecodes: [],
             addcodes: [],
@@ -195,11 +195,10 @@ export default {
     },
     methods: {
       editMode: function(){      
-        localStorage.setItem('editmode', this.edit)          
+        sessionStorage.editpwbs = this.edit;          
       },
       showWbs: function() {
-        localStorage.setItem('isShowWbs', this.isShowWbs)
-
+        sessionStorage.isShowWbs = this.isShowWbs;
       },
       getPwbs: function(pid) {
         axios.get('/api/projects/'+this.id+'/pwbs') 

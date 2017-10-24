@@ -194,7 +194,7 @@ function absDiff(instance, td, row, col, prop, value, cellProperties) {
 
                   ],
                  
-                  colHeaders: ['Code', 'Name', 'Qty', 'Unit', 'File', 'Mrk.', 'Cmt', 'C.Qty', 'Diff', 'absDiff', 'CFile', 'CMrk.', 'CCmt.'],
+                  colHeaders: ['Code', 'Name', 'Qty', 'Unit', 'File', 'Mrk.', 'Cmt', 'C.Qty', 'Diff', 'AbsDiff', 'CFile', 'CMrk.', 'CCmt.'],
                   
                   afterChange: function(change, source) {                      
                       if(source == 'edit') {

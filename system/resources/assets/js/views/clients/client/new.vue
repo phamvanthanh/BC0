@@ -224,6 +224,7 @@ import datepicker from './../../elements/Datepicker';
           },
           reset() {
               this.form.reset();
+               this.form.user_id = this.$store.state.user.id;
           }
 
         

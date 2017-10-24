@@ -9,6 +9,7 @@
     <div class="chatnav-list">
         <ul  v-if='current_tab == "user"'>
             <contact v-for="user in users"
+                :key="user.id"
                 :contact="user" >           
             </contact>
         </ul>

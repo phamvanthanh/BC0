@@ -8,6 +8,7 @@ use system\Models\Package;
 use system\Http\Requests\PackageForm;
 use system\Models\Job;
 use system\Models\Swbs;
+use DB;
 class SectionForm extends FormRequest
 {
     /**
@@ -94,10 +95,8 @@ class SectionForm extends FormRequest
               $section =  Section::create($this->all());
             
          }
-         
-
         
-         $job = Job::updateOrCreate(
+        $job = Job::updateOrCreate(
                 
             ['jobable_id'=>$section->id, 'jobable_type'=>'section'],
         
@@ -108,12 +107,33 @@ class SectionForm extends FormRequest
                 'status'         => $this->input('status')
             ]
         );
+        if($job->status != 'active')
+           $this->changeStatus($section->id, $job->status);
+
         if(!empty($section->mirror_id) && !$this->input('id')) 
             $this->mirrorSection($section);
 
-        return response(['Section post succeed'], 200); 
-      
+        return response(['Section post succeed'], 200);       
         
+    }
+
+    public function changeStatus($section_id, $status) {
+        $jobs = DB::table('jobs')
+                ->join('packages', function($q) {
+                    $q->on('packages.id', 'jobs.jobable_id')
+                        ->where('jobs.jobable_type', 'package');
+                })
+                ->where('packages.section_id', $section_id)
+                ->select(DB::raw('jobs.id'))
+                ->get()
+                ->toArray();
+         
+        foreach ($jobs as $job) {
+            
+            $j = Job::where('id', $job->id)
+                    ->update(['status'=>$status]);      
+            
+        }
     }
 
 }

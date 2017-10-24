@@ -11,6 +11,7 @@ use system\Http\Requests\SectionForm;
 use system\Models\Folder;
 use system\Models\File;
 use system\Models\Link;
+use DB;
 class ProjectForm extends FormRequest
 {
     /**
@@ -134,8 +135,7 @@ class ProjectForm extends FormRequest
             $this->only(['name', 'user_id', 'nation_abbr', 'industry_id', 'description', 'requirement', 'mirror_id']),
             ['created_by'=>$this->user()->id]
         );
-       
-  
+         
         if($this->input('mirror_id') && !$this->input('id')) {
             $index = Project::where('mirror_id', $this->input('mirror_id'))->count();
             $project->name .= '-MP'.$index;
@@ -143,7 +143,6 @@ class ProjectForm extends FormRequest
             $this->mirrorProject($project);
               
         }
-
                  
         $job = Job::updateOrCreate(
             ['jobable_id'=>$project->id, 'jobable_type'=>'project'],
@@ -153,11 +152,33 @@ class ProjectForm extends FormRequest
                 'to_date'      => $this->input('job')['to_date'],
                 'status'       => $this->input('job')['status']
             ]
-        );   
+        ); 
 
-            
+        if($job->status != 'active') 
+           $this->changeStatus($project, $job->satus);      
         
         return response(['Project post succeed'], 200); 
+    }
+    protected function changeStatus($project, $status) {
+        $jobs = DB::table('jobs')
+          ->join('sections', function($q) {
+              $q->on('sections.id', 'jobs.jobable_id')
+                ->where('jobs.jobable_type', 'section');
+          })
+          ->where('sections.project_id', $project->id)
+          ->select(DB::raw(
+              'jobs.id,
+               jobs.jobable_id'
+          ))
+          ->get()
+          ->toArray();
+       
+        $sectionForm = new SectionForm;
+        foreach ($jobs as $job) {
+            Job::where('id',$job->id)
+               ->update(['status'=>$status]);
+            $sectionForm->changeStatus($job->jobable_id, $status);
+        }
     }
 }
 

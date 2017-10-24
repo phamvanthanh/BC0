@@ -4,12 +4,12 @@ Vue.use(VueRouter);
 let routes = [
   
     {
-        path: '/',     
+        path: '',     
         component: require('./core/index.vue'),
         meta: { 
             display: "Dashboard",
             permission: 'any', 
-            fail: './views/error'
+            fail: './error'
         },      
 
         children: [
@@ -19,19 +19,30 @@ let routes = [
                 component: require('./views/home.vue'),
                 meta: { 
                     display: "Dash board",
-                    permission: 'any', 
-                    fail: './views/error'
+                    permission: 'any|superuser|project_manager|qto_controller|surveyor|client', 
+                    fail: './error'
+                },
+
+            },
+            {
+                path: '/error',
+                name: 'error',
+                component: require('./views/error.vue'),
+                meta: { 
+                    display: "Access Error ",
+                    permission: 'any|superuser|project_manager|qto_controller|surveyor|client', 
+                    fail: './error'
                 },
 
             },
              {
-                path: '/mysettings',
-                name: 'mysettings',
+                path: '/settings',
+                name: 'settings',
                 component: require('./views/mysettings/mysettings.vue'),
                 meta: { 
                     display: "Account Setting",
-                    permission: 'superuser|client|surveyor|qto_controller|project_manager', 
-                    fail: './views/error'
+                    permission: 'superuser|project_manager|qto_controller|surveyor|client', 
+                    fail: './error'
                 },
 
             },
@@ -42,7 +53,7 @@ let routes = [
                 meta: { 
                     display: "Messsages",
                     permission: 'superuser|client|surveyor|qto_controller|project_manager', 
-                    fail: './views/error'
+                    fail: './error'
                 },
             }, 
             {
@@ -52,7 +63,7 @@ let routes = [
                 meta: { 
                     display: "Forms",
                     permission: 'superuser|surveyor|qto_controller|project_manager', 
-                    fail: './views/error'
+                    fail: './error'
                 
                 },
             },
@@ -63,7 +74,7 @@ let routes = [
                 meta: { 
                     display: "My Jobs",
                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                    fail: './views/error'
+                    fail: './error'
                 }
                            
             }, 
@@ -74,7 +85,7 @@ let routes = [
                 meta: { 
                     display: "My Bids",
                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                    fail: './views/error'
+                    fail: './error'
                 }
                            
             }, 
@@ -84,7 +95,7 @@ let routes = [
                 meta: { 
                     displa: 'Job',
                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                    fail: './views/error'},        
+                    fail: './error'},        
                     children: [
                     {
                         path: '',
@@ -93,7 +104,7 @@ let routes = [
                         meta: { 
                             display: "Job Information",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     },
                     {
@@ -103,7 +114,7 @@ let routes = [
                         meta: { 
                             display: "Job Information",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'jwbs',
@@ -112,7 +123,7 @@ let routes = [
                         meta: { 
                             display: "JWBS",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     },  {
                         path: 'unitify',
@@ -121,7 +132,7 @@ let routes = [
                         meta: { 
                             display: "Units",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     },  {
                         path: 'files',
@@ -130,7 +141,7 @@ let routes = [
                         meta: { 
                             display: "Job Documents",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     },  {
                         path: 'links', 
@@ -139,16 +150,25 @@ let routes = [
                         meta: { 
                             display: "Storage Links",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
+                        path: 'org',
+                        name: 'myjob.org',
+                        component: require('./views/desk/projects/project/org'),
+                        meta: {
+                            display: "Project Tree Map",
+                            permission: 'project_manager',
+                            fail: './error'
+                        },
+                    },{
                         path: 'quantity',
                         name: 'myjob.quantity',
                         component: require('./views/myjobs/job/quantity'),
                         meta: { 
                             display: "Package Quantity",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'summary',
@@ -157,7 +177,7 @@ let routes = [
                         meta: { 
                             display: "Section Summary",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'packages',
@@ -166,7 +186,7 @@ let routes = [
                         meta: { 
                             display: "Section's Packages",
                             permission: 'superuser|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     },  {
                         path: 'packages/:sid',
@@ -175,7 +195,7 @@ let routes = [
                         meta: { 
                             display: "Package Quantity Audit",
                             permission: 'superuser|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'sections',
@@ -184,7 +204,7 @@ let routes = [
                         meta: { 
                             display: "Project Sections",
                             permission: 'superuser|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     },  {
                         
@@ -194,7 +214,7 @@ let routes = [
                         meta: { 
                             display: "Section",
                             permission: 'superuser|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'psum',
@@ -203,7 +223,7 @@ let routes = [
                         meta: { 
                             display: "Project Summary",
                             permission: 'superuser|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'reports',
@@ -212,7 +232,7 @@ let routes = [
                         meta: { 
                             display: "Quantity Reports",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'issues',
@@ -225,7 +245,7 @@ let routes = [
                                 meta: { 
                                     display: "Issues",
                                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                }
                             },{
                                 path:'new',
@@ -235,7 +255,7 @@ let routes = [
                                     display: "New Issues",
                                     parentName: 'myjob.issues',
                                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                                
                             }, {
@@ -246,7 +266,7 @@ let routes = [
                                     display: "Issue",
                                     parentName: 'myjob.issues',
                                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }, {
                                 path: ':iid/edit',
@@ -256,7 +276,7 @@ let routes = [
                                     display: "Edit Issue",
                                     parentName: 'myjob.issues',
                                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }
                         ]
@@ -271,7 +291,7 @@ let routes = [
                 meta: { 
                     display: "Available Jobs",
                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                    fail: './views/error'
+                    fail: './error'
                 
                 },
                 
@@ -281,7 +301,7 @@ let routes = [
                 meta: { 
                     display: "Job",
                     permission: 'superuser|surveyor|qto_controller|project_manager',
-                    fail: './views/error'
+                    fail: './error'
                 
                 },
                 children: [
@@ -295,7 +315,7 @@ let routes = [
                         meta: { 
                             display: "Job Information",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
-                            fail: './views/error'
+                            fail: './error'
                         },
                     }, 
                     
@@ -314,7 +334,7 @@ let routes = [
                             meta: {
                                 display: 'Roles',
                                 permission: 'superuser|admin',
-                                fail: './views/error'
+                                fail: './error'
                             },
                         },{
                             path: 'roles/:rid',
@@ -323,7 +343,7 @@ let routes = [
                             meta: {
                                 display: "Role's Permissions",
                                 permission: 'superuser|admin',
-                                fail: './views/error'
+                                fail: './error'
                             },
                         }, {
                             path: 'users',
@@ -332,7 +352,7 @@ let routes = [
                             meta: {
                                 display: 'Users',
                                 permission: 'superuser|admin',
-                                fail: './views/error'
+                                fail: './error'
                             },
                         }, {
                             path: 'users/new',
@@ -341,7 +361,7 @@ let routes = [
                             meta: {
                                 display: 'New User',
                                 permission: 'superuser|admin',
-                                fail: './views/error'
+                                fail: './error'
                             },
                         },{
                             path: 'users/:uid',                           
@@ -353,7 +373,7 @@ let routes = [
                                     meta: {
                                         display: 'Infomation',
                                         permission: 'superuser|admin',
-                                        fail: './views/error'
+                                        fail: './error'
                                     }
                                 },
                                 {
@@ -363,7 +383,7 @@ let routes = [
                                     meta: {
                                         display: 'Infomation',
                                         permission: 'superuser|admin',
-                                        fail: './views/error'
+                                        fail: './error'
                                     }
                                 },
                                 {
@@ -373,7 +393,7 @@ let routes = [
                                     meta: {
                                         display: 'Roles',
                                         permission: 'superuser|admin',
-                                        fail: './views/error'
+                                        fail: './error'
                                     }
                                 },
                                 {
@@ -383,7 +403,7 @@ let routes = [
                                     meta: {
                                         display: 'Jobs',
                                         permission: 'superuser|admin',
-                                        fail: './views/error'
+                                        fail: './error'
                                     }
                                 },
                             ]
@@ -394,7 +414,7 @@ let routes = [
                             meta: {
                                 display: 'Permissions',
                                 permission: 'superuser|admin',
-                                fail: './views/error'
+                                fail: './error'
                             },
                         },  {
                             path: 'nations',
@@ -403,7 +423,7 @@ let routes = [
                             meta: {
                                 display: 'Nations',
                                 permission: 'superuser|admin',
-                                fail: './views/error'
+                                fail: './error'
                             },
                         },   {
                             path: 'forms',
@@ -412,7 +432,7 @@ let routes = [
                             meta: { 
                                 display: "Forms",
                                 permission: 'superuser|admin|surveyor|qto_controller, project_manager|director',
-                                fail: './views/error'
+                                fail: './error'
                             },
                         },
 
@@ -425,7 +445,7 @@ let routes = [
                 meta: { 
                     display: "Desk Management",
                     permission: 'superuser|project_director|sale_manager',
-                    fail: './views/error'
+                    fail: './error'
                 },
                 children: [
                 
@@ -436,7 +456,7 @@ let routes = [
                         meta: { 
                             display: "Clients",                            
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         },
                     }, {
                         path: 'clients/:uid',                        
@@ -444,7 +464,7 @@ let routes = [
                         meta: { 
                             display: "Information",                            
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         },
                         children: [
                             {
@@ -459,7 +479,7 @@ let routes = [
                                 meta: {
                                      display: "Information",                            
                                      permission: 'superuser|project_director|sale_manager',
-                                     fail: './views/error'
+                                     fail: './error'
                                 }
                             },
 
@@ -470,7 +490,7 @@ let routes = [
                                 meta: {
                                      display: "Projects",                            
                                      permission: 'superuser|project_director|sale_manager',
-                                     fail: './views/error'
+                                     fail: './error'
                                 }
                             },
                             
@@ -484,7 +504,7 @@ let routes = [
                         meta: { 
                             display: "Global WBS",
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         },
                     }, {
                         path: 'jobs',
@@ -493,7 +513,7 @@ let routes = [
                         meta: { 
                             display : "Jobs",
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         },
                         
                     },{
@@ -502,7 +522,7 @@ let routes = [
                         meta: { 
                             display : "Job Information",
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         },
                         children: [
                             {
@@ -512,7 +532,7 @@ let routes = [
                                 meta: { 
                                     display : "Job Information",
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 },
                             },
                              {
@@ -522,7 +542,7 @@ let routes = [
                                 meta: { 
                                     display : "Job Infomation",
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 },
                             },
                             {
@@ -532,7 +552,7 @@ let routes = [
                                 meta: { 
                                     display : "Jwbs",
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 },
                             },
                              {
@@ -542,7 +562,7 @@ let routes = [
                                 meta: { 
                                     display : "Bids",
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 },
                             },
                         ]
@@ -553,7 +573,7 @@ let routes = [
                         meta: {
                             display: 'Projects',
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     },{
                         path: 'projects/new',
@@ -562,7 +582,7 @@ let routes = [
                         meta: {
                             display: 'New Project',
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }, {
                         path: 'projects/:pid',
@@ -570,7 +590,7 @@ let routes = [
                         meta: {
                             display: 'Project',
                             permission: 'superuser|project_director|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         },
                         children: [
                             {
@@ -580,7 +600,7 @@ let routes = [
                                 meta: {
                                     display: 'Project Overview',
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
 
                                 }
                             },
@@ -592,7 +612,7 @@ let routes = [
                                 meta: {
                                     display: 'Project Information',
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
 
                                 }
                             }, {
@@ -602,7 +622,7 @@ let routes = [
                                 meta: {
                                     display: 'PWBS',
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }, {
                                 path: 'units',
@@ -611,7 +631,7 @@ let routes = [
                                 meta: { 
                                     display: "Units",
                                     permission: 'superuser|project_manager|project_director',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }, {
                                 path: 'files',
@@ -620,16 +640,16 @@ let routes = [
                                 meta: {
                                     display: 'Project Documents',
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }, {
                                 path: 'links',
                                 name: 'desk.project.links',
                                 component: require('./views/desk/projects/project/doclinks'),
                                 meta: {
-                                    display: 'Cloud Storage Links',
+                                    display: 'Storage Links',
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
 
                                 }
                             }, {
@@ -639,7 +659,7 @@ let routes = [
                                 meta: {
                                     display: 'Sections',
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
 
                                 }
                               
@@ -649,7 +669,7 @@ let routes = [
                                 meta: {
                                     
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 },
                                 children: [
                                        {
@@ -663,7 +683,7 @@ let routes = [
                                                 meta: {
                                                     display: "Packages",
                                                     permission: 'superuser|project_director|sale_manager',
-                                                    fail: './views/error'
+                                                    fail: './error'
                                                 }
                                         }, {
                                                 path: 'swbs',
@@ -672,7 +692,7 @@ let routes = [
                                                 meta: {
                                                     display: "Swbs",
                                                     permission: 'superuser|project_director|sale_manager',
-                                                    fail: './views/error'
+                                                    fail: './error'
                                                 }
                                             }, 
                                             
@@ -684,7 +704,7 @@ let routes = [
                                 meta: {
                                     display: "Project Organization",
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }, {
                                 path: 'reports',
@@ -693,7 +713,7 @@ let routes = [
                                 meta: {
                                     display: "Reports",
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }, {
                                 path: 'quantity',
@@ -702,7 +722,7 @@ let routes = [
                                 meta: {
                                     display: "Quantity",
                                     permission: 'superuser|project_director|sale_manager',
-                                    fail: './views/error'
+                                    fail: './error'
                                 }
                             }
                         ]
@@ -713,7 +733,7 @@ let routes = [
                         meta: {
                             display: 'Leads',
                             permission: 'superuser|sale_manager',
-                            fail: './views/error'
+                            fail: './error'
                         }
                     }
                 ]
@@ -725,7 +745,7 @@ let routes = [
                 meta: {
                     display: "Dashboard",
                     permission: 'superuser|client',
-                    fail: './views/error'                    
+                    fail: './error'                    
                 },
                 children: [            
                             {
@@ -735,7 +755,7 @@ let routes = [
                                     meta: {
                                         display: "Projects",
                                         permission: 'superuser|client',
-                                        fail: './views/error' 
+                                        fail: './error' 
                                     }
                                                 
                             }, {
@@ -745,7 +765,7 @@ let routes = [
                                     meta: {
                                         display: "New Projects",
                                         permission: 'superuser|client',
-                                        fail: './views/error' 
+                                        fail: './error' 
                                     }
                                                 
                             }, {
@@ -758,7 +778,7 @@ let routes = [
                                             meta: {
                                                 display: "Project Information",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                            }
                                         }, {
                                             path: 'info',
@@ -767,7 +787,7 @@ let routes = [
                                             meta: {
                                                 display: "Information",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                             }
                                         }, {
                                             path: 'pwbs',
@@ -776,7 +796,7 @@ let routes = [
                                             meta: {
                                                 display: "PWBS",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                             }
                                         }, {
                                             path: 'files',
@@ -785,7 +805,7 @@ let routes = [
                                             meta: {
                                                 display: "Documents",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                             }
                                         }, {
                                             path: 'links',
@@ -794,7 +814,7 @@ let routes = [
                                             meta: {
                                                 display: "Cloud Storage Links",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                            }
                                         }, {
                                             path: 'reports',
@@ -803,7 +823,7 @@ let routes = [
                                             meta: {
                                                 display: "Quantity Reports",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                             }
                                         }, {
                                             path: 'quantity',
@@ -812,7 +832,7 @@ let routes = [
                                             meta: {
                                                 display: "Quantity",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                             }
                                         },{
                                             path:'issues',                                                    
@@ -820,7 +840,7 @@ let routes = [
                                             meta: {
                                                 display: "Issues",
                                                 permission: 'superuser|client',
-                                                fail: './views/error' 
+                                                fail: './error' 
                                             },
                                             children: [
                                                 {
@@ -830,7 +850,7 @@ let routes = [
                                                     meta: {
                                                         display: "Project Issues",
                                                         permission: 'superuser|client',
-                                                        fail: './views/error' 
+                                                        fail: './error' 
                                                     }
                                                 }, {
                                                     path: 'new',
@@ -839,7 +859,7 @@ let routes = [
                                                     meta: {
                                                         display: "Open New Issue",
                                                         permission: 'superuser|client',
-                                                        fail: './views/error' 
+                                                        fail: './error' 
                                                     }
                                                 },{
                                                     path: ':iid',
@@ -849,7 +869,7 @@ let routes = [
                                                         display: "Issue",
                                                         parentName: 'client.project.issues',
                                                         permission: 'superuser|client',
-                                                        fail: './views/error' 
+                                                        fail: './error' 
                                                     }
                                                 }, {
                                                     path: ':iid/edit',
@@ -858,7 +878,7 @@ let routes = [
                                                     meta: {
                                                         display: "Edit Issue",                                                      
                                                         permission: 'superuser|client',
-                                                        fail: './views/error'
+                                                        fail: './error'
                                                     }
                                                 }
                                             ]

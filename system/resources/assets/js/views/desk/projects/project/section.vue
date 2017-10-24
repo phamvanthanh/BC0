@@ -34,10 +34,11 @@
 import pwbsg    from './../../../elements/pwbsg';
 import gwbs     from './../../../elements/gwbs';
 
-export default {  
+export default {
+    props: ['project_id'],  
     data() {
         return {            
-             pid : this.$route.params.pid,  
+             pid : this.project_id,  
              editMode: (localStorage.getItem('groupingedit') =="false"? false: true),        
              section_id : this.$route.params.sid,
              pwbs: [],

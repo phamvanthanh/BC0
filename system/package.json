@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "webpack": "webpack  --progress --display-error-details",
+    "webpack": "webpack  --progress --display-error-details --watch",
     "dev": "webpack --hide-modules --watch",
-    "build": "webpack -p"
+    "build": "webpack -p  --progress --display-error-details"
   },
   "keywords": [],
   "author": "thanhpv",
@@ -28,8 +28,12 @@
     "proxy-observe": "0.0.21",
     "pusher": "^1.5.1",
     "pusher-js": "^4.1.0",
-    "vue": "^2.4.2",
-    "vue-acl": "^2.1.10",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony",
+    "uglifyjs-webpack-plugin": "^1.0.1",
+    "vue": "^2.5.2",
+    "vue-acl": "^2.2.2",
+    "vue-breadcrumbs": "^1.1.1",
+    "vue-handsontable-official": "^0.34.4",
     "vue-rate": "^1.1.5",
     "vue-router": "^2.7.0",
     "vue-simple-upload": "^0.1.6",
@@ -37,12 +41,10 @@
     "vue-tables-2": "^0.6.75",
     "vue2-dropzone": "^2.3.5",
     "vue2-editor": "git+https://github.com/phamvanthanh/vue2-editor.git",
+    "vuejs-datepicker": "^0.9.3",
     "vuex": "^2.3.1",
     "webpack": "^2.7.0",
-    "zeroclipboard": "^2.3.0",
-    "vue-handsontable-official": "^0.34.4",
-    "vue-breadcrumbs": "^1.1.1",
-    "vuejs-datepicker": "^0.9.3"
+    "zeroclipboard": "^2.3.0"
   },
   "dependencies": {}
 }

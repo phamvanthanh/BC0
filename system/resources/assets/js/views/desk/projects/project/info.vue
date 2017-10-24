@@ -39,25 +39,18 @@
                             <select v-else name="user_id" type="text" v-model="form.user_id" disabled class="form-control required" >
                                 <option></option>
                                 <option v-for="client in clients" :value="client.id">{{client.first_name}} {{ client.last_name}} </option>
-                                
-                            </select>
-                           
-                        </div>		
-                                                            
-                    </div>
- 
+                            </select>                           
+                        </div>                                                           
+                    </div> 
                     <div class="col-md-4">
                             <div class="form-group">
                             <label>Nation: <span class="text-danger">*</span></label>
                             <select name="nation_abbr" v-model="form.nation_abbr" data-placeholder="Select nation"  class="form-control required">
                                 <option></option>                                    
-                                <option v-for="nation in nations" :value="nation.abbr">{{nation.name}}</option> 
-                                
+                                <option v-for="nation in nations" :value="nation.abbr">{{nation.name}}</option>                                 
                             </select>
-                        </div>                        
-                        
-                    </div>  
-                    
+                        </div>                                                
+                    </div>                      
                 </div>
                 <div class="row">
                     <div class="col-md-4">
@@ -138,7 +131,7 @@ import datepicker from '././../../../elements/Datepicker';
         data() {
               
             return {
-              edit: (localStorage.getItem('editProject') =="false"? false: true),
+              edit: (sessionStorage.editProject =="true"? true: false),
               project:  null,
               clients: [],
               nations: [],
@@ -163,10 +156,8 @@ import datepicker from '././../../../elements/Datepicker';
             }       
         },
         created() {    
-
             this.getNations();  
-            this.getProject();    
-
+            this.getProject(); 
         },       
             
         computed: {
@@ -177,8 +168,7 @@ import datepicker from '././../../../elements/Datepicker';
                 set(newVal) {
 
                 }
-            },          
-            
+            },                    
         },  
         components: {         
             info,
@@ -186,7 +176,7 @@ import datepicker from '././../../../elements/Datepicker';
         },
         methods: {
             editMode(){      
-                localStorage.setItem('editProject', this.edit)          
+                sessionStorage.editProject = this.edit;          
             },
             getNations() {
                 axios.get('/api/admin/nations')

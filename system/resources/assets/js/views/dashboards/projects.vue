@@ -1,5 +1,5 @@
 <template>
-<div class="panel panel-flat">
+
     <div class="panel panel-flat">
         <div class="panel-heading">
             <h6 class="panel-title">Projects</h6>
@@ -28,8 +28,8 @@
                         <ul class="list-inline text-center">
                      
                             <li class="text-center">
-                                <div class="fw-600 fs-30">{{counts.awardeds}}</div>
-                                <div class="text-bold">Awarded</div>
+                                <div class="fw-600 fs-30">{{counts.all - counts.awardeds}}</div>
+                                <div class="text-bold">Unwarded</div>
                             </li>
                         </ul>
 

@@ -48,8 +48,10 @@ window.hasRole =  function(roles, name) {
     }
     return false;
 }
-
-Vue.use(Acl, { router: Router, init: 'any' });
+var perms = sessionStorage.perms;
+if(!perms)
+    perms = 'any';
+Vue.use(Acl, { router: router, init: perms });
 window.app =  new Vue({
     el: '#app',
     router,
@@ -72,14 +74,18 @@ window.app =  new Vue({
                 var access = data.roles.map(function(e){
                     return e.name;
                 });
-         
-                this.$access(access);     
+            
+                this.$access(access);   
+                sessionStorage.perms = access;  
                 this.loggedIn = true;               
             })
             .catch((error)=>console.log(error));  
 
 		
 	},
+    
+      
+    
     methods: {
 
         userOnline() {

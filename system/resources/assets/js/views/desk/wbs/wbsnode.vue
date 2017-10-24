@@ -127,12 +127,10 @@ export default {
                     let c = item.children ? treeFilter(item) : false;
                  
                     if(c.length == 0){                        
-                        // _this.match = false;
                         return false;
 
-                    }else{
-                        // if(c)
-                        //     _this.match = true;
+                    }
+                    else {
                         return c;
                     }
                 })

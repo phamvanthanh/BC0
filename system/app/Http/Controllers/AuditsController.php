@@ -7,6 +7,7 @@ use DB;
 use system\Models\Job;
 use system\Models\Section;
 use system\Models\Audit;
+use system\Http\Requests\AuditForm;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AuditsController extends Controller
@@ -148,15 +149,8 @@ class AuditsController extends Controller
 
     }
 
-    public function store($jid, Request $request) {
-        
-        Audit::updateOrCreate(
-         
-            ['id' => $request['id']],   
-     
-            ['commit' => $request['commit'] ]          
-           
-        );
+    public function store(AuditForm $form) {
+       return $form->persist();        
     }
 
     public function upload(Request $request) {

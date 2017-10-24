@@ -95,7 +95,7 @@ class QuantityController extends Controller
         return  array_values($leaves);  
     }
     
-    public function pullJobItems($jid) {
+    protected function pullJobItems($jid) {
            $job = Job::with('jobable')->find($jid);           
            if($job['jobable_type'] == 'package'){
                return $this->leaves($this->pullPackageQuantity($jid));

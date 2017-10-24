@@ -84,7 +84,6 @@ export default {
         });
     },
    
-
     components: {
        notify,
        wbs

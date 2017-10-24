@@ -69,15 +69,10 @@
                             </ul>
                         </li>
                     </ul>
-                </template>
-                
+                </template>                
             </v-client-table>
-        </div>
-         
-    </div>
-    
-    
-    
+        </div>         
+    </div>   
 </div>
 
 </template>
@@ -101,7 +96,7 @@ export default {
 
         return {
             loading: true,
-             editMode: (localStorage.getItem('linksedit') =="false"? false: true),
+             editMode: sessionStorage.linksedit =="true"? true: false,
              pid: this.$route.params.pid,
              form: new Form({
                  id: null,
@@ -162,7 +157,7 @@ export default {
 
     methods: {
         editToggle() {
-            localStorage.setItem('linksedit', this.editMode);
+            sessionStorage.linksedit = this.editMode;
         },
         onSubmit() { 
             this.form.project_id = this.id;
@@ -184,7 +179,6 @@ export default {
                   })
         }, 
   
-
         deleteLink(e) {          
          
             var yes = confirm('You are about to delete the link permanently. All system will not be able to access the link.');
