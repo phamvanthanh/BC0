@@ -1,32 +1,32 @@
 <template>
 <div >
-    <div class="col-md-6">
+    <div v-if='$can("superuser|admin|project_director")' class="col-md-6">
          <projects>
     
         </projects>
     </div>
-    <div class="col-md-6">
+    <div v-if='$can("superuser|admin|project_director")' class="col-md-6">
          <jobs>
     
         </jobs>
     </div>
-    <div class="col-md-6">
+    <div v-if='$can("superuser|admin")' class="col-md-6">
         <leads>
         </leads>
     </div>
-    <div class="col-md-6">
+    <div v-if='$can("superuser|admin")' class="col-md-6">
         <clients>
         </clients>
     </div>
-    <div class="col-md-6">
+    <div v-if='$can("superuser|admin|project_director")' class="col-md-6">
         <issues>
         </issues>
     </div>
-     <div class="col-md-10">
+     <div class="col-md-8">
         <newjobs>
         </newjobs>
     </div>
-     <div class="col-md-10">
+     <div class="col-md-8">
         <newprojects>
         </newprojects>
     </div>

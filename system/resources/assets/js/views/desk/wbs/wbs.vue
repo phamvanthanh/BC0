@@ -61,7 +61,7 @@ export default {
             loading: true,
             filterInput: '',
             filterString: '',
-            editMode: (localStorage.getItem('wbseditmode') == "false"? false: true) ,
+            editMode: sessionStorage.wbsedit == "true"? true: false,
             wbs:[],
             isNewEntry: false,
             currentActive: {},
@@ -90,7 +90,7 @@ export default {
     },
     methods: {
       toggleEditMode: function(){      
-        localStorage.setItem('wbseditmode', this.editMode)          
+        sessionStorage.wbsedit = this.editMode         
       },      
           
       getWbs: function() {

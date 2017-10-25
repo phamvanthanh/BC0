@@ -1,3 +1,5 @@
+"use strict";
+
 import './bootstrap';
 import Form from './core/Form';
 import Router from './route';
@@ -49,8 +51,9 @@ window.hasRole =  function(roles, name) {
     return false;
 }
 var perms = sessionStorage.perms;
-if(!perms)
-    perms = 'any';
+
+perms = perms || 'any';
+
 Vue.use(Acl, { router: router, init: perms });
 window.app =  new Vue({
     el: '#app',

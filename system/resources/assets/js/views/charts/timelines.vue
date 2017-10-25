@@ -20,7 +20,7 @@ export default {
         
         initiateChart() {
            
-            var title = this.yText,
+            var yText = this.yText,
             datasets = this.datasets,
             title = this.title,      
             left = 100,    
@@ -88,7 +88,7 @@ export default {
                  .attr("y", 6)
                  .attr("dy", "0.71em")
                  .attr("text-anchor", "end")
-                 .text(title);
+                 .text(yText);
 
             
             for(var i = 0; i < datasets.length; i++) {

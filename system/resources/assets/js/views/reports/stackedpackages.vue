@@ -1,7 +1,7 @@
 <template>
 <div class="panel panel-flat" id="stackedbar_chart" >
     <stacked-Bars
-        v-if="localdata"
+        v-if="localdata && width>0"
         :data ="localdata"
         barHeight="20"
         :width="width"
@@ -42,6 +42,9 @@ export default {
         }            
     },
     mounted() {
+        this.width = document.getElementById('stackedbar_chart').offsetWidth - 100;
+    },
+    updated() {
         this.width = document.getElementById('stackedbar_chart').offsetWidth - 100;
     },
     watch: {

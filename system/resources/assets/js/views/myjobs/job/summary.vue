@@ -132,8 +132,8 @@ function Diff(instance, td, row, col, prop, value, cellProperties) {
       
       var rowData = instance.getSourceDataAtRow(row);
       if(rowData.quantity && rowData.quantity  != 0 && rowData.a_quantity  ) {
-         
-          if(abs(diff) > rowData.difference)
+          var diff = rowData.a_quantity - rowData.quantity;
+          if(Math.abs(diff) > rowData.difference)
             td.style.color = '#ff3333'; 
           td.innerHTML = diff/rowData.quantity;
       } 

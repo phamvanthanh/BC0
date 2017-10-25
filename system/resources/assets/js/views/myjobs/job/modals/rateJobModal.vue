@@ -53,7 +53,6 @@
 <script>
 import Rate from 'vue-rate';
 
-
 export default {
     props:['data'],
     data() {

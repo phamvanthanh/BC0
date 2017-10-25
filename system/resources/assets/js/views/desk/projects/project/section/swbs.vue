@@ -135,7 +135,7 @@ export default {
     },
     methods: {
         editToggle() {
-            localStorage.setItem('groupingedit', this.editMode);
+            sessionStorage.groupingedit = this.editMode;
         },
 
         getGroup(sid) {

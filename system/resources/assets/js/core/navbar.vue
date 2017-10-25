@@ -18,13 +18,61 @@
           </router-link>
        
         </li>
-        <li>
-          <a  >
-              <i class="icon-bell2"></i>
-              <span id="msg-count"  class="badge bg-warning fs-10"></span>
-          </a>
-       
-        </li>
+   
+        <li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<i class="icon-bell2"></i>
+						<span class="visible-xs-inline-block position-right">Notifications</span>
+						<span v-if="notifications.length > 0" class="badge bg-warning fs-10"></span>
+					</a>
+					
+					<div class="dropdown-menu dropdown-content w-300">
+						<div class="dropdown-content-heading">
+							Messages
+							
+						</div>
+
+						<ul class="media-list dropdown-content-body">
+							<li class="media">
+								<div class="media-left">
+									
+								
+								</div>
+
+								<div class="media-body">
+									<a href="#" class="media-heading">
+										<span class="text-semibold"></span>
+										<span class="media-annotation pull-right"></span>
+									</a>
+
+									<span class="text-muted"></span>
+								</div>
+							</li>
+
+							<li class="media">
+								<div class="media-left">
+								
+								
+								</div>
+
+								<div class="media-body">
+									<a href="#" class="media-heading">
+										<span class="text-semibold"></span>
+										
+									</a>
+
+									<span class="text-muted"></span>
+								</div>
+							</li>
+            </ul>
+		
+
+
+						<div class="dropdown-content-footer">
+							<a href="#" data-popup="tooltip" title="All notifications"><i class="icon-menu display-block"></i></a>
+						</div>
+					</div>
+				</li>
         <li class="dropdown">
 
           <a href="/" class="dropdown-toggle" data-toggle="dropdown" id="dropdown1">
@@ -35,7 +83,7 @@
             <i class="caret"></i>
           </a>
 
-          <ul class="dropdown-menu" id="nav-dropdown1" aria-labelledby="dropdown1">
+          <ul class="dropdown-menu w-200" id="nav-dropdown1" aria-labelledby="dropdown1">
 
             <li>
               <a href="#" @click.prevent="stay" class="accordion  has-ul">

@@ -434,7 +434,9 @@ if (Mix.inProduction && Mix.options.uglify) {
             parallel: 4, // Speed up build
             uglifyOptions: {
                 ecma: 5
-            }
+            },
+            extractComments: true
+            
         })
         // new webpack.optimize.UglifyJsPlugin(Mix.options.uglify)
     );

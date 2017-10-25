@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-flat" id="itemprogress_chart"  >
         <horizontal-bars
-            v-if="localdata"
+            v-if="localdata && width > 0"
             :data = "localdata"
             barHeight="18"
             :width="width"
@@ -47,6 +47,9 @@ export default {
     },
     mounted() {
          this.width = document.getElementById('itemprogress_chart').offsetWidth - 100;
+    },
+    updated() {
+        this.width = document.getElementById('itemprogress_chart').offsetWidth - 100;
     },
     watch: {
         'job.id': function(val) {

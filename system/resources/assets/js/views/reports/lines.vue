@@ -1,7 +1,7 @@
 <template>
     <div class="panel panel-flat" id="timelines_chart" >
-        <timelines
-            v-if="datasets[0].data.length >0"
+        <timelines 
+            v-if="datasets[0].data.length >0 && width > 0"
             :datasets="datasets"
             yText="Complete (%)"
             :height="300"
@@ -38,9 +38,13 @@ export default {
     components: {
        timelines
     },
+
     mounted() {
         if(this.job)
             this.getData(this.job.id);
+        this.width = document.getElementById('timelines_chart').offsetWidth - 100;
+    },
+    updated() {
         this.width = document.getElementById('timelines_chart').offsetWidth - 100;
     },
 
