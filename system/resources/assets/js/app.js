@@ -50,10 +50,10 @@ window.hasRole =  function(roles, name) {
     }
     return false;
 }
-var perms = sessionStorage.perms;
-
-perms = perms || 'any';
-
+if(sessionStorage.perms)
+var perms = JSON.parse(sessionStorage.perms);
+perms = perms || ['any'];
+// console.log(perms)
 Vue.use(Acl, { router: router, init: perms });
 window.app =  new Vue({
     el: '#app',
@@ -79,7 +79,7 @@ window.app =  new Vue({
                 });
             
                 this.$access(access);   
-                sessionStorage.perms = access;  
+                sessionStorage.perms = JSON.stringify(access);  
                 this.loggedIn = true;               
             })
             .catch((error)=>console.log(error));  

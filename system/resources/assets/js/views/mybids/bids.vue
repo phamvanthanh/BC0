@@ -103,6 +103,10 @@ export default {
         }
     },
 
+    // mounted() {
+    //     console.log(this.$access(), sessionStorage.perms);
+    // }
+
 }
     
 

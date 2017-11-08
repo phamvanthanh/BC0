@@ -35,7 +35,8 @@
     <div class="content">
         <div :class="{loader:loading}"></div> 
 
-        <router-view           
+        <router-view   
+            v-if="project"        
             :class="{hidden:loading}"
             :project_id="id"
             :job="project">

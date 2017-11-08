@@ -24,6 +24,7 @@
     <div class="content">
         <div :class="{loader:loading}"></div>
         <router-view 
+            v-if="project.job.id"
             :pid="pid" 
             :project_id="pid"
             :id="pid"

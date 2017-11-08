@@ -2,15 +2,20 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 let routes = [
-  
+    {
+        path: '/api',
+        redirect: 'error',
+
+    },
     {
         path: '',     
         component: require('./core/index.vue'),
         meta: { 
             display: "Dashboard",
-            permission: 'any', 
+            permission: 'any|superuser|project_manager|qto_controller|surveyor|client', 
             fail: './error'
-        },      
+        }, 
+             
 
         children: [
             {
@@ -21,9 +26,10 @@ let routes = [
                     display: "Dash board",
                     permission: 'any|superuser|project_manager|qto_controller|surveyor|client', 
                     fail: './error'
-                },
+                }
 
             },
+             
             {
                 path: '/error',
                 name: 'error',
@@ -68,9 +74,9 @@ let routes = [
                 },
             },
             {
-                path: '/myjobs',
-                name: 'myjobs',
-                component:require('./views/myjobs/jobs.vue'),
+                path: '/my_jobs',
+                name: 'my_jobs',
+                component:require('./views/my_jobs/jobs.vue'),
                 meta: { 
                     display: "My Jobs",
                     permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -90,8 +96,8 @@ let routes = [
                            
             }, 
             {
-                path: '/myjobs/:id',
-                component: require('./views/myjobs/job.vue'),
+                path: '/my_jobs/:id',
+                component: require('./views/my_jobs/job.vue'),
                 meta: { 
                     displa: 'Job',
                     permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -99,7 +105,7 @@ let routes = [
                     children: [
                     {
                         path: '',
-                        name: 'myjob',
+                        name: 'my_job',
                         redirect: 'info',
                         meta: { 
                             display: "Job Information",
@@ -109,8 +115,8 @@ let routes = [
                     },
                     {
                         path:'info',
-                        name:'myjob.info',
-                        component:require('./views/myjobs/job/info.vue'),
+                        name:'my_job.info',
+                        component:require('./views/my_jobs/job/info.vue'),
                         meta: { 
                             display: "Job Information",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -118,8 +124,8 @@ let routes = [
                         }
                     }, {
                         path: 'jwbs',
-                        name:'myjob.jwbs',
-                        component:require('./views/myjobs/job/jwbs.vue'),
+                        name:'my_job.jwbs',
+                        component:require('./views/my_jobs/job/jwbs.vue'),
                         meta: { 
                             display: "JWBS",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -127,8 +133,8 @@ let routes = [
                         }
                     },  {
                         path: 'unitify',
-                        name:'myjob.units',
-                        component:require('./views/desk/projects//project/unitify.vue'),
+                        name:'my_job.units',
+                        component:require('./views/desk/projects/project/unitify.vue'),
                         meta: { 
                             display: "Units",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -136,8 +142,8 @@ let routes = [
                         }
                     },  {
                         path: 'files',
-                        name:'myjob.files',
-                        component:require('./views/myjobs/files.vue'),
+                        name:'my_job.files',
+                        component:require('./views/my_jobs/files.vue'),
                         meta: { 
                             display: "Job Documents",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -145,8 +151,8 @@ let routes = [
                         }
                     },  {
                         path: 'links', 
-                        name:'myjob.links',
-                        component:require('./views/myjobs/doclinks.vue'),
+                        name:'my_job.links',
+                        component:require('./views/my_jobs/doclinks.vue'),
                         meta: { 
                             display: "Storage Links",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -154,7 +160,7 @@ let routes = [
                         }
                     }, {
                         path: 'org',
-                        name: 'myjob.org',
+                        name: 'my_job.org',
                         component: require('./views/desk/projects/project/org'),
                         meta: {
                             display: "Project Tree Map",
@@ -163,8 +169,8 @@ let routes = [
                         },
                     },{
                         path: 'quantity',
-                        name: 'myjob.quantity',
-                        component: require('./views/myjobs/job/quantity'),
+                        name: 'my_job.quantity',
+                        component: require('./views/my_jobs/job/quantity'),
                         meta: { 
                             display: "Package Quantity",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -172,8 +178,8 @@ let routes = [
                         }
                     }, {
                         path: 'summary',
-                        name: 'myjob.summary',
-                        component: require('./views/myjobs/job/summary'),
+                        name: 'my_job.summary',
+                        component: require('./views/my_jobs/job/summary'),
                         meta: { 
                             display: "Section Summary",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -181,8 +187,8 @@ let routes = [
                         }
                     }, {
                         path: 'packages',
-                        name: 'myjob.packages',
-                        component: require('./views/myjobs/job/packages'),
+                        name: 'my_job.packages',
+                        component: require('./views/my_jobs/job/packages'),
                         meta: { 
                             display: "Section's Packages",
                             permission: 'superuser|qto_controller|project_manager',
@@ -190,8 +196,8 @@ let routes = [
                         }
                     },  {
                         path: 'packages/:sid',
-                        name: 'myjob.package',
-                        component: require('./views/myjobs/job/packages/package'),
+                        name: 'my_job.package',
+                        component: require('./views/my_jobs/job/packages/package'),
                         meta: { 
                             display: "Package Quantity Audit",
                             permission: 'superuser|qto_controller|project_manager',
@@ -199,8 +205,8 @@ let routes = [
                         }
                     }, {
                         path: 'sections',
-                        name: 'myjob.sections',
-                        component: require('./views/myjobs/job/sections'),
+                        name: 'my_job.sections',
+                        component: require('./views/my_jobs/job/sections'),
                         meta: { 
                             display: "Project Sections",
                             permission: 'superuser|qto_controller|project_manager',
@@ -209,8 +215,8 @@ let routes = [
                     },  {
                         
                         path: 'sections/:jid1',
-                        name: 'myjob.section',
-                        component: require('./views/myjobs/job/sections/section'),
+                        name: 'my_job.section',
+                        component: require('./views/my_jobs/job/sections/section'),
                         meta: { 
                             display: "Section",
                             permission: 'superuser|qto_controller|project_manager',
@@ -218,8 +224,8 @@ let routes = [
                         }
                     }, {
                         path: 'psum',
-                        name: 'myjob.psum',
-                        component: require('./views/myjobs/job/psum'),
+                        name: 'my_job.psum',
+                        component: require('./views/my_jobs/job/psum'),
                         meta: { 
                             display: "Project Summary",
                             permission: 'superuser|project_manager',
@@ -227,8 +233,8 @@ let routes = [
                         }
                     }, {
                         path: 'reports',
-                        name: 'myjob.reports',
-                        component: require('./views/myjobs/job/reports'),
+                        name: 'my_job.reports',
+                        component: require('./views/my_jobs/job/reports'),
                         meta: { 
                             display: "Quantity Reports",
                             permission: 'superuser|surveyor|qto_controller|project_manager',
@@ -236,11 +242,11 @@ let routes = [
                         }
                     }, {
                         path: 'issues',
-                        component: require('./views/myjobs/job/issues'),
+                        component: require('./views/my_jobs/job/issues'),
                         children: [
                             {
                                 path: '',
-                                name: 'myjob.issues',
+                                name: 'my_job.issues',
                                 component: require('./views/issues/list'),
                                 meta: { 
                                     display: "Issues",
@@ -249,32 +255,32 @@ let routes = [
                                }
                             },{
                                 path:'new',
-                                name: 'myjob.issues.new',
+                                name: 'my_job.issues.new',
                                 component: require('./views/issues/new'),
                                 meta: {
                                     display: "New Issues",
-                                    parentName: 'myjob.issues',
+                                    parentName: 'my_job.issues',
                                     permission: 'superuser|surveyor|qto_controller|project_manager',
                                     fail: './error'
                                 }
                                
                             }, {
                                 path:':iid',
-                                name: 'myjob.issues.issue',
+                                name: 'my_job.issues.issue',
                                 component: require('./views/issues/issue'),
                                 meta: {
                                     display: "Issue",
-                                    parentName: 'myjob.issues',
+                                    parentName: 'my_job.issues',
                                     permission: 'superuser|surveyor|qto_controller|project_manager',
                                     fail: './error'
                                 }
                             }, {
                                 path: ':iid/edit',
-                                name: 'myjob.issues.issue.edit',
+                                name: 'my_job.issues.issue.edit',
                                 component: require('./views/issues/edit'),
                                  meta: {
                                     display: "Edit Issue",
-                                    parentName: 'myjob.issues',
+                                    parentName: 'my_job.issues',
                                     permission: 'superuser|surveyor|qto_controller|project_manager',
                                     fail: './error'
                                 }

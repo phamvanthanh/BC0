@@ -64,12 +64,7 @@ return [
     |
     */
 
-    // 'providers' => [
-    //     'users' => [
-    //         'driver' => 'eloquent',
-    //         'model' => Snail\Models\User::class,
-    //     ],
-    //  ],
+
     'providers' => [
     'users' => [
             'driver' => 'eloquent',
@@ -78,10 +73,7 @@ return [
         ],
     ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+     
  
 
     /*

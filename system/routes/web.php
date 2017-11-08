@@ -52,13 +52,8 @@ Route::get('/registrations', function(){
 });
 Route::post('registration', 'LeadsController@store');
 
-Route::group(['middleware' => 'auth'], function () { 
-    
-    
-
-    Route::get('/localhost/loggedInUser',['uses'=>'UsersController@loggedInUser'] );
-
-    Route::get('/loggedInUser',['uses'=>'UsersController@loggedInUser'] );
+Route::group(['middleware' => 'auth'], function () {        
+    Route::get('/loggedInUser','UsersController@loggedInUser' );
 
     // Route::get('/changeRole/{id}', function($id){
     //     $user = new UsersController;
@@ -86,6 +81,7 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
 
     Route::post('users/status/online', 'UserStatusController@online');
     Route::post('users/status/offline', 'UserStatusController@offline');
+    Route::get('users/status/offline', 'UserStatusController@offline');
 
     Route::get('/works', ['uses'=>'JobsController@availJobs']);
     Route::get('/works/{id}', ['uses'=>'JobsController@info']);
@@ -258,7 +254,6 @@ Route::group(['prefix' => 'api',  'middleware' => 'ajax'], function () {
     Route::get('/api/downloads/jobs/afiles/{id}/{c}', ['uses'=>'QuantityController@downloadAFile']);
     Route::get('/api/downloads/jobs/mrkd/{id}/{c}', ['uses'=>'QuantityController@downloadMrkd']);
     Route::get('/api/downloads/jobs/amrkd/{id}/{c}', ['uses'=>'QuantityController@downloadAMrkd']);
-
 
 
   

@@ -47,7 +47,7 @@
             return {
                 loading: true,               
                 clients:[],                  
-                columns: ['id', 'name', 'email', 'phone',  'organization', 'nation_abbr', 'status', 'actions'],
+                columns: ['id', 'name', 'email', 'phone',  'organization', 'nation_abbr', 'active', 'actions'],
                 options: {
                     headings: {
                         nation_abbr: 'Nation',                 
@@ -55,7 +55,7 @@
                         
                     },
                     templates: {              
-                        status: 'status'
+                        status: 'active'
                         
                     },
                
@@ -67,7 +67,7 @@
                         email: 'w-300',
                         phone: 'w-125',
                         organization: 'w-200',
-                        status: 'w-70', 
+                        active: 'w-70', 
                         actions: 'text-right w-40 action'                
                     },
                     sortable: ['id', 'name', 'email', 'phone', 'organization', 'nation_abbr', 'status'],

@@ -2,9 +2,9 @@
   <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header display-flex">
-         <router-link to="/dashboard" class="navbar-brand" style="font-size: 26px; font-weight: 600" > 
+         <router-link to="/dashboard" class="navbar-brand"  > 
+            <img src="/ico/logo.svg" height="46" ></img>
       
-          <span class="pr-0" style="color:#3097D1 !important">B</span>
 
         </router-link>      
          <window-heading2></window-heading2> 
@@ -179,6 +179,7 @@ export default {
                       console.log(error);                        
                     })
            })
+          
 	
 
     }
@@ -198,5 +199,10 @@ export default {
     position: absolute;
     top: 15%;
     left: 60%
+  }
+  .navbar-brand img {
+    padding-top: 6px;
+    padding-bottom: 6px; 
+    margin-left: 20px;
   }
 </style>

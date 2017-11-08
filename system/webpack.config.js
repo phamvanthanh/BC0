@@ -385,9 +385,7 @@ plugins.push(
             output: { path: './' }
         }
     })
-    // new webpack.ProvidePlugin({
-     
-    // })
+ 
 );
 
 

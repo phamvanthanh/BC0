@@ -232,33 +232,41 @@ class JobsController extends Controller
             */
 
             $awards = Bid::where('user_id', $user->id)
+                         ->with('job')
                          ->where('status', 'awarded')
                          ->get();
         
             //
             foreach($awards as $index=>$award) {
-                /**
-                * Attach info to each warded bids (Job with Project).
-                *
-                * @return Job + Project
-                */
-                $awards[$index]['info'] = $this->info($award->job_id);
-                
-                 /**
-                * Find related jobs for each jobs.
-                *
-                * @return Job + Project
-                */
-                $relateds =  $awards[$index]['info']->find($award->job_id)->relatedJobs();
-                
-                // $collect  = collect($relateds )->pluck('id')->all();  
 
-                                 /**
-                * Attached related job id(s) to awarded bids.
-                *
-                * @return Job + Project
-                */
-                $awards[$index]['relateds'] = $relateds;
+                if($awards[$index]->job->status != 'active') //Stupid Codes
+                    unset($awards[$index]);
+                else {
+
+                
+                    /**
+                    * Attach info to each warded bids (Job with Project).
+                    *
+                    * @return Job + Project
+                    */
+                    $awards[$index]['info'] = $this->info($award->job_id);
+                    
+                    /**
+                    * Find related jobs for each jobs.
+                    *
+                    * @return Job + Project
+                    */
+                    $relateds =  $awards[$index]['info']->find($award->job_id)->relatedJobs();
+                    
+                    // $collect  = collect($relateds )->pluck('id')->all();  
+
+                                    /**
+                    * Attached related job id(s) to awarded bids.
+                    *
+                    * @return Job + Project
+                    */
+                    $awards[$index]['relateds'] = $relateds;
+                }
             }
             return $awards;
         }   

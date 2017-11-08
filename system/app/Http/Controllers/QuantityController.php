@@ -3,7 +3,7 @@
 namespace system\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 use system\Models\Quantity;
 use system\Models\Job;
 use system\Models\Section;
